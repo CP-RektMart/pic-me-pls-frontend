@@ -11,6 +11,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        base: {
+          primary: 'hsl(var(--base-primary))',
+          secondary: 'hsl(var(--base-secondary))',
+          tertiary: 'hsl(var(--base-tertiary))',
+          quaternary: 'hsl(var(--base-quaternary))',
+          quinary: 'hsl(var(--base-quinary))',
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

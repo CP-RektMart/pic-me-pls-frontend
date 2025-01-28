@@ -33,6 +33,11 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --base-primary: 3 15% 24%;
+    --base-secondary: 24 24% 56%;
+    --base-tertiary: 20 36% 38%;
+    --base-quaternary: 17 38% 33%;
+    --base-quinary: 25 46% 40%;
   }
   .dark {
     --background: 240 10% 3.9%;
