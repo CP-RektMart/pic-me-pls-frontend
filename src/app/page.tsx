@@ -1,3 +1,4 @@
+import SignIn from '@/components/sign-in';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
       <div>Pic me pls YOYO</div>
       <div>
         <Button>Button from shadcn</Button>
+        <SignIn />
       </div>
     </>
   );
