@@ -9,6 +9,7 @@ export default function Home() {
         <Button>Button from shadcn</Button>
         <SignIn />
       </div>
+      <div>YOYO branch logout wei</div>
       <div className='flex flex-row space-x-2'>
         <div className='size-10 rounded-full bg-base-primary'></div>
         <div className='size-10 rounded-full bg-base-secondary'></div>
