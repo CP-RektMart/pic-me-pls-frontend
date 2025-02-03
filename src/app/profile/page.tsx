@@ -1,4 +1,5 @@
 import { Save } from 'lucide-react';
+import { Button } from '@/components/ui/button'
 
 export default function ProfilePage() { 
     return (
@@ -34,6 +35,21 @@ export default function ProfilePage() {
                         <p className='h-[21px]'>Instagram</p>
                         <input type='text' className='w-full border rounded-md px-4 py-2' placeholder='instagram'/>
                     </div>
+                    <hr className="border-t border-zinc-200" />
+                    <h2 className="font-bold text-[24px] items-center self-center">Payment Method</h2>
+                    <div className='space-y-1'>
+                        <p className='h-[21px]'>Bank</p>
+                        <input type='text' className='w-full border rounded-md px-4 py-2' placeholder='SCB'/>
+                    </div>
+                    <div className='space-y-1'>
+                        <p className='h-[21px]'>Account No.</p>
+                        <input type='text' className='w-full border rounded-md px-4 py-2' placeholder='360-411175-6'/>
+                    </div>
+                    <div className='space-y-1'>
+                        <p className='h-[21px]'>Branch</p>
+                        <input type='text' className='w-full border rounded-md px-4 py-2' placeholder='Future Park Rangsit'/>
+                    </div>
+                    <Button>Revalidate Account</Button>
                 </div>
             </div>
         </div>
