@@ -9,7 +9,7 @@ export default function ProfilePage() {
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-[40px] flex-row'>
-        <h1 className='items-center self-center text-[24px] font-bold lg:text-3xl'>
+        <h1 className='items-center self-center text-2xl font-bold lg:text-3xl'>
           Edit Profile
         </h1>
         <div className='ml-auto flex items-center rounded-md border bg-zinc-800 px-4 py-2 hover:bg-zinc-700'>
