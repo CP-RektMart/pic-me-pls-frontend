@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react'
 import { Save } from 'lucide-react'
 import Image from 'next/image'
 
@@ -13,7 +14,7 @@ export default function ProfilePage() {
           Edit Profile
         </h1>
         <div className='ml-auto flex items-center rounded-md border bg-zinc-800 px-4 py-2 hover:bg-zinc-700'>
-          <Save size={16} className='text-white' />
+          <Icon icon='lucide-lab:save' className='text-white' width={16} />
         </div>
       </div>
       <div className='flex flex-col gap-8 lg:flex-row'>
