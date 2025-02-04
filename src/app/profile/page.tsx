@@ -24,7 +24,7 @@ export default function ProfilePage() {
               src={'/image.png'}
               width={200}
               height={200}
-              className='my-8 rounded-full'
+              className='my-8 rounded-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
             />
           </div>
         </div>
