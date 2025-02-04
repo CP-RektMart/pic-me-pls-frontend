@@ -1,7 +1,15 @@
+import { CalendarIcon } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 
 export default function Page() {
   return (
@@ -13,12 +21,25 @@ export default function Page() {
           <p className='font-medium'>Citizen ID</p>
           <Input placeholder='1-XXXX-XXXXX-XX-X' />
         </div>
-        <div className='flex flex-row gap-2'>
-          <div className='space-y-1.5'>
+        <div className='flex flex-row justify-between gap-2'>
+          <div className='flex-1 space-y-1.5'>
             <p className='font-medium'>Expired Date</p>
-            <Input placeholder='expired date' />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant='outline'
+                  className='flex w-full justify-between'
+                >
+                  <p className='text-zinc-500'>21 Mar 2024</p>
+                  <CalendarIcon size={16} color='#71717A' />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className='w-auto p-0'>
+                <Calendar mode='single' />
+              </PopoverContent>
+            </Popover>
           </div>
-          <div className='space-y-1.5'>
+          <div className='flex-1 space-y-1.5'>
             <p className='font-medium'>Laser No.</p>
             <Input placeholder='MEx-xxxxxx-xx' />
           </div>
