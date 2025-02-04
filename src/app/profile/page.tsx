@@ -15,6 +15,7 @@ export default function ProfilePage() {
   const [facebook, setFacebook] = useState('')
   const [instagram, setInstagram] = useState('')
   const [bank, setBank] = useState('')
+  const [accountNo, setAccountNo] = useState('')
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-10 flex-row'>
@@ -100,6 +101,7 @@ export default function ProfilePage() {
                 <Input
                   placeholder='360-411175-6'
                   className='h-10 justify-between px-3 py-2'
+                  onChange={(e) => setAccountNo(e.target.value)}
                 />
               </div>
               <div className='space-y-1.5'>
