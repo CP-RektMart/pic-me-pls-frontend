@@ -7,7 +7,7 @@ export default function ProfilePage() {
         <div className="lg:px-8 gap-6 mx-12 my-6 flex-col space-y-6">
             <div className="flex flex-row h-[40px]">
                 <h1 className="font-bold text-[24px] items-center self-center lg:text-3xl">Edit Profile</h1>
-                <div className='border rounded-md px-4 py-2 ml-auto bg-zinc-800 flex items-center'>
+                <div className='border rounded-md px-4 py-2 ml-auto bg-zinc-800 hover:bg-zinc-700 flex items-center'>
                     <Save size={16} className='text-white' />
                 </div>
             </div>
@@ -52,7 +52,7 @@ export default function ProfilePage() {
                             <p className='h-[21px]'>Branch</p>
                             <input type='text' className='w-full border rounded-md px-4 py-2' placeholder='Future Park Rangsit'/>
                         </div>
-                        <Button>Revalidate Account</Button>
+                        <Button className='hover:bg-zinc-700'>Revalidate Account</Button>
                     </div> 
                     : null}   
                 </div>
