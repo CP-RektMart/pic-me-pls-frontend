@@ -12,6 +12,7 @@ export default function ProfilePage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [facebook, setFacebook] = useState('')
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-10 flex-row'>
@@ -67,6 +68,7 @@ export default function ProfilePage() {
             <Input
               placeholder='Facebook'
               className='h-10 justify-between px-3 py-2'
+              onChange={(e) => setFacebook(e.target.value)}
             />
           </div>
           <div className='space-y-1.5'>
