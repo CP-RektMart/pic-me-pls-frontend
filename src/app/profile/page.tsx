@@ -16,6 +16,7 @@ export default function ProfilePage() {
   const [instagram, setInstagram] = useState('')
   const [bank, setBank] = useState('')
   const [accountNo, setAccountNo] = useState('')
+  const [bankBranch, setBankBranch] = useState('')
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-10 flex-row'>
@@ -109,6 +110,7 @@ export default function ProfilePage() {
                 <Input
                   placeholder='Future Park Rangsit'
                   className='h-10 justify-between px-3 py-2'
+                  onChange={(e) => setBankBranch(e.target.value)}
                 />
               </div>
               <Button className='hover:bg-zinc-700'>Revalidate Account</Button>
