@@ -11,6 +11,7 @@ export default function ProfilePage() {
   const isPhotographer: boolean = true
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-10 flex-row'>
@@ -58,6 +59,7 @@ export default function ProfilePage() {
             <Input
               placeholder='0xx-xxx-xxxx'
               className='h-10 justify-between px-3 py-2'
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div className='space-y-1.5'>
