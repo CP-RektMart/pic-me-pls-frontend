@@ -30,24 +30,39 @@ export default function ProfilePage() {
         </div>
         <div className='flex-1 space-y-8'>
           <div className='space-y-1.5'>
-            <p className='text-2xl'>Name</p>
-            <Input placeholder='John Doe' className='px-3 py-2' />
+            <p className='text-sm font-medium'>Name</p>
+            <Input
+              placeholder='John Doe'
+              className='h-10 justify-between px-3 py-2'
+            />
           </div>
           <div className='space-y-1.5'>
-            <p className='text-2xl'>Email</p>
-            <Input placeholder='admin@picmepls.com' className='px-3 py-2' />
+            <p className='text-sm font-medium'>Email</p>
+            <Input
+              placeholder='admin@picmepls.com'
+              className='h-10 justify-between px-3 py-2'
+            />
           </div>
           <div className='space-y-1.5'>
-            <p className='text-2xl'>Phone</p>
-            <Input placeholder='0xx-xxx-xxxx' className='px-3 py-2' />
+            <p className='text-sm font-medium'>Phone</p>
+            <Input
+              placeholder='0xx-xxx-xxxx'
+              className='h-10 justify-between px-3 py-2'
+            />
           </div>
           <div className='space-y-1.5'>
-            <p className='text-2xl'>Facebook</p>
-            <Input placeholder='Facebook' className='px-3 py-2' />
+            <p className='text-sm font-medium'>Facebook</p>
+            <Input
+              placeholder='Facebook'
+              className='h-10 justify-between px-3 py-2'
+            />
           </div>
           <div className='space-y-1.5'>
-            <p className='text-2xl'>Instagram</p>
-            <Input placeholder='instagram' className='px-3 py-2' />
+            <p className='text-sm font-medium'>Instagram</p>
+            <Input
+              placeholder='instagram'
+              className='h-10 justify-between px-3 py-2'
+            />
           </div>
           {isPhotographer ? (
             <div className='flex-1 space-y-8'>
@@ -56,18 +71,24 @@ export default function ProfilePage() {
                 Payment Method
               </h2>
               <div className='space-y-1.5'>
-                <p className='text-2xl'>Bank</p>
-                <Input placeholder='SCB' className='px-3 py-2' />
+                <p className='text-sm font-medium'>Bank</p>
+                <Input
+                  placeholder='SCB'
+                  className='h-10 justify-between px-3 py-2'
+                />
               </div>
               <div className='space-y-1.5'>
-                <p className='text-2xl'>Account No.</p>
-                <Input placeholder='360-411175-6' className='px-3 py-2' />
+                <p className='text-sm font-medium'>Account No.</p>
+                <Input
+                  placeholder='360-411175-6'
+                  className='h-10 justify-between px-3 py-2'
+                />
               </div>
               <div className='space-y-1.5'>
-                <p className='text-2xl'>Branch</p>
+                <p className='text-sm font-medium'>Branch</p>
                 <Input
                   placeholder='Future Park Rangsit'
-                  className='px-3 py-2'
+                  className='h-10 justify-between px-3 py-2'
                 />
               </div>
               <Button className='hover:bg-zinc-700'>Revalidate Account</Button>
