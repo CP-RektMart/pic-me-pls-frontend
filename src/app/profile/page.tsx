@@ -17,6 +17,18 @@ export default function ProfilePage() {
   const [bank, setBank] = useState('')
   const [accountNo, setAccountNo] = useState('')
   const [bankBranch, setBankBranch] = useState('')
+  const handleSave = () => {
+    console.log({
+      name,
+      email,
+      phone,
+      facebook,
+      instagram,
+      bank,
+      accountNo,
+      bankBranch,
+    })
+  }
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-10 flex-row'>
@@ -113,7 +125,9 @@ export default function ProfilePage() {
                   onChange={(e) => setBankBranch(e.target.value)}
                 />
               </div>
-              <Button className='hover:bg-zinc-700'>Revalidate Account</Button>
+              <Button className='hover:bg-zinc-700' onClick={handleSave}>
+                Revalidate Account
+              </Button>
             </div>
           ) : null}
         </div>
