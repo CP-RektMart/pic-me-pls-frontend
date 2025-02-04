@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
@@ -5,7 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 export default function ProfilePage() {
+  // mock data, as a photographer
   const isPhotographer: boolean = true
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-10 flex-row'>
@@ -37,6 +42,7 @@ export default function ProfilePage() {
             <Input
               placeholder='John Doe'
               className='h-10 justify-between px-3 py-2'
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className='space-y-1.5'>
@@ -44,6 +50,7 @@ export default function ProfilePage() {
             <Input
               placeholder='admin@picmepls.com'
               className='h-10 justify-between px-3 py-2'
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className='space-y-1.5'>
