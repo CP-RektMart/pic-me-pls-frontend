@@ -30,23 +30,23 @@ export default function ProfilePage() {
         </div>
         <div className='flex-1 space-y-8'>
           <div className='space-y-1'>
-            <p className='h-[21px]'>Name</p>
+            <p className='text-2xl'>Name</p>
             <Input placeholder='John Doe' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
-            <p className='h-[21px]'>Email</p>
+            <p className='text-2xl'>Email</p>
             <Input placeholder='admin@picmepls.com' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
-            <p className='h-[21px]'>Phone</p>
+            <p className='text-2xl'>Phone</p>
             <Input placeholder='0xx-xxx-xxxx' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
-            <p className='h-[21px]'>Facebook</p>
+            <p className='text-2xl'>Facebook</p>
             <Input placeholder='Facebook' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
-            <p className='h-[21px]'>Instagram</p>
+            <p className='text-2xl'>Instagram</p>
             <Input placeholder='instagram' className='px-3 py-2' />
           </div>
           {isPhotographer ? (
@@ -56,15 +56,15 @@ export default function ProfilePage() {
                 Payment Method
               </h2>
               <div className='space-y-1'>
-                <p className='h-[21px]'>Bank</p>
+                <p className='text-2xl'>Bank</p>
                 <Input placeholder='SCB' className='px-3 py-2' />
               </div>
               <div className='space-y-1'>
-                <p className='h-[21px]'>Account No.</p>
+                <p className='text-2xl'>Account No.</p>
                 <Input placeholder='360-411175-6' className='px-3 py-2' />
               </div>
               <div className='space-y-1'>
-                <p className='h-[21px]'>Branch</p>
+                <p className='text-2xl'>Branch</p>
                 <Input
                   placeholder='Future Park Rangsit'
                   className='px-3 py-2'
