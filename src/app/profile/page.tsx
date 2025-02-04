@@ -2,6 +2,7 @@ import { Save } from 'lucide-react'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 export default function ProfilePage() {
   const isPhotographer: boolean = true
@@ -30,43 +31,23 @@ export default function ProfilePage() {
         <div className='flex-1 space-y-8'>
           <div className='space-y-1'>
             <p className='h-[21px]'>Name</p>
-            <input
-              type='text'
-              className='w-full rounded-md border px-4 py-2'
-              placeholder='John Doe'
-            />
+            <Input placeholder='John Doe' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
             <p className='h-[21px]'>Email</p>
-            <input
-              type='text'
-              className='w-full rounded-md border px-4 py-2'
-              placeholder='admin@picmepls.com'
-            />
+            <Input placeholder='admin@picmepls.com' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
             <p className='h-[21px]'>Phone</p>
-            <input
-              type='text'
-              className='w-full rounded-md border px-4 py-2'
-              placeholder='0xx-xxx-xxxx'
-            />
+            <Input placeholder='0xx-xxx-xxxx' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
             <p className='h-[21px]'>Facebook</p>
-            <input
-              type='text'
-              className='w-full rounded-md border px-4 py-2'
-              placeholder='Facebook'
-            />
+            <Input placeholder='Facebook' className='px-3 py-2' />
           </div>
           <div className='space-y-1'>
             <p className='h-[21px]'>Instagram</p>
-            <input
-              type='text'
-              className='w-full rounded-md border px-4 py-2'
-              placeholder='instagram'
-            />
+            <Input placeholder='instagram' className='px-3 py-2' />
           </div>
           {isPhotographer ? (
             <div className='flex-1 space-y-8'>
@@ -76,26 +57,17 @@ export default function ProfilePage() {
               </h2>
               <div className='space-y-1'>
                 <p className='h-[21px]'>Bank</p>
-                <input
-                  type='text'
-                  className='w-full rounded-md border px-4 py-2'
-                  placeholder='SCB'
-                />
+                <Input placeholder='SCB' className='px-3 py-2' />
               </div>
               <div className='space-y-1'>
                 <p className='h-[21px]'>Account No.</p>
-                <input
-                  type='text'
-                  className='w-full rounded-md border px-4 py-2'
-                  placeholder='360-411175-6'
-                />
+                <Input placeholder='360-411175-6' className='px-3 py-2' />
               </div>
               <div className='space-y-1'>
                 <p className='h-[21px]'>Branch</p>
-                <input
-                  type='text'
-                  className='w-full rounded-md border px-4 py-2'
+                <Input
                   placeholder='Future Park Rangsit'
+                  className='px-3 py-2'
                 />
               </div>
               <Button className='hover:bg-zinc-700'>Revalidate Account</Button>
