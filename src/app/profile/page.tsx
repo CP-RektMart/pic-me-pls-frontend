@@ -13,6 +13,7 @@ export default function ProfilePage() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [facebook, setFacebook] = useState('')
+  const [instagram, setInstagram] = useState('')
   return (
     <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
       <div className='flex h-10 flex-row'>
@@ -76,6 +77,7 @@ export default function ProfilePage() {
             <Input
               placeholder='instagram'
               className='h-10 justify-between px-3 py-2'
+              onChange={(e) => setInstagram(e.target.value)}
             />
           </div>
           {isPhotographer ? (
