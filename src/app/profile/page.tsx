@@ -12,7 +12,7 @@ export default function ProfilePage() {
             </div>
             <div className='flex flex-col lg:flex-row gap-8'>
                 <div className="flex-1 flex justify-center">
-                    <img src="image.png" className="rounded-full max-w-[200px] max-h-[200px]"/>
+                    <img src="image.png" className="rounded-full my-8 max-w-[200px] max-h-[200px]"/>
                 </div>
                 <div className='space-y-8 flex-1'>
                     <div className='space-y-1'>
