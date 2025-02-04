@@ -3,11 +3,11 @@ import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <>
+    <div className='relative'>
       <div>Pic me pls YOYO</div>
       <div>
         <Button>Button from shadcn</Button>
-        <SignIn />
+        <SignIn userType='Customer'/>
       </div>
       <div className='flex flex-row space-x-2'>
         <div className='size-10 rounded-full bg-base-primary'></div>
@@ -16,6 +16,6 @@ export default function Home() {
         <div className='size-10 rounded-full bg-base-quaternary'></div>
         <div className='size-10 rounded-full bg-base-quinary'></div>
       </div>
-    </>
+    </div>
   )
 }
