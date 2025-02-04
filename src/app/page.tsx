@@ -1,12 +1,14 @@
 import SignIn from '@/components/sign-in'
 import { Button } from '@/components/ui/button'
+import { Icon } from "@iconify/react";
 
 export default function Home() {
   return (
     <div className='relative'>
       <div>Pic me pls YOYO</div>
       <div>
-        <Button>Button from shadcn</Button>
+        {/* <Button>Button from shadcn</Button> */}
+        {/* <Icon icon="flat-color-icons:google" width="48" height="48" /> */}
         <SignIn userType='Customer'/>
       </div>
       <div className='flex flex-row space-x-2'>
