@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react'
-import { Save } from 'lucide-react'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
