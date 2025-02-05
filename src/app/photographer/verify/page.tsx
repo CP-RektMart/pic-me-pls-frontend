@@ -47,7 +47,7 @@ export default function Page() {
                       <CalendarIcon size={16} color='#71717A' />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className='w-auto p-0'>
+                  <PopoverContent className='ml-2 w-auto p-0'>
                     <Calendar mode='single' />
                   </PopoverContent>
                 </Popover>
