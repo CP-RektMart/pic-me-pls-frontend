@@ -39,7 +39,7 @@ export default function ProfilePageComponent({
   }
 
   return (
-    <div className='mx-12 my-6 flex-col gap-6 space-y-6 lg:px-8'>
+    <div className='my-6 flex-col gap-6 space-y-6 px-16 lg:px-8'>
       <div className='flex h-10 flex-row'>
         <h1 className='items-center self-center text-2xl font-bold lg:text-3xl'>
           Edit Profile
