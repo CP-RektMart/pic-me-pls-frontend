@@ -3,6 +3,7 @@ import { CalendarIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Checkbox } from '@/components/ui/checkbox'
+import ImageUpload from '@/components/ui/imageUpload'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -16,7 +17,7 @@ export default function Page() {
     <div className='p-4'>
       <p className='mb-4 font-bold'>Verify your account</p>
       <div className='flex flex-col gap-8'>
-        <div>upload area</div>
+        <ImageUpload />
         <div className='flex flex-col gap-2'>
           <div className='space-y-1.5'>
             <p className='font-medium'>Citizen ID</p>
