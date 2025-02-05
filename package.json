@@ -10,7 +10,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@radix-ui/react-dialog": "^1.1.5",
+    "@hookform/resolvers": "^3.10.0",
+    "@iconify/react": "^5.2.0",
     "@radix-ui/react-slot": "^1.1.1",
     "@types/recharts": "^1.8.29",
     "class-variance-authority": "^0.7.1",
@@ -20,11 +21,10 @@
     "next-auth": "5.0.0-beta.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-responsive": "^10.0.0",
-    "recharts": "^2.15.1",
+    "react-hook-form": "^7.54.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "vaul": "^1.1.2"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
