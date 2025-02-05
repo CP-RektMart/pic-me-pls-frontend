@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
@@ -13,30 +11,30 @@ interface ProfilePageComponentProps {
   isPhotographer: boolean
 }
 
+interface FormData {
+  name: string
+  email: string
+  phone: string
+  facebook: string
+  instagram: string
+  bank?: string
+  accountNo?: string
+  bankBranch?: string
+}
+
 export default function ProfilePageComponent({
   ComponentProps,
 }: {
   ComponentProps: ProfilePageComponentProps
 }) {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [facebook, setFacebook] = useState('')
-  const [instagram, setInstagram] = useState('')
-  const [bank, setBank] = useState('')
-  const [accountNo, setAccountNo] = useState('')
-  const [bankBranch, setBankBranch] = useState('')
-  const handleSave = () => {
-    console.log({
-      name,
-      email,
-      phone,
-      facebook,
-      instagram,
-      bank,
-      accountNo,
-      bankBranch,
-    })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>()
+
+  const onSubmit = (data: FormData) => {
+    console.log(data)
   }
 
   return (
@@ -45,11 +43,19 @@ export default function ProfilePageComponent({
         <h1 className='items-center self-center text-2xl font-bold lg:text-3xl'>
           Edit Profile
         </h1>
-        <div className='ml-auto flex items-center rounded-md border bg-zinc-800 px-4 py-2 hover:bg-zinc-700'>
+        <button
+          type='submit'
+          form='profile-form'
+          className='ml-auto flex items-center rounded-md border bg-zinc-800 px-4 py-2 hover:bg-zinc-700'
+        >
           <Icon icon='lucide-lab:save' className='size-4 text-white' />
-        </div>
+        </button>
       </div>
-      <div className='flex flex-col gap-8 lg:flex-row'>
+      <form
+        id='profile-form'
+        className='flex flex-col gap-8 lg:flex-row'
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className='flex flex-1 justify-center'>
           <div className='relative my-8 h-[200px] w-[200px]'>
             <Image
@@ -69,43 +75,41 @@ export default function ProfilePageComponent({
             <p className='text-sm font-medium'>Name</p>
             <Input
               placeholder='John Doe'
-              className='h-10 justify-between px-3 py-2'
-              onChange={(e) => setName(e.target.value)}
+              {...register('name', { required: true })}
             />
+            {errors.name && (
+              <p className='text-sm text-red-500'>Name is required</p>
+            )}
           </div>
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Email</p>
             <Input
               placeholder='admin@picmepls.com'
-              className='h-10 justify-between px-3 py-2'
-              onChange={(e) => setEmail(e.target.value)}
+              {...register('email', { required: true })}
             />
+            {errors.email && (
+              <p className='text-sm text-red-500'>Email is required</p>
+            )}
           </div>
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Phone</p>
             <Input
               placeholder='0xx-xxx-xxxx'
-              className='h-10 justify-between px-3 py-2'
-              onChange={(e) => setPhone(e.target.value)}
+              {...register('phone', { required: true })}
             />
+            {errors.phone && (
+              <p className='text-sm text-red-500'>Phone is required</p>
+            )}
           </div>
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Facebook</p>
-            <Input
-              placeholder='Facebook'
-              className='h-10 justify-between px-3 py-2'
-              onChange={(e) => setFacebook(e.target.value)}
-            />
+            <Input placeholder='Facebook' {...register('facebook')} />
           </div>
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Instagram</p>
-            <Input
-              placeholder='instagram'
-              className='h-10 justify-between px-3 py-2'
-              onChange={(e) => setInstagram(e.target.value)}
-            />
+            <Input placeholder='instagram' {...register('instagram')} />
           </div>
-          {ComponentProps.isPhotographer ? (
+          {ComponentProps.isPhotographer && (
             <div className='flex-1 space-y-8'>
               <hr className='border-t border-zinc-200' />
               <h2 className='items-center self-center text-[24px] font-bold'>
@@ -113,35 +117,26 @@ export default function ProfilePageComponent({
               </h2>
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Bank</p>
-                <Input
-                  placeholder='SCB'
-                  className='h-10 justify-between px-3 py-2'
-                  onChange={(e) => setBank(e.target.value)}
-                />
+                <Input placeholder='SCB' {...register('bank')} />
               </div>
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Account No.</p>
-                <Input
-                  placeholder='360-411175-6'
-                  className='h-10 justify-between px-3 py-2'
-                  onChange={(e) => setAccountNo(e.target.value)}
-                />
+                <Input placeholder='360-411175-6' {...register('accountNo')} />
               </div>
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Branch</p>
                 <Input
                   placeholder='Future Park Rangsit'
-                  className='h-10 justify-between px-3 py-2'
-                  onChange={(e) => setBankBranch(e.target.value)}
+                  {...register('bankBranch')}
                 />
               </div>
-              <Button className='hover:bg-zinc-700' onClick={handleSave}>
+              <Button className='hover:bg-zinc-700' type='submit'>
                 Revalidate Account
               </Button>
             </div>
-          ) : null}
+          )}
         </div>
-      </div>
+      </form>
     </div>
   )
 }
