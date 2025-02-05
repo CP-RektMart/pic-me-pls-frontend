@@ -9,27 +9,27 @@
 
 1. Clone repository
 
-    ```bash
-    git clone https://github.com/CP-RektMart/pic-me-pls-frontend.git
-    ```
+   ```bash
+   git clone https://github.com/CP-RektMart/pic-me-pls-frontend.git
+   ```
 
 2. If you not have `pnpm` installed, you can enable it by running the following command:
 
-    ```bash
-    corepack enable
-    ```
+   ```bash
+   corepack enable
+   ```
 
 3. Install dependencies
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 4. Start the development server
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
 ## Some useful scripts
 
@@ -41,17 +41,18 @@
 | `pnpm lint`   | To check lint of your codes!               |
 
 ## Commit message formats
-* API relevant changes
-    * `feat` Commits, that adds or remove a new feature
-    * `fix` Commits, that fixes a bug
-* `refactor` Commits, that rewrite/restructure your code, however does not change any API behaviour
-    * `perf` Commits are special `refactor` commits, that improve performance
-* `style` Commits, that do not affect the meaning (white-space, formatting, missing semi-colons, etc)
-* `test` Commits, that add missing tests or correcting existing tests
-* `docs` Commits, that affect documentation only
-* `build` Commits, that affect build components like build tool, ci pipeline, dependencies, project version, ...
-* `ops` Commits, that affect operational components like infrastructure, deployment, backup, recovery, ...
-* `chore` Miscellaneous commits e.g. modifying `.gitignore`
+
+- API relevant changes
+  - `feat` Commits, that adds or remove a new feature
+  - `fix` Commits, that fixes a bug
+- `refactor` Commits, that rewrite/restructure your code, however does not change any API behaviour
+  - `perf` Commits are special `refactor` commits, that improve performance
+- `style` Commits, that do not affect the meaning (white-space, formatting, missing semi-colons, etc)
+- `test` Commits, that add missing tests or correcting existing tests
+- `docs` Commits, that affect documentation only
+- `build` Commits, that affect build components like build tool, ci pipeline, dependencies, project version, ...
+- `ops` Commits, that affect operational components like infrastructure, deployment, backup, recovery, ...
+- `chore` Miscellaneous commits e.g. modifying `.gitignore`
 
 ## Learn More
 
