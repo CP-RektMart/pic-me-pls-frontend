@@ -60,7 +60,7 @@ export default function ImageUpload() {
             <Button
               variant='destructive'
               size='icon'
-              className='absolute right-2 top-2'
+              className='absolute -right-2 -top-2 lg:-top-3 lg:right-5'
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation()
                 removeImage()
