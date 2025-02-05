@@ -15,20 +15,19 @@ import {
 
 export default function Page() {
   return (
-    <div className='p-4'>
+    <div className='min-h-screen p-4'>
+      {/* To be fixed: Move to layout */}
       <p className='mb-4 font-bold lg:text-2xl'>Verify your account</p>
       <div className='flex flex-row justify-between gap-8'>
-        <div className='hidden lg:flex-1'>
-          <div className='flex h-full flex-1 items-center justify-center'>
-            <Image
-              src={'/photographer-verify.svg'}
-              alt='pic'
-              width={380}
-              height={200}
-            />
-          </div>
+        <div className='hidden w-full items-center justify-center lg:flex'>
+          <Image
+            src={'/photographer-verify.svg'}
+            alt='pic'
+            width={380}
+            height={200}
+          />
         </div>
-        <div className='flex flex-1 flex-col gap-8'>
+        <div className='flex w-full flex-col gap-8'>
           <ImageUpload />
           <div className='flex flex-col gap-2'>
             <div className='space-y-1.5'>
