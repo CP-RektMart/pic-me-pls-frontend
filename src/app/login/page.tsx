@@ -6,7 +6,8 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive'
 
-import SignIn from '@/components/sign-in'
+import SignInForm from '@/components/sign-in-form'
+import SignInDrawer from '@/components/sign-in-drawer'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -20,9 +21,17 @@ import {
 } from '@/components/ui/drawer'
 
 export default function LoginPage() {
-  const [userType, setUserType] = useState('Customer')
-  const [isSignIn, setIsSignIn] = useState(true)
+  const [userType, setUserType] = useState('')
+  const [isSignIn, setIsSignIn] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: 767 })
+
+  const handleUserIconClick = (clickType: 'Customer' | 'Photographer' | '') => {
+    setUserType((prevUserType) => {
+      const newUserType = prevUserType === clickType ? '' : clickType
+      setIsSignIn(prevUserType !== clickType || !isSignIn)
+      return newUserType
+    })
+  }
 
   return (
     <div className='flex h-screen w-full'>
@@ -41,86 +50,34 @@ export default function LoginPage() {
                   alt={''}
                   width={152}
                   height={154}
+                  onClick={() => handleUserIconClick('Customer')}
                 />
                 <Image
                   src='photographerIcon.svg'
                   alt={''}
                   width={152}
                   height={154}
+                  onClick={() => handleUserIconClick('Photographer')}
                 />
               </div>
             ) : (
               <div className='flex flex-row items-center space-x-4'>
-                <Drawer open>
-                  <DrawerTrigger>
-                    <Image
-                      src='customerIcon.svg'
-                      alt={''}
-                      width={152}
-                      height={154}
-                    />
-                  </DrawerTrigger>
-                  <DrawerContent className='rounded-t-3xl'>
-                    <DrawerHeader className='flex flex-col items-center'>
-                      <DrawerTitle>Sign in as Customer</DrawerTitle>
-                      <DrawerDescription>
-                        Log in to find the perfect photographer and bring your
-                        vision to life!
-                      </DrawerDescription>
-                      <Image
-                        src='CustomerSigninIcon.svg'
-                        alt=''
-                        width={152}
-                        height={154}
-                      />
-                    </DrawerHeader>
-                    <DrawerFooter className='flex items-center'>
-                      <Button type='submit' className='h-10 w-[80%]'>
-                        <Icon
-                          icon='flat-color-icons:google'
-                          width='12'
-                          height='12'
-                        />
-                        Login with email
-                      </Button>
-                    </DrawerFooter>
-                  </DrawerContent>
-                </Drawer>
-                <Drawer>
-                  <DrawerTrigger>
-                    <Image
-                      src='photographerIcon.svg'
-                      alt={''}
-                      width={152}
-                      height={154}
-                    />
-                  </DrawerTrigger>
-                  <DrawerContent className='rounded-t-3xl'>
-                    <DrawerHeader className='flex flex-col items-center'>
-                      <DrawerTitle>Sign in as Photographer</DrawerTitle>
-                      <DrawerDescription>
-                        Log in to connect with clients and grow your photography
-                        business!
-                      </DrawerDescription>
-                      <Image
-                        src='PhotographerSigninIcon.svg'
-                        alt=''
-                        width={152}
-                        height={154}
-                      />
-                    </DrawerHeader>
-                    <DrawerFooter className='flex items-center'>
-                      <Button type='submit' className='h-10 w-[80%]'>
-                        <Icon
-                          icon='flat-color-icons:google'
-                          width='12'
-                          height='12'
-                        />
-                        Login with email
-                      </Button>
-                    </DrawerFooter>
-                  </DrawerContent>
-                </Drawer>
+                <SignInDrawer
+                  userType='Customer'
+                  onClick={() => handleUserIconClick('Customer')}
+                  onClose={() => {
+                    setIsSignIn(false)
+                    setUserType('')
+                  }}
+                />
+                <SignInDrawer
+                  userType='Photographer'
+                  onClick={() => handleUserIconClick('Photographer')}
+                  onClose={() => {
+                    setIsSignIn(false)
+                    setUserType('')
+                  }}
+                />
               </div>
             )}
           </div>
@@ -134,19 +91,26 @@ export default function LoginPage() {
               Sign in to book photographers or showcase your talent.
             </p>
             <div className='flex flex-row space-x-4'>
-              <Image src='customerIcon.svg' alt={''} width={152} height={154} />
+              <Image
+                src='customerIcon.svg'
+                alt={''}
+                width={152}
+                height={154}
+                onClick={() => handleUserIconClick('Customer')}
+              />
               <Image
                 src='photographerIcon.svg'
                 alt={''}
                 width={152}
                 height={154}
+                onClick={() => handleUserIconClick('Photographer')}
               />
             </div>
           </div>
           {userType === 'Customer' ? (
-            <SignIn userType='Customer' />
+            <SignInForm userType='Customer' />
           ) : userType === 'Photographer' ? (
-            <SignIn userType='Photographer' />
+            <SignInForm userType='Photographer' />
           ) : null}
         </div>
       ) : (
@@ -158,76 +122,22 @@ export default function LoginPage() {
               Sign in to book photographers or showcase your talent.
             </p>
             <div className='flex flex-row items-center space-x-4'>
-              <Drawer>
-                <DrawerTrigger>
-                  <Image
-                    src='customerIcon.svg'
-                    alt={''}
-                    width={152}
-                    height={154}
-                  />
-                </DrawerTrigger>
-                <DrawerContent className='rounded-t-3xl'>
-                  <DrawerHeader className='flex flex-col items-center'>
-                    <DrawerTitle>Sign in as Customer</DrawerTitle>
-                    <DrawerDescription>
-                      Log in to find the perfect photographer and bring your
-                      vision to life!
-                    </DrawerDescription>
-                    <Image
-                      src='CustomerSigninIcon.svg'
-                      alt=''
-                      width={152}
-                      height={154}
-                    />
-                  </DrawerHeader>
-                  <DrawerFooter className='flex items-center'>
-                    <Button type='submit' className='h-10 w-[80%]'>
-                      <Icon
-                        icon='flat-color-icons:google'
-                        width='12'
-                        height='12'
-                      />
-                      Login with email
-                    </Button>
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
-              <Drawer>
-                <DrawerTrigger>
-                  <Image
-                    src='photographerIcon.svg'
-                    alt={''}
-                    width={152}
-                    height={154}
-                  />
-                </DrawerTrigger>
-                <DrawerContent className='rounded-t-3xl'>
-                  <DrawerHeader className='flex flex-col items-center'>
-                    <DrawerTitle>Sign in as Photographer</DrawerTitle>
-                    <DrawerDescription>
-                      Log in to connect with clients and grow your photography
-                      business!
-                    </DrawerDescription>
-                    <Image
-                      src='PhotographerSigninIcon.svg'
-                      alt=''
-                      width={152}
-                      height={154}
-                    />
-                  </DrawerHeader>
-                  <DrawerFooter className='flex items-center'>
-                    <Button type='submit' className='h-10 w-[80%]'>
-                      <Icon
-                        icon='flat-color-icons:google'
-                        width='12'
-                        height='12'
-                      />
-                      Login with email
-                    </Button>
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
+              <SignInDrawer
+                userType='Customer'
+                onClick={() => handleUserIconClick('Customer')}
+                onClose={() => {
+                  setIsSignIn(false)
+                  setUserType('')
+                }}
+              />
+              <SignInDrawer
+                userType='Photographer'
+                onClick={() => handleUserIconClick('Photographer')}
+                onClose={() => {
+                  setIsSignIn(false)
+                  setUserType('')
+                }}
+              />
             </div>
           </div>
         </div>

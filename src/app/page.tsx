@@ -1,6 +1,7 @@
-import SignIn from '@/components/sign-in'
+import SignInForm from '@/components/sign-in-form'
 import { Button } from '@/components/ui/button'
 import { Icon } from "@iconify/react";
+import SignInDrawer from '@/components/sign-in-drawer';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
     //     <div className='size-10 rounded-full bg-base-quinary'></div>
     //   </div>
     // </div>
-    <SignIn userType='Customer'/>
+    // <SignIn userType='Customer'/>
+    <SignInDrawer userType='Photographer' />
   )
 }
