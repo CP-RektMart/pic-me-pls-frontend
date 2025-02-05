@@ -2,9 +2,6 @@
   "name": "pic-me-pls-frontend",
   "version": "0.1.0",
   "private": true,
-  "commitizen": {
-    "path": "cz-conventional-changelog"
-  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -12,7 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "prepare": "husky",
-    "commit": "npx cz"
+    "commit": "cz"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
@@ -45,5 +42,10 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@9.15.3"
+  "packageManager": "pnpm@9.15.3",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
 }
