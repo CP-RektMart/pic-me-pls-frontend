@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
+import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
