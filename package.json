@@ -2,6 +2,9 @@
   "name": "pic-me-pls-frontend",
   "version": "0.1.0",
   "private": true,
+  "commitizen": {
+    "path": "cz-conventional-changelog"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
