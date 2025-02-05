@@ -16,7 +16,7 @@ export default function SignIn({
       action={async () => {
         await signIn('google')
       }}
-      className='fixed bottom-0 right-0 flex h-[451px] w-full flex-col rounded-t-3xl border-[1px] border-zinc-200 bg-white md:right-0 md:h-full md:w-1/2 md:items-center md:justify-center md:rounded-none md:border-none md:bg-zinc-100'
+      className='fixed bottom-0 flex w-full flex-col right-0 h-full md:w-1/2 md:items-center md:justify-center border-none bg-zinc-100'
     >
       <div className='mt-4 flex h-[294.76] flex-col gap-4 px-6 py-4'>
         <div className='text-lg font-semibold'>Sign in as {userType}</div>
