@@ -8,10 +8,14 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+interface ProfilePageComponentProps {
+  isPhotographer: boolean
+}
+
 export default function ProfilePageComponent({
-  isPhotographer,
+  ComponentProps,
 }: {
-  isPhotographer: Boolean
+  ComponentProps: ProfilePageComponentProps
 }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -100,7 +104,7 @@ export default function ProfilePageComponent({
               onChange={(e) => setInstagram(e.target.value)}
             />
           </div>
-          {isPhotographer ? (
+          {ComponentProps.isPhotographer ? (
             <div className='flex-1 space-y-8'>
               <hr className='border-t border-zinc-200' />
               <h2 className='items-center self-center text-[24px] font-bold'>
