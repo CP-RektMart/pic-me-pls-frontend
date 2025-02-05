@@ -1,25 +1,30 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+// Define Zod Schema
+const profileSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  phone: z.string().regex(/^0\d{2}-\d{3}-\d{4}$/, 'Invalid phone format'),
+  facebook: z.string().optional(),
+  instagram: z.string().optional(),
+  bank: z.string().optional(),
+  accountNo: z.string().optional(),
+  bankBranch: z.string().optional(),
+})
+
+type ProfileFormValues = z.infer<typeof profileSchema>
+
 interface ProfilePageComponentProps {
   isPhotographer: boolean
-}
-
-interface FormData {
-  name: string
-  email: string
-  phone: string
-  facebook: string
-  instagram: string
-  bank?: string
-  accountNo?: string
-  bankBranch?: string
 }
 
 export default function ProfilePageComponent({
@@ -31,9 +36,11 @@ export default function ProfilePageComponent({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>()
+  } = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileSchema),
+  })
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: ProfileFormValues) => {
     console.log(data)
   }
 
@@ -51,10 +58,11 @@ export default function ProfilePageComponent({
           <Icon icon='lucide-lab:save' className='size-4 text-white' />
         </button>
       </div>
+
       <form
         id='profile-form'
-        className='flex flex-col gap-8 lg:flex-row'
         onSubmit={handleSubmit(onSubmit)}
+        className='flex flex-col gap-8 lg:flex-row'
       >
         <div className='flex flex-1 justify-center'>
           <div className='relative my-8 h-[200px] w-[200px]'>
@@ -70,59 +78,57 @@ export default function ProfilePageComponent({
             </div>
           </div>
         </div>
+
         <div className='flex-1 space-y-8'>
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Name</p>
-            <Input
-              placeholder='John Doe'
-              {...register('name', { required: true })}
-            />
+            <Input placeholder='John Doe' {...register('name')} />
             {errors.name && (
-              <p className='text-sm text-red-500'>Name is required</p>
+              <p className='text-red-500'>{errors.name.message}</p>
             )}
           </div>
+
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Email</p>
-            <Input
-              placeholder='admin@picmepls.com'
-              {...register('email', { required: true })}
-            />
+            <Input placeholder='admin@picmepls.com' {...register('email')} />
             {errors.email && (
-              <p className='text-sm text-red-500'>Email is required</p>
+              <p className='text-red-500'>{errors.email.message}</p>
             )}
           </div>
+
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Phone</p>
-            <Input
-              placeholder='0xx-xxx-xxxx'
-              {...register('phone', { required: true })}
-            />
+            <Input placeholder='0xx-xxx-xxxx' {...register('phone')} />
             {errors.phone && (
-              <p className='text-sm text-red-500'>Phone is required</p>
+              <p className='text-red-500'>{errors.phone.message}</p>
             )}
           </div>
+
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Facebook</p>
             <Input placeholder='Facebook' {...register('facebook')} />
           </div>
+
           <div className='space-y-1.5'>
             <p className='text-sm font-medium'>Instagram</p>
-            <Input placeholder='instagram' {...register('instagram')} />
+            <Input placeholder='Instagram' {...register('instagram')} />
           </div>
+
           {ComponentProps.isPhotographer && (
             <div className='flex-1 space-y-8'>
               <hr className='border-t border-zinc-200' />
-              <h2 className='items-center self-center text-[24px] font-bold'>
-                Payment Method
-              </h2>
+              <h2 className='text-[24px] font-bold'>Payment Method</h2>
+
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Bank</p>
                 <Input placeholder='SCB' {...register('bank')} />
               </div>
+
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Account No.</p>
                 <Input placeholder='360-411175-6' {...register('accountNo')} />
               </div>
+
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Branch</p>
                 <Input
@@ -130,7 +136,8 @@ export default function ProfilePageComponent({
                   {...register('bankBranch')}
                 />
               </div>
-              <Button className='hover:bg-zinc-700' type='submit'>
+
+              <Button type='submit' className='hover:bg-zinc-700'>
                 Revalidate Account
               </Button>
             </div>
