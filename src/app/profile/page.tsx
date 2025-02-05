@@ -2,5 +2,5 @@ import ProfileComponent from '@/components/profile-page'
 
 export default function ProfilePage() {
   const componentProps = { isPhotographer: true } // Add the necessary properties for ProfilePageComponentProps
-  ;<ProfileComponent ComponentProps={componentProps} />
+  return <ProfileComponent ComponentProps={componentProps} />
 }

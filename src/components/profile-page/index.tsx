@@ -45,7 +45,7 @@ export default function ProfilePageComponent({
           Edit Profile
         </h1>
         <div className='ml-auto flex items-center rounded-md border bg-zinc-800 px-4 py-2 hover:bg-zinc-700'>
-          <Icon icon='lucide-lab:save' className='text-white' width={16} />
+          <Icon icon='lucide-lab:save' className='size-4 text-white' />
         </div>
       </div>
       <div className='flex flex-col gap-8 lg:flex-row'>
