@@ -23,6 +23,7 @@
     "react": "^19.0.0",
     "react-day-picker": "8.10.1",
     "react-dom": "^19.0.0",
+    "react-dropzone": "^14.3.5",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
