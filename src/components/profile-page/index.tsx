@@ -117,7 +117,20 @@ export default function Profile({ isPhotographer }: ProfileProps) {
 
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Bank</p>
-                <Input placeholder='SCB' {...register('bank')} />
+                <Input
+                  list='bank-options'
+                  placeholder='Select or type a bank'
+                  {...register('bank')}
+                />
+                <datalist id='bank-options'>
+                  <option value='SCB' />
+                  <option value='KBANK' />
+                  <option value='KTB' />
+                  <option value='BBL' />
+                  <option value='BAY' />
+                  <option value='TTB' />
+                  <option value='KKP' />
+                </datalist>
               </div>
 
               <div className='space-y-1.5'>
