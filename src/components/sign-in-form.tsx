@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 
 import { UserType } from '@/type/user'
 
+import SignInContent from './sign-in-content'
+
 export default function SignInForm({
   userType,
 }: {
@@ -20,36 +22,7 @@ export default function SignInForm({
       }}
       className='fixed bottom-0 flex w-full flex-col right-0 h-full md:w-1/2 md:items-center md:justify-center border-none bg-zinc-100'
     >
-      <div className='mt-4 flex h-[294.76] flex-col gap-4 px-6 py-4'>
-        <div className='text-lg font-semibold'>Sign in as {userType}</div>
-        <div className='text-sm font-normal text-zinc-500'>
-          {userType === 'Photographer'
-            ? 'Log in to connect with clients and grow your photography business!'
-            : userType === 'Customer'
-              ? 'Log in to find the perfect photographer and bring your vision to life!'
-              : ''}
-        </div>
-        <div className='flex w-full justify-center'>
-          <Image
-            src={
-              userType === 'Photographer'
-                ? 'PhotographerSigninIcon.svg'
-                : userType === 'Customer'
-                  ? 'CustomerSigninIcon.svg'
-                  : ''
-            }
-            alt=''
-            width={224}
-            height={162}
-          />
-        </div>
-      </div>
-      <div className='flex h-16 items-center justify-center'>
-        <Button type='submit' className='h-10 w-[345px]'>
-          <Icon icon='flat-color-icons:google' width='12' height='12' />
-          Login with email
-        </Button>
-      </div>
+      <SignInContent userType={userType} />
     </form>
   )
 }

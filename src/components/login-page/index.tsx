@@ -35,7 +35,7 @@ export default function LoginPageComponent() {
               Sign in to book photographers or showcase your talent.
             </p>
             {!isMobile ? (
-              <div className='flex flex-row space-x-4'>
+              <div className='flex flex-row items-center space-x-4'>
                 <LoginButton
                   userType='Customer'
                   onClick={() => handleUserIconClick('Customer')}
@@ -75,7 +75,7 @@ export default function LoginPageComponent() {
             <p className='text-xs text-zinc-500'>
               Sign in to book photographers or showcase your talent.
             </p>
-            <div className='flex flex-row space-x-4'>
+            <div className='flex flex-row items-center space-x-4'>
               <LoginButton
                 userType='Customer'
                 onClick={() => handleUserIconClick('Customer')}
