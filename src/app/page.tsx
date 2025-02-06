@@ -1,4 +1,4 @@
-import Navbar from '@/components/navbar'
+import Navbar from '@/components/navbar/navbar'
 import SignIn from '@/components/sign-in'
 import { Button } from '@/components/ui/button'
 
