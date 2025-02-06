@@ -27,7 +27,7 @@ interface ProfileProps {
   isPhotographer: boolean
 }
 
-export default function ProfilePageComponent({ isPhotographer }: ProfileProps) {
+export default function Profile({ isPhotographer }: ProfileProps) {
   const {
     register,
     handleSubmit,
