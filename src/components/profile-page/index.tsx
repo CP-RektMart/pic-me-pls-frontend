@@ -36,11 +36,7 @@ interface ProfileProps {
 }
 
 export default function Profile({ isPhotographer }: ProfileProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ProfileFormValues>({
+  const { handleSubmit } = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
   })
 
