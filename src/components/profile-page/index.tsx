@@ -17,7 +17,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-// Define Zod Schema
 const profileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
@@ -211,7 +210,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                           <Input
                             list='bank-options'
                             placeholder='Select or type a bank'
-                            {...field} // ✅ Correct way to use FormField
+                            {...field}
                           />
                         </FormControl>
                         <datalist id='bank-options'>
