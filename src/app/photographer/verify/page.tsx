@@ -42,6 +42,9 @@ const formSchema = z.object({
   terms: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
   }),
+  image: z
+    .string({ required_error: 'Please upload your citizen card' })
+    .nonempty('Please upload your citizen card'),
 })
 
 export default function Page() {
@@ -79,7 +82,21 @@ export default function Page() {
             />
           </div>
           <div className='flex w-full flex-col gap-8'>
-            <ImageUpload />
+            <FormField
+              control={form.control}
+              name='image'
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <ImageUpload
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className='flex flex-col gap-2'>
               <FormField
                 control={form.control}

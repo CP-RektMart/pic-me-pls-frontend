@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 
 import { cn } from '@/lib/utils'
 import { Upload, X } from 'lucide-react'
@@ -9,31 +9,33 @@ import { useDropzone } from 'react-dropzone'
 
 import { Button } from '@/components/ui/button'
 
-export default function ImageUpload() {
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null)
+type ImageUploadProps = {
+  value?: string
+  onChange: (value: string | null) => void
+}
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+export default function ImageUpload({ value, onChange }: ImageUploadProps) {
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
     const file = acceptedFiles[0]
     if (file) {
       const reader = new FileReader()
       reader.onload = (e) => {
-        setUploadedImage(e.target?.result as string)
+          onChange(e.target?.result as string)
       }
       reader.readAsDataURL(file)
     }
-  }, [])
+    },
+    [onChange]
+  )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: {
-      'image/*': ['.jpeg', '.jpg', '.png', '.gif'],
-    },
+    accept: { 'image/*': ['.jpeg', '.jpg', '.png'] },
     multiple: false,
   })
 
-  const removeImage = () => {
-    setUploadedImage(null)
-  }
+  const removeImage = () => onChange(null)
 
   return (
     <div className='mx-auto w-full max-w-md'>
@@ -44,14 +46,14 @@ export default function ImageUpload() {
           isDragActive
             ? 'border-gray-500 bg-gray-500/10'
             : 'border-gray-300 hover:border-gray-500',
-          uploadedImage ? 'h-auto' : 'h-40'
+          value ? 'h-auto' : 'h-40'
         )}
       >
         <input {...getInputProps()} />
-        {uploadedImage ? (
+        {value ? (
           <div className='relative'>
             <Image
-              src={uploadedImage || '/placeholder.svg'}
+              src={value}
               alt='Uploaded image'
               width={250}
               height={250}
