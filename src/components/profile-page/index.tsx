@@ -126,7 +126,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
               </div>
 
               <div className='space-y-1.5'>
-                <p className='text-sm font-medium'>Branch</p>
+                <p className='text-sm font-medium'>Bank Branch</p>
                 <Input
                   placeholder='Future Park Rangsit'
                   {...register('bankBranch')}
