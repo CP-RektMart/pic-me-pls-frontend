@@ -1,4 +1,3 @@
-// sign-in-drawer.tsx
 'use client'
 
 import { UserType } from '@/type/user'
@@ -14,10 +13,6 @@ import {
 
 import LoginButton from './login-button'
 import SignInContent from './sign-in-content'
-
-// sign-in-drawer.tsx
-
-// sign-in-drawer.tsx
 
 export default function SignInDrawer({
   userType,
