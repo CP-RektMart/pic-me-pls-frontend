@@ -36,7 +36,7 @@ export default function ImageUpload() {
   }
 
   return (
-    <div className='mx-auto w-full max-w-md p-6'>
+    <div className='mx-auto w-full max-w-md'>
       <div
         {...getRootProps()}
         className={cn(

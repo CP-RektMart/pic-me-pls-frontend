@@ -2,15 +2,24 @@
 
 import { useState } from 'react'
 
-import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
 import Image from 'next/image'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import ImageUpload from '@/components/ui/imageUpload'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -20,149 +29,172 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
-type Inputs = {
-  citizenId: string
-  expiredDate: Date
-  laserNo: string
-  terms: boolean
-}
+const formSchema = z.object({
+  citizenId: z
+    .string({ required_error: 'Enter your citizen id' })
+    .nonempty('Citizen ID is required')
+    .min(13, 'Citizen ID must be 13 characters')
+    .max(13, 'Citizen ID must be 13 characters'),
+  expiredDate: z.date({ required_error: 'Please select a date' }),
+  laserNo: z
+    .string({ required_error: 'Enter your laser number' })
+    .nonempty('Laser No. is required'),
+  terms: z.literal(true, {
+    errorMap: () => ({ message: 'You must accept the terms and conditions' }),
+  }),
+})
 
 export default function Page() {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>({ defaultValues: { expiredDate: undefined } })
 
-  const submitDate = (date?: Date) => {
-    if (date) {
-      setValue('expiredDate', date)
-      setOpenCalendar(false)
-    }
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      citizenId: '',
+      expiredDate: undefined,
+      laserNo: '',
+      terms: undefined,
+    },
+  })
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
   }
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
   return (
     <div className='min-h-screen p-4'>
       {/* To be fixed: Move to layout */}
       <p className='mb-4 font-bold lg:text-2xl'>Verify your account</p>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-row justify-between gap-8'
-      >
-        <div className='hidden w-full items-center justify-center lg:flex'>
-          <Image
-            src={'/photographer-verify.svg'}
-            alt='pic'
-            width={380}
-            height={200}
-          />
-        </div>
-        <div className='flex w-full flex-col gap-8'>
-          <ImageUpload />
-          <div className='flex flex-col gap-2'>
-            <div className='space-y-1.5'>
-              <p className='font-medium'>Citizen ID</p>
-              <Input
-                placeholder='1-XXXX-XXXXX-XX-X'
-                {...register('citizenId', { required: true })}
-                className={cn(
-                  errors.citizenId &&
-                    'border-red-400 focus-visible:ring-red-600'
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className='flex flex-row justify-between gap-8'
+        >
+          <div className='hidden w-full items-center justify-center lg:flex'>
+            <Image
+              src={'/photographer-verify.svg'}
+              alt='pic'
+              width={380}
+              height={200}
+            />
+          </div>
+          <div className='flex w-full flex-col gap-8'>
+            <ImageUpload />
+            <div className='flex flex-col gap-2'>
+              <FormField
+                control={form.control}
+                name='citizenId'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-base font-medium'>
+                      Citizen ID
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder='1-XXXX-XXXXX-XX-X' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
                 )}
               />
-              {errors.citizenId && (
-                <span className='text-sm text-red-400'>
-                  Please enter your Citizen ID
-                </span>
-              )}
-            </div>
-            <div className='flex flex-row justify-between gap-2'>
-              <div className='flex-1 space-y-1.5'>
-                <p className='font-medium'>Expired Date</p>
-                <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant='outline'
-                      className={cn(
-                        'flex w-full justify-between',
-                        errors.expiredDate &&
-                          'border-red-400 focus-visible:ring-red-600'
-                      )}
-                      onClick={() => setOpenCalendar(true)}
-                    >
-                      <p className='text-zinc-500'>
-                        {watch('expiredDate')
-                          ? format(watch('expiredDate'), 'PPP')
-                          : 'Select date'}
-                      </p>
-                      <CalendarIcon size={16} color='#71717A' />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className='ml-2 w-auto p-0'>
-                    <Calendar
-                      mode='single'
-                      onSelect={submitDate}
-                      {...register('expiredDate', { required: true })}
-                    />
-                  </PopoverContent>
-                </Popover>
-                {errors.expiredDate && (
-                  <span className='text-sm text-red-400'>
-                    Please select an expired date
-                  </span>
-                )}
-              </div>
-              <div className='flex-1 space-y-1.5'>
-                <p className='font-medium'>Laser No.</p>
-                <Input
-                  placeholder='MEx-xxxxxx-xx'
-                  {...register('laserNo', { required: true })}
-                  className={cn(
-                    errors.laserNo &&
-                      'border-red-400 focus-visible:ring-red-600'
+              <div className='flex flex-row justify-between gap-2'>
+                <FormField
+                  control={form.control}
+                  name='expiredDate'
+                  render={({ field }) => (
+                    <div className='flex-1'>
+                      <FormItem className='flex flex-col'>
+                        <FormLabel className='space-y-1.5 text-base font-medium'>
+                          Expired Date
+                        </FormLabel>
+                        <FormControl>
+                          <Popover
+                            open={openCalendar}
+                            onOpenChange={setOpenCalendar}
+                          >
+                            <PopoverTrigger
+                              className='flex flex-row justify-between'
+                              asChild
+                            >
+                              <Button
+                                variant='outline'
+                                onClick={() => setOpenCalendar(true)}
+                              >
+                                <p className='text-zinc-500'>
+                                  {field.value
+                                    ? format(field.value, 'PPP')
+                                    : 'Select date'}
+                                </p>
+                                <CalendarIcon size={16} color='#71717A' />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className='ml-2 w-auto p-0'>
+                              <Calendar
+                                mode='single'
+                                selected={field.value}
+                                onSelect={(date) => {
+                                  field.onChange(date)
+                                  setOpenCalendar(false)
+                                }}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    </div>
                   )}
                 />
-                {errors.laserNo && (
-                  <span className='text-sm text-red-400'>
-                    Please enter your laser number
-                  </span>
-                )}
+                <FormField
+                  control={form.control}
+                  name='laserNo'
+                  render={({ field }) => (
+                    <div className='flex-1'>
+                      <FormItem>
+                        <FormLabel className='text-base font-medium'>
+                          Laser No.
+                        </FormLabel>
+                        <FormControl>
+                          <Input placeholder='MEx-xxxxxx-xx' {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    </div>
+                  )}
+                />
               </div>
             </div>
+            <FormField
+              control={form.control}
+              name='terms'
+              render={({ field }) => (
+                <FormItem>
+                  <div className='flex space-x-2'>
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        id='terms'
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className='flex flex-col space-y-1.5'>
+                      <Label htmlFor='terms' className='text-sm font-medium'>
+                        Accept terms and conditions
+                      </Label>
+                      <p className='text-sm text-zinc-500'>
+                        You agree to our Terms of Service and Privacy Policy.
+                      </p>
+                      <FormMessage />
+                    </div>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <Button type='submit' className='self-end'>
+              Submit
+            </Button>
           </div>
-          <div>
-            <div className='flex space-x-2'>
-              <Checkbox
-                id='terms'
-                {...register('terms')}
-                checked={watch('terms')}
-                onCheckedChange={(checked: boolean) =>
-                  setValue('terms', checked)
-                }
-              />
-              <div className='flex flex-col space-y-1.5 leading-none'>
-                <Label
-                  htmlFor='terms'
-                  className='mt-0.5 text-sm font-medium leading-none'
-                >
-                  Accept terms and conditions
-                </Label>
-                <p className='text-sm text-zinc-500'>
-                  You agree to our Terms of Service and Privacy Policy.
-                </p>
-              </div>
-            </div>
-          </div>
-          <Button type='submit' className='self-end'>
-            Submit
-          </Button>
-        </div>
-      </form>
+        </form>
+      </Form>
     </div>
   )
 }
