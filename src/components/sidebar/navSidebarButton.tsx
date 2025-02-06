@@ -11,8 +11,8 @@ interface MenuProps {
 
 export function SidebarButton({ icon, title, link, handleOnClick }: MenuProps) {
   return (
-    <button onClick={handleOnClick}>
-      <Link href={link} className='flex items-center justify-end space-x-3'>
+    <button onClick={handleOnClick} className='w-full'>
+      <Link href={link} className='flex w-full p-2 cursor-pointer items-center justify-start space-x-3'>
         <span className='text-primary'>{icon}</span>
         <span className='text-primary'>{title}</span>
       </Link>

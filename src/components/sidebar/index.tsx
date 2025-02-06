@@ -29,7 +29,7 @@ export default function NavSidebar() {
               {navItems.slice(0, 5).map((item, index) => (
                 <li
                   key={index}
-                  className='w-full rounded-sm p-2 hover:bg-neutral-200'
+                  className='w-full rounded-sm hover:bg-neutral-200 place-items-start'
                 >
                   <SidebarButton
                     icon={<item.icon size={16} />}
