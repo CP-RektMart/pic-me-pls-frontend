@@ -1,6 +1,6 @@
+import LoginButton from '@/components/login-button'
 import SignIn from '@/components/sign-in'
 import { Button } from '@/components/ui/button'
-import LoginButton from '@/components/login-button'
 
 export default function Home() {
   return (
@@ -18,8 +18,8 @@ export default function Home() {
         <div className='size-10 rounded-full bg-base-quinary'></div>
       </div>
       <div className='flex flex-row space-x-2'>
-      <LoginButton userType='Customer'/>
-      <LoginButton userType='Photographer'/>
+        <LoginButton userType='Customer' />
+        <LoginButton userType='Photographer' />
       </div>
     </>
   )

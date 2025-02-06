@@ -28,7 +28,7 @@ export default function LoginPageComponent() {
     <div className='flex h-screen w-full'>
       {!isSignIn ? (
         <div className='flex w-full flex-col items-center justify-center'>
-          <div className='flex h-[297.75px] w-[361px] flex-col items-center justify-center space-y-4'>
+          <div className='flex flex-col items-center justify-center space-y-4'>
             <Image alt={''} src='logo.svg' width={64} height={67.75} />
             <h1 className='text-base font-medium'>Sign in as</h1>
             <p className='text-xs text-zinc-500'>
@@ -69,7 +69,7 @@ export default function LoginPageComponent() {
         </div>
       ) : !isMobile ? (
         <div className='flex w-full flex-col items-center justify-center md:w-1/2'>
-          <div className='flex h-[297.75px] w-[361px] flex-col items-center justify-center space-y-4'>
+          <div className='flex flex-col items-center justify-center space-y-4'>
             <Image alt={''} src='logo.svg' width={64} height={67.75} />
             <h1 className='text-base font-medium'>Sign in as</h1>
             <p className='text-xs text-zinc-500'>
@@ -94,7 +94,7 @@ export default function LoginPageComponent() {
         </div>
       ) : (
         <div className='flex w-full flex-col items-center justify-center'>
-          <div className='flex h-[297.75px] w-[361px] flex-col items-center justify-center space-y-4'>
+          <div className='flex flex-col items-center justify-center space-y-4'>
             <Image alt={''} src='logo.svg' width={64} height={67.75} />
             <h1 className='text-base font-medium'>Sign in as</h1>
             <p className='text-xs text-zinc-500'>

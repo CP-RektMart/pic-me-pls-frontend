@@ -7,7 +7,7 @@ export default function LoginButton({
   userType,
   onClick,
 }: {
-  userType?: UserType
+  userType: UserType
   onClick?: () => void
 }) {
   return (

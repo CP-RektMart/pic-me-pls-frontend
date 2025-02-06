@@ -8,11 +8,11 @@ import { Button } from '@/components/ui/button'
 export default function SignInContent({
   userType,
 }: {
-  userType: UserType | ''
+  userType: UserType
 }) {
   return (
-    <>
-      <div className='mt-4 flex h-[294.76] flex-col gap-4 px-6 py-4'>
+    <div>
+      <div className='mt-4 flex flex-col gap-4 px-6 py-4'>
         <div className='text-lg font-semibold'>Sign in as {userType}</div>
         <div className='text-sm font-normal text-zinc-500'>
           {userType === 'Photographer'
@@ -31,17 +31,17 @@ export default function SignInContent({
                   : ''
             }
             alt=''
-            width={152}
-            height={154}
+            width={224}
+            height={152}
           />
         </div>
       </div>
-      <div className='flex h-16 justify-center'>
-        <Button type='submit' className='h-10 w-[80%] md:w-[345px]'>
+      <div className='flex h-16 justify-center p-3'>
+        <Button type='submit' className='h-10 w-full'>
           <Icon icon='flat-color-icons:google' className='size-3' />
           Login with email
         </Button>
       </div>
-    </>
+    </div>
   )
 }
