@@ -125,9 +125,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='text-base font-medium'>
-                      Email
-                    </FormLabel>
+                    <FormLabel className='text-sm font-medium'>Email</FormLabel>
                     <FormControl>
                       <Input placeholder='user@picmepls.com' {...field} />
                     </FormControl>
@@ -148,9 +146,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 name='phone'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='text-base font-medium'>
-                      Phone
-                    </FormLabel>
+                    <FormLabel className='text-sm font-medium'>Phone</FormLabel>
                     <FormControl>
                       <Input placeholder='xxx-xxx-xxxx' {...field} />
                     </FormControl>
@@ -171,7 +167,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 name='facebook'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='text-base font-medium'>
+                    <FormLabel className='text-sm font-medium'>
                       Facebook
                     </FormLabel>
                     <FormControl>
@@ -189,7 +185,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 name='instagram'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='text-base font-medium'>
+                    <FormLabel className='text-sm font-medium'>
                       Instagram
                     </FormLabel>
                     <FormControl>
@@ -212,7 +208,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                     name='bank'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className='text-base font-medium'>
+                        <FormLabel className='text-sm font-medium'>
                           Bank
                         </FormLabel>
                         <FormControl>
@@ -243,7 +239,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                     name='accountNo'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className='text-base font-medium'>
+                        <FormLabel className='text-sm font-medium'>
                           Bank Account Number
                         </FormLabel>
                         <FormControl>
