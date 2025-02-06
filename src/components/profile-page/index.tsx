@@ -135,7 +135,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
 
               <div className='space-y-1.5'>
                 <p className='text-sm font-medium'>Account number</p>
-                <Input placeholder='360-411175-6' {...register('accountNo')} />
+                <Input placeholder='xxx-xxx-xxx-x' {...register('accountNo')} />
               </div>
 
               <div className='space-y-1.5'>
