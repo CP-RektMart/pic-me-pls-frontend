@@ -1,8 +1,9 @@
 'use client'
 
+import { Icon } from '@iconify/react'
 import { Menu } from 'lucide-react'
 
-import { SidebarButton } from '@/components/sidebar/navSidebarButton'
+import { SidebarButton } from '@/components/sidebar/sidebar-button'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -11,9 +12,13 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 
-import { navItems } from '../../data/navItems'
+import { navItems } from '../../data/nav-items'
 
 export default function NavSidebar() {
+  const handleLogout = () => {
+    return
+  }
+
   return (
     <div className='lg:hidden'>
       <Sheet>
@@ -32,7 +37,7 @@ export default function NavSidebar() {
                   className='w-full place-items-start rounded-sm hover:bg-neutral-200'
                 >
                   <SidebarButton
-                    icon={<item.icon size={16} />}
+                    icon={<Icon icon={item.icon} className='sie-4' />}
                     title={item.title}
                     link={item.url}
                   />
@@ -45,14 +50,13 @@ export default function NavSidebar() {
                   key={index}
                   className='w-full rounded-sm p-4 hover:bg-neutral-200'
                 >
-                  {/* TODO: Add onClick event, handlelogout */}
                   <button
-                    onClick={() => console.log('clicked')}
+                    onClick={handleLogout}
                     className='flex items-center justify-end space-x-3'
                   >
                     <span className='text-primary'>{item.title}</span>
                     <span className='text-primary'>
-                      {<item.icon size={16} />}
+                      <Icon icon={item.icon} className='size-6' />
                     </span>
                   </button>
                 </li>

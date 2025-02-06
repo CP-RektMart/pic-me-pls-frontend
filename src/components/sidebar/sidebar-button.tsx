@@ -2,8 +2,6 @@ import React, { MouseEventHandler } from 'react'
 
 import Link from 'next/link'
 
-import { Button } from '@/components/ui/button'
-
 interface MenuProps {
   icon: React.ReactNode
   title: string
@@ -11,13 +9,16 @@ interface MenuProps {
   handleOnClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export function NavButton({ icon, title, link, handleOnClick }: MenuProps) {
+export function SidebarButton({ icon, title, link, handleOnClick }: MenuProps) {
   return (
-    <Button variant={'ghost'} onClick={handleOnClick}>
-      <Link href={link} className='inline-flex h-[10px] items-center space-x-3'>
+    <button onClick={handleOnClick} className='w-full'>
+      <Link
+        href={link}
+        className='flex w-full cursor-pointer items-center justify-start space-x-3 p-2 text-primary'
+      >
         <span>{icon}</span>
         <span>{title}</span>
       </Link>
-    </Button>
+    </button>
   )
 }
