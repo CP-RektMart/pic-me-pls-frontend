@@ -1,11 +1,10 @@
-import Navbar from '@/components/navbar'
+
 import SignIn from '@/components/sign-in'
 import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <>
-      <Navbar />
+    <div>
       <div>Pic me pls YOYO</div>
       <div>
         <Button>Button from shadcn</Button>
@@ -18,6 +17,6 @@ export default function Home() {
         <div className='size-10 rounded-full bg-base-quaternary'></div>
         <div className='size-10 rounded-full bg-base-quinary'></div>
       </div>
-    </>
+    </div>
   )
 }
