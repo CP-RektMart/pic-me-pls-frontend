@@ -75,7 +75,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
           <div className='flex h-full flex-col items-center justify-center gap-2'>
             <Upload className='mx-auto' size={24} color='#62748E' />
             <p className='text-sm font-medium text-slate-500'>
-              Upload your citizen card
+              Drag and drop or click here to upload your citizen card
             </p>
           </div>
         )}
