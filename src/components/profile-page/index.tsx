@@ -7,6 +7,14 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
 // Define Zod Schema
@@ -39,6 +47,19 @@ export default function Profile({ isPhotographer }: ProfileProps) {
   const onSubmit = (data: ProfileFormValues) => {
     console.log(data)
   }
+  const form = useForm<z.infer<typeof profileSchema>>({
+    resolver: zodResolver(profileSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      facebook: '',
+      instagram: '',
+      bank: '',
+      accountNo: '',
+      bankBranch: '',
+    },
+  })
 
   return (
     <div className='my-6 flex-col gap-6 space-y-6 px-12 lg:max-w-7xl lg:px-8'>
@@ -55,104 +76,214 @@ export default function Profile({ isPhotographer }: ProfileProps) {
         </button>
       </div>
 
-      <form
-        id='profile-form'
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col gap-8 lg:flex-row'
-      >
-        <div className='flex flex-1 justify-center'>
-          <div className='relative my-8 h-[200px] w-[200px]'>
-            <Image
-              alt=''
-              src={'/image.png'}
-              width={200}
-              height={200}
-              className='rounded-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
-            />
-            <div className='absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 shadow-md hover:bg-slate-200'>
-              <Icon icon='lucide:edit' className='h-4 w-4 text-zinc-800' />
+      <Form {...form}>
+        <form
+          id='profile-form'
+          onSubmit={handleSubmit(onSubmit)}
+          className='flex flex-col gap-8 lg:flex-row'
+        >
+          <div className='flex flex-1 justify-center'>
+            <div className='relative my-8 h-[200px] w-[200px]'>
+              <Image
+                alt=''
+                src={'/image.png'}
+                width={200}
+                height={200}
+                className='rounded-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
+              />
+              <div className='absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 shadow-md hover:bg-slate-200'>
+                <Icon icon='lucide:edit' className='h-4 w-4 text-zinc-800' />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className='flex-1 space-y-8'>
-          <div className='space-y-1.5'>
-            <p className='text-sm font-medium'>Name</p>
-            <Input placeholder='John Doe' {...register('name')} />
-            {errors.name && (
-              <p className='text-red-500'>{errors.name.message}</p>
-            )}
-          </div>
-
-          <div className='space-y-1.5'>
-            <p className='text-sm font-medium'>Email</p>
-            <Input placeholder='admin@picmepls.com' {...register('email')} />
-            {errors.email && (
-              <p className='text-red-500'>{errors.email.message}</p>
-            )}
-          </div>
-
-          <div className='space-y-1.5'>
-            <p className='text-sm font-medium'>Phone</p>
-            <Input placeholder='0xx-xxx-xxxx' {...register('phone')} />
-            {errors.phone && (
-              <p className='text-red-500'>{errors.phone.message}</p>
-            )}
-          </div>
-
-          <div className='space-y-1.5'>
-            <p className='text-sm font-medium'>Facebook</p>
-            <Input placeholder='Facebook' {...register('facebook')} />
-          </div>
-
-          <div className='space-y-1.5'>
-            <p className='text-sm font-medium'>Instagram</p>
-            <Input placeholder='Instagram' {...register('instagram')} />
-          </div>
-
-          {isPhotographer && (
-            <div className='flex-1 space-y-8'>
-              <hr className='border-t border-zinc-200' />
-              <h2 className='text-[24px] font-bold'>Payment Method</h2>
-
-              <div className='space-y-1.5'>
-                <p className='text-sm font-medium'>Bank</p>
-                <Input
-                  list='bank-options'
-                  placeholder='Select or type a bank'
-                  {...register('bank')}
-                />
-                <datalist id='bank-options'>
-                  <option value='SCB' />
-                  <option value='KBANK' />
-                  <option value='KTB' />
-                  <option value='BBL' />
-                  <option value='BAY' />
-                  <option value='TTB' />
-                  <option value='KKP' />
-                </datalist>
-              </div>
-
-              <div className='space-y-1.5'>
-                <p className='text-sm font-medium'>Account number</p>
-                <Input placeholder='xxx-xxx-xxx-x' {...register('accountNo')} />
-              </div>
-
-              <div className='space-y-1.5'>
-                <p className='text-sm font-medium'>Bank Branch</p>
-                <Input
-                  placeholder='Chulalongkorn University'
-                  {...register('bankBranch')}
-                />
-              </div>
-
-              <Button type='button' className='hover:bg-zinc-700'>
-                Revalidate Account
-              </Button>
+          <div className='flex-1 space-y-8'>
+            <div className='space-y-1.5'>
+              <FormField
+                control={form.control}
+                name='name'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-sm font-medium'>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder='John Doe' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {form.formState.errors.name && (
+                <p className='text-red-500'>
+                  {form.formState.errors.name.message}
+                </p>
+              )}
             </div>
-          )}
-        </div>
-      </form>
+
+            <div className='space-y-1.5'>
+              <FormField
+                control={form.control}
+                name='email'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-base font-medium'>
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder='user@picmepls.com' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {form.formState.errors.name && (
+                <p className='text-red-500'>
+                  {form.formState.errors.name.message}
+                </p>
+              )}
+            </div>
+
+            <div className='space-y-1.5'>
+              <FormField
+                control={form.control}
+                name='phone'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-base font-medium'>
+                      Phone
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder='xxx-xxx-xxxx' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {form.formState.errors.name && (
+                <p className='text-red-500'>
+                  {form.formState.errors.name.message}
+                </p>
+              )}
+            </div>
+
+            <div className='space-y-1.5'>
+              <FormField
+                control={form.control}
+                name='facebook'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-base font-medium'>
+                      Facebook
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder='Facebook' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className='space-y-1.5'>
+              <FormField
+                control={form.control}
+                name='instagram'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-base font-medium'>
+                      Instagram
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder='Instagram' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {isPhotographer && (
+              <div className='flex-1 space-y-8'>
+                <hr className='border-t border-zinc-200' />
+                <h2 className='text-[24px] font-bold'>Payment Method</h2>
+
+                <div className='space-y-1.5'>
+                  <FormField
+                    control={form.control}
+                    name='bank'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-base font-medium'>
+                          Bank
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            list='bank-options'
+                            placeholder='Select or type a bank'
+                            {...field} // ✅ Correct way to use FormField
+                          />
+                        </FormControl>
+                        <datalist id='bank-options'>
+                          <option value='SCB' />
+                          <option value='KBANK' />
+                          <option value='KTB' />
+                          <option value='BBL' />
+                          <option value='BAY' />
+                          <option value='TTB' />
+                          <option value='KKP' />
+                        </datalist>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className='space-y-1.5'>
+                  <FormField
+                    control={form.control}
+                    name='accountNo'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-base font-medium'>
+                          Bank Account Number
+                        </FormLabel>
+                        <FormControl>
+                          <Input placeholder='xxx-xxxxxx-x' {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className='space-y-1.5'>
+                  <FormField
+                    control={form.control}
+                    name='bankBranch'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-base font-medium'>
+                          Bank Branch
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='Chulalongkorn University'
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <Button type='button' className='hover:bg-zinc-700'>
+                  Revalidate Account
+                </Button>
+              </div>
+            )}
+          </div>
+        </form>
+      </Form>
     </div>
   )
 }
