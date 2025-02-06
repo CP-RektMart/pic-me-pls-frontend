@@ -25,12 +25,12 @@ export default function SignInDrawer({
 }) {
   return (
     <Drawer onOpenChange={(open) => !open && onClose?.()}>
-      <DrawerTrigger asChild>
+      <DrawerTrigger asChild className='md:hidden'>
         <LoginButton userType={userType} onClick={onClick} />
       </DrawerTrigger>
-      <DrawerContent className='flex flex-col rounded-t-3xl border border-zinc-200 items-center'>
+      <DrawerContent className="flex flex-col rounded-t-3xl border border-zinc-200 items-center md:hidden">
         <SignInContent userType={userType} />
-        <DrawerHeader>
+        <DrawerHeader className='md:hidden'>
           <DrawerTitle></DrawerTitle>
           <DrawerDescription></DrawerDescription>
         </DrawerHeader>
