@@ -16,6 +16,13 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 const profileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -201,28 +208,28 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                   <FormField
                     control={form.control}
                     name='bank'
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <FormLabel className='text-sm font-medium'>
                           Bank
                         </FormLabel>
-                        <FormControl>
-                          <Input
-                            list='bank-options'
-                            placeholder='Select or type a bank'
-                            {...field}
-                          />
-                        </FormControl>
-                        <datalist id='bank-options'>
-                          <option value='SCB' />
-                          <option value='KBANK' />
-                          <option value='KTB' />
-                          <option value='BBL' />
-                          <option value='BAY' />
-                          <option value='TTB' />
-                          <option value='KKP' />
-                        </datalist>
-                        <FormMessage />
+                        <Select>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder='Select or type a bank' />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent id='bank-options'>
+                            <SelectItem value='SCB'> SCB </SelectItem>
+                            <SelectItem value='KBANK'>KBANK </SelectItem>
+                            <SelectItem value='KTB'> KTB</SelectItem>
+                            <SelectItem value='BBL'> BBL</SelectItem>
+                            <SelectItem value='BAY'> BAY</SelectItem>
+                            <SelectItem value='TTB'> TTB</SelectItem>
+                            <SelectItem value='KKP'> KKP</SelectItem>
+                          </SelectContent>
+                          <FormMessage />
+                        </Select>
                       </FormItem>
                     )}
                   />
