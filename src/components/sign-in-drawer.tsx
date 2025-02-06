@@ -36,7 +36,7 @@ export default function SignInDrawer({
           priority={true}
         />
       </DrawerTrigger>
-      <DrawerContent className='rounded-t-3xl border-[1px] border-zinc-200'>
+      <DrawerContent className='rounded-t-3xl border border-zinc-200'>
         <DrawerHeader className='flex flex-col gap-4 px-6 py-4'>
           <div className='flex w-full flex-col gap-2 text-left'>
             <DrawerTitle className='text-lg'>Sign in as {userType}</DrawerTitle>
@@ -56,14 +56,14 @@ export default function SignInDrawer({
                   : 'CustomerSigninIcon.svg'
               }
               alt=''
-              width={152}
-              height={154}
+              width={162}
+              height={224}
             />
           </div>
         </DrawerHeader>
         <DrawerFooter className='flex items-center'>
           <Button type='submit' className='h-10 w-[80%]'>
-            <Icon icon='flat-color-icons:google' width='12' height='12' />
+            <Icon icon='flat-color-icons:google' className='size-3' />
             Login with email
           </Button>
         </DrawerFooter>

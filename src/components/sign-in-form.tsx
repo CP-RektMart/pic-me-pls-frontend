@@ -37,8 +37,8 @@ export default function SignInForm({
                   : ''
             }
             alt=''
-            width={152}
-            height={154}
+            width={224}
+            height={162}
           />
         </div>
       </div>
