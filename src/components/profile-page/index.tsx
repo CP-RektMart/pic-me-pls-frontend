@@ -216,7 +216,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                         <Select>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder='Select or type a bank' />
+                              <SelectValue placeholder='Select a bank' />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent id='bank-options'>
