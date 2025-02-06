@@ -32,13 +32,15 @@ import {
 const formSchema = z.object({
   citizenId: z
     .string({ required_error: 'Enter your citizen id' })
-    .nonempty('Citizen ID is required')
+    .nonempty('Enter your citizen id')
     .min(13, 'Citizen ID must be 13 characters')
     .max(13, 'Citizen ID must be 13 characters'),
   expiredDate: z.date({ required_error: 'Please select a date' }),
   laserNo: z
     .string({ required_error: 'Enter your laser number' })
-    .nonempty('Laser No. is required'),
+    .nonempty('Enter your laser number')
+    .min(13, 'Laser number must be 11 characters')
+    .max(13, 'Laser number must be 11 characters'),
   terms: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
   }),

@@ -17,14 +17,14 @@ type ImageUploadProps = {
 export default function ImageUpload({ value, onChange }: ImageUploadProps) {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-    const file = acceptedFiles[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
+      const file = acceptedFiles[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
           onChange(e.target?.result as string)
+        }
+        reader.readAsDataURL(file)
       }
-      reader.readAsDataURL(file)
-    }
     },
     [onChange]
   )
@@ -38,7 +38,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
   const removeImage = () => onChange(null)
 
   return (
-    <div className='mx-auto w-full max-w-md'>
+    <div className='mx-auto w-full'>
       <div
         {...getRootProps()}
         className={cn(
