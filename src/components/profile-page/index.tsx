@@ -23,15 +23,11 @@ const profileSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileSchema>
 
-interface ProfilePageComponentProps {
+interface ProfileProps {
   isPhotographer: boolean
 }
 
-export default function ProfilePageComponent({
-  ComponentProps,
-}: {
-  ComponentProps: ProfilePageComponentProps
-}) {
+export default function ProfilePageComponent({ isPhotographer }: ProfileProps) {
   const {
     register,
     handleSubmit,
@@ -114,7 +110,7 @@ export default function ProfilePageComponent({
             <Input placeholder='Instagram' {...register('instagram')} />
           </div>
 
-          {ComponentProps.isPhotographer && (
+          {isPhotographer && (
             <div className='flex-1 space-y-8'>
               <hr className='border-t border-zinc-200' />
               <h2 className='text-[24px] font-bold'>Payment Method</h2>
