@@ -1,3 +1,4 @@
+import { UserType } from '@/type/user'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
@@ -12,29 +13,21 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 
+import LoginButton from './login-button'
+
 export default function SignInDrawer({
   userType,
   onClick,
   onClose,
 }: {
-  userType: 'Customer' | 'Photographer' | ''
+  userType: UserType
   onClick?: () => void
   onClose?: () => void
 }) {
   return (
     <Drawer onOpenChange={(open) => !open && onClose && onClose()}>
       <DrawerTrigger onClick={onClick}>
-        <Image
-          src={
-            userType === 'Photographer'
-              ? 'PhotographerIcon.svg'
-              : 'CustomerIcon.svg'
-          }
-          alt={`${userType} Icon`}
-          width={152}
-          height={154}
-          priority={true}
-        />
+        <LoginButton userType={userType} />
       </DrawerTrigger>
       <DrawerContent className='rounded-t-3xl border border-zinc-200'>
         <DrawerHeader className='flex flex-col gap-4 px-6 py-4'>

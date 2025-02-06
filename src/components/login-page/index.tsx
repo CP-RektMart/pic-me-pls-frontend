@@ -1,18 +1,22 @@
 'use client'
 
 import { useState } from 'react'
+
+import { UserType } from '@/type/user'
 import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive'
 
-import SignInForm from '@/components/sign-in-form'
 import SignInDrawer from '@/components/sign-in-drawer'
+import SignInForm from '@/components/sign-in-form'
+
+import LoginButton from '../login-button'
 
 export default function LoginPageComponent() {
   const [userType, setUserType] = useState('')
   const [isSignIn, setIsSignIn] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: 767 })
 
-  const handleUserIconClick = (clickType: 'Customer' | 'Photographer' | '') => {
+  const handleUserIconClick = (clickType: UserType) => {
     setUserType((prevUserType) => {
       const newUserType = prevUserType === clickType ? '' : clickType
       setIsSignIn(prevUserType !== clickType || !isSignIn)
@@ -32,18 +36,12 @@ export default function LoginPageComponent() {
             </p>
             {!isMobile ? (
               <div className='flex flex-row space-x-4'>
-                <Image
-                  src='customerIcon.svg'
-                  alt={''}
-                  width={152}
-                  height={154}
+                <LoginButton
+                  userType='Customer'
                   onClick={() => handleUserIconClick('Customer')}
                 />
-                <Image
-                  src='photographerIcon.svg'
-                  alt={''}
-                  width={152}
-                  height={154}
+                <LoginButton
+                  userType='Photographer'
                   onClick={() => handleUserIconClick('Photographer')}
                 />
               </div>
@@ -78,18 +76,12 @@ export default function LoginPageComponent() {
               Sign in to book photographers or showcase your talent.
             </p>
             <div className='flex flex-row space-x-4'>
-              <Image
-                src='customerIcon.svg'
-                alt={''}
-                width={152}
-                height={154}
+              <LoginButton
+                userType='Customer'
                 onClick={() => handleUserIconClick('Customer')}
               />
-              <Image
-                src='photographerIcon.svg'
-                alt={''}
-                width={152}
-                height={154}
+              <LoginButton
+                userType='Photographer'
                 onClick={() => handleUserIconClick('Photographer')}
               />
             </div>

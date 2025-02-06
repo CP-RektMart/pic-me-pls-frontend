@@ -6,10 +6,12 @@ import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
 
+import { UserType } from '@/type/user'
+
 export default function SignInForm({
   userType,
 }: {
-  userType: 'Customer' | 'Photographer' | ''
+  userType: UserType
 }) {
   return (
     <form
