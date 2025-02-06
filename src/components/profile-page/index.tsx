@@ -146,7 +146,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 />
               </div>
 
-              <Button type='submit' className='hover:bg-zinc-700'>
+              <Button type='button' className='hover:bg-zinc-700'>
                 Revalidate Account
               </Button>
             </div>
