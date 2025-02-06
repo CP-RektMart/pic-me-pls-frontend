@@ -257,7 +257,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                     name='bankBranch'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className='text-base font-medium'>
+                        <FormLabel className='text-sm font-medium'>
                           Bank Branch
                         </FormLabel>
                         <FormControl>
