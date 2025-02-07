@@ -32,8 +32,8 @@ export default function LoginPageComponent() {
     <div className='flex flex-1'>
       <div
         className={cn(
-          'flex w-full flex-col items-center justify-center',
-          isSignIn && 'md:w-1/2'
+          'grid h-full flex-1',
+          isSignIn ? 'md:grid-cols-2' : 'grid-cols-1'
         )}
       >
         <div className='flex flex-col items-center justify-center space-y-4'>
