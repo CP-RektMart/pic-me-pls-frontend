@@ -19,12 +19,15 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        login:
+          'flex flex-col gap-2.5 items-center justify-center rounded-2xl bg-white shadow-[2px_2px_2px_rgba(0,0,0,0.25)]',
       },
       size: {
         default: 'h-9 px-4 py-2',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-10 rounded-md px-8',
         icon: 'h-9 w-9',
+        login: 'h-[154px] w-[152px] gap-2.5 p-6',
       },
     },
     defaultVariants: {
