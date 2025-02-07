@@ -66,7 +66,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
   })
 
   return (
-    <Container>
+    <Container className='my-6'>
       <div className='flex h-10 flex-row'>
         <h1 className='items-center self-center text-2xl font-bold lg:text-3xl'>
           Edit Profile
