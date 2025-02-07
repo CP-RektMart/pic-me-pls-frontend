@@ -24,6 +24,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
+import Container from '../container'
+
 const profileSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
@@ -64,7 +66,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
   })
 
   return (
-    <div className='mx-auto my-6 flex-col gap-6 space-y-6 px-4 lg:max-w-7xl lg:px-8'>
+    <Container>
       <div className='flex h-10 flex-row'>
         <h1 className='items-center self-center text-2xl font-bold lg:text-3xl'>
           Edit Profile
@@ -282,6 +284,6 @@ export default function Profile({ isPhotographer }: ProfileProps) {
           </div>
         </form>
       </Form>
-    </div>
+    </Container>
   )
 }

@@ -2,7 +2,7 @@ import Container from '@/components/container'
 
 export default function NotFound() {
   return (
-    <div className='flex min-h-screen flex-1 items-center justify-center text-center'>
+    <div className='flex flex-1 items-center justify-center text-center'>
       <Container>
         <div className='flex flex-col items-center justify-center space-y-4'>
           <h1 className='animate-bounce text-3xl font-semibold'>
