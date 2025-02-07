@@ -20,8 +20,8 @@ export default function SignInDrawer({
   onClose,
 }: {
   userType: UserType
-  onClick?: () => void
-  onClose?: () => void
+  onClick: () => void
+  onClose: () => void
 }) {
   return (
     <Drawer onOpenChange={(open) => !open && onClose?.()}>

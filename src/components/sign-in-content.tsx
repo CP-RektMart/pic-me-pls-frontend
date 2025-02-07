@@ -1,15 +1,12 @@
-"use client";
+'use client'
+
 import { UserType } from '@/type/user'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
 
-export default function SignInContent({
-  userType,
-}: {
-  userType: UserType
-}) {
+export default function SignInContent({ userType }: { userType: UserType }) {
   return (
     <div>
       <div className='mt-4 flex flex-col gap-4 px-6 py-4'>
@@ -36,7 +33,7 @@ export default function SignInContent({
           />
         </div>
       </div>
-      <div className='flex h-16 justify-center p-3'>
+      <div className='flex justify-center p-3'>
         <Button type='submit' className='h-10 w-full'>
           <Icon icon='flat-color-icons:google' className='size-3' />
           Login with email

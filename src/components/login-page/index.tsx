@@ -19,8 +19,12 @@ export default function LoginPageComponent() {
       const newUserType = prevUserType === clickType ? '' : clickType
       return newUserType
     })
-
     setIsSignIn((prevIsSignIn) => !prevIsSignIn || userType !== clickType)
+  }
+
+  const handleDrawerClose = () => {
+    setIsSignIn(false)
+    setUserType('')
   }
 
   return (
@@ -47,18 +51,12 @@ export default function LoginPageComponent() {
               <SignInDrawer
                 userType='Customer'
                 onClick={() => handleUserIconClick('Customer')}
-                onClose={() => {
-                  setIsSignIn(false)
-                  setUserType('')
-                }}
+                onClose={() => handleDrawerClose()}
               />
               <SignInDrawer
                 userType='Photographer'
                 onClick={() => handleUserIconClick('Photographer')}
-                onClose={() => {
-                  setIsSignIn(false)
-                  setUserType('')
-                }}
+                onClose={() => handleDrawerClose()}
               />
             </div>
           </div>
@@ -85,18 +83,12 @@ export default function LoginPageComponent() {
               <SignInDrawer
                 userType='Customer'
                 onClick={() => handleUserIconClick('Customer')}
-                onClose={() => {
-                  setIsSignIn(false)
-                  setUserType('')
-                }}
+                onClose={() => handleDrawerClose()}
               />
               <SignInDrawer
                 userType='Photographer'
                 onClick={() => handleUserIconClick('Photographer')}
-                onClose={() => {
-                  setIsSignIn(false)
-                  setUserType('')
-                }}
+                onClose={() => handleDrawerClose()}
               />
             </div>
           </div>
