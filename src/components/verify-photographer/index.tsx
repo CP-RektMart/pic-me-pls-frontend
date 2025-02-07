@@ -120,64 +120,61 @@ export default function Page() {
                   control={form.control}
                   name='expiredDate'
                   render={({ field }) => (
-                    <div className='flex-1'>
-                      <FormItem className='flex flex-col'>
-                        <FormLabel className='space-y-1.5 text-sm font-medium'>
-                          Expired Date
-                        </FormLabel>
-                        <FormControl>
-                          <Popover
-                            open={openCalendar}
-                            onOpenChange={setOpenCalendar}
+                    <FormItem className='flex-1'>
+                      <FormLabel className='text-sm font-medium'>
+                        Expired Date
+                      </FormLabel>
+                      <FormControl>
+                        <Popover
+                          open={openCalendar}
+                          onOpenChange={setOpenCalendar}
+                        >
+                          <PopoverTrigger
+                            className='flex flex-row justify-between'
+                            asChild
                           >
-                            <PopoverTrigger
-                              className='flex flex-row justify-between'
-                              asChild
+                            <Button
+                              variant='outline'
+                              onClick={() => setOpenCalendar(true)}
+                              className='w-full'
                             >
-                              <Button
-                                variant='outline'
-                                onClick={() => setOpenCalendar(true)}
-                              >
-                                <p className='text-zinc-500'>
-                                  {field.value
-                                    ? format(field.value, 'PPP')
-                                    : 'Select a date'}
-                                </p>
-                                <CalendarIcon size={16} color='#71717A' />
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className='ml-2 w-auto p-0'>
-                              <Calendar
-                                mode='single'
-                                selected={field.value}
-                                onSelect={(date) => {
-                                  field.onChange(date)
-                                  setOpenCalendar(false)
-                                }}
-                              />
-                            </PopoverContent>
-                          </Popover>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    </div>
+                              <p className='text-zinc-500'>
+                                {field.value
+                                  ? format(field.value, 'PP')
+                                  : 'Select a date'}
+                              </p>
+                              <CalendarIcon size={16} color='#71717A' />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className='ml-2 w-auto p-0'>
+                            <Calendar
+                              mode='single'
+                              selected={field.value}
+                              onSelect={(date) => {
+                                field.onChange(date)
+                                setOpenCalendar(false)
+                              }}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
                   )}
                 />
                 <FormField
                   control={form.control}
                   name='laserNo'
                   render={({ field }) => (
-                    <div className='flex-1'>
-                      <FormItem>
-                        <FormLabel className='text-sm font-medium'>
-                          Laser No.
-                        </FormLabel>
-                        <FormControl>
-                          <Input placeholder='MEx-xxxxxx-xx' {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    </div>
+                    <FormItem className='flex-1'>
+                      <FormLabel className='text-sm font-medium'>
+                        Laser No.
+                      </FormLabel>
+                      <FormControl>
+                        <Input placeholder='MEx-xxxxxx-xx' {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
                   )}
                 />
               </div>
