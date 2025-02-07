@@ -3,7 +3,7 @@
 import { useCallback } from 'react'
 
 import { cn } from '@/lib/utils'
-import { Upload, X } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 
@@ -68,12 +68,15 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
                 removeImage()
               }}
             >
-              <X className='h-4 w-4' />
+              <Icon icon='lucide:x' className='size-4' />
             </Button>
           </div>
         ) : (
-          <div className='flex h-full flex-col items-center justify-center gap-2'>
-            <Upload className='mx-auto' size={24} color='#62748E' />
+          <div className='flex h-full flex-col items-center justify-center gap-4'>
+            <Icon
+              icon='lucide:upload'
+              className='mx-auto size-6 text-slate-500'
+            />
             <p className='text-sm font-medium text-slate-500'>
               Drag and drop or click here to upload your citizen card
             </p>

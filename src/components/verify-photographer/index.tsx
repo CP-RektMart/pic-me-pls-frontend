@@ -3,8 +3,8 @@
 import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -146,7 +146,10 @@ export default function Page() {
                                   ? format(field.value, 'PP')
                                   : 'Select a date'}
                               </p>
-                              <CalendarIcon size={16} color='#71717A' />
+                              <Icon
+                                icon='lucide:calendar'
+                                className='size-6 text-zinc-500'
+                              />
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent className='ml-2 w-auto p-0'>
