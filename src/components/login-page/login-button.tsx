@@ -3,6 +3,8 @@
 import { UserType } from '@/type/user'
 import Image from 'next/image'
 
+import { Button } from '../ui/button'
+
 export default function LoginButton({
   userType,
   onClick,
@@ -11,10 +13,7 @@ export default function LoginButton({
   onClick?: () => void
 }) {
   return (
-    <button
-      onClick={onClick}
-      className='flex h-[154px] w-[152px] flex-col items-center justify-center gap-[10px] rounded-2xl bg-white p-6 shadow-[2px_2px_2px_rgba(0,0,0,0.25)]'
-    >
+    <Button onClick={onClick} variant='login' size='login'>
       <Image
         src={
           userType === 'Photographer'
@@ -27,6 +26,6 @@ export default function LoginButton({
         priority
       />
       <div className='font-medium'>{userType}</div>
-    </button>
+    </Button>
   )
 }
