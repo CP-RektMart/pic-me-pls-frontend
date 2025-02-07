@@ -12,7 +12,10 @@
     "commit": "cz"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
     "@iconify/react": "^5.2.0",
+    "@radix-ui/react-label": "^2.1.2",
+    "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-dialog": "^1.1.5",
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
@@ -22,9 +25,12 @@
     "next-auth": "5.0.0-beta.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "react-select": "link:@radix/ui/react-select",
     "react-responsive": "^10.0.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.1",
     "vaul": "^1.1.2"
   },
   "devDependencies": {
