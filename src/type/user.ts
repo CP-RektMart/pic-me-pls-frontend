@@ -1,1 +1,1 @@
-export type UserType = 'Customer' | 'Photographer' | '';
+export type UserType = 'Customer' | 'Photographer' | ''

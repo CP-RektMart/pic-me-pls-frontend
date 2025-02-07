@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <>
+    <div>
       <div>Pic me pls YOYO</div>
       <div>
         <Button>Button from shadcn</Button>
@@ -19,6 +19,6 @@ export default function Home() {
         <LoginButton userType='Customer' />
         <LoginButton userType='Photographer' />
       </div>
-    </>
+    </div>
   )
 }

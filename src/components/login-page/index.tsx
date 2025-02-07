@@ -29,7 +29,7 @@ export default function LoginPageComponent() {
   }
 
   return (
-    <div className='flex h-screen w-full'>
+    <div className='flex flex-1'>
       <div
         className={cn(
           'flex w-full flex-col items-center justify-center',
