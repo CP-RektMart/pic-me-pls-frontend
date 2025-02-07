@@ -31,10 +31,9 @@ import {
 
 const formSchema = z.object({
   citizenId: z
-    .string({ required_error: 'Enter your citizen id' })
-    .nonempty('Enter your citizen id')
-    .min(13, 'Citizen ID must be 13 characters')
-    .max(13, 'Citizen ID must be 13 characters'),
+    .string()
+    .length(13, 'Citizen ID must be exactly 13 digits')
+    .regex(/^\d+$/, 'Citizen ID must contain only numbers'),
   expiredDate: z.date({ required_error: 'Please select a date' }),
   laserNo: z
     .string({ required_error: 'Enter your laser number' })
@@ -109,7 +108,11 @@ export default function Page() {
                       Citizen ID
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder='1-XXXX-XXXXX-XX-X' {...field} />
+                      <Input
+                        type='number'
+                        placeholder='1-XXXX-XXXXX-XX-X'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
