@@ -28,7 +28,7 @@ export default function SignInDrawer({
       <DrawerTrigger asChild className='md:hidden'>
         <LoginButton userType={userType} onClick={onClick} />
       </DrawerTrigger>
-      <DrawerContent className="flex flex-col rounded-t-3xl border border-zinc-200 items-center md:hidden">
+      <DrawerContent className='flex flex-col items-center rounded-t-3xl border border-zinc-200 md:hidden'>
         <SignInContent userType={userType} />
         <DrawerHeader className='md:hidden'>
           <DrawerTitle></DrawerTitle>
