@@ -14,14 +14,14 @@ export default function Navbar() {
   }
 
   return (
-    <nav className='flex flex-row items-center justify-between bg-base-primary px-6 py-4 text-white'>
+    <nav className='sticky flex w-full flex-row items-center justify-between bg-base-primary px-6 py-4 text-white'>
       <div className='text-base font-bold'>PicMePls</div>
       <div className='hidden flex-row gap-6 lg:flex'>
         {/* navigation zone */}
         {navItems.slice(0, 5).map((item, index) => (
           <NavButton
             key={index}
-            icon={<Icon icon={item.icon} className='size-4' />}
+            icon={item.icon}
             title={item.title}
             link={item.url}
           />
@@ -30,7 +30,7 @@ export default function Navbar() {
         {navItems.slice(5, 6).map((item, index) => (
           <NavButton
             key={index}
-            icon={<Icon icon={item.icon} className='size-4' />}
+            icon={item.icon}
             title={item.title}
             link={item.url}
             handleOnClick={handleLogout}

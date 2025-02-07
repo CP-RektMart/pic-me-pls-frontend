@@ -1,7 +1,6 @@
 'use client'
 
 import { Icon } from '@iconify/react'
-import { Menu } from 'lucide-react'
 
 import { SidebarButton } from '@/components/sidebar/sidebar-button'
 import { Button } from '@/components/ui/button'
@@ -24,7 +23,7 @@ export default function NavSidebar() {
       <Sheet>
         <SheetTrigger asChild>
           <Button variant='ghost' className='p-2'>
-            <Menu size={16} />
+            <Icon icon='lucide:menu' className='size-4' />
           </Button>
         </SheetTrigger>
         <SheetContent>
@@ -37,7 +36,7 @@ export default function NavSidebar() {
                   className='w-full place-items-start rounded-sm hover:bg-neutral-200'
                 >
                   <SidebarButton
-                    icon={<Icon icon={item.icon} className='sie-4' />}
+                    icon={item.icon}
                     title={item.title}
                     link={item.url}
                   />
