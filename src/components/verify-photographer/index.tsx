@@ -105,7 +105,7 @@ export default function Page() {
                 name='citizenId'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='text-base font-medium'>
+                    <FormLabel className='text-sm font-medium'>
                       Citizen ID
                     </FormLabel>
                     <FormControl>
@@ -122,7 +122,7 @@ export default function Page() {
                   render={({ field }) => (
                     <div className='flex-1'>
                       <FormItem className='flex flex-col'>
-                        <FormLabel className='space-y-1.5 text-base font-medium'>
+                        <FormLabel className='space-y-1.5 text-sm font-medium'>
                           Expired Date
                         </FormLabel>
                         <FormControl>
@@ -169,7 +169,7 @@ export default function Page() {
                   render={({ field }) => (
                     <div className='flex-1'>
                       <FormItem>
-                        <FormLabel className='text-base font-medium'>
+                        <FormLabel className='text-sm font-medium'>
                           Laser No.
                         </FormLabel>
                         <FormControl>
