@@ -35,8 +35,6 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
     multiple: false,
   })
 
-  const removeImage = () => onChange(null)
-
   return (
     <div className='mx-auto w-full'>
       <div
@@ -65,7 +63,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
               className='absolute -right-2 -top-2 lg:-top-3 lg:right-5'
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation()
-                removeImage()
+                onChange('')
               }}
             >
               <Icon icon='lucide:x' className='size-4' />
