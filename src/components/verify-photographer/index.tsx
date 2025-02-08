@@ -50,8 +50,23 @@ const formSchema = z.object({
     .nonempty('Please upload your citizen card'),
 })
 
-export default function Page() {
+interface ValidateProps {
+  isRevalidate: boolean
+}
+
+export default function Page({ isRevalidate }: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+
+  // TODO: [Revalidate] fetch GET /photographer/verify-card-info
+  // TODO: [Revalidate] fetch POST /photographer/renew-verify-card
+  // TODO: [verify] fetch POST /photographer/upload-verify-card
+
+  const revalidateInfo = {
+    citizenId: '1-1234-XXXXX-XX-X',
+    expiredDate: new Date('2025-12-31'),
+    laserNo: 'AB1XXXXXXXXX',
+    // image: '/path/to/previous-image.jpg',
+  }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -60,6 +75,7 @@ export default function Page() {
       expiredDate: undefined,
       laserNo: '',
       terms: undefined,
+      image: '',
     },
   })
 
@@ -70,7 +86,9 @@ export default function Page() {
   return (
     <div className='mx-auto min-h-screen max-w-7xl p-4 lg:px-8 lg:py-6'>
       {/* To be fixed: Move to layout */}
-      <p className='mb-4 font-bold lg:text-2xl'>Verify your account</p>
+      <p className='mb-4 font-bold lg:text-2xl'>
+        {!isRevalidate ? 'Verify your account' : 'Re-Verify your account'}
+      </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -112,7 +130,11 @@ export default function Page() {
                     <FormControl>
                       <Input
                         type='number'
-                        placeholder='1-XXXX-XXXXX-XX-X'
+                        placeholder={
+                          isRevalidate
+                            ? revalidateInfo.citizenId
+                            : '1-XXXX-XXXXX-XX-X'
+                        }
                         {...field}
                       />
                     </FormControl>
@@ -144,9 +166,13 @@ export default function Page() {
                               className='w-full'
                             >
                               <p className='text-zinc-500'>
-                                {field.value
-                                  ? format(field.value, 'PP')
-                                  : 'Select a date'}
+                                {isRevalidate
+                                  ? revalidateInfo.expiredDate
+                                    ? format(revalidateInfo.expiredDate, 'PP')
+                                    : 'Select a date'
+                                  : field.value
+                                    ? format(field.value, 'PP')
+                                    : 'Select a date'}
                               </p>
                               <Icon
                                 icon='lucide:calendar'
@@ -179,7 +205,14 @@ export default function Page() {
                         Laser No.
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder='MEx-xxxxxx-xx' {...field} />
+                        <Input
+                          placeholder={
+                            isRevalidate
+                              ? revalidateInfo.laserNo
+                              : 'MEx-xxxxxx-xx'
+                          }
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
