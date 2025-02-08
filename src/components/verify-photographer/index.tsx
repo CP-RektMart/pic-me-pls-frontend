@@ -38,8 +38,10 @@ const formSchema = z.object({
   laserNo: z
     .string({ required_error: 'Enter your laser number' })
     .nonempty('Enter your laser number')
-    .min(13, 'Laser number must be 11 characters')
-    .max(13, 'Laser number must be 11 characters'),
+    .regex(
+      /^[A-Z]{2}\d{10}$/,
+      'Laser number must start with 2 capital letters followed by 10 digits'
+    ),
   terms: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
   }),
