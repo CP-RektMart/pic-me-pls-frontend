@@ -68,7 +68,7 @@ export default function Page() {
   }
 
   return (
-    <div className='min-h-screen max-w-7xl px-4 lg:px-8'>
+    <div className='mx-auto min-h-screen max-w-7xl p-4 lg:px-8 lg:py-6'>
       {/* To be fixed: Move to layout */}
       <p className='mb-4 font-bold lg:text-2xl'>Verify your account</p>
       <Form {...form}>
