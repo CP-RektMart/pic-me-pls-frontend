@@ -16,8 +16,8 @@ export default function Home() {
         <div className='size-10 rounded-full bg-base-quinary'></div>
       </div>
       <div className='flex flex-row space-x-2'>
-        <LoginButton userType='Customer' />
-        <LoginButton userType='Photographer' />
+        <LoginButton userType='Customer' isClicked={false} />
+        <LoginButton userType='Photographer' isClicked={false} />
       </div>
     </div>
   )
