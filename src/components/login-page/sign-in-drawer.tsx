@@ -26,7 +26,7 @@ export default function SignInDrawer({
   return (
     <Drawer onOpenChange={(open) => !open && onClose?.()}>
       <DrawerTrigger asChild className='md:hidden'>
-        <LoginButton userType={userType} onClick={onClick} />
+        <LoginButton userType={userType} onClick={onClick} isClicked={false} />
       </DrawerTrigger>
       <DrawerContent className='flex flex-col items-center rounded-t-3xl border border-zinc-200 md:hidden'>
         <SignInContent userType={userType} />
