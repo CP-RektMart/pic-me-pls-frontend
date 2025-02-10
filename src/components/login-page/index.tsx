@@ -14,10 +14,16 @@ import LoginButton from './login-button'
 export default function LoginPageComponent() {
   const [userType, setUserType] = useState('')
   const [isSignIn, setIsSignIn] = useState(false)
+  const [isCustomerButtonClicked, setIsCustomerButtonClicked] = useState(false)
+  const [isPhotographerButtonClicked, setIsPhotographerButtonClicked] =
+    useState(false)
 
   const handleUserIconClick = (clickType: UserType) => {
     setUserType((prevUserType) => {
       const newUserType = prevUserType === clickType ? '' : clickType
+      setIsCustomerButtonClicked(newUserType === 'Customer')
+      setIsPhotographerButtonClicked(newUserType === 'Photographer')
+
       return newUserType
     })
     setIsSignIn((prevIsSignIn) => !prevIsSignIn || userType !== clickType)
@@ -26,6 +32,8 @@ export default function LoginPageComponent() {
   const handleDrawerClose = () => {
     setIsSignIn(false)
     setUserType('')
+    setIsCustomerButtonClicked(false)
+    setIsPhotographerButtonClicked(false)
   }
 
   return (
@@ -46,10 +54,12 @@ export default function LoginPageComponent() {
             <LoginButton
               userType='Customer'
               onClick={() => handleUserIconClick('Customer')}
+              isClicked={isCustomerButtonClicked}
             />
             <LoginButton
               userType='Photographer'
               onClick={() => handleUserIconClick('Photographer')}
+              isClicked={isPhotographerButtonClicked}
             />
           </div>
           <div className='flex flex-row items-center space-x-4 md:hidden'>
