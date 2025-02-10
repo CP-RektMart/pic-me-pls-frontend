@@ -1,5 +1,3 @@
-'use client'
-
 import { UserType } from '@/type/user'
 import { Icon } from '@iconify/react'
 import { signIn } from 'next-auth/react'
