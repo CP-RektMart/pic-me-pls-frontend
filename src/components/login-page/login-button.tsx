@@ -13,7 +13,12 @@ export default function LoginButton({
   onClick?: () => void
 }) {
   return (
-    <Button onClick={onClick} variant='login' size='login'>
+    <Button
+      onClick={onClick}
+      variant='login'
+      size='login'
+      className='hover:bg-zinc-100'
+    >
       <Image
         src={
           userType === 'Photographer'
