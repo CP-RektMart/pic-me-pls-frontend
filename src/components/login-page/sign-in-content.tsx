@@ -1,6 +1,7 @@
 import { UserType } from '@/type/user'
 import { Icon } from '@iconify/react'
 import { signIn } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
