@@ -1,13 +1,14 @@
-import LoginButton from '@/components/login-page/login-button'
-import { Button } from '@/components/ui/button'
+import { auth } from '@/auth'
 
-export default function Home() {
+import LoginButton from '@/components/login-page/login-button'
+
+export default async function Home() {
+  const session = await auth()
+  console.log('session', session)
+
   return (
     <div>
       <div>Pic me pls YOYO</div>
-      <div>
-        <Button>Button from shadcn</Button>
-      </div>
       <div className='flex flex-row space-x-2'>
         <div className='size-10 rounded-full bg-base-primary'></div>
         <div className='size-10 rounded-full bg-base-secondary'></div>
