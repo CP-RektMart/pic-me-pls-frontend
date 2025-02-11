@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 
+import { setRole } from '@/app/actions/set-cookie'
 import { cn } from '@/lib/utils'
-import { UserType } from '@/types/user'
+import { UserType } from '@/type/user'
 import Image from 'next/image'
 
 import SignInDrawer from '@/components/login-page/sign-in-drawer'
@@ -15,7 +16,9 @@ export default function LoginPageComponent() {
   const [userType, setUserType] = useState('')
   const [isSignIn, setIsSignIn] = useState(false)
 
-  const handleUserIconClick = (clickType: UserType) => {
+  const handleUserIconClick = async (clickType: UserType) => {
+    await setRole(clickType) // Assign role to cookies to use with Auth.js
+
     setUserType((prevUserType) => {
       const newUserType = prevUserType === clickType ? '' : clickType
 

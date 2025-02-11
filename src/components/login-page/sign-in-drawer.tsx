@@ -1,6 +1,6 @@
 'use client'
 
-import { UserType } from '@/types/user'
+import { UserType } from '@/type/user'
 
 import {
   Drawer,

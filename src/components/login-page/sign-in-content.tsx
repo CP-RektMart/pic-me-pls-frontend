@@ -1,12 +1,17 @@
-'use client'
-
-import { UserType } from '@/types/user'
+import { UserType } from '@/type/user'
 import { Icon } from '@iconify/react'
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
 
 export default function SignInContent({ userType }: { userType: UserType }) {
+  const handleLogin = async () => {
+    await signIn('google', {
+      redirectTo: '/',
+    })
+  }
+
   return (
     <div>
       <div className='mt-4 flex flex-col gap-4 px-6 py-4'>
@@ -34,9 +39,9 @@ export default function SignInContent({ userType }: { userType: UserType }) {
         </div>
       </div>
       <div className='flex justify-center p-3'>
-        <Button type='submit' className='h-10 w-full'>
+        <Button type='button' className='h-10 w-full' onClick={handleLogin}>
           <Icon icon='flat-color-icons:google' className='size-3' />
-          Login with email
+          Login with Google
         </Button>
       </div>
     </div>
