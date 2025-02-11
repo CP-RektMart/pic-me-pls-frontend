@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import updateProfile from '@/server/actions/update-profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
@@ -43,24 +45,50 @@ type ProfileFormValues = z.infer<typeof profileSchema>
 
 interface ProfileProps {
   isPhotographer: boolean
+  name: string
+  email: string
+  phone: string
+  facebook: string
+  instagram: string
+  bank?: 'SCB' | 'KBANK' | 'KTB' | 'BBL' | 'BAY' | 'TTB' | 'KKP'
+  accountNo?: string
+  bankBranch?: string
 }
 
-export default function Profile({ isPhotographer }: ProfileProps) {
+export default function Profile({
+  isPhotographer,
+  name,
+  email,
+  phone,
+  facebook,
+  instagram,
+  bank,
+  accountNo,
+  bankBranch,
+}: ProfileProps) {
+  const [isEditing, setIsEditing] = useState<boolean>(false)
+
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      facebook: '',
-      instagram: '',
-      bank: '',
-      accountNo: '',
-      bankBranch: '',
+      name: name,
+      email: email,
+      phone: phone,
+      facebook: facebook,
+      instagram: instagram,
+      bank: bank,
+      accountNo: accountNo,
+      bankBranch: bankBranch,
     },
   })
 
   const onSubmit = async (data: ProfileFormValues) => {
+    setIsEditing((prevState) => !prevState)
+
+    if (!isEditing) {
+      return
+    }
+
     console.log(data)
 
     const response = await updateProfile()
@@ -79,7 +107,10 @@ export default function Profile({ isPhotographer }: ProfileProps) {
           form='profile-form'
           className='ml-auto flex items-center rounded-md border bg-zinc-800 px-4 py-2 hover:bg-zinc-700'
         >
-          <Icon icon='lucide-lab:save' className='size-4 text-white' />
+          <Icon
+            icon={`lucide:${isEditing ? 'save' : 'square-pen'}`}
+            className='size-4 text-white'
+          />
         </Button>
       </div>
 
@@ -104,7 +135,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
             </div>
           </div>
 
-          <div className='flex-1 flex-col gap-2'>
+          <div className='flex flex-1 flex-col gap-2'>
             <FormField
               control={form.control}
               name='name'
@@ -112,7 +143,11 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 <FormItem>
                   <FormLabel className='text-sm font-medium'>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder='John Doe' {...field} />
+                    <Input
+                      placeholder='John Doe'
+                      disabled={!isEditing}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -126,7 +161,11 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 <FormItem>
                   <FormLabel className='text-sm font-medium'>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='user@picmepls.com' {...field} />
+                    <Input
+                      placeholder='user@picmepls.com'
+                      disabled={!isEditing}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -140,7 +179,11 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 <FormItem>
                   <FormLabel className='text-sm font-medium'>Phone</FormLabel>
                   <FormControl>
-                    <Input placeholder='xxx-xxx-xxxx' {...field} />
+                    <Input
+                      placeholder='xxx-xxx-xxxx'
+                      disabled={!isEditing}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -156,7 +199,11 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                     Facebook
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder='Facebook' {...field} />
+                    <Input
+                      placeholder='Facebook'
+                      disabled={!isEditing}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -172,7 +219,11 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                     Instagram
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder='Instagram' {...field} />
+                    <Input
+                      placeholder='Instagram'
+                      disabled={!isEditing}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -180,19 +231,19 @@ export default function Profile({ isPhotographer }: ProfileProps) {
             />
 
             {isPhotographer && (
-              <div className='flex-1 flex-col gap-2'>
+              <div className='flex flex-1 flex-col gap-2'>
                 <hr className='mb-2 mt-4 border-t border-zinc-200' />
                 <h2 className='text-[24px] font-bold'>Payment Method</h2>
 
                 <FormField
                   control={form.control}
                   name='bank'
-                  render={() => (
+                  render={({ field }) => (
                     <FormItem>
                       <FormLabel className='text-sm font-medium'>
                         Bank
                       </FormLabel>
-                      <Select>
+                      <Select disabled={!isEditing} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder='Select a bank' />
@@ -222,7 +273,11 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                         Bank Account Number
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder='xxx-xxxxxx-x' {...field} />
+                        <Input
+                          placeholder='xxx-xxxxxx-x'
+                          disabled={!isEditing}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -240,6 +295,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                       <FormControl>
                         <Input
                           placeholder='Chulalongkorn University'
+                          disabled={!isEditing}
                           {...field}
                         />
                       </FormControl>
@@ -249,7 +305,7 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                 />
 
                 <div className='mt-4'>
-                  <Link href='/photographer/reverify' className='mt-4'>
+                  <Link href='/photographer/reverify'>
                     <Button type='button' className='hover:bg-zinc-700'>
                       Revalidate Account
                     </Button>
