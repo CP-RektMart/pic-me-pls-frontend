@@ -1,6 +1,6 @@
+import login from '@/server/actions/login'
 import { UserType } from '@/type/user'
 import { Icon } from '@iconify/react'
-import { signIn } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 
@@ -8,9 +8,8 @@ import { Button } from '@/components/ui/button'
 
 export default function SignInContent({ userType }: { userType: UserType }) {
   const handleLogin = async () => {
-    await signIn('google', {
-      redirectTo: '/',
-    })
+    await signIn('google')
+    await login()
   }
 
   return (
