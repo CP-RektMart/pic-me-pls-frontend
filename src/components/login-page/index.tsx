@@ -54,12 +54,12 @@ export default function LoginPageComponent() {
             <LoginButton
               userType='Customer'
               onClick={() => handleUserIconClick('Customer')}
-              isClicked={isCustomerButtonClicked}
+              isActive={isCustomerButtonClicked}
             />
             <LoginButton
               userType='Photographer'
               onClick={() => handleUserIconClick('Photographer')}
-              isClicked={isPhotographerButtonClicked}
+              isActive={isPhotographerButtonClicked}
             />
           </div>
           <div className='flex flex-row items-center space-x-4 md:hidden'>
