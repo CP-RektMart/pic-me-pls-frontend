@@ -103,165 +103,149 @@ export default function Profile({ isPhotographer }: ProfileProps) {
             </div>
           </div>
 
-          <div className='flex-1 space-y-8'>
-            <div className='space-y-1.5'>
-              <FormField
-                control={form.control}
-                name='name'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder='John Doe' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+          <div className='flex-1 flex-col gap-2'>
+            <FormField
+              control={form.control}
+              name='name'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder='John Doe' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className='space-y-1.5'>
-              <FormField
-                control={form.control}
-                name='email'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder='user@picmepls.com' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name='email'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder='user@picmepls.com' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className='space-y-1.5'>
-              <FormField
-                control={form.control}
-                name='phone'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>Phone</FormLabel>
-                    <FormControl>
-                      <Input placeholder='xxx-xxx-xxxx' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name='phone'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>Phone</FormLabel>
+                  <FormControl>
+                    <Input placeholder='xxx-xxx-xxxx' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className='space-y-1.5'>
-              <FormField
-                control={form.control}
-                name='facebook'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>
-                      Facebook
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder='Facebook' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name='facebook'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>
+                    Facebook
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder='Facebook' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className='space-y-1.5'>
-              <FormField
-                control={form.control}
-                name='instagram'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>
-                      Instagram
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder='Instagram' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name='instagram'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>
+                    Instagram
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder='Instagram' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             {isPhotographer && (
-              <div className='flex-1 space-y-8'>
-                <hr className='border-t border-zinc-200' />
+              <div className='flex-1 flex-col gap-2'>
+                <hr className='mb-2 mt-4 border-t border-zinc-200' />
                 <h2 className='text-[24px] font-bold'>Payment Method</h2>
 
-                <div className='space-y-1.5'>
-                  <FormField
-                    control={form.control}
-                    name='bank'
-                    render={() => (
-                      <FormItem>
-                        <FormLabel className='text-sm font-medium'>
-                          Bank
-                        </FormLabel>
-                        <Select>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder='Select a bank' />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent id='bank-options'>
-                            <SelectItem value='SCB'> SCB </SelectItem>
-                            <SelectItem value='KBANK'>KBANK </SelectItem>
-                            <SelectItem value='KTB'> KTB</SelectItem>
-                            <SelectItem value='BBL'> BBL</SelectItem>
-                            <SelectItem value='BAY'> BAY</SelectItem>
-                            <SelectItem value='TTB'> TTB</SelectItem>
-                            <SelectItem value='KKP'> KKP</SelectItem>
-                          </SelectContent>
-                          <FormMessage />
-                        </Select>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className='space-y-1.5'>
-                  <FormField
-                    control={form.control}
-                    name='accountNo'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className='text-sm font-medium'>
-                          Bank Account Number
-                        </FormLabel>
+                <FormField
+                  control={form.control}
+                  name='bank'
+                  render={() => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>
+                        Bank
+                      </FormLabel>
+                      <Select>
                         <FormControl>
-                          <Input placeholder='xxx-xxxxxx-x' {...field} />
+                          <SelectTrigger>
+                            <SelectValue placeholder='Select a bank' />
+                          </SelectTrigger>
                         </FormControl>
+                        <SelectContent id='bank-options'>
+                          <SelectItem value='SCB'> SCB </SelectItem>
+                          <SelectItem value='KBANK'>KBANK </SelectItem>
+                          <SelectItem value='KTB'> KTB</SelectItem>
+                          <SelectItem value='BBL'> BBL</SelectItem>
+                          <SelectItem value='BAY'> BAY</SelectItem>
+                          <SelectItem value='TTB'> TTB</SelectItem>
+                          <SelectItem value='KKP'> KKP</SelectItem>
+                        </SelectContent>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                      </Select>
+                    </FormItem>
+                  )}
+                />
 
-                <div className='space-y-1.5'>
-                  <FormField
-                    control={form.control}
-                    name='bankBranch'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className='text-sm font-medium'>
-                          Bank Branch
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder='Chulalongkorn University'
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name='accountNo'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>
+                        Bank Account Number
+                      </FormLabel>
+                      <FormControl>
+                        <Input placeholder='xxx-xxxxxx-x' {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='bankBranch'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>
+                        Bank Branch
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder='Chulalongkorn University'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <Button type='button' className='hover:bg-zinc-700'>
                   Revalidate Account
