@@ -50,17 +50,49 @@ const formSchema = z.object({
     .nonempty('Please upload your citizen card'),
 })
 
-export default function Page() {
+interface ValidateProps {
+  isRevalidate: boolean
+}
+
+type ReverifyInfo = {
+  citizenId: string;
+  expiredDate: Date;
+  laserNo: string;
+  image: string;
+};
+
+export default function Page({ isRevalidate }: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+
+  // TODO: [Reverify] fetch GET /photographer/verify-card-info
+  // TODO: [Reverify] fetch POST /photographer/renew-verify-card
+  // TODO: [verify] fetch POST /photographer/upload-verify-card
+
+  // Temp
+  const reverifyInfo: ReverifyInfo = {
+    citizenId: '1-1234-XXXXX-XX-X',
+    expiredDate: new Date('2025-12-31'),
+    laserNo: 'AB1XXXXXXXXX',
+    image: '/path/to/previous-image.jpg',
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      citizenId: '',
-      expiredDate: undefined,
-      laserNo: '',
-      terms: undefined,
-    },
+    defaultValues: isRevalidate
+      ? {
+          citizenId: reverifyInfo.citizenId,
+          expiredDate: reverifyInfo.expiredDate,
+          laserNo: reverifyInfo.laserNo,
+          terms: undefined,
+          image: reverifyInfo.image,
+        }
+      : {
+          citizenId: '',
+          expiredDate: undefined,
+          laserNo: '',
+          terms: undefined,
+          image: '',
+        },
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -70,7 +102,9 @@ export default function Page() {
   return (
     <div className='mx-auto min-h-screen max-w-7xl p-4 lg:px-8 lg:py-6'>
       {/* To be fixed: Move to layout */}
-      <p className='mb-4 font-bold lg:text-2xl'>Verify your account</p>
+      <p className='mb-4 font-bold lg:text-2xl'>
+        {!isRevalidate ? 'Verify your account' : 'Re-Verify your account'}
+      </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
