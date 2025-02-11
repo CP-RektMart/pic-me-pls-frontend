@@ -1,5 +1,6 @@
 'use client'
 
+import updateProfile from '@/server/actions/update-profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
@@ -44,14 +45,7 @@ interface ProfileProps {
 }
 
 export default function Profile({ isPhotographer }: ProfileProps) {
-  const { handleSubmit } = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileSchema),
-  })
-
-  const onSubmit = (data: ProfileFormValues) => {
-    console.log(data)
-  }
-  const form = useForm<z.infer<typeof profileSchema>>({
+  const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       name: '',
@@ -65,25 +59,30 @@ export default function Profile({ isPhotographer }: ProfileProps) {
     },
   })
 
+  const onSubmit = async (data: ProfileFormValues) => {
+    console.log(data)
+    await updateProfile()
+  }
+
   return (
     <Container className='my-6'>
       <div className='flex h-10 flex-row'>
         <h1 className='items-center self-center text-2xl font-bold lg:text-3xl'>
           Edit Profile
         </h1>
-        <button
+        <Button
           type='submit'
           form='profile-form'
           className='ml-auto flex items-center rounded-md border bg-zinc-800 px-4 py-2 hover:bg-zinc-700'
         >
           <Icon icon='lucide-lab:save' className='size-4 text-white' />
-        </button>
+        </Button>
       </div>
 
       <Form {...form}>
         <form
           id='profile-form'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(onSubmit)}
           className='flex flex-col gap-8 lg:flex-row'
         >
           <div className='flex flex-1 justify-center'>
@@ -116,11 +115,6 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                   </FormItem>
                 )}
               />
-              {form.formState.errors.name && (
-                <p className='text-red-500'>
-                  {form.formState.errors.name.message}
-                </p>
-              )}
             </div>
 
             <div className='space-y-1.5'>
@@ -137,11 +131,6 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                   </FormItem>
                 )}
               />
-              {form.formState.errors.name && (
-                <p className='text-red-500'>
-                  {form.formState.errors.name.message}
-                </p>
-              )}
             </div>
 
             <div className='space-y-1.5'>
@@ -158,11 +147,6 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                   </FormItem>
                 )}
               />
-              {form.formState.errors.name && (
-                <p className='text-red-500'>
-                  {form.formState.errors.name.message}
-                </p>
-              )}
             </div>
 
             <div className='space-y-1.5'>
