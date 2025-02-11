@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SessionProvider } from 'next-auth/react'
 import { Poppins } from 'next/font/google'
 
 import Footer from '@/components/footer'
@@ -28,9 +29,11 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} flex min-h-screen flex-col justify-between antialiased`}
       >
-        <Navbar />
-        <main className='flex flex-1'>{children}</main>
-        <Footer />
+        <SessionProvider>
+          <Navbar />
+          <main className='flex flex-1'>{children}</main>
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   )

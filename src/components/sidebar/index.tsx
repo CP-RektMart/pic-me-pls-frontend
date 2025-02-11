@@ -1,6 +1,8 @@
 'use client'
 
 import { Icon } from '@iconify/react'
+import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 import { SidebarButton } from '@/components/sidebar/sidebar-button'
 import { Button } from '@/components/ui/button'
@@ -13,10 +15,13 @@ import {
 
 import { navItems } from '../../data/nav-items'
 
-export default function NavSidebar() {
-  const handleLogout = () => {
-    return
-  }
+interface SidebarProps {
+  handleLogout: () => void
+}
+
+export default function Sidebar(props: SidebarProps) {
+  const { handleLogout } = props
+  const { status } = useSession()
 
   return (
     <div className='lg:hidden'>
@@ -43,24 +48,28 @@ export default function NavSidebar() {
                 </li>
               ))}
             </ul>
-            <ul className='grid w-full place-content-end gap-2'>
-              {navItems.slice(5, 6).map((item, index) => (
-                <li
-                  key={index}
-                  className='w-full rounded-sm p-4 hover:bg-neutral-200'
+            <div className='grid w-full place-content-end gap-2'>
+              {status === 'authenticated' ? (
+                <button
+                  onClick={handleLogout}
+                  className='flex w-full items-center justify-end space-x-3 rounded-sm p-4 hover:bg-neutral-200'
                 >
-                  <button
-                    onClick={handleLogout}
-                    className='flex items-center justify-end space-x-3'
-                  >
-                    <span className='text-primary'>{item.title}</span>
+                  <span className='text-primary'>Logout</span>
+                  <span className='text-primary'>
+                    <Icon icon='lucide:log-out' className='size-6' />
+                  </span>
+                </button>
+              ) : (
+                <Link href='/login'>
+                  <button className='flex w-full items-center justify-end space-x-3 rounded-sm p-4 hover:bg-neutral-200'>
+                    <span className='text-primary'>Login</span>
                     <span className='text-primary'>
-                      <Icon icon={item.icon} className='size-6' />
+                      <Icon icon='lucide:log-in' className='size-6' />
                     </span>
                   </button>
-                </li>
-              ))}
-            </ul>
+                </Link>
+              )}
+            </div>
           </div>
         </SheetContent>
       </Sheet>

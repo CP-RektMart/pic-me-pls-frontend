@@ -17,9 +17,9 @@ export function NavButton({ icon, title, link, handleOnClick }: MenuProps) {
       className='hover:underline hover:underline-offset-4'
     >
       <Link href={link} className='inline-flex items-center space-x-3'>
-        <span>
-          <Icon icon={icon} className='size-4' />
-        </span>
+        <div className='size-4'>
+          <Icon icon={icon} className='size-full' />
+        </div>
         <span className='place-items-end'>{title}</span>
       </Link>
     </button>
