@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
-import { UserType } from '@/type/user'
+import { UserType } from '@/types/user'
 import Image from 'next/image'
 
 import SignInDrawer from '@/components/login-page/sign-in-drawer'

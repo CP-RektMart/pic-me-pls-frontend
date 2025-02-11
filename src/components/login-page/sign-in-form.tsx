@@ -1,7 +1,7 @@
 'use client'
 
 import { signIn } from '@/auth'
-import { UserType } from '@/type/user'
+import { UserType } from '@/types/user'
 
 import SignInContent from './sign-in-content'
 
