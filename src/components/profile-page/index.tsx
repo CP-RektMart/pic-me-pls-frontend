@@ -61,7 +61,10 @@ export default function Profile({ isPhotographer }: ProfileProps) {
 
   const onSubmit = async (data: ProfileFormValues) => {
     console.log(data)
-    await updateProfile()
+
+    const response = await updateProfile()
+    console.log(response)
+    return
   }
 
   return (
