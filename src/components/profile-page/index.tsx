@@ -4,6 +4,7 @@ import updateProfile from '@/server/actions/update-profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -247,9 +248,13 @@ export default function Profile({ isPhotographer }: ProfileProps) {
                   )}
                 />
 
-                <Button type='button' className='hover:bg-zinc-700'>
-                  Revalidate Account
-                </Button>
+                <div className='mt-4'>
+                  <Link href='/photographer/reverify' className='mt-4'>
+                    <Button type='button' className='hover:bg-zinc-700'>
+                      Revalidate Account
+                    </Button>
+                  </Link>
+                </div>
               </div>
             )}
           </div>
