@@ -54,29 +54,45 @@ interface ValidateProps {
   isRevalidate: boolean
 }
 
+type ReverifyInfo = {
+  citizenId: string;
+  expiredDate: Date;
+  laserNo: string;
+  image: string;
+};
+
 export default function Page({ isRevalidate }: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
 
-  // TODO: [Revalidate] fetch GET /photographer/verify-card-info
-  // TODO: [Revalidate] fetch POST /photographer/renew-verify-card
+  // TODO: [Reverify] fetch GET /photographer/verify-card-info
+  // TODO: [Reverify] fetch POST /photographer/renew-verify-card
   // TODO: [verify] fetch POST /photographer/upload-verify-card
 
-  const revalidateInfo = {
+  // Temp
+  const reverifyInfo: ReverifyInfo = {
     citizenId: '1-1234-XXXXX-XX-X',
     expiredDate: new Date('2025-12-31'),
     laserNo: 'AB1XXXXXXXXX',
-    // image: '/path/to/previous-image.jpg',
-  }
+    image: '/path/to/previous-image.jpg',
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      citizenId: '',
-      expiredDate: undefined,
-      laserNo: '',
-      terms: undefined,
-      image: '',
-    },
+    defaultValues: isRevalidate
+      ? {
+          citizenId: reverifyInfo.citizenId,
+          expiredDate: reverifyInfo.expiredDate,
+          laserNo: reverifyInfo.laserNo,
+          terms: undefined,
+          image: reverifyInfo.image,
+        }
+      : {
+          citizenId: '',
+          expiredDate: undefined,
+          laserNo: '',
+          terms: undefined,
+          image: '',
+        },
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -130,11 +146,7 @@ export default function Page({ isRevalidate }: ValidateProps) {
                     <FormControl>
                       <Input
                         type='number'
-                        placeholder={
-                          isRevalidate
-                            ? revalidateInfo.citizenId
-                            : '1-XXXX-XXXXX-XX-X'
-                        }
+                        placeholder='1-XXXX-XXXXX-XX-X'
                         {...field}
                       />
                     </FormControl>
@@ -166,13 +178,9 @@ export default function Page({ isRevalidate }: ValidateProps) {
                               className='w-full'
                             >
                               <p className='text-zinc-500'>
-                                {isRevalidate
-                                  ? revalidateInfo.expiredDate
-                                    ? format(revalidateInfo.expiredDate, 'PP')
-                                    : 'Select a date'
-                                  : field.value
-                                    ? format(field.value, 'PP')
-                                    : 'Select a date'}
+                                {field.value
+                                  ? format(field.value, 'PP')
+                                  : 'Select a date'}
                               </p>
                               <Icon
                                 icon='lucide:calendar'
@@ -205,14 +213,7 @@ export default function Page({ isRevalidate }: ValidateProps) {
                         Laser No.
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder={
-                            isRevalidate
-                              ? revalidateInfo.laserNo
-                              : 'MEx-xxxxxx-xx'
-                          }
-                          {...field}
-                        />
+                        <Input placeholder='MEx-xxxxxx-xx' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
