@@ -8,18 +8,18 @@ import { Button } from '../ui/button'
 export default function LoginButton({
   userType,
   onClick,
-  isClicked,
+  isActive,
 }: {
   userType: UserType
   onClick?: () => void
-  isClicked: boolean
+  isActive: boolean
 }) {
   return (
     <Button
       onClick={onClick}
       variant='login'
       size='login'
-      className={`hover:bg-zinc-100 ${isClicked ? 'bg-zinc-200' : ''}`}
+      className={`hover:bg-zinc-100 ${isActive ? 'bg-zinc-200' : ''}`}
     >
       <Image
         src={
