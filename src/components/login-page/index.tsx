@@ -14,7 +14,6 @@ import LoginButton from './login-button'
 export default function LoginPageComponent() {
   const [userType, setUserType] = useState('')
   const [isSignIn, setIsSignIn] = useState(false)
-  useState(false)
 
   const handleUserIconClick = (clickType: UserType) => {
     setUserType((prevUserType) => {
