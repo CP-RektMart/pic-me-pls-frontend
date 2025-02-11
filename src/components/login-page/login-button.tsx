@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { UserType } from '@/type/user'
 import Image from 'next/image'
 
@@ -19,7 +20,7 @@ export default function LoginButton({
       onClick={onClick}
       variant='login'
       size='login'
-      className={`hover:bg-zinc-100 ${isActive ? 'bg-zinc-200' : ''}`}
+      className={cn('hover:bg-zinc-100', isActive ? 'bg-zinc-200' : '')}
     >
       <Image
         src={
