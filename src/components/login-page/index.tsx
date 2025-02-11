@@ -18,6 +18,7 @@ export default function LoginPageComponent() {
   const handleUserIconClick = (clickType: UserType) => {
     setUserType((prevUserType) => {
       const newUserType = prevUserType === clickType ? '' : clickType
+
       return newUserType
     })
     setIsSignIn((prevIsSignIn) => !prevIsSignIn || userType !== clickType)
@@ -46,10 +47,12 @@ export default function LoginPageComponent() {
             <LoginButton
               userType='Customer'
               onClick={() => handleUserIconClick('Customer')}
+              isActive={userType === 'Customer'}
             />
             <LoginButton
               userType='Photographer'
               onClick={() => handleUserIconClick('Photographer')}
+              isActive={userType === 'Photographer'}
             />
           </div>
           <div className='flex flex-row items-center space-x-4 md:hidden'>
