@@ -7,6 +7,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
   async (req: NextRequest | undefined) => {
     return {
       providers: [Google],
+      session: {
+        maxAge: 7 * 24 * 60 * 60, // 7 days
+      },
       callbacks: {
         signIn: async ({ user, account }) => {
           const role = (req && req.cookies.get('role')?.value) || 'CUSTOMER'
