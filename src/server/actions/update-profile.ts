@@ -27,24 +27,24 @@ export default async function updateProfile(
       }
     }
 
+    const form = new FormData()
+    form.append('id', session.user.userId.toString())
+    form.append('name', formData.name)
+    form.append('email', formData.email)
+    form.append('phone_number', formData.phone.replace(/-/g, ''))
+    form.append('facebook', formData.facebook || '')
+    form.append('instagram', formData.instagram || '')
+    form.append('bank', formData.bank || '')
+    form.append('account_no', formData.accountNo || '')
+    form.append('bank_branch', formData.bankBranch || '')
+    form.append('role', session.user.role)
+
     const res = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${session.accessToken}`,
       },
-      body: JSON.stringify({
-        id: session.user.userId,
-        name: formData.name,
-        email: formData.email,
-        phone_number: formData.phone.replace(/-/g, ''),
-        facebook: formData.facebook,
-        instagram: formData.instagram,
-        bank: formData.bank,
-        account_no: formData.accountNo,
-        bank_branch: formData.bankBranch,
-        role: session.user.role,
-      }),
+      body: form,
     })
 
     const data = await res.json()
