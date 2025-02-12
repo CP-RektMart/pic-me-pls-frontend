@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 
-import { setRole } from '@/app/actions/set-cookie'
 import { cn } from '@/lib/utils'
 import { setRole } from '@/server/actions/set-cookie'
 import { UserType } from '@/type/user'
