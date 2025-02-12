@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { UserType } from '@/types/user'
@@ -84,7 +84,9 @@ export default function RegisterPageComponent() {
         </div>
       </div>
 
-      <ErrorDialog />
+      <Suspense>
+        <ErrorDialog />
+      </Suspense>
     </>
   )
 }
