@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head>
+        <title>PicMePls</title>
+      </head>
       <body
         className={`${poppins.variable} flex min-h-screen flex-col justify-between antialiased`}
       >
