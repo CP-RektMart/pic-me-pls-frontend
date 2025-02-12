@@ -14,6 +14,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
       session: {
         maxAge: 7 * 24 * 60 * 60, // 7 days
       },
+      pages: {
+        signIn: '/login',
+        signOut: '/',
+        error: '/sign-up',
+      },
       callbacks: {
         signIn: async ({ user, account }) => {
           const role = req && req.cookies.get('role')?.value
