@@ -6,29 +6,13 @@ import { cn } from '@/lib/utils'
 import { UserType } from '@/types/user'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog'
-
+import ErrorDialog from './error-dialog'
 import LoginButton from './login-button'
 import SignInDrawer from './sign-in-drawer'
 import SignInForm from './sign-in-form'
 
 export default function RegisterPageComponent() {
-  const searchParams = useSearchParams()
-
-  const [isLoggedInError, setIsLoggedInError] = useState(
-    searchParams.get('error') === 'AccessDenied'
-  )
-
   const [userType, setUserType] = useState('')
   const [isSignIn, setIsSignIn] = useState(false)
 
@@ -100,23 +84,7 @@ export default function RegisterPageComponent() {
         </div>
       </div>
 
-      <AlertDialog open={isLoggedInError} onOpenChange={setIsLoggedInError}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className='text-red-700'>
-              Access Denied
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              {
-                "You might have already signed up or you don't have an account yet."
-              }
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Dismiss</AlertDialogCancel>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <ErrorDialog />
     </>
   )
 }
