@@ -6,6 +6,7 @@ import { NextRequest } from 'next/server'
 export const { handlers, signIn, signOut, auth } = NextAuth(
   async (req: NextRequest | undefined) => {
     return {
+      debug: true,
       providers: [Google],
       session: {
         maxAge: 7 * 24 * 60 * 60, // 7 days
