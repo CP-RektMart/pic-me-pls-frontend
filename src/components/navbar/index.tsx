@@ -12,7 +12,11 @@ import Sidebar from '../sidebar'
 export default function Navbar() {
   const { status } = useSession()
   const handleLogout = async () => {
-    await logout()
+    const result = await logout()
+    if (result?.error) {
+      console.error(result.error)
+      return
+    }
     await signOut()
   }
 
