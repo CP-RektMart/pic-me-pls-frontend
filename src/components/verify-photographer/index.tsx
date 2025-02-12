@@ -75,7 +75,7 @@ export default function Page({ isRevalidate }: ValidateProps) {
     laserNo: 'AB1XXXXXXXXX',
     image: '/path/to/previous-image.jpg',
   };
-
+        
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: isRevalidate
