@@ -11,7 +11,7 @@ export async function logout() {
       return { error: 'No session found' }
     }
 
-    const access_token = session?.accessToken
+    const access_token = session.accessToken
 
     const response = await fetch(url, {
       method: 'POST',
@@ -22,9 +22,10 @@ export async function logout() {
     })
 
     if (!response.ok) {
-      console.error('Failed to logout', response)
+      return { error: 'Failed to logout' }
     }
-  } catch (e) {
-    console.error(e)
+    return { success: true }
+  } catch (err) {
+    return { error: err }
   }
 }
