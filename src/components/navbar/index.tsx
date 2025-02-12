@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <nav className='sticky flex w-full flex-row items-center justify-between bg-base-primary px-6 py-4 text-white'>
       <div className='flex items-center'>
-        <Image src={LogoTrans} alt='Logo' width={23} height={24} />
+        <Image src={LogoTrans} alt='Logo' width={24} height={24} />
       </div>
       <div className='hidden flex-row gap-6 lg:flex'>
         {navItems.slice(0, 5).map((item, index) => (
@@ -48,7 +48,9 @@ export default function Navbar() {
         )}
       </div>
       <div className='flex flex-row items-center space-x-4'>
-        <Icon icon='lucide:bell' className='mt-0.5 size-4' />
+        <div className='relative size-4'>
+          <Icon icon='lucide:bell' className='size-full' />
+        </div>
         <Sidebar handleLogout={handleLogout} />
       </div>
     </nav>
