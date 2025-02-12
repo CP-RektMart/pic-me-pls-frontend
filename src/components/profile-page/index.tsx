@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 
+import { useToast } from '@/hooks/use-toast'
 import updateProfile from '@/server/actions/update-profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
@@ -48,9 +49,9 @@ interface ProfileProps {
   name: string
   email: string
   phone: string
-  facebook: string
-  instagram: string
-  bank?: 'SCB' | 'KBANK' | 'KTB' | 'BBL' | 'BAY' | 'TTB' | 'KKP'
+  facebook?: string
+  instagram?: string
+  bank?: string
   accountNo?: string
   bankBranch?: string
 }
@@ -67,6 +68,7 @@ export default function Profile({
   bankBranch,
 }: ProfileProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
+  const { toast } = useToast()
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
@@ -89,11 +91,22 @@ export default function Profile({
       return
     }
 
-    console.log(data)
-
-    const response = await updateProfile()
+    const response = await updateProfile(data)
     console.log(response)
-    return
+
+    if (!response.result) {
+      toast({
+        variant: 'destructive',
+        title: 'Something went wrong.',
+        description:
+          'There was a problem with internal server. Please try again later.',
+      })
+    } else {
+      toast({
+        title: 'Profile updated.',
+        description: 'Your profile has been successfully updated.',
+      })
+    }
   }
 
   return (

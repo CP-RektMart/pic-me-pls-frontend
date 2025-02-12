@@ -1,17 +1,30 @@
+import getProfile from '@/server/actions/get-profile'
+
 import ProfileComponent from '@/components/profile-page'
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const response = await getProfile()
+
+  if (!response || !response.result) {
+    return <div>Failed to get user profile</div>
+  }
+
+  const userProfile = response.result
+
   return (
     <ProfileComponent
-      isPhotographer={true}
-      name='อยากดูกัปตัน4'
-      email='elme@email.com'
-      phone='089-486-4954'
-      facebook='Chanotai Sirintornsopon'
-      instagram='prompt.bit'
-      bank='SCB'
-      accountNo='123-4-56789-0'
-      bankBranch='สาขาพร้อมพงษ์ลงพร้อมเพย์'
+      isPhotographer={userProfile.role == 'PHOTOGRAPHER'}
+      name={userProfile.name || 'John Doe'}
+      email={userProfile.email || 'user@picmepls.com'}
+      phone={
+        userProfile.phone_number.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') ||
+        'xxx-xxx-xxxx'
+      }
+      facebook={userProfile.facebook || 'Facebook'}
+      instagram={userProfile.instagram || 'Instagram'}
+      bank={userProfile.bank}
+      accountNo={userProfile.account_no}
+      bankBranch={userProfile.bank_branch}
     />
   )
 }

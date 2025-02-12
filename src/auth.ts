@@ -126,6 +126,8 @@ declare module 'next-auth' {
     refreshToken?: string
     expireAt?: number
     user?: {
+      name: string
+      email: string
       userId: number
       phone_number: string
       role: string
