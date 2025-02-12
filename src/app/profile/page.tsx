@@ -14,8 +14,9 @@ export default async function ProfilePage() {
   return (
     <ProfileComponent
       isPhotographer={userProfile.role == 'PHOTOGRAPHER'}
-      name={userProfile.name || 'John Doe'}
-      email={userProfile.email || 'user@picmepls.com'}
+      imageUrl={userProfile.profile_picture_url || '/image.png'}
+      name={userProfile.name}
+      email={userProfile.email}
       phone={
         userProfile.phone_number.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') ||
         '012-345-6789'
