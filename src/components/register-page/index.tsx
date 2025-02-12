@@ -7,12 +7,11 @@ import { setRole } from '@/server/actions/set-cookie'
 import { UserType } from '@/type/user'
 import Image from 'next/image'
 
-import SignInDrawer from '@/components/login-page/sign-in-drawer'
-import SignInForm from '@/components/login-page/sign-in-form'
-
 import LoginButton from './login-button'
+import SignInDrawer from './sign-in-drawer'
+import SignInForm from './sign-in-form'
 
-export default function LoginPageComponent() {
+export default function RegisterPageComponent() {
   const [userType, setUserType] = useState('')
   const [isSignIn, setIsSignIn] = useState(false)
 
