@@ -1,4 +1,4 @@
-import LoginButton from '@/components/login-page/login-button'
+import LoginButton from '@/components/register-page/login-button'
 
 export default async function Home() {
   return (

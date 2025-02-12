@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { setRole } from '@/server/actions/set-cookie'
 import { UserType } from '@/type/user'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import LoginButton from './login-button'
 import SignInDrawer from './sign-in-drawer'
@@ -68,6 +69,12 @@ export default function RegisterPageComponent() {
               onClick={() => handleUserIconClick('Photographer')}
               onClose={() => handleDrawerClose()}
             />
+          </div>
+          <div className='text-sm'>
+            {'Already have an account? '}{' '}
+            <Link href='/login' className='text-blue-500 hover:underline'>
+              Sign in
+            </Link>
           </div>
         </div>
         {userType === 'Customer' ? (

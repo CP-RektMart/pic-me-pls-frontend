@@ -1,3 +1,5 @@
+'use client'
+
 import { UserType } from '@/type/user'
 import { Icon } from '@iconify/react'
 import { signIn } from 'next-auth/react'
@@ -5,7 +7,7 @@ import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
 
-export default function SignInContent({ userType }: { userType: UserType }) {
+export default function SignInContent({ userType }: { userType?: UserType }) {
   const handleLogin = async () => {
     await signIn('google', {
       redirectTo: '/',
@@ -13,15 +15,17 @@ export default function SignInContent({ userType }: { userType: UserType }) {
   }
 
   return (
-    <div>
+    <div className='max-w-lg'>
       <div className='mt-4 flex flex-col gap-4 px-6 py-4'>
-        <div className='text-lg font-semibold'>Sign in as {userType}</div>
+        <div className='text-lg font-semibold'>
+          Sign in {userType ? `as ${userType}` : null}
+        </div>
         <div className='text-sm font-normal text-zinc-500'>
           {userType === 'Photographer'
             ? 'Log in to connect with clients and grow your photography business!'
             : userType === 'Customer'
               ? 'Log in to find the perfect photographer and bring your vision to life!'
-              : ''}
+              : 'Sign in to showcase your photography skills or find the perfect photographer for your needs!'}
         </div>
         <div className='flex w-full justify-center'>
           <Image
@@ -30,7 +34,7 @@ export default function SignInContent({ userType }: { userType: UserType }) {
                 ? 'PhotographerSigninIcon.svg'
                 : userType === 'Customer'
                   ? 'CustomerSigninIcon.svg'
-                  : ''
+                  : 'SignIn.svg'
             }
             alt=''
             width={224}
