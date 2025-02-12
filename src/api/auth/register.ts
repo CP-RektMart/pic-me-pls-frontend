@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const userRoleEnum = z.enum(['CUSTOMER', 'PHOTOGRAPHER', 'ADMIN'])
+import { userResponseSchema, userRoleEnum } from './common'
 
 export const registerRequest = z.object({
   idToken: z.string(),
@@ -15,23 +15,13 @@ export const registerResponse = z.object({
     accessToken: z.string(),
     refreshToken: z.string(),
     exp: z.number(),
-    user: z.object({
-      id: z.number(),
-      name: z.string(),
-      email: z.string(),
-      phoneNumber: z.string(),
-      profilePictureUrl: z.string(),
-      role: userRoleEnum,
-      facebook: z.string().optional(),
-      instagram: z.string().optional(),
-      bank: z.string().optional(),
-      accountNo: z.string().optional(),
-      bankBranch: z.string().optional(),
-    }),
+    user: userResponseSchema,
   }),
 })
 
 export async function register(req: RegisterRequest) {
+  const url = `${process.env.BACKEND_URL}/api/v1/auth/register`
+
   try {
     registerRequest.parse(req)
   } catch (err) {
@@ -39,8 +29,6 @@ export async function register(req: RegisterRequest) {
   }
 
   try {
-    const url = `${process.env.BACKEND_URL}/api/v1/auth/register`
-
     const { idToken, provider, role } = req
 
     const response = await fetch(url, {
@@ -55,14 +43,11 @@ export async function register(req: RegisterRequest) {
       }),
     })
 
-    console.log(response)
-
     if (!response.ok) {
       return { error: 'Failed to register' }
     }
 
     const data = await response.json()
-    console.log('data', data)
     const result = registerResponse.parse(data).result
     return result
   } catch (err) {

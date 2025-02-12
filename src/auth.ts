@@ -3,7 +3,8 @@ import 'next-auth/jwt'
 import Google from 'next-auth/providers/google'
 import { NextRequest } from 'next/server'
 
-import { register } from './server/actions/register'
+import { login } from './api/auth/login'
+import { register } from './api/auth/register'
 import { UserRole, User as UserType } from './types/user'
 
 export const { handlers, signIn, signOut, auth } = NextAuth(
@@ -21,7 +22,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
 
           // Register
           if (role) {
-            console.log('register')
             try {
               const response = await register({
                 idToken: account.id_token,
@@ -29,22 +29,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
                 role: role.toUpperCase() as UserRole,
               })
 
-              console.log('here1')
-
-              console.log(response)
-
               if (!response || 'error' in response) {
                 return false
               }
-
-              console.log('here2')
 
               user.accessToken = response.accessToken
               user.refreshToken = response.refreshToken
               user.expireAt = response.exp
               user.user = response.user
 
-              console.log('here3')
               return true
             } catch (error) {
               console.error('Error during sign up:', error)
@@ -53,30 +46,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
           }
 
           // Login
-          console.log('login')
           try {
-            const url = `${process.env.BACKEND_URL}/api/v1/auth/login`
-            const res = await fetch(url, {
-              method: 'POST',
-              body: JSON.stringify({
-                idToken: account.id_token,
-                provider: account.provider.toUpperCase(),
-              }),
-              headers: {
-                'Content-Type': 'application/json',
-              },
+            const response = await login({
+              idToken: account.id_token,
+              provider: account.provider,
             })
 
-            if (!res.ok) {
+            if (!response || 'error' in response) {
               return false
             }
 
-            const data = await res.json()
-
-            user.accessToken = data.result.accessToken
-            user.refreshToken = data.result.refreshToken
-            user.expireAt = data.result.exp
-            user.user = data.result.user
+            user.accessToken = response.accessToken
+            user.refreshToken = response.refreshToken
+            user.expireAt = response.exp
+            user.user = response.user
 
             return true
           } catch (error) {
