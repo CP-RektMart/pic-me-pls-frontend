@@ -6,7 +6,6 @@ import { NextRequest } from 'next/server'
 export const { handlers, signIn, signOut, auth } = NextAuth(
   async (req: NextRequest | undefined) => {
     return {
-      debug: true,
       providers: [Google],
       session: {
         maxAge: 7 * 24 * 60 * 60, // 7 days
@@ -29,9 +28,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
                   'Content-Type': 'application/json',
                 },
               })
-
-              console.log("Debugging...")
-              console.log(res)
 
               if (!res.ok) {
                 return false
