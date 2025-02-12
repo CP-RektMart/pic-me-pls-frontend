@@ -1,5 +1,6 @@
 'use client'
 
+import { setRole } from '@/server/actions/set-cookie'
 import { UserType } from '@/types/user'
 import { Icon } from '@iconify/react'
 import { signIn } from 'next-auth/react'
@@ -9,6 +10,7 @@ import { Button } from '@/components/ui/button'
 
 export default function SignInContent({ userType }: { userType?: UserType }) {
   const handleLogin = async () => {
+    await setRole(userType)
     await signIn('google', {
       redirectTo: '/',
     })
