@@ -258,13 +258,17 @@ export default function Profile({
                       <FormLabel className='text-sm font-medium'>
                         Bank
                       </FormLabel>
-                      <Select disabled={!isEditing} defaultValue={field.value}>
+                      <Select
+                        disabled={!isEditing}
+                        defaultValue={field.value}
+                        onValueChange={field.onChange}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder='Select a bank' />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent id='bank-options'>
+                        <SelectContent>
                           <SelectItem value='SCB'> SCB </SelectItem>
                           <SelectItem value='KBANK'>KBANK </SelectItem>
                           <SelectItem value='KTB'> KTB</SelectItem>
