@@ -55,11 +55,11 @@ interface ValidateProps {
 }
 
 type ReverifyInfo = {
-  citizenId: string;
-  expiredDate: Date;
-  laserNo: string;
-  image: string;
-};
+  citizenId: string
+  expiredDate: Date
+  laserNo: string
+  image: string
+}
 
 export default function Page({ isRevalidate }: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
@@ -74,8 +74,8 @@ export default function Page({ isRevalidate }: ValidateProps) {
     expiredDate: new Date('2025-12-31'),
     laserNo: 'AB1XXXXXXXXX',
     image: '/path/to/previous-image.jpg',
-  };
-        
+  }
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: isRevalidate
