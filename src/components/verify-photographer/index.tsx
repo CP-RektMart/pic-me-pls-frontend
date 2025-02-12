@@ -35,6 +35,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
+
 const formSchema = z.object({
   citizenId: z
     .string()
@@ -63,13 +64,13 @@ interface ValidateProps {
   citizenId: string;
   laserId: string;
   picture: string;
-  expiredDate?: Date;
+  expireDate: Date;
 }
 
 export default function Page({isReverify,  citizenId,
   laserId,
   picture,
-  expiredDate}: ValidateProps) {
+  expireDate}: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
   const { toast } = useToast()
 
@@ -77,7 +78,7 @@ export default function Page({isReverify,  citizenId,
     resolver: zodResolver(formSchema),
     defaultValues: {
           citizenId: citizenId,
-          expiredDate: expiredDate,
+          expiredDate: expireDate,
           laserId: laserId,
           terms: undefined,
           picture: picture}

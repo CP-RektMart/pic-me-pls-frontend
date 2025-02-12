@@ -38,7 +38,6 @@ export default async function getCitizenCard(): Promise<
     }
 
     const data: ServerResponse<CitizenCardInfo> = await response.json()
-
     return data
   } catch (err) {
 

@@ -5,7 +5,7 @@ export default async function Page() {
     citizenId: '',
     laserId: '',
     picture: '',
-    expireDate: new Date(),
+    expireDate: new Date().toISOString(),
   }
 
   return (
@@ -14,7 +14,7 @@ export default async function Page() {
       citizenId={citizenCardInfo.citizenId}
       laserId={citizenCardInfo.laserId}
       picture={citizenCardInfo.picture}
-      expiredDate={citizenCardInfo.expireDate}
+      expireDate={new Date(citizenCardInfo.expireDate)}
     />
   )
 }

@@ -9,12 +9,8 @@ export default async function Page() {
     citizenId: '',
     laserId: '',
     picture: '',
-    expiredDate: '',
+    expiredDate: new Date().toISOString(),
   }
-
-  const expiredDate = citizenCardInfo.expiredDate 
-    ? new Date(citizenCardInfo.expiredDate) 
-    : undefined;
 
   return (
     <VerifyPhotographer 
@@ -22,7 +18,7 @@ export default async function Page() {
       citizenId={citizenCardInfo.citizenId}
       laserId={citizenCardInfo.laserId}
       picture={citizenCardInfo.picture}
-      expiredDate={expiredDate}
+      expireDate={new Date(citizenCardInfo.expiredDate)}
     />
   )
 }
