@@ -1,5 +1,6 @@
 'use client'
 
+import { logout } from '@/server/actions/logout'
 import { Icon } from '@iconify/react'
 import { signOut, useSession } from 'next-auth/react'
 
@@ -11,8 +12,12 @@ import Sidebar from '../sidebar'
 export default function Navbar() {
   const { status } = useSession()
   const handleLogout = async () => {
-    // TODO: Send a request to the backend to logout
-    signOut()
+    const result = await logout()
+    if (result?.error) {
+      console.error(result.error)
+      return
+    }
+    await signOut()
   }
 
   return (

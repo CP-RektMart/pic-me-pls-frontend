@@ -1,11 +1,6 @@
-import { auth } from '@/auth'
-
 import LoginButton from '@/components/login-page/login-button'
 
 export default async function Home() {
-  const session = await auth()
-  console.log('session', session)
-
   return (
     <div>
       <div>Pic me pls YOYO</div>
