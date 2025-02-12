@@ -4,6 +4,7 @@ import { Poppins } from 'next/font/google'
 
 import Footer from '@/components/footer'
 import Navbar from '@/components/navbar'
+import { Toaster } from '@/components/ui/toaster'
 
 import './globals.css'
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <SessionProvider>
           <Navbar />
           <main className='flex flex-1'>{children}</main>
+          <Toaster />
           <Footer />
         </SessionProvider>
       </body>
