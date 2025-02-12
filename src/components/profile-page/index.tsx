@@ -142,9 +142,9 @@ export default function Profile({
                 height={200}
                 className='rounded-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
               />
-              <div className='absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 shadow-md hover:bg-slate-200'>
+              {/* <div className='absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 shadow-md hover:bg-slate-200'>
                 <Icon icon='lucide:edit' className='h-4 w-4 text-zinc-800' />
-              </div>
+              </div> */}
             </div>
           </div>
 
