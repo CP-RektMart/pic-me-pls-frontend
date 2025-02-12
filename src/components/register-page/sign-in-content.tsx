@@ -1,6 +1,6 @@
 'use client'
 
-import { UserType } from '@/type/user'
+import { UserType } from '@/types/user'
 import { Icon } from '@iconify/react'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'

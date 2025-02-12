@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { setRole } from '@/server/actions/set-cookie'
-import { UserType } from '@/type/user'
+import { UserType } from '@/types/user'
 import Image from 'next/image'
 import Link from 'next/link'
 

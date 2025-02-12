@@ -1,6 +1,6 @@
 'use server'
 
-import { UserType } from '@/type/user'
+import { UserType } from '@/types/user'
 import { cookies } from 'next/headers'
 
 export async function setRole(role: UserType) {
