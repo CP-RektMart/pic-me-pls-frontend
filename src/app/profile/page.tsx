@@ -18,7 +18,7 @@ export default async function ProfilePage() {
       email={userProfile.email || 'user@picmepls.com'}
       phone={
         userProfile.phone_number.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') ||
-        'xxx-xxx-xxxx'
+        '0xx-xxx-xxxx'
       }
       facebook={userProfile.facebook || 'Facebook'}
       instagram={userProfile.instagram || 'Instagram'}
