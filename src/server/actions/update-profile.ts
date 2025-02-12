@@ -31,12 +31,12 @@ export default async function updateProfile(
     form.append('id', session.user.userId.toString())
     form.append('name', formData.name)
     form.append('email', formData.email)
-    form.append('phone_number', formData.phone.replace(/-/g, ''))
+    form.append('phoneNumber', formData.phone.replace(/-/g, ''))
     form.append('facebook', formData.facebook || '')
     form.append('instagram', formData.instagram || '')
     form.append('bank', formData.bank || '')
-    form.append('account_no', formData.accountNo || '')
-    form.append('bank_branch', formData.bankBranch || '')
+    form.append('accountNo', formData.accountNo || '')
+    form.append('bankBranch', formData.bankBranch || '')
     form.append('role', session.user.role)
 
     const res = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
