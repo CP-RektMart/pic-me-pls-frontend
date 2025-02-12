@@ -12,7 +12,6 @@ export async function logout() {
     }
 
     const access_token = session?.accessToken
-    console.log('access_token', access_token)
 
     const response = await fetch(url, {
       method: 'POST',
@@ -23,11 +22,9 @@ export async function logout() {
     })
 
     if (!response.ok) {
-      return { error: 'Failed to logout', access_token: access_token }
+      console.error('Failed to logout', response)
     }
-    return { success: true, status: response.status }
   } catch (e) {
     console.error(e)
-    return { error: 'An error occurred during logout' }
   }
 }
