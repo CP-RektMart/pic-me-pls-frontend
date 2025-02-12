@@ -2,6 +2,10 @@
 
 import { useState } from 'react'
 
+import { useToast } from '@/hooks/use-toast'
+import updateCitizenCard from '@/server/actions/patch-citizen-card'
+import createCitizenCard from '@/server/actions/post-citizen-card'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
@@ -12,6 +16,8 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Checkbox } from '@/components/ui/checkbox'
+
+
 import {
   Form,
   FormControl,
@@ -29,13 +35,14 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
+
 const formSchema = z.object({
   citizenId: z
     .string()
     .length(13, 'Citizen ID must be exactly 13 digits')
     .regex(/^\d+$/, 'Citizen ID must contain only numbers'),
   expiredDate: z.date({ required_error: 'Please select a date' }),
-  laserNo: z
+  laserId: z
     .string({ required_error: 'Enter your laser number' })
     .nonempty('Enter your laser number')
     .regex(
@@ -45,65 +52,73 @@ const formSchema = z.object({
   terms: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
   }),
-  image: z
+  picture: z
     .string({ required_error: 'Please upload your citizen card' })
     .nonempty('Please upload your citizen card'),
-})
+});
+
+type FormValues = z.infer<typeof formSchema>
 
 interface ValidateProps {
-  isRevalidate: boolean
+  isReverify: boolean;
+  citizenId: string;
+  laserId: string;
+  picture: string;
+  expireDate: Date;
 }
 
-type ReverifyInfo = {
-  citizenId: string;
-  expiredDate: Date;
-  laserNo: string;
-  image: string;
-};
-
-export default function Page({ isRevalidate }: ValidateProps) {
+export default function Page({isReverify,  citizenId,
+  laserId,
+  picture,
+  expireDate}: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+  const { toast } = useToast()
 
-  // TODO: [Reverify] fetch GET /photographer/verify-card-info
-  // TODO: [Reverify] fetch POST /photographer/renew-verify-card
-  // TODO: [verify] fetch POST /photographer/upload-verify-card
-
-  // Temp
-  const reverifyInfo: ReverifyInfo = {
-    citizenId: '1-1234-XXXXX-XX-X',
-    expiredDate: new Date('2025-12-31'),
-    laserNo: 'AB1XXXXXXXXX',
-    image: '/path/to/previous-image.jpg',
-  };
-        
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: isRevalidate
-      ? {
-          citizenId: reverifyInfo.citizenId,
-          expiredDate: reverifyInfo.expiredDate,
-          laserNo: reverifyInfo.laserNo,
+    defaultValues: {
+          citizenId: citizenId,
+          expiredDate: expireDate,
+          laserId: laserId,
           terms: undefined,
-          image: reverifyInfo.image,
-        }
-      : {
-          citizenId: '',
-          expiredDate: undefined,
-          laserNo: '',
-          terms: undefined,
-          image: '',
-        },
+          picture: picture}
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-  }
+  const onSubmit = async (data: FormValues) => {
+    try {
+      let response;
+      let actionType: string;
+  
+      if (isReverify) {
+        response = await updateCitizenCard(data);
+        actionType = 'updated';
+      } else {
+        response = await createCitizenCard(data);
+        actionType = 'created';
+      }
+  
+      if (!response?.result) {
+        throw new Error('Server error');
+      }
+  
+      toast({
+        title: `Citizen card ${actionType}.`,
+        description: `Your citizen card has been successfully ${actionType}.`,
+      });
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Something went wrong.',
+        description: 'There was a problem with the internal server. Please try again later.',
+      });
+    }
+  };
 
   return (
     <div className='mx-auto min-h-screen max-w-7xl p-4 lg:px-8 lg:py-6'>
       {/* To be fixed: Move to layout */}
       <p className='mb-4 font-bold lg:text-2xl'>
-        {!isRevalidate ? 'Verify your account' : 'Re-Verify your account'}
+        {!isReverify ? 'Verify your account' : 'Re-Verify your account'}
       </p>
       <Form {...form}>
         <form
@@ -121,7 +136,7 @@ export default function Page({ isRevalidate }: ValidateProps) {
           <div className='flex w-full flex-col gap-8'>
             <FormField
               control={form.control}
-              name='image'
+              name='picture'
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -206,7 +221,7 @@ export default function Page({ isRevalidate }: ValidateProps) {
                 />
                 <FormField
                   control={form.control}
-                  name='laserNo'
+                  name='laserId'
                   render={({ field }) => (
                     <FormItem className='flex-1'>
                       <FormLabel className='text-sm font-medium'>
