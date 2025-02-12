@@ -92,7 +92,6 @@ export default function Profile({
     }
 
     const response = await updateProfile(data)
-    console.log(response)
 
     if (!response.result) {
       toast({
