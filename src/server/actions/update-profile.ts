@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@/auth'
-import { ServerResponse } from '@/type/server'
+import { ServerResponse } from '@/types/server'
 
 interface formData {
   name: string
