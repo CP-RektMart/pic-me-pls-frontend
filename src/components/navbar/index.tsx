@@ -1,6 +1,6 @@
 'use client'
 
-import { logout } from '@/app/actions/logout'
+import { logout } from '@/server/actions/logout'
 import { Icon } from '@iconify/react'
 import { signOut, useSession } from 'next-auth/react'
 
