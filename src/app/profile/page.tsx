@@ -25,22 +25,19 @@ export default async function ProfilePage() {
   return (
     <ProfileComponent
       isPhotographer={userProfile.role == 'PHOTOGRAPHER'}
-      imageUrl={userProfile.profile_picture_url || '/image.png'}
+      imageUrl={userProfile.profilePictureUrl || '/image.png'}
       name={userProfile.name}
       email={userProfile.email}
       phone={
-        userProfile.phone_number
-          ? userProfile.phone_number.replace(
-              /(\d{3})(\d{3})(\d{4})/,
-              '$1-$2-$3'
-            )
+        userProfile.phoneNumber
+          ? userProfile.phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
           : '012-345-6789'
       }
       facebook={userProfile.facebook || 'Facebook'}
       instagram={userProfile.instagram || 'Instagram'}
       bank={userProfile.bank}
-      accountNo={userProfile.account_no}
-      bankBranch={userProfile.bank_branch}
+      accountNo={userProfile.accountNo}
+      bankBranch={userProfile.bankBranch}
     />
   )
 }
