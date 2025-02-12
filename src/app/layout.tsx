@@ -36,9 +36,9 @@ export default function RootLayout({
         <SessionProvider>
           <Navbar />
           <main className='flex flex-1'>{children}</main>
-          <Toaster />
           <Footer />
         </SessionProvider>
+        <Toaster />
       </body>
     </html>
   )

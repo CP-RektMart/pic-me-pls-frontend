@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 
 type ImageUploadProps = {
   value?: string
-  onChange: (value: string | null) => void
+  onChange: (value: File | undefined) => void
 }
 
 export default function ImageUpload({ value, onChange }: ImageUploadProps) {
@@ -19,11 +19,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
     (acceptedFiles: File[]) => {
       const file = acceptedFiles[0]
       if (file) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          onChange(e.target?.result as string)
-        }
-        reader.readAsDataURL(file)
+        onChange(file)
       }
     },
     [onChange]
@@ -63,7 +59,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
               className='absolute -right-2 -top-2 lg:-top-3 lg:right-5'
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation()
-                onChange('')
+                onChange(undefined)
               }}
             >
               <Icon icon='lucide:x' className='size-4' />

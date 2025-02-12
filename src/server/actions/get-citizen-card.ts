@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@/auth'
-import { ServerResponse } from '@/type/server'
+import { ServerResponse } from '@/types/server'
 
 interface CitizenCardInfo {
   citizenId: string
@@ -23,12 +23,15 @@ export default async function getCitizenCard(): Promise<
       }
     }
 
-    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/photographer/citizen-card`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-    })
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/v1/photographer/citizen-card`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      }
+    )
 
     if (!response.ok) {
       return {
@@ -39,8 +42,7 @@ export default async function getCitizenCard(): Promise<
 
     const data: ServerResponse<CitizenCardInfo> = await response.json()
     return data
-  } catch (err) {
-
+  } catch {
     return {
       result: null,
       error: 'Failed to get citizen card',

@@ -2,22 +2,18 @@
 
 import { useState } from 'react'
 
-import { useToast } from '@/hooks/use-toast'
-import updateCitizenCard from '@/server/actions/patch-citizen-card'
-import createCitizenCard from '@/server/actions/post-citizen-card'
-
+import verifyCitizenCardAction from '@/server/actions/verify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Checkbox } from '@/components/ui/checkbox'
-
-
 import {
   Form,
   FormControl,
@@ -35,13 +31,12 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
-
 const formSchema = z.object({
   citizenId: z
     .string()
     .length(13, 'Citizen ID must be exactly 13 digits')
     .regex(/^\d+$/, 'Citizen ID must contain only numbers'),
-  expiredDate: z.date({ required_error: 'Please select a date' }),
+  expireDate: z.date({ required_error: 'Please select a date' }),
   laserId: z
     .string({ required_error: 'Enter your laser number' })
     .nonempty('Enter your laser number')
@@ -52,67 +47,52 @@ const formSchema = z.object({
   terms: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
   }),
-  picture: z
-    .string({ required_error: 'Please upload your citizen card' })
-    .nonempty('Please upload your citizen card'),
-});
+  picture: z.instanceof(File),
+})
 
 type FormValues = z.infer<typeof formSchema>
 
 interface ValidateProps {
-  isReverify: boolean;
-  citizenId: string;
-  laserId: string;
-  picture: string;
-  expireDate: Date;
+  isReverify: boolean
+  citizenId: string
+  laserId: string
+  picture: string
+  expireDate: Date
 }
 
-export default function Page({isReverify,  citizenId,
+export default function Page({
+  isReverify,
+  citizenId,
   laserId,
   picture,
-  expireDate}: ValidateProps) {
+  expireDate,
+}: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
-  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-          citizenId: citizenId,
-          expiredDate: expireDate,
-          laserId: laserId,
-          terms: undefined,
-          picture: picture}
+      citizenId: citizenId,
+      expireDate: expireDate,
+      laserId: laserId,
+    },
   })
 
   const onSubmit = async (data: FormValues) => {
+    console.log(data)
+
     try {
-      let response;
-      let actionType: string;
-  
-      if (isReverify) {
-        response = await updateCitizenCard(data);
-        actionType = 'updated';
-      } else {
-        response = await createCitizenCard(data);
-        actionType = 'created';
-      }
-  
-      if (!response?.result) {
-        throw new Error('Server error');
-      }
-  
-      toast({
-        title: `Citizen card ${actionType}.`,
-        description: `Your citizen card has been successfully ${actionType}.`,
-      });
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Something went wrong.',
-        description: 'There was a problem with the internal server. Please try again later.',
-      });
+      await verifyCitizenCardAction({
+        citizenId: data.citizenId,
+        laserId: data.laserId,
+        expireDate: data.expireDate,
+        cardPicture: data.picture,
+      })
+      toast.success('Your citizen card has been successfully verified')
+    } catch {
+      toast.error('An error occurred while verifying your citizen card')
     }
-  };
+  }
 
   return (
     <div className='mx-auto min-h-screen max-w-7xl p-4 lg:px-8 lg:py-6'>
@@ -141,7 +121,11 @@ export default function Page({isReverify,  citizenId,
                 <FormItem>
                   <FormControl>
                     <ImageUpload
-                      value={field.value}
+                      value={
+                        form.getValues('picture')
+                          ? URL.createObjectURL(form.getValues('picture'))
+                          : picture
+                      }
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -162,6 +146,7 @@ export default function Page({isReverify,  citizenId,
                       <Input
                         type='number'
                         placeholder='1-XXXX-XXXXX-XX-X'
+                        maxLength={13}
                         {...field}
                       />
                     </FormControl>
@@ -172,11 +157,11 @@ export default function Page({isReverify,  citizenId,
               <div className='flex flex-row justify-between gap-2'>
                 <FormField
                   control={form.control}
-                  name='expiredDate'
+                  name='expireDate'
                   render={({ field }) => (
                     <FormItem className='flex-1'>
                       <FormLabel className='text-sm font-medium'>
-                        Expired Date
+                        Expire Date
                       </FormLabel>
                       <FormControl>
                         <Popover
