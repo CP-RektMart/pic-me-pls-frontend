@@ -1,15 +1,26 @@
-import getProfile from '@/server/actions/get-profile'
+import { auth } from '@/auth'
 
 import ProfileComponent from '@/components/profile-page'
 
 export default async function ProfilePage() {
-  const response = await getProfile()
+  const session = await auth()
 
-  if (!response || !response.result) {
+  if (!session) {
     return <div>Failed to get user profile</div>
   }
 
-  const userProfile = response.result
+  const response = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session.accessToken}`,
+    },
+  })
+
+  if (!response.ok) {
+    return <div>Failed to get user profile</div>
+  }
+
+  const userProfile = (await response.json()).result
 
   return (
     <ProfileComponent
@@ -19,7 +30,7 @@ export default async function ProfilePage() {
       email={userProfile.email}
       phone={
         userProfile.phone_number.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') ||
-        '012-345-6789'
+        '0X2-345-6789'
       }
       facebook={userProfile.facebook || 'Facebook'}
       instagram={userProfile.instagram || 'Instagram'}
