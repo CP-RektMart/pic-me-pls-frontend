@@ -29,6 +29,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
                 },
               })
 
+              console.log("Debugging...")
+              console.log(res)
+
               if (!res.ok) {
                 return false
               }
