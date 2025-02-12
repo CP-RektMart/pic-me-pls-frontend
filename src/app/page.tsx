@@ -1,20 +1,16 @@
-import LoginButton from '@/components/register-page/login-button'
+import Container from '@/components/container'
 
 export default async function Home() {
   return (
-    <div>
-      <div>Pic me pls YOYO</div>
-      <div className='flex flex-row space-x-2'>
-        <div className='size-10 rounded-full bg-base-primary'></div>
-        <div className='size-10 rounded-full bg-base-secondary'></div>
-        <div className='size-10 rounded-full bg-base-tertiary'></div>
-        <div className='size-10 rounded-full bg-base-quaternary'></div>
-        <div className='size-10 rounded-full bg-base-quinary'></div>
-      </div>
-      <div className='flex flex-row space-x-2'>
-        <LoginButton userType='Customer' isActive={false} />
-        <LoginButton userType='Photographer' isActive={false} />
-      </div>
+    <div className='flex flex-1 items-center justify-center bg-gradient-to-b from-base-primary to-base-quinary text-center'>
+      <Container>
+        <div className='flex flex-col items-center justify-center space-y-4 bg-gradient-to-tr from-white to-base-secondary bg-clip-text text-transparent'>
+          <h1 className='text-9xl font-semibold'>Pic Me Pls</h1>
+          <p className='animate-pulse text-2xl font-medium text-white'>
+            Connecting with your desired photographers.
+          </p>
+        </div>
+      </Container>
     </div>
   )
 }
