@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { UserType } from '@/type/user'
+import { UserType } from '@/types/user'
 import Image from 'next/image'
 
 import { Button } from '../ui/button'

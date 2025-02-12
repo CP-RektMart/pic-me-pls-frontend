@@ -1,3 +1,6 @@
+import RickAshely from '@public/rick-roll-rick-ashley.gif'
+import Image from 'next/image'
+
 import Container from '@/components/container'
 
 export default function NotFound() {
@@ -10,6 +13,7 @@ export default function NotFound() {
             <br />
             Page Not Found
           </h1>
+          <Image src={RickAshely} alt='rick' sizes='600' />
           <p>
             The requested URL was not found.
             <br />
