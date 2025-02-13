@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import {
   customerItems,
@@ -25,6 +25,9 @@ interface SidebarProps {
 }
 
 export default function Sidebar(props: SidebarProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const closeSideBar = () => setIsOpen(false)
+
   const { data: session, status } = useSession()
   const { handleLogout } = props
 
