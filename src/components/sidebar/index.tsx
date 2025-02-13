@@ -73,8 +73,8 @@ export default function Sidebar(props: SidebarProps) {
               {status === 'authenticated' ? (
                 <button
                   onClick={() => {
-                    closeSideBar()
                     handleLogout()
+                    closeSideBar()
                   }}
                   className='flex w-full items-center justify-end space-x-3 rounded-sm p-4 hover:bg-neutral-200'
                 >
