@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import { Icon } from '@iconify/react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -20,12 +22,15 @@ interface SidebarProps {
 }
 
 export default function Sidebar(props: SidebarProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const closeSideBar = () => setIsOpen(false)
+
   const { handleLogout } = props
   const { status } = useSession()
 
   return (
     <div className='lg:hidden'>
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button variant='ghost' className='p-2'>
             <Icon icon='lucide:menu' className='size-4' />
@@ -39,6 +44,7 @@ export default function Sidebar(props: SidebarProps) {
                 <li
                   key={index}
                   className='w-full place-items-start rounded-sm hover:bg-neutral-200'
+                  onClick={closeSideBar}
                 >
                   <SidebarButton
                     icon={item.icon}
