@@ -7,7 +7,7 @@ interface CitizenCardInfo {
   citizenId: string
   laserId: string
   picture: string
-  expiredDate: string
+  expireDate: string
 }
 
 export default async function getCitizenCard(): Promise<
