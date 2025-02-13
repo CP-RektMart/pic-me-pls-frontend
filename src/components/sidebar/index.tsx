@@ -42,7 +42,7 @@ export default function Sidebar(props: SidebarProps) {
 
   return (
     <div className='lg:hidden'>
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button variant='ghost' className='p-2'>
             <Icon icon='lucide:menu' className='size-4' />
@@ -56,6 +56,7 @@ export default function Sidebar(props: SidebarProps) {
                 <li
                   key={index}
                   className='w-full place-items-start rounded-sm hover:bg-neutral-200'
+                  onClick={closeSideBar}
                 >
                   <SidebarButton
                     icon={item.icon}
