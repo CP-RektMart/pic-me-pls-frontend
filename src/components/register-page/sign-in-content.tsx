@@ -11,6 +11,15 @@ import { Button } from '@/components/ui/button'
 export default function SignInContent({ userType }: { userType?: UserType }) {
   const handleLogin = async () => {
     await setRole(userType)
+
+    if (userType === 'Photographer') {
+      await signIn('google', {
+        redirect: true,
+        callbackUrl: '/photographer/verify',
+      })
+      return
+    }
+
     await signIn('google', {
       redirectTo: '/',
     })
