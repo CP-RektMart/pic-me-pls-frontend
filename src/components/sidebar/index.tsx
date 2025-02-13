@@ -72,7 +72,10 @@ export default function Sidebar(props: SidebarProps) {
             <div className='grid w-full place-content-end gap-2'>
               {status === 'authenticated' ? (
                 <button
-                  onClick={handleLogout}
+                  onClick={() => {
+                    handleLogout()
+                    closeSideBar()
+                  }}
                   className='flex w-full items-center justify-end space-x-3 rounded-sm p-4 hover:bg-neutral-200'
                 >
                   <span className='text-primary'>Logout</span>
@@ -82,7 +85,10 @@ export default function Sidebar(props: SidebarProps) {
                 </button>
               ) : (
                 <Link href='/login'>
-                  <button className='flex w-full items-center justify-end space-x-3 rounded-sm p-4 hover:bg-neutral-200'>
+                  <button
+                    className='flex w-full items-center justify-end space-x-3 rounded-sm p-4 hover:bg-neutral-200'
+                    onClick={closeSideBar}
+                  >
                     <span className='text-primary'>Login</span>
                     <span className='text-primary'>
                       <Icon icon='lucide:log-in' className='size-6' />
