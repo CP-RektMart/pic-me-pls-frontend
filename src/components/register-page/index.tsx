@@ -45,7 +45,7 @@ export default function RegisterPageComponent() {
             <motion.div
               key='base'
               initial={{
-                scale: 1.2,
+                scale: 1.1,
               }}
               animate={{
                 scale: 1,
