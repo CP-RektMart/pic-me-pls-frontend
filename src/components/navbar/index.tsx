@@ -1,5 +1,7 @@
 'use client'
 
+import { useMemo } from 'react'
+
 import { logout } from '@/server/actions/logout'
 import { Icon } from '@iconify/react'
 import LogoTrans from '@public/logo-trans.svg'
@@ -8,11 +10,16 @@ import Image from 'next/image'
 
 import { NavButton } from '@/components/navbar/nav-button'
 
-import { navItems } from '../../data/nav-items'
+import {
+  customerItems,
+  defaultItems,
+  photographerItems,
+} from '../../data/nav-items'
 import Sidebar from '../sidebar'
 
 export default function Navbar() {
-  const { status } = useSession()
+  const { data: session, status } = useSession()
+
   const handleLogout = async () => {
     const result = await logout()
     if (result?.error) {
@@ -21,6 +28,18 @@ export default function Navbar() {
     }
     await signOut()
   }
+
+  const navItems = useMemo(() => {
+    if (status !== 'authenticated') {
+      return defaultItems
+    }
+
+    if (session?.user?.role === 'PHOTOGRAPHER') {
+      return photographerItems
+    }
+
+    return customerItems
+  }, [session?.user?.role, status])
 
   return (
     <nav className='sticky flex w-full flex-row items-center justify-between bg-base-primary px-6 py-4 text-white'>
