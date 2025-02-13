@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 
-import verifyCitizenCardAction from '@/server/actions/verify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -47,7 +47,7 @@ const formSchema = z.object({
   terms: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
   }),
-  picture: z.instanceof(File),
+  cardPicture: z.instanceof(File),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -69,6 +69,8 @@ export default function Page({
 }: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
 
+  const { data: session } = useSession()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -79,15 +81,33 @@ export default function Page({
   })
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data)
-
     try {
-      await verifyCitizenCardAction({
-        citizenId: data.citizenId,
-        laserId: data.laserId,
-        expireDate: data.expireDate,
-        cardPicture: data.picture,
-      })
+      const formData = new FormData()
+      formData.append('citizenId', data.citizenId)
+      formData.append('laserId', data.laserId)
+      formData.append('expireDate', data.expireDate.toISOString())
+      formData.append('cardPicture', data.cardPicture)
+      const url = `${process.env.BACKEND_URL}/api/v1/photographer/verify`
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+          },
+          body: formData,
+        })
+
+        if (!response.ok) {
+          return { error: response.statusText }
+        }
+
+        const data = await response.json()
+        console.log(data)
+      } catch (error) {
+        console.error('Error during sign in:', error)
+        return { error: 'An error occurred while signing in' }
+      }
       toast.success('Your citizen card has been successfully verified')
     } catch {
       toast.error('An error occurred while verifying your citizen card')
@@ -116,14 +136,14 @@ export default function Page({
           <div className='flex w-full flex-col gap-8'>
             <FormField
               control={form.control}
-              name='picture'
+              name='cardPicture'
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <ImageUpload
                       value={
-                        form.getValues('picture')
-                          ? URL.createObjectURL(form.getValues('picture'))
+                        form.getValues('cardPicture')
+                          ? URL.createObjectURL(form.getValues('cardPicture'))
                           : picture
                       }
                       onChange={field.onChange}
