@@ -7,8 +7,6 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 
-import { Button } from '@/components/ui/button'
-
 type ImageUploadProps = {
   value?: string
   onChange: (value: File | undefined) => void
@@ -53,17 +51,9 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
               height={250}
               className='mx-auto rounded-lg object-cover'
             />
-            <Button
-              variant='destructive'
-              size='icon'
-              className='absolute -right-2 -top-2 lg:-top-3 lg:right-5'
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.stopPropagation()
-                onChange(undefined)
-              }}
-            >
-              <Icon icon='lucide:x' className='size-4' />
-            </Button>
+            <p className='-mb-4 mt-4 text-sm font-medium text-slate-500'>
+              Drag and drop or click here to upload your citizen card
+            </p>
           </div>
         ) : (
           <div className='flex h-full flex-col items-center justify-center gap-4'>

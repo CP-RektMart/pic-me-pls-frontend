@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import reverifyCitizenCardAction from '@/server/actions/reverify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -76,6 +76,10 @@ export default function ReverifyPhotographer({
     },
   })
 
+  useEffect(() => {
+    console.log(expireDate, citizenId)
+  }, [expireDate, citizenId])
+
   const onSubmit = async (data: FormValues) => {
     try {
       await reverifyCitizenCardAction({
@@ -115,7 +119,16 @@ export default function ReverifyPhotographer({
                 <FormItem>
                   <FormControl>
                     {/* TODO: FIX */}
-                    <ImageUpload value={picture} onChange={field.onChange} />
+                    <ImageUpload
+                      value={
+                        form.getValues('cardPicture') instanceof File
+                          ? URL.createObjectURL(
+                              form.getValues('cardPicture') as File
+                            )
+                          : picture
+                      }
+                      onChange={field.onChange}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

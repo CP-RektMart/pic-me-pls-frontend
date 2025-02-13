@@ -5,6 +5,8 @@ import ReverifyPhotographer from '@/components/reverify-photographer'
 export default async function Page() {
   const response = await getCitizenCard()
 
+  console.log(response)
+
   const citizenCardInfo = response.result || {
     citizenId: '',
     laserId: '',
