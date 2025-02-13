@@ -54,12 +54,14 @@ type FormValues = z.infer<typeof formSchema>
 
 export default function VerifyPhotographer() {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true)
     try {
       await verifyCitizenCardAction({
         cardPicture: data.cardPicture,
@@ -72,6 +74,7 @@ export default function VerifyPhotographer() {
     } catch {
       toast.error('An error occurred while verifying your citizen card')
     }
+    setIsSubmitting(false)
   }
 
   return (
@@ -224,7 +227,13 @@ export default function VerifyPhotographer() {
                 </FormItem>
               )}
             />
-            <Button type='submit' className='self-end'>
+            <Button type='submit' className='self-end' disabled={isSubmitting}>
+              {isSubmitting && (
+                <Icon
+                  icon='lucide:loader-circle'
+                  className='size-4 animate-spin'
+                />
+              )}
               Submit
             </Button>
           </div>

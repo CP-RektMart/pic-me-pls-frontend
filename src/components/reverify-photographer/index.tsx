@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import reverifyCitizenCardAction from '@/server/actions/reverify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -66,6 +66,7 @@ export default function ReverifyPhotographer({
   expireDate,
 }: ReverifyPhotographerProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -76,11 +77,8 @@ export default function ReverifyPhotographer({
     },
   })
 
-  useEffect(() => {
-    console.log(expireDate, citizenId)
-  }, [expireDate, citizenId])
-
   const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true)
     try {
       await reverifyCitizenCardAction({
         cardPicture: data.cardPicture,
@@ -93,6 +91,7 @@ export default function ReverifyPhotographer({
     } catch {
       toast.error('An error occurred while verifying your citizen card')
     }
+    setIsSubmitting(false)
   }
 
   return (
@@ -118,7 +117,6 @@ export default function ReverifyPhotographer({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    {/* TODO: FIX */}
                     <ImageUpload
                       value={
                         form.getValues('cardPicture')
@@ -248,7 +246,13 @@ export default function ReverifyPhotographer({
                 </FormItem>
               )}
             />
-            <Button type='submit' className='self-end'>
+            <Button type='submit' className='self-end' disabled={isSubmitting}>
+              {isSubmitting && (
+                <Icon
+                  icon='lucide:loader-circle'
+                  className='size-4 animate-spin'
+                />
+              )}
               Submit
             </Button>
           </div>
