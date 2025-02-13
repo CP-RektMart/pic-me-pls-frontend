@@ -239,7 +239,7 @@ export default function Profile({
             {isPhotographer && (
               <div className='flex flex-1 flex-col gap-2'>
                 <hr className='mb-2 mt-4 border-t border-zinc-200' />
-                <h2 className='text-[24px] font-bold'>Payment Method</h2>
+                <h2 className='text-[24px] font-bold'>Payout Method</h2>
 
                 <FormField
                   control={form.control}
