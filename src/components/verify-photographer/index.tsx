@@ -80,13 +80,12 @@ export default function Page({
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const formData = new FormData()
-      formData.append('citizenId', data.citizenId)
-      formData.append('laserId', data.laserId)
-      formData.append('expireDate', data.expireDate.toISOString())
-      formData.append('cardPicture', data.cardPicture)
-
-      await verifyCitizenCardAction(formData)
+      await verifyCitizenCardAction({
+        cardPicture: data.cardPicture,
+        citizenId: data.citizenId,
+        expireDate: data.expireDate,
+        laserId: data.laserId,
+      })
 
       toast.success('Your citizen card has been successfully verified')
     } catch {

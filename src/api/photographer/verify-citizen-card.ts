@@ -1,9 +1,9 @@
+import { auth } from '@/auth'
 import { z } from 'zod'
 
 import { citizenCardResponse } from './common'
 
 export const verifyCitizenCardRequest = z.object({
-  accessToken: z.string(),
   cardPicture: z.instanceof(File),
   citizenId: z.string(),
   laserId: z.string(),
@@ -21,12 +21,13 @@ export type VerifyCitizenCardResponse = z.infer<
 >
 
 export async function verifyCitizenCard(req: VerifyCitizenCardRequest) {
+  const session = await auth()
   const url = `${process.env.BACKEND_URL}/api/v1/photographer/verify`
 
   try {
     verifyCitizenCardRequest.parse(req)
-  } catch (err) {
-    return { error: err }
+  } catch {
+    throw new Error('INVALID_REQUEST')
   }
 
   try {
@@ -39,19 +40,20 @@ export async function verifyCitizenCard(req: VerifyCitizenCardRequest) {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${req.accessToken}`,
+        Authorization: `Bearer ${session?.accessToken}`,
       },
       body: formDataBody,
     })
 
     if (!response.ok) {
-      return { error: response.statusText }
+      const data = await response.json()
+      throw new Error(data.error)
     }
 
     const data = await response.json()
+    console.log(data)
     return verifyCitizenCardResponse.parse(data).result
-  } catch (error) {
-    console.error('Error during sign in:', error)
-    return { error: 'An error occurred while signing in' }
+  } catch {
+    throw new Error('An error occurred while signing in')
   }
 }
