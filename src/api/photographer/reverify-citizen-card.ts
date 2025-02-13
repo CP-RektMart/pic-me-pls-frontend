@@ -3,29 +3,31 @@ import { z } from 'zod'
 
 import { citizenCardResponse } from './common'
 
-export const verifyCitizenCardRequest = z.object({
+export const reverifyCitizenCardRequest = z.object({
   cardPicture: z.instanceof(File),
   citizenId: z.string(),
   laserId: z.string(),
   expireDate: z.date(),
 })
 
-export type VerifyCitizenCardRequest = z.infer<typeof verifyCitizenCardRequest>
+export type ReverifyCitizenCardRequest = z.infer<
+  typeof reverifyCitizenCardRequest
+>
 
-export const verifyCitizenCardResponse = z.object({
+export const reverifyCitizenCardResponse = z.object({
   result: citizenCardResponse,
 })
 
-export type VerifyCitizenCardResponse = z.infer<
-  typeof verifyCitizenCardResponse
+export type ReverifyCitizenCardResponse = z.infer<
+  typeof reverifyCitizenCardResponse
 >
 
-export async function verifyCitizenCard(req: VerifyCitizenCardRequest) {
+export async function reverifyCitizenCard(req: ReverifyCitizenCardRequest) {
   const session = await auth()
-  const url = `${process.env.BACKEND_URL}/api/v1/photographer/verify`
+  const url = `${process.env.BACKEND_URL}/api/v1/photographer/reverify`
 
   try {
-    verifyCitizenCardRequest.parse(req)
+    reverifyCitizenCardRequest.parse(req)
   } catch {
     throw new Error('INVALID_REQUEST')
   }
@@ -38,7 +40,7 @@ export async function verifyCitizenCard(req: VerifyCitizenCardRequest) {
     formDataBody.append('cardPicture', req.cardPicture)
 
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         Authorization: `Bearer ${session?.accessToken}`,
       },
@@ -51,7 +53,7 @@ export async function verifyCitizenCard(req: VerifyCitizenCardRequest) {
     }
 
     const data = await response.json()
-    return verifyCitizenCardResponse.parse(data).result
+    return reverifyCitizenCardResponse.parse(data).result
   } catch {
     throw new Error('An error occurred while signing in')
   }
