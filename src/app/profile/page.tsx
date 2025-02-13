@@ -1,4 +1,5 @@
 import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 
 import ProfileComponent from '@/components/profile-page'
 
@@ -6,7 +7,7 @@ export default async function ProfilePage() {
   const session = await auth()
 
   if (!session) {
-    return <div>Failed to get user profile</div>
+    redirect(`/login`)
   }
 
   const response = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
@@ -17,7 +18,7 @@ export default async function ProfilePage() {
   })
 
   if (!response.ok) {
-    return <div>Failed to get user profile</div>
+    redirect(`/login`)
   }
 
   const userProfile = (await response.json()).result
