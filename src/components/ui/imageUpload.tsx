@@ -43,14 +43,15 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
       >
         <input {...getInputProps()} />
         {value ? (
-          <div className='relative'>
-            <Image
-              src={value}
-              alt='Uploaded image'
-              width={250}
-              height={250}
-              className='mx-auto rounded-lg object-cover'
-            />
+          <div className='relative flex flex-col items-center'>
+            <div className='relative aspect-video w-[250px]'>
+              <Image
+                src={value}
+                alt='Uploaded image'
+                fill
+                className='rounded-lg object-cover'
+              />
+            </div>
             <p className='-mb-4 mt-4 text-sm font-medium text-slate-500'>
               Drag and drop or click here to upload your citizen card
             </p>
