@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import verifyCitizenCardAction from '@/server/actions/verify-citizen-card'
+import reverifyCitizenCardAction from '@/server/actions/reverify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
@@ -32,7 +32,7 @@ import {
 } from '@/components/ui/popover'
 
 const formSchema = z.object({
-  cardPicture: z.instanceof(File),
+  cardPicture: z.instanceof(File).optional(),
   citizenId: z
     .string()
     .length(13, 'Citizen ID must be exactly 13 digits')
@@ -52,23 +52,40 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>
 
-export default function VerifyPhotographer() {
+interface ReverifyPhotographerProps {
+  citizenId: string
+  laserId: string
+  picture: string
+  expireDate: Date
+}
+
+export default function ReverifyPhotographer({
+  citizenId,
+  laserId,
+  picture,
+  expireDate,
+}: ReverifyPhotographerProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      citizenId: citizenId,
+      expireDate: expireDate,
+      laserId: laserId,
+    },
   })
 
   const onSubmit = async (data: FormValues) => {
     try {
-      await verifyCitizenCardAction({
+      await reverifyCitizenCardAction({
         cardPicture: data.cardPicture,
         citizenId: data.citizenId,
         expireDate: data.expireDate,
         laserId: data.laserId,
       })
 
-      toast.success('Your citizen card has been successfully verified')
+      toast.success('Your citizen card has been successfully reverified')
     } catch {
       toast.error('An error occurred while verifying your citizen card')
     }
@@ -76,7 +93,7 @@ export default function VerifyPhotographer() {
 
   return (
     <div className='mx-auto min-h-screen max-w-7xl p-4 lg:px-8 lg:py-6'>
-      <p className='mb-4 font-bold lg:text-2xl'>Verify your account</p>
+      <p className='mb-4 font-bold lg:text-2xl'>Re-Verify your account</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -97,10 +114,8 @@ export default function VerifyPhotographer() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <ImageUpload
-                      value={URL.createObjectURL(form.getValues('cardPicture'))}
-                      onChange={field.onChange}
-                    />
+                    {/* TODO: FIX */}
+                    <ImageUpload value={picture} onChange={field.onChange} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

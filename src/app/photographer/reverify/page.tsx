@@ -1,6 +1,6 @@
-import VerifyPhotographer from '@/components/verify-photographer'
-
 import getCitizenCard from '@/server/actions/get-citizen-card'
+
+import ReverifyPhotographer from '@/components/reverify-photographer'
 
 export default async function Page() {
   const response = await getCitizenCard()
@@ -13,8 +13,7 @@ export default async function Page() {
   }
 
   return (
-    <VerifyPhotographer 
-      isReverify={true} 
+    <ReverifyPhotographer
       citizenId={citizenCardInfo.citizenId}
       laserId={citizenCardInfo.laserId}
       picture={citizenCardInfo.picture}
@@ -22,4 +21,3 @@ export default async function Page() {
     />
   )
 }
-

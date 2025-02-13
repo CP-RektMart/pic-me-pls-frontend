@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { citizenCardResponse } from './common'
 
 export const reverifyCitizenCardRequest = z.object({
-  cardPicture: z.instanceof(File),
+  cardPicture: z.instanceof(File).optional(),
   citizenId: z.string(),
   laserId: z.string(),
   expireDate: z.date(),
@@ -37,7 +37,7 @@ export async function reverifyCitizenCard(req: ReverifyCitizenCardRequest) {
     formDataBody.append('citizenId', req.citizenId)
     formDataBody.append('laserId', req.laserId)
     formDataBody.append('expireDate', req.expireDate.toISOString())
-    formDataBody.append('cardPicture', req.cardPicture)
+    if (req.cardPicture) formDataBody.append('cardPicture', req.cardPicture)
 
     const response = await fetch(url, {
       method: 'PATCH',
