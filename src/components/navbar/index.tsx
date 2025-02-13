@@ -26,7 +26,10 @@ export default function Navbar() {
       console.error(result.error)
       return
     }
-    await signOut()
+    await signOut({
+      redirect: true,
+      redirectTo: '/',
+    })
   }
 
   const navItems = useMemo(() => {
