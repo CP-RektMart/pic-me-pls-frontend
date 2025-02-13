@@ -1,7 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
+import {
+  customerItems,
+  defaultItems,
+  photographerItems,
+} from '@/data/nav-items'
 import { Icon } from '@iconify/react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -15,8 +20,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 
-import { navItems } from '../../data/nav-items'
-
 interface SidebarProps {
   handleLogout: () => void
 }
@@ -25,8 +28,20 @@ export default function Sidebar(props: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const closeSideBar = () => setIsOpen(false)
 
+  const { data: session, status } = useSession()
   const { handleLogout } = props
-  const { status } = useSession()
+
+  const navItems = useMemo(() => {
+    if (status !== 'authenticated') {
+      return defaultItems
+    }
+
+    if (session?.user?.role === 'PHOTOGRAPHER') {
+      return photographerItems
+    }
+
+    return customerItems
+  }, [session?.user?.role, status])
 
   return (
     <div className='lg:hidden'>

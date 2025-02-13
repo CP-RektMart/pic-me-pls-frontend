@@ -1,5 +1,5 @@
 import VerifyPhotographer from '@/components/verify-photographer'
 
-export default function Page() {
-  return <VerifyPhotographer isRevalidate={false} />
+export default async function Page() {
+  return <VerifyPhotographer />
 }
