@@ -121,7 +121,7 @@ export default function ReverifyPhotographer({
                     {/* TODO: FIX */}
                     <ImageUpload
                       value={
-                        form.getValues('cardPicture') instanceof File
+                        form.getValues('cardPicture')
                           ? URL.createObjectURL(
                               form.getValues('cardPicture') as File
                             )

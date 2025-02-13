@@ -98,7 +98,11 @@ export default function VerifyPhotographer() {
                 <FormItem>
                   <FormControl>
                     <ImageUpload
-                      value={URL.createObjectURL(form.getValues('cardPicture'))}
+                      value={
+                        form.getValues('cardPicture')
+                          ? URL.createObjectURL(form.getValues('cardPicture'))
+                          : undefined
+                      }
                       onChange={field.onChange}
                     />
                   </FormControl>
