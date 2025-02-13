@@ -4,6 +4,7 @@
 
 body {
   font-family: var(--font-poppins);
+  overflow-x: hidden;
 }
 
 @layer base {
