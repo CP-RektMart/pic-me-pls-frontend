@@ -1,22 +1,29 @@
-// 'use server'
+'use server'
 
-// // import { verifyCitizenCard } from '@/api/photographer/verify-citizen-card'
-// import { auth } from '@/auth'
+import { auth } from '@/auth'
 
-// export default async function verifyCitizenCardAction(payload: FormData) {
-//   console.log('here991')
-//   const session = await auth()
+export default async function verifyCitizenCardAction(payload: FormData) {
+  const session = await auth()
+  const url = `${process.env.BACKEND_URL}/api/v1/photographer/verify`
 
-//   console.log('here992')
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session?.accessToken}`,
+      },
+      body: payload,
+    })
 
-//   if (!session || !session.accessToken) {
-//     return { error: 'Failed to authenticate' }
-//   }
+    if (!response.ok) {
+      console.log(response)
+      return { error: response.statusText }
+    }
 
-//   try {
-//     // await verifyCitizenCard(session.accessToken, payload)
-//   } catch (error) {
-//     console.error(error)
-//     return { error: 'Failed to verify citizen card' }
-//   }
-// }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Error during sign in:', error)
+    return { error: 'An error occurred while signing in' }
+  }
+}

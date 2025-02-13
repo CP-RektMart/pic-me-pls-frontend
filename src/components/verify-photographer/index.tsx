@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 
+import verifyCitizenCardAction from '@/server/actions/verify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -69,8 +69,6 @@ export default function Page({
 }: ValidateProps) {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
 
-  const { data: session } = useSession()
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,27 +85,9 @@ export default function Page({
       formData.append('laserId', data.laserId)
       formData.append('expireDate', data.expireDate.toISOString())
       formData.append('cardPicture', data.cardPicture)
-      const url = `${process.env.BACKEND_URL}/api/v1/photographer/verify`
 
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${session?.accessToken}`,
-          },
-          body: formData,
-        })
+      await verifyCitizenCardAction(formData)
 
-        if (!response.ok) {
-          return { error: response.statusText }
-        }
-
-        const data = await response.json()
-        console.log(data)
-      } catch (error) {
-        console.error('Error during sign in:', error)
-        return { error: 'An error occurred while signing in' }
-      }
       toast.success('Your citizen card has been successfully verified')
     } catch {
       toast.error('An error occurred while verifying your citizen card')
