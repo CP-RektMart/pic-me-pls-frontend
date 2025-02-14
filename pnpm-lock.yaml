@@ -58,6 +58,9 @@ importers:
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      openapi-fetch:
+        specifier: ^0.13.4
+        version: 0.13.4
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -125,15 +128,9 @@ importers:
       commitizen:
         specifier: ^4.3.1
         version: 4.3.1(@types/node@20.17.16)(typescript@5.7.3)
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
       cz-conventional-changelog:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@20.17.16)(typescript@5.7.3)
-      dotenv-cli:
-        specifier: ^8.0.0
-        version: 8.0.0
       eslint:
         specifier: ^9
         version: 9.19.0(jiti@2.4.2)
@@ -2039,14 +2036,6 @@ packages:
       typescript:
         optional: true
 
-  cross-env@7.0.3:
-    resolution:
-      {
-        integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==,
-      }
-    engines: { node: '>=10.14', npm: '>=6', yarn: '>=1' }
-    hasBin: true
-
   cross-spawn@7.0.6:
     resolution:
       {
@@ -2228,27 +2217,6 @@ packages:
         integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==,
       }
     engines: { node: '>=8' }
-
-  dotenv-cli@8.0.0:
-    resolution:
-      {
-        integrity: sha512-aLqYbK7xKOiTMIRf1lDPbI+Y+Ip/wo5k3eyp6ePysVaSqbyxjyK3dK35BTxG+rmd7djf5q2UPs4noPNH+cj0Qw==,
-      }
-    hasBin: true
-
-  dotenv-expand@10.0.0:
-    resolution:
-      {
-        integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==,
-      }
-    engines: { node: '>=12' }
-
-  dotenv@16.4.7:
-    resolution:
-      {
-        integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==,
-      }
-    engines: { node: '>=12' }
 
   dunder-proto@1.0.1:
     resolution:
@@ -3867,6 +3835,18 @@ packages:
         integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==,
       }
     engines: { node: '>=6' }
+
+  openapi-fetch@0.13.4:
+    resolution:
+      {
+        integrity: sha512-JHX7UYjLEiHuQGCPxa3CCCIqe/nc4bTIF9c4UYVC8BegAbWoS3g4gJxKX5XcG7UtYQs2060kY6DH64KkvNZahg==,
+      }
+
+  openapi-typescript-helpers@0.0.15:
+    resolution:
+      {
+        integrity: sha512-opyTPaunsklCBpTK8JGef6mfPhLSnyy5a0IN9vKtx3+4aExf+KxEqYwIy3hqkedXIB97u357uLMJsOnm3GVjsw==,
+      }
 
   openapi-typescript@7.6.1:
     resolution:
@@ -6389,10 +6369,6 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
 
-  cross-env@7.0.3:
-    dependencies:
-      cross-spawn: 7.0.6
-
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -6493,17 +6469,6 @@ snapshots:
   dot-prop@5.3.0:
     dependencies:
       is-obj: 2.0.0
-
-  dotenv-cli@8.0.0:
-    dependencies:
-      cross-spawn: 7.0.6
-      dotenv: 16.4.7
-      dotenv-expand: 10.0.0
-      minimist: 1.2.8
-
-  dotenv-expand@10.0.0: {}
-
-  dotenv@16.4.7: {}
 
   dunder-proto@1.0.1:
     dependencies:
@@ -7569,6 +7534,12 @@ snapshots:
   onetime@5.1.2:
     dependencies:
       mimic-fn: 2.1.0
+
+  openapi-fetch@0.13.4:
+    dependencies:
+      openapi-typescript-helpers: 0.0.15
+
+  openapi-typescript-helpers@0.0.15: {}
 
   openapi-typescript@7.6.1(typescript@5.7.3):
     dependencies:
