@@ -1,8 +1,7 @@
-import { userResponseSchema, userRoleEnum } from '@/api/auth/common'
-import { z } from 'zod'
+import { components } from '@/api/schema'
 
 export type UserType = 'Customer' | 'Photographer' | ''
 
-export type UserRole = z.infer<typeof userRoleEnum>
+export type UserRole = 'CUSTOMER' | 'PHOTOGRAPHER' | 'ADMIN'
 
-export type User = z.infer<typeof userResponseSchema>
+export type User = components['schemas']['dto.UserResponse']

@@ -37,10 +37,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_LoginResponse']
           }
         }
         /** @description Bad Request */
@@ -49,7 +46,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -58,7 +55,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -104,7 +101,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -113,7 +110,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -157,10 +154,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_TokenResponse']
           }
         }
         /** @description Bad Request */
@@ -169,7 +163,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -178,7 +172,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -222,10 +216,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_RegisterResponse']
           }
         }
         /** @description Bad Request */
@@ -234,7 +225,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -243,7 +234,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -280,10 +271,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_UserResponse']
           }
         }
         /** @description Bad Request */
@@ -292,7 +280,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -301,7 +289,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -335,10 +323,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_UserResponse']
           }
         }
         /** @description Bad Request */
@@ -347,7 +332,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -356,7 +341,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -389,10 +374,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_CitizenCardResponse']
           }
         }
         /** @description Bad Request */
@@ -401,7 +383,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -410,7 +392,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -460,10 +442,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_CitizenCardResponse']
           }
         }
         /** @description Bad Request */
@@ -472,7 +451,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -481,7 +460,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -521,10 +500,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': {
-              error?: string
-              result?: unknown
-            } & components['schemas']['result']
+            'application/json': components['schemas']['dto.HttpResponse-dto_CitizenCardResponse']
           }
         }
         /** @description Bad Request */
@@ -533,7 +509,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
         /** @description Internal Server Error */
@@ -542,7 +518,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse']
+            'application/json': components['schemas']['dto.HttpError']
           }
         }
       }
@@ -563,14 +539,34 @@ export interface components {
       laserId?: string
       picture?: string
     }
-    'dto.HttpResponse': {
+    'dto.HttpError': {
       error?: string
-      result?: unknown
-    } & components['schemas']['result']
+    }
+    'dto.HttpResponse-dto_CitizenCardResponse': {
+      result?: components['schemas']['dto.CitizenCardResponse']
+    }
+    'dto.HttpResponse-dto_LoginResponse': {
+      result?: components['schemas']['dto.LoginResponse']
+    }
+    'dto.HttpResponse-dto_RegisterResponse': {
+      result?: components['schemas']['dto.RegisterResponse']
+    }
+    'dto.HttpResponse-dto_TokenResponse': {
+      result?: components['schemas']['dto.TokenResponse']
+    }
+    'dto.HttpResponse-dto_UserResponse': {
+      result?: components['schemas']['dto.UserResponse']
+    }
     'dto.LoginRequest': {
       idToken: string
       /** @description GOOGLE */
       provider: string
+    }
+    'dto.LoginResponse': {
+      accessToken?: string
+      exp?: number
+      refreshToken?: string
+      user?: components['schemas']['dto.UserResponse']
     }
     'dto.RefreshTokenRequest': {
       refreshToken: string
@@ -605,9 +601,6 @@ export interface components {
       phoneNumber?: string
       profilePictureUrl?: string
       role?: string
-    }
-    result: {
-      result?: components['schemas']['dto.UserResponse']
     }
   }
   responses: never

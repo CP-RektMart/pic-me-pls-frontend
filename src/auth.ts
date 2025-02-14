@@ -3,8 +3,7 @@ import 'next-auth/jwt'
 import Google from 'next-auth/providers/google'
 import { NextRequest } from 'next/server'
 
-import { login } from './api/auth/login'
-import { register } from './api/auth/register'
+import { client } from './api/client'
 import { UserRole, User as UserType } from './types/user'
 
 export const { handlers, signIn, signOut, auth } = NextAuth(
@@ -28,20 +27,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
           // Register
           if (role) {
             try {
-              const response = await register({
-                idToken: account.id_token,
-                provider: account.provider,
-                role: role.toUpperCase() as UserRole,
-              })
+              const { data, response } = await client.POST(
+                '/api/v1/auth/register',
+                {
+                  body: {
+                    idToken: account.id_token,
+                    provider: account.provider.toUpperCase(),
+                    role: role.toUpperCase() as UserRole,
+                  },
+                }
+              )
 
-              if (!response || 'error' in response) {
+              if (
+                response.status !== 200 ||
+                !data ||
+                !data.result ||
+                'error' in data
+              ) {
                 return false
               }
 
-              user.accessToken = response.accessToken
-              user.refreshToken = response.refreshToken
-              user.expireAt = response.exp
-              user.user = response.user
+              user.accessToken = data.result.accessToken
+              user.refreshToken = data.result.refreshToken
+              user.expireAt = data.result.exp
+              user.user = data.result.user
 
               return true
             } catch (error) {
@@ -52,19 +61,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
 
           // Login
           try {
-            const response = await login({
-              idToken: account.id_token,
-              provider: account.provider,
+            console.log('here1')
+            const { data, response } = await client.POST('/api/v1/auth/login', {
+              body: {
+                idToken: account.id_token,
+                provider: account.provider.toUpperCase(),
+              },
             })
 
-            if (!response || 'error' in response) {
+            console.log('here2')
+            if (
+              response.status !== 200 ||
+              !data ||
+              !data.result ||
+              'error' in data
+            ) {
+              console.log(response, data)
               return false
             }
 
-            user.accessToken = response.accessToken
-            user.refreshToken = response.refreshToken
-            user.expireAt = response.exp
-            user.user = response.user
+            user.accessToken = data.result.accessToken
+            user.refreshToken = data.result.refreshToken
+            user.expireAt = data.result.exp
+            user.user = data.result.user
 
             return true
           } catch (error) {
@@ -92,7 +111,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
             session.expireAt = token.expireAt
           }
           if (token?.user) {
-            session.user.userId = token.user.id
+            session.user.userId = token.user.id as number
             session.user.phoneNumber = token.user.phoneNumber
             session.user.role = token.user.role
             session.user.accountNo = token.user.accountNo
