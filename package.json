@@ -9,7 +9,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "generate": "openapi-typescript http://127.0.0.1:8000/openapi -o ./src/api/schema.d.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -57,11 +58,12 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "husky": "^9.1.7",
+    "openapi-typescript": "^7.6.1",
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.7.3"
   },
   "packageManager": "pnpm@9.15.3",
   "config": {
