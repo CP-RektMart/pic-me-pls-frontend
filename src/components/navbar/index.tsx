@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 
-import { logout } from '@/server/actions/logout'
+import { logout } from '@/actions/logout'
 import { Icon } from '@iconify/react'
 import LogoTrans from '@public/logo-trans.svg'
 import { signOut, useSession } from 'next-auth/react'
