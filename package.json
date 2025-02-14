@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "prepare": "husky",
     "commit": "cz",
-    "generate": "openapi-typescript http://127.0.0.1:8000/openapi -o ./src/api/schema.d.ts"
+    "generate": "openapi-typescript https://picmepls-api.chanatpakorn.gay/openapi -o ./src/api/schema.d.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
