@@ -1,6 +1,6 @@
 'use client'
 
-import { setRole } from '@/server/actions/set-cookie'
+import { setRole } from '@/actions/set-cookie'
 import { UserType } from '@/types/user'
 import { Icon } from '@iconify/react'
 import { signIn } from 'next-auth/react'
