@@ -37,7 +37,7 @@ export default async function updateProfile(
     form.append('bank', formData.bank || '')
     form.append('accountNo', formData.accountNo || '')
     form.append('bankBranch', formData.bankBranch || '')
-    form.append('role', session.user.role)
+    if (session.user.role) form.append('role', session.user.role)
 
     const res = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
       method: 'PATCH',
