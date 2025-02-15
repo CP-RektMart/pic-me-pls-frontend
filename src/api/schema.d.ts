@@ -487,10 +487,10 @@ export interface paths {
         path?: never
         cookie?: never
       }
-      /** @description Expire Date */
+      /** @description form data */
       requestBody: {
         content: {
-          'application/x-www-form-urlencoded': string
+          'multipart/form-data': Record<string, never>
         }
       }
       responses: {
