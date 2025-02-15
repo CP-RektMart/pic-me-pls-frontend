@@ -32,7 +32,7 @@ export default function RootLayout({
         <link rel='icon' href='/logo.svg' />
       </head>
       <body
-        className={`${poppins.variable} flex min-h-screen flex-col justify-between antialiased`}
+        className={`${poppins.variable} flex min-h-dvh flex-col justify-between antialiased`}
       >
         <SessionProvider>
           <Navbar />

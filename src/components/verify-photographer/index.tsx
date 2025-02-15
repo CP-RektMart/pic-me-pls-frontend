@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import verifyCitizenCardAction from '@/server/actions/verify-citizen-card'
+import verifyCitizenCardAction from '@/actions/verify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'

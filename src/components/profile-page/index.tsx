@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import updateProfile from '@/server/actions/update-profile'
+import updateProfile from '@/actions/update-profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
