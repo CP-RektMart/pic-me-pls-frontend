@@ -219,7 +219,7 @@ export default function GalleryDetailSection({
                     </FormItem>
                   )}
                 />
-                <div className=''>
+                <div className='mt-auto'>
                   <Link href='/gallery'>
                     <Button type='button' className='w-full hover:bg-zinc-700'>
                       Create
