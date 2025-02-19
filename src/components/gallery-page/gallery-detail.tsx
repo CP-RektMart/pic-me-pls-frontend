@@ -113,7 +113,7 @@ export default function GalleryDetailSection({
                 alt='Back'
                 width={20}
                 height={20}
-                className='cursor-pointer'
+                className='cursor-pointer rounded-full hover:bg-zinc-200'
               />
             </Link>
             <h1 className='text-xl font-bold'>New Gallery</h1>
