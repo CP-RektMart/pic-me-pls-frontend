@@ -71,12 +71,12 @@ export default function GalleryDetailSection({
       <div className='px-5 py-4'>
         <div className='space-y-2'>
           <h1 className='text-xl font-bold'>New Gallery</h1>
-          <div className='gap-4'>
+          <div className='gap-y-4'>
             <Form {...form}>
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-8 lg:flex-row'
+                className='flex flex-col gap-y-8 lg:flex-row'
               >
                 <FormField
                   control={form.control}
@@ -104,7 +104,7 @@ export default function GalleryDetailSection({
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-8 lg:flex-row'
+                className='flex flex-col gap-y-8 lg:flex-row'
               >
                 <FormField
                   control={form.control}
@@ -132,7 +132,7 @@ export default function GalleryDetailSection({
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-8 lg:flex-row'
+                className='flex flex-col gap-y-8 lg:flex-row'
               >
                 <FormField
                   control={form.control}
