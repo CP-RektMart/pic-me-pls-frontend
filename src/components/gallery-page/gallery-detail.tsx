@@ -18,13 +18,13 @@ import { Input } from '@/components/ui/input'
 
 import Container from '../container'
 
-const profileSchema = z.object({
+const gallerySchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   description: z.string().min(2, 'Description must be at least 2 characters'),
   price: z.number().min(0, 'Price must be at least 0'),
 })
 
-type GalleryFormValues = z.infer<typeof profileSchema>
+type GalleryFormValues = z.infer<typeof gallerySchema>
 
 interface GalleryDetailSectionProps {
   name: string
@@ -40,7 +40,7 @@ export default function GalleryDetailSection({
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
   const form = useForm<GalleryFormValues>({
-    resolver: zodResolver(profileSchema),
+    resolver: zodResolver(gallerySchema),
     defaultValues: {
       name,
       description,
@@ -61,9 +61,9 @@ export default function GalleryDetailSection({
     // const response = await updateGallery(data)
 
     // if (!response.result) {
-    //   toast.error('An error occurred while updating your profile')
+    //   toast.error('An error occurred while updating your gallery')
     // } else {
-    //   toast.success('Your profile has been successfully updated.')
+    //   toast.success('Your gallery has been successfully updated.')
     // }
   }
   return (
