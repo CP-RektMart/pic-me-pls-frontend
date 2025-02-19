@@ -4,7 +4,6 @@ import { useState } from 'react'
 import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ImagePlus } from 'lucide-react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
@@ -177,13 +176,13 @@ export default function GalleryDetailSection({
                   control={form.control}
                   name='image'
                   render={() => (
-                    <FormItem className='mx-auto md:w-1/2'>
+                    <FormItem>
                       <FormLabel
                         className={`${
                           fileRejections.length !== 0 && 'text-destructive'
                         }`}
                       >
-                        <h2 className='text-xl font-semibold tracking-tight'>
+                        <h2 className='text-sm font-medium'>
                           Upload Photos
                           <span
                             className={
@@ -210,14 +209,17 @@ export default function GalleryDetailSection({
                               style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
                             />
                           )}
-                          <ImagePlus
-                            className={`size-40 ${preview ? 'hidden' : 'block'}`}
+                          <Image
+                            src={'/uploadPhotoButton.svg'}
+                            alt='icon'
+                            width={40}
+                            height={40}
                           />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
                             <p>Drop the image!</p>
                           ) : (
-                            <p>Click here or drag an image to upload it</p>
+                            <p>Upload Photos</p>
                           )}
                         </div>
                       </FormControl>
