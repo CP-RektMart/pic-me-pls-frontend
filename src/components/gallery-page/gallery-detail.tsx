@@ -76,7 +76,7 @@ export default function GalleryDetailSection({
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-y-8 lg:flex-row'
+                className='flex flex-col gap-y-8'
               >
                 <FormField
                   control={form.control}
@@ -104,7 +104,7 @@ export default function GalleryDetailSection({
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-y-8 lg:flex-row'
+                className='flex flex-col gap-y-8'
               >
                 <FormField
                   control={form.control}
@@ -132,7 +132,7 @@ export default function GalleryDetailSection({
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-y-8 lg:flex-row'
+                className='flex flex-col gap-y-8'
               >
                 <FormField
                   control={form.control}
