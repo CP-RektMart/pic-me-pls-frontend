@@ -177,23 +177,6 @@ export default function GalleryDetailSection({
                   name='image'
                   render={() => (
                     <FormItem>
-                      <FormLabel
-                        className={`${
-                          fileRejections.length !== 0 && 'text-destructive'
-                        }`}
-                      >
-                        <h2 className='text-sm font-medium'>
-                          Upload Photos
-                          <span
-                            className={
-                              form.formState.errors.image ||
-                              fileRejections.length !== 0
-                                ? 'text-destructive'
-                                : 'text-muted-foreground'
-                            }
-                          ></span>
-                        </h2>
-                      </FormLabel>
                       <FormControl>
                         <div
                           {...getRootProps()}
