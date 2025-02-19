@@ -8,7 +8,7 @@ export default function CreateGalleryPage() {
         <GalleryDetailSection
           name='Gallery'
           description='This is my gallery'
-          price={0}
+          price={10}
         />
       </div>
       <div className='w-3/4'></div>

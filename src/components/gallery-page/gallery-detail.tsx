@@ -127,6 +127,34 @@ export default function GalleryDetailSection({
                 />
               </form>
             </Form>
+
+            <Form {...form}>
+              <form
+                id='profile-form'
+                onSubmit={form.handleSubmit(onSubmit)}
+                className='flex flex-col gap-8 lg:flex-row'
+              >
+                <FormField
+                  control={form.control}
+                  name='price'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>
+                        Price
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder='$10'
+                          disabled={!isEditing}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </form>
+            </Form>
           </div>
         </div>
       </div>
