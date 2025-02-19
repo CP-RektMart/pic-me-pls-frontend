@@ -184,7 +184,7 @@ export default function GalleryDetailSection({
                         }`}
                       >
                         <h2 className='text-xl font-semibold tracking-tight'>
-                          Upload your image
+                          Upload Photos
                           <span
                             className={
                               form.formState.errors.image ||
