@@ -180,7 +180,7 @@ export default function GalleryDetailSection({
                       <FormControl>
                         <div
                           {...getRootProps()}
-                          className='mx-auto flex cursor-pointer flex-col items-center justify-center gap-y-2 rounded-lg border border-foreground p-8 shadow-sm shadow-foreground'
+                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-4 rounded-lg border border-foreground py-2 shadow-sm shadow-foreground'
                         >
                           {preview && (
                             <Image
@@ -200,9 +200,9 @@ export default function GalleryDetailSection({
                           />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
-                            <p>Drop the image!</p>
+                            <p className='text-sm'>Drop the image!</p>
                           ) : (
-                            <p>Upload Photos</p>
+                            <p className='text-sm'>Upload Photos</p>
                           )}
                         </div>
                       </FormControl>
