@@ -69,14 +69,14 @@ export default function GalleryDetailSection({
   return (
     <Container className='my-6'>
       <div className='px-5 py-4'>
-        <div className='space-y-2'>
+        <div className='flex flex-col gap-y-4'>
           <h1 className='text-xl font-bold'>New Gallery</h1>
-          <div className='gap-y-4'>
+          <div>
             <Form {...form}>
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-y-8'
+                className='flex flex-col gap-y-4'
               >
                 <FormField
                   control={form.control}
