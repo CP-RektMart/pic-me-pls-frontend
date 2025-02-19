@@ -234,3 +234,8 @@ export default function GalleryDetailSection({
     </Container>
   )
 }
+
+/* 
+Source for upload photo button:
+https://github.com/shadcn-ui/ui/discussions/3188
+*/
