@@ -110,7 +110,7 @@ export default function GalleryDetailSection({
             <Link href='/gallery'>
               <Image
                 src='/leftArrow.svg'
-                alt='Back Arrow'
+                alt='Back'
                 width={20}
                 height={20}
                 className='cursor-pointer'
