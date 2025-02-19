@@ -195,8 +195,8 @@ export default function GalleryDetailSection({
                           <Image
                             src={'/uploadPhotoButton.svg'}
                             alt='icon'
-                            width={40}
-                            height={40}
+                            width={32}
+                            height={32}
                           />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
