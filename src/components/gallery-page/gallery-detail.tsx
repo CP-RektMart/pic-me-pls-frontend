@@ -71,7 +71,7 @@ export default function GalleryDetailSection({
       <div className='px-5 py-4'>
         <div className='space-y-2'>
           <h1 className='text-xl font-bold'>New Gallery</h1>
-          <div>
+          <div className='gap-4'>
             <Form {...form}>
               <form
                 id='profile-form'
@@ -89,6 +89,34 @@ export default function GalleryDetailSection({
                       <FormControl>
                         <Input
                           placeholder='Gallery Name'
+                          disabled={!isEditing}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </form>
+            </Form>
+
+            <Form {...form}>
+              <form
+                id='profile-form'
+                onSubmit={form.handleSubmit(onSubmit)}
+                className='flex flex-col gap-8 lg:flex-row'
+              >
+                <FormField
+                  control={form.control}
+                  name='description'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>
+                        Description
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder='Description'
                           disabled={!isEditing}
                           {...field}
                         />
