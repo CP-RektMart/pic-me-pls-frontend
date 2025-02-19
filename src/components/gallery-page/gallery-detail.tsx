@@ -5,10 +5,12 @@ import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -101,16 +103,16 @@ export default function GalleryDetailSection({
     })
 
   return (
-    <Container>
-      <div className='px-5 py-4'>
-        <div className='flex flex-col gap-y-4'>
+    <Container className='h-full'>
+      <div className='flex h-full flex-col py-4'>
+        <div className='flex h-full flex-col gap-y-4'>
           <h1 className='text-xl font-bold'>New Gallery</h1>
-          <div>
+          <div className='h-full'>
             <Form {...form}>
               <form
                 id='gallery-form'
                 onSubmit={form.handleSubmit(onSubmit)}
-                className='flex flex-col gap-y-4'
+                className='flex h-full flex-col gap-y-4'
               >
                 <FormField
                   control={form.control}
@@ -217,6 +219,13 @@ export default function GalleryDetailSection({
                     </FormItem>
                   )}
                 />
+                <div className=''>
+                  <Link href='/photographer/reverify'>
+                    <Button type='button' className='w-full hover:bg-zinc-700'>
+                      Create
+                    </Button>
+                  </Link>
+                </div>
               </form>
             </Form>
           </div>
