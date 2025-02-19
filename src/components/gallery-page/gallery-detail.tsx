@@ -180,7 +180,7 @@ export default function GalleryDetailSection({
                       <FormControl>
                         <div
                           {...getRootProps()}
-                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-4 rounded-lg border border-foreground py-2 shadow-sm shadow-foreground'
+                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground py-2 shadow-sm shadow-foreground'
                         >
                           {preview && (
                             <Image
@@ -195,8 +195,8 @@ export default function GalleryDetailSection({
                           <Image
                             src={'/uploadPhotoButton.svg'}
                             alt='icon'
-                            width={32}
-                            height={32}
+                            width={24}
+                            height={24}
                           />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
