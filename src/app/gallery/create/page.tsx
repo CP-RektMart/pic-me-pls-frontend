@@ -3,7 +3,7 @@ import GalleryDetailSection from '@/components/gallery-page/gallery-detail'
 export default function CreateGalleryPage() {
   return (
     <div className='w-full'>
-      <div className='w-1/3'>
+      <div className='shadow-right h-full w-1/3 shadow-lg shadow-black/100'>
         {/* defaultValues */}
         <GalleryDetailSection
           name='Gallery'
