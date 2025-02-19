@@ -5,6 +5,7 @@ import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ImagePlus } from 'lucide-react'
+import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -200,10 +201,13 @@ export default function GalleryDetailSection({
                           className='mx-auto flex cursor-pointer flex-col items-center justify-center gap-y-2 rounded-lg border border-foreground p-8 shadow-sm shadow-foreground'
                         >
                           {preview && (
-                            <img
+                            <Image
                               src={preview as string}
                               alt='Uploaded image'
-                              className='max-h-[400px] rounded-lg'
+                              className='rounded-lg'
+                              width={600} // Adjust width as needed
+                              height={400} // Adjust height as needed
+                              style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
                             />
                           )}
                           <ImagePlus
