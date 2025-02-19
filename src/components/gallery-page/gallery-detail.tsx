@@ -104,7 +104,7 @@ export default function GalleryDetailSection({
 
   return (
     <Container className='h-full'>
-      <div className='flex h-full flex-col py-4'>
+      <div className='flex h-full flex-col px-5 py-4'>
         <div className='flex h-full flex-col gap-y-4'>
           <h1 className='text-xl font-bold'>New Gallery</h1>
           <div className='h-full'>
