@@ -220,7 +220,7 @@ export default function GalleryDetailSection({
                   )}
                 />
                 <div className=''>
-                  <Link href='/photographer/reverify'>
+                  <Link href='/gallery'>
                     <Button type='button' className='w-full hover:bg-zinc-700'>
                       Create
                     </Button>
