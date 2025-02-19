@@ -106,7 +106,17 @@ export default function GalleryDetailSection({
     <Container className='h-full'>
       <div className='flex h-full flex-col px-5 py-4'>
         <div className='flex h-full flex-col gap-y-4'>
-          <h1 className='text-xl font-bold'>New Gallery</h1>
+          <div className='flex flex-row gap-x-4'>
+            <Link href='/gallery'>
+              <Image
+                src='/leftArrow.svg'
+                alt='Back Arrow'
+                width={20}
+                height={20}
+              />
+            </Link>
+            <h1 className='text-xl font-bold'>New Gallery</h1>
+          </div>
           <div className='h-full'>
             <Form {...form}>
               <form
