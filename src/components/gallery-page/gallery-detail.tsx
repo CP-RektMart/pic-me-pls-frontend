@@ -180,7 +180,7 @@ export default function GalleryDetailSection({
                       <FormControl>
                         <div
                           {...getRootProps()}
-                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground py-2 shadow-sm shadow-foreground'
+                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
                         >
                           {preview && (
                             <Image
