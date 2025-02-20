@@ -71,7 +71,7 @@ export default function PhotoCard({
         height={10}
       />
 
-      <div className='h-1/4 w-full'>
+      <div className='h-1/4 w-full p-2.5'>
         <Form {...form}>
           <form
             id='gallery-form'
