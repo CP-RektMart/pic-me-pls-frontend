@@ -61,7 +61,7 @@ export default function PhotoCard({
   }
 
   return (
-    <div className='flex w-auto flex-col rounded-2xl'>
+    <div className='flex w-auto flex-col rounded-2xl shadow-lg shadow-black/100'>
       <Image
         src={imageUrl}
         alt='image'
