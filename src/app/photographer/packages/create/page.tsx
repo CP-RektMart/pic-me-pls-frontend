@@ -14,7 +14,11 @@ export default function CreateGalleryPage() {
       </div>
       <div className='lg: space-2 grid-cols-2 lg:w-3/4 lg:grid-cols-4'>
         {[...Array(4)].map((_, i) => (
-          <PhotoCard key={i} description='My Gallery' />
+          <PhotoCard
+            key={i}
+            description='My Gallery'
+            imageUrl='/mockPhotoCard.svg'
+          />
         ))}
       </div>
     </div>

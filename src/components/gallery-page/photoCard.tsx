@@ -25,9 +25,13 @@ type photoCardFormValues = z.infer<typeof photoCardSchema>
 
 interface photoCardFormProps {
   description: string
+  imageUrl: string
 }
 
-export default function PhotoCard({ description }: photoCardFormProps) {
+export default function PhotoCard({
+  description,
+  imageUrl,
+}: photoCardFormProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
   const form = useForm<photoCardFormValues>({
@@ -59,7 +63,7 @@ export default function PhotoCard({ description }: photoCardFormProps) {
   return (
     <div className='flex w-auto flex-col rounded-2xl'>
       <Image
-        src='/mockPhotoCard.svg'
+        src={imageUrl}
         alt='image'
         className='h-auto w-full'
         layout='responsive'
