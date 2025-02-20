@@ -65,7 +65,7 @@ export default function PhotoCard({
       <Image
         src={imageUrl}
         alt='image'
-        className='h-auto w-full'
+        className='h-auto w-full rounded-t-2xl'
         layout='responsive'
         width={10}
         height={10}
