@@ -14,7 +14,7 @@ export default function CreateGalleryPage() {
       </div>
       <div className='grid grid-cols-2 gap-4 p-4 lg:w-3/4 lg:grid-cols-4'>
         {[...Array(8)].map((_, i) => (
-          <div className='aspect-w-1 aspect-h-1 flex' key={i}>
+          <div className='flex' key={i}>
             <PhotoCard
               key={i}
               description='My Gallery'
