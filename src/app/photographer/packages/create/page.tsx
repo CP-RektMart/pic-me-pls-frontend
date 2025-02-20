@@ -2,8 +2,8 @@ import GalleryDetailSection from '@/components/gallery-page/gallery-detail'
 
 export default function CreateGalleryPage() {
   return (
-    <div className='w-full'>
-      <div className='shadow-right h-full w-1/4 shadow-lg shadow-black/100'>
+    <div className='flex w-full flex-col lg:flex-row'>
+      <div className='shadow-right h-full shadow-lg shadow-black/100 lg:w-1/4'>
         {/* defaultValues */}
         <GalleryDetailSection
           name='Gallery'
@@ -11,7 +11,7 @@ export default function CreateGalleryPage() {
           price={10}
         />
       </div>
-      <div className='w-3/4'></div>
+      <div className='lg:w-3/4'></div>
     </div>
   )
 }
