@@ -199,12 +199,7 @@ export default function GalleryDetailSection({
                               style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
                             />
                           )}
-                          <Image
-                            src={'/uploadPhotoButton.svg'}
-                            alt='icon'
-                            width={24}
-                            height={24}
-                          />
+                          <Icon icon='mage:image-upload' />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
                             <p className='text-sm'>Drop the image!</p>
