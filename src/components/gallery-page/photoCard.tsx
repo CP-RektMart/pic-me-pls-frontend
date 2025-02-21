@@ -39,7 +39,7 @@ export default function PhotoCard({
   })
 
   return (
-    <div className='flex w-full flex-col rounded-2xl shadow-lg shadow-black/100'>
+    <div className='flex w-full flex-col rounded-2xl bg-white shadow-sm'>
       <Image
         src={imageUrl}
         alt='image'
