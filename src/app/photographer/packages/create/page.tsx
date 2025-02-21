@@ -113,7 +113,7 @@ export default function CreateGalleryPage() {
                       <FormControl>
                         <div
                           {...getRootProps()}
-                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
+                          className='flex h-auto min-h-96 cursor-pointer flex-col items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground lg:h-screen'
                         >
                           {preview && (
                             <Image
@@ -128,14 +128,14 @@ export default function CreateGalleryPage() {
                           <Image
                             src={'/uploadPhotoButton.svg'}
                             alt='icon'
-                            width={24}
-                            height={24}
+                            width={72}
+                            height={72}
                           />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
                             <p className='text-sm'>Drop the image!</p>
                           ) : (
-                            <div>
+                            <div className='text-center'>
                               <p className='text-xl font-bold'>
                                 Ready to add something?
                               </p>
