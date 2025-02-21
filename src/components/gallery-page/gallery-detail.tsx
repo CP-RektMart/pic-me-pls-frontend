@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
@@ -105,13 +106,9 @@ export default function GalleryDetailSection({
         <div className='flex h-full flex-col gap-y-4'>
           <div className='flex flex-row items-center gap-x-4'>
             <Link href='/gallery'>
-              <Image
-                src='/leftArrow.svg'
-                alt='Back'
-                width={20}
-                height={20}
-                className='cursor-pointer rounded-full hover:bg-zinc-200'
-              />
+              <div className='rounded-full p-2 hover:bg-gray-200'>
+                <Icon icon='ep:arrow-left-bold' />
+              </div>
             </Link>
             <h1 className='text-xl font-bold'>New Gallery</h1>
           </div>
