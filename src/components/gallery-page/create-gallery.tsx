@@ -88,7 +88,7 @@ export default function CreateGallery() {
 
   return (
     <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
-      <div className='shadow-right space-between h-full bg-white px-5 py-4 shadow-black/100 drop-shadow-sm lg:w-1/4'>
+      <div className='shadow-right space-between h-full bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:w-1/4'>
         {/* defaultValues */}
         <GalleryDetailSection
           name='Gallery'
