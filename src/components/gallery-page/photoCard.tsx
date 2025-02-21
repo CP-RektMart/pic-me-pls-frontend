@@ -76,13 +76,13 @@ export default function PhotoCard({
           <form
             id='gallery-form'
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex flex-col gap-y-4'
+            className='flex min-h-16 flex-col gap-y-4'
           >
             <FormField
               control={form.control}
               name='description'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className='h-full'>
                   <FormControl>
                     <Input
                       placeholder='Description (Optional)'
