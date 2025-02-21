@@ -158,7 +158,7 @@ export default function CreateGallery() {
               <div className='flex' key={i}>
                 <PhotoCard
                   key={i}
-                  description='My Gallery'
+                  description=''
                   imageUrl='/mockPhotoCard.svg'
                 />
               </div>
