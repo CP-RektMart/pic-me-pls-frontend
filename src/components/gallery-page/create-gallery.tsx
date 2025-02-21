@@ -29,11 +29,10 @@ const gallerySchema = z.object({
 type GalleryFormValues = z.infer<typeof gallerySchema>
 
 export default function CreateGallery() {
-  //mock gallery data
-  const galleries = [...Array(8)]
-
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
+  //mock gallery data
+  const [galleries, setGalleries] = useState<File[]>([])
 
   const form = useForm<GalleryFormValues>({
     resolver: zodResolver(gallerySchema),
@@ -69,6 +68,7 @@ export default function CreateGallery() {
         reader.readAsDataURL(acceptedFiles[0])
         form.setValue('image', acceptedFiles[0])
         form.clearErrors('image')
+        setGalleries([...galleries, acceptedFiles[0]])
       } catch (error) {
         console.error(error)
         setPreview(null)
