@@ -21,8 +21,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import Container from '../container'
-
 const gallerySchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   description: z.string().min(2, 'Description must be at least 2 characters'),
@@ -103,8 +101,8 @@ export default function GalleryDetailSection({
     })
 
   return (
-    <Container className='h-full'>
-      <div className='flex h-full flex-col px-4 py-4 lg:px-5'>
+    <div className='h-full'>
+      <div className='flex h-full flex-col'>
         <div className='flex h-full flex-col gap-y-4'>
           <div className='flex flex-row items-center gap-x-4'>
             <Link href='/gallery'>
@@ -242,7 +240,7 @@ export default function GalleryDetailSection({
           </div>
         </div>
       </div>
-    </Container>
+    </div>
   )
 }
 
