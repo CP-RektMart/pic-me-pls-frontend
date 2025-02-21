@@ -98,7 +98,7 @@ export default function CreateGalleryPage() {
       </div>
       <div className='lg:w-3/4'>
         {galleries.length === 0 ? (
-          <div>
+          <div className='h-full'>
             <Form {...form}>
               <form
                 id='gallery-form'
@@ -135,7 +135,12 @@ export default function CreateGalleryPage() {
                           {isDragActive ? (
                             <p className='text-sm'>Drop the image!</p>
                           ) : (
-                            <p className='text-sm'>Upload Photos</p>
+                            <div>
+                              <p className='text-xl font-bold'>
+                                Ready to add something?
+                              </p>
+                              <p>Drag photos and videos here to get started.</p>
+                            </div>
                           )}
                         </div>
                       </FormControl>
