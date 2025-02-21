@@ -30,7 +30,7 @@ type GalleryFormValues = z.infer<typeof gallerySchema>
 
 export default function CreateGallery() {
   //mock gallery data
-  const galleries = [...Array(0)]
+  const galleries = [...Array(8)]
 
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [preview, setPreview] = useState<string | ArrayBuffer | null>('')

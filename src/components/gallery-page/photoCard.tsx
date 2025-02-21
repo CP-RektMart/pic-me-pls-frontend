@@ -33,6 +33,7 @@ export default function PhotoCard({
   imageUrl,
 }: photoCardFormProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
+  setIsEditing(true)
 
   const form = useForm<photoCardFormValues>({
     resolver: zodResolver(photoCardSchema),
@@ -40,25 +41,6 @@ export default function PhotoCard({
       description,
     },
   })
-
-  const onSubmit = async (data: photoCardFormValues) => {
-    setIsEditing((prevState) => !prevState)
-
-    if (!isEditing) {
-      return
-    }
-
-    //mock data usage
-    console.log(data)
-
-    // const response = await updateGallery(data)
-
-    // if (!response.result) {
-    //   toast.error('An error occurred while updating your gallery')
-    // } else {
-    //   toast.success('Your gallery has been successfully updated.')
-    // }
-  }
 
   return (
     <div className='flex w-full flex-col rounded-2xl shadow-lg shadow-black/100'>
@@ -73,11 +55,7 @@ export default function PhotoCard({
 
       <div className='w-full p-2.5'>
         <Form {...form}>
-          <form
-            id='gallery-form'
-            onSubmit={form.handleSubmit(onSubmit)}
-            className='flex min-h-16 flex-col gap-y-4'
-          >
+          <form id='gallery-form' className='flex min-h-16 flex-col gap-y-4'>
             <FormField
               control={form.control}
               name='description'
