@@ -15,15 +15,19 @@ export default function CreateGalleryPage() {
       </div>
       <div className='lg:w-3/4'>
         <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
-          {galleries.map((_, i) => (
-            <div className='flex' key={i}>
-              <PhotoCard
-                key={i}
-                description='My Gallery'
-                imageUrl='/mockPhotoCard.svg'
-              />
-            </div>
-          ))}
+          {galleries.length === 0 ? (
+            <p>No galleries available</p>
+          ) : (
+            galleries.map((_, i) => (
+              <div className='flex' key={i}>
+                <PhotoCard
+                  key={i}
+                  description='My Gallery'
+                  imageUrl='/mockPhotoCard.svg'
+                />
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
