@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
@@ -32,9 +31,6 @@ export default function PhotoCard({
   description,
   imageUrl,
 }: photoCardFormProps) {
-  const [isEditing, setIsEditing] = useState<boolean>(false)
-  setIsEditing(true)
-
   const form = useForm<photoCardFormValues>({
     resolver: zodResolver(photoCardSchema),
     defaultValues: {
@@ -64,7 +60,7 @@ export default function PhotoCard({
                   <FormControl>
                     <Input
                       placeholder='Description (Optional)'
-                      disabled={!isEditing}
+                      disabled={false}
                       {...field}
                     />
                   </FormControl>

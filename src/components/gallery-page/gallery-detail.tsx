@@ -43,7 +43,7 @@ export default function GalleryDetailSection({
   description,
   price,
 }: GalleryDetailSectionProps) {
-  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [isEditing, setIsEditing] = useState<boolean>(true)
   const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
 
   const form = useForm<GalleryFormValues>({
