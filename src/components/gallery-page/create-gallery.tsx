@@ -90,7 +90,13 @@ export default function CreateGallery() {
     <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
       <div className='shadow-right space-between h-full bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:w-1/4'>
         {/* defaultValues */}
-        <GalleryDetailSection name='' description='' price={0} />
+        <GalleryDetailSection
+          name=''
+          description=''
+          price={0}
+          setGallery={setGalleries}
+          gallery={galleries}
+        />
       </div>
       <div className='lg:w-3/4'>
         {galleries.length === 0 ? (

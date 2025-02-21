@@ -4,7 +4,6 @@ import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
@@ -36,15 +35,18 @@ interface GalleryDetailSectionProps {
   name: string
   description: string
   price: number
+  setGallery: React.Dispatch<React.SetStateAction<File[]>>
+  gallery: File[]
 }
 
 export default function GalleryDetailSection({
   name,
   description,
   price,
+  setGallery,
+  gallery,
 }: GalleryDetailSectionProps) {
   const [isEditing, setIsEditing] = useState<boolean>(true)
-  const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
 
   const form = useForm<GalleryFormValues>({
     resolver: zodResolver(gallerySchema),
@@ -79,13 +81,12 @@ export default function GalleryDetailSection({
     (acceptedFiles: File[]) => {
       const reader = new FileReader()
       try {
-        reader.onload = () => setPreview(reader.result)
         reader.readAsDataURL(acceptedFiles[0])
         form.setValue('image', acceptedFiles[0])
         form.clearErrors('image')
+        setGallery([...gallery, acceptedFiles[0]])
       } catch (error) {
         console.error(error)
-        setPreview(null)
         form.resetField('image')
       }
     },
@@ -189,16 +190,6 @@ export default function GalleryDetailSection({
                           {...getRootProps()}
                           className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
                         >
-                          {preview && (
-                            <Image
-                              src={preview as string}
-                              alt='Uploaded image'
-                              className='rounded-lg'
-                              width={600} // Adjust width as needed
-                              height={400} // Adjust height as needed
-                              style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
-                            />
-                          )}
                           <Icon icon='mage:image-upload' />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
