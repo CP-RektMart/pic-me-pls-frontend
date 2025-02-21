@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
@@ -124,11 +125,9 @@ export default function CreateGalleryPage() {
                               style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
                             />
                           )}
-                          <Image
-                            src={'/uploadPhotoButton.svg'}
-                            alt='icon'
-                            width={72}
-                            height={72}
+                          <Icon
+                            icon='mage:image-upload'
+                            className='h-20 w-20'
                           />
                           <Input {...getInputProps()} type='file' />
                           {isDragActive ? (
