@@ -82,7 +82,7 @@ export default function PhotoCard({
               control={form.control}
               name='description'
               render={({ field }) => (
-                <FormItem className='h-full'>
+                <FormItem>
                   <FormControl>
                     <Input
                       placeholder='Description (Optional)'
