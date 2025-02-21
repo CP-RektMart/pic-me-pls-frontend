@@ -1,7 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import React from 'react'
+import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
@@ -44,7 +43,7 @@ export default function GalleryDetailSection({
   price,
 }: GalleryDetailSectionProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
-  const [preview, setPreview] = React.useState<string | ArrayBuffer | null>('')
+  const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
 
   const form = useForm<GalleryFormValues>({
     resolver: zodResolver(gallerySchema),
@@ -75,7 +74,7 @@ export default function GalleryDetailSection({
     // }
   }
 
-  const onDrop = React.useCallback(
+  const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const reader = new FileReader()
       try {
