@@ -97,65 +97,65 @@ export default function CreateGalleryPage() {
         />
       </div>
       <div className='lg:w-3/4'>
-        <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
-          {galleries.length === 0 ? (
-            <div>
-              <Form {...form}>
-                <form
-                  id='gallery-form'
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className='flex h-full flex-col gap-y-4'
-                >
-                  <FormField
-                    control={form.control}
-                    name='image'
-                    render={() => (
-                      <FormItem>
-                        <FormControl>
-                          <div
-                            {...getRootProps()}
-                            className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
-                          >
-                            {preview && (
-                              <Image
-                                src={preview as string}
-                                alt='Uploaded image'
-                                className='rounded-lg'
-                                width={600} // Adjust width as needed
-                                height={400} // Adjust height as needed
-                                style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
-                              />
-                            )}
+        {galleries.length === 0 ? (
+          <div>
+            <Form {...form}>
+              <form
+                id='gallery-form'
+                onSubmit={form.handleSubmit(onSubmit)}
+                className='flex h-full flex-col gap-y-4'
+              >
+                <FormField
+                  control={form.control}
+                  name='image'
+                  render={() => (
+                    <FormItem>
+                      <FormControl>
+                        <div
+                          {...getRootProps()}
+                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
+                        >
+                          {preview && (
                             <Image
-                              src={'/uploadPhotoButton.svg'}
-                              alt='icon'
-                              width={24}
-                              height={24}
+                              src={preview as string}
+                              alt='Uploaded image'
+                              className='rounded-lg'
+                              width={600} // Adjust width as needed
+                              height={400} // Adjust height as needed
+                              style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
                             />
-                            <Input {...getInputProps()} type='file' />
-                            {isDragActive ? (
-                              <p className='text-sm'>Drop the image!</p>
-                            ) : (
-                              <p className='text-sm'>Upload Photos</p>
-                            )}
-                          </div>
-                        </FormControl>
-                        <FormMessage>
-                          {fileRejections.length !== 0 && (
-                            <p>
-                              Image must be less than 1MB and of type png, jpg,
-                              or jpeg
-                            </p>
                           )}
-                        </FormMessage>
-                      </FormItem>
-                    )}
-                  />
-                </form>
-              </Form>
-            </div>
-          ) : (
-            galleries.map((_, i) => (
+                          <Image
+                            src={'/uploadPhotoButton.svg'}
+                            alt='icon'
+                            width={24}
+                            height={24}
+                          />
+                          <Input {...getInputProps()} type='file' />
+                          {isDragActive ? (
+                            <p className='text-sm'>Drop the image!</p>
+                          ) : (
+                            <p className='text-sm'>Upload Photos</p>
+                          )}
+                        </div>
+                      </FormControl>
+                      <FormMessage>
+                        {fileRejections.length !== 0 && (
+                          <p>
+                            Image must be less than 1MB and of type png, jpg, or
+                            jpeg
+                          </p>
+                        )}
+                      </FormMessage>
+                    </FormItem>
+                  )}
+                />
+              </form>
+            </Form>
+          </div>
+        ) : (
+          <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
+            {galleries.map((_, i) => (
               <div className='flex' key={i}>
                 <PhotoCard
                   key={i}
@@ -163,9 +163,9 @@ export default function CreateGalleryPage() {
                   imageUrl='/mockPhotoCard.svg'
                 />
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
