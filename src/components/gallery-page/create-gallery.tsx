@@ -113,7 +113,7 @@ export default function CreateGallery() {
                       <FormControl>
                         <div
                           {...getRootProps()}
-                          className='flex h-auto min-h-96 cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground lg:h-screen'
+                          className='flex h-auto min-h-96 cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50 py-2 lg:h-screen'
                         >
                           {preview && (
                             <Image
