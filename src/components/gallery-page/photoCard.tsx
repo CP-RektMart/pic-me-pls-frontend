@@ -71,12 +71,12 @@ export default function PhotoCard({
         height={10}
       />
 
-      <div className='h-1/4 w-full p-2.5'>
+      <div className='w-full p-2.5'>
         <Form {...form}>
           <form
             id='gallery-form'
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex h-full flex-col gap-y-4'
+            className='flex flex-col gap-y-4'
           >
             <FormField
               control={form.control}

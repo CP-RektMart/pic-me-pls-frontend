@@ -12,16 +12,18 @@ export default function CreateGalleryPage() {
           price={10}
         />
       </div>
-      <div className='grid grid-cols-2 gap-4 p-4 lg:w-3/4 lg:grid-cols-4'>
-        {[...Array(8)].map((_, i) => (
-          <div className='flex' key={i}>
-            <PhotoCard
-              key={i}
-              description='My Gallery'
-              imageUrl='/mockPhotoCard.svg'
-            />
-          </div>
-        ))}
+      <div className='lg:w-3/4'>
+        <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
+          {[...Array(8)].map((_, i) => (
+            <div className='flex' key={i}>
+              <PhotoCard
+                key={i}
+                description='My Gallery'
+                imageUrl='/mockPhotoCard.svg'
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
