@@ -28,11 +28,16 @@ const packageSchema = z.object({
 
 type packageFormValues = z.infer<typeof packageSchema>
 
+interface photoCardForm {
+  description: string
+  imageUrl: string
+}
+
 export default function CreatePackage() {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
   //mock package data
-  const [images, setImages] = useState<File[]>([])
+  const [photoCards, setPhotoCards] = useState<photoCardForm[]>([])
 
   const form = useForm<packageFormValues>({
     resolver: zodResolver(packageSchema),
@@ -68,7 +73,10 @@ export default function CreatePackage() {
         reader.readAsDataURL(acceptedFiles[0])
         form.setValue('image', acceptedFiles[0])
         form.clearErrors('image')
-        setImages([...images, acceptedFiles[0]])
+        setPhotoCards([
+          ...photoCards,
+          { description: '', imageUrl: URL.createObjectURL(acceptedFiles[0]) },
+        ])
       } catch (error) {
         console.error(error)
         setPreview(null)
@@ -93,11 +101,11 @@ export default function CreatePackage() {
         name=''
         description=''
         price={0}
-        setPackage={setImages}
-        packages={images}
+        setPhotoCards={setPhotoCards}
+        photoCards={photoCards}
       />
       <div className='flex-1 lg:w-3/4'>
-        {images.length === 0 ? (
+        {photoCards.length === 0 ? (
           <Form {...form}>
             <form
               id='package-form'
@@ -153,7 +161,7 @@ export default function CreatePackage() {
           </Form>
         ) : (
           <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
-            {images.map((_, i) => (
+            {photoCards.map((_, i) => (
               <div className='flex' key={i}>
                 <PhotoCard
                   key={i}

@@ -31,20 +31,25 @@ const packageSchema = z.object({
 
 type packageFormValues = z.infer<typeof packageSchema>
 
+interface photoCardForm {
+  description: string
+  imageUrl: string
+}
+
 interface packageDetailSectionProps {
   name: string
   description: string
   price: number
-  setPackage: React.Dispatch<React.SetStateAction<File[]>>
-  packages: File[]
+  setPhotoCards: React.Dispatch<React.SetStateAction<photoCardForm[]>>
+  photoCards: photoCardForm[]
 }
 
 export default function PackageDetailSection({
   name,
   description,
   price,
-  setPackage,
-  packages,
+  setPhotoCards,
+  photoCards,
 }: packageDetailSectionProps) {
   const [isEditing, setIsEditing] = useState<boolean>(true)
 
@@ -84,7 +89,10 @@ export default function PackageDetailSection({
         reader.readAsDataURL(acceptedFiles[0])
         form.setValue('image', acceptedFiles[0])
         form.clearErrors('image')
-        setPackage([...packages, acceptedFiles[0]])
+        setPhotoCards([
+          ...photoCards,
+          { description: '', imageUrl: URL.createObjectURL(acceptedFiles[0]) },
+        ])
       } catch (error) {
         console.error(error)
         form.resetField('image')
