@@ -102,7 +102,7 @@ export default function PackageDetailSection({
     })
 
   return (
-    <div className='shadow-right space-between h-full bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:w-1/4'>
+    <div className='shadow-right space-between bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-1/4'>
       <div className='flex flex-row items-center gap-4'>
         <Link href='/package'>
           <div className='rounded-full p-2 hover:bg-gray-200'>

@@ -96,66 +96,61 @@ export default function CreatePackage() {
         setPackage={setImages}
         packages={images}
       />
-      <div className='lg:w-3/4'>
+      <div className='flex-1 lg:w-3/4'>
         {images.length === 0 ? (
-          <div className='h-full'>
-            <Form {...form}>
-              <form
-                id='package-form'
-                onSubmit={form.handleSubmit(onSubmit)}
-                className='flex h-full flex-col gap-y-4'
-              >
-                <FormField
-                  control={form.control}
-                  name='image'
-                  render={() => (
-                    <FormItem>
-                      <FormControl>
-                        <div
-                          {...getRootProps()}
-                          className='flex h-auto min-h-96 cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50 py-2 lg:h-screen'
-                        >
-                          {preview && (
-                            <Image
-                              src={preview as string}
-                              alt='Uploaded image'
-                              className='rounded-lg'
-                              width={600} // Adjust width as needed
-                              height={400} // Adjust height as needed
-                              style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
-                            />
-                          )}
-                          <Icon
-                            icon='mage:image-upload'
-                            className='h-20 w-20'
+          <Form {...form}>
+            <form
+              id='package-form'
+              onSubmit={form.handleSubmit(onSubmit)}
+              className='h-full gap-y-4'
+            >
+              <FormField
+                control={form.control}
+                name='image'
+                render={() => (
+                  <FormItem className='h-full'>
+                    <FormControl>
+                      <div
+                        {...getRootProps()}
+                        className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
+                      >
+                        {preview && (
+                          <Image
+                            src={preview as string}
+                            alt='Uploaded image'
+                            className='rounded-lg'
+                            width={600} // Adjust width as needed
+                            height={400} // Adjust height as needed
+                            style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
                           />
-                          <Input {...getInputProps()} type='file' />
-                          {isDragActive ? (
-                            <p className='text-sm'>Drop the image!</p>
-                          ) : (
-                            <div className='text-center'>
-                              <p className='text-xl font-bold'>
-                                Ready to add something?
-                              </p>
-                              <p>Drag photos and videos here to get started.</p>
-                            </div>
-                          )}
-                        </div>
-                      </FormControl>
-                      <FormMessage>
-                        {fileRejections.length !== 0 && (
-                          <p>
-                            Image must be less than 1MB and of type png, jpg, or
-                            jpeg
-                          </p>
                         )}
-                      </FormMessage>
-                    </FormItem>
-                  )}
-                />
-              </form>
-            </Form>
-          </div>
+                        <Icon icon='mage:image-upload' className='h-20 w-20' />
+                        <Input {...getInputProps()} type='file' />
+                        {isDragActive ? (
+                          <p className='text-sm'>Drop the image!</p>
+                        ) : (
+                          <div className='text-center'>
+                            <p className='text-xl font-bold'>
+                              Ready to add something?
+                            </p>
+                            <p>Drag photos and videos here to get started.</p>
+                          </div>
+                        )}
+                      </div>
+                    </FormControl>
+                    <FormMessage>
+                      {fileRejections.length !== 0 && (
+                        <p>
+                          Image must be less than 1MB and of type png, jpg, or
+                          jpeg
+                        </p>
+                      )}
+                    </FormMessage>
+                  </FormItem>
+                )}
+              />
+            </form>
+          </Form>
         ) : (
           <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
             {images.map((_, i) => (
