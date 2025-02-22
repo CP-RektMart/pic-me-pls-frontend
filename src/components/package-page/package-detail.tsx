@@ -178,7 +178,7 @@ export default function PackageDetailSection({
                   <FormControl>
                     <div
                       {...getRootProps()}
-                      className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
+                      className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
                     >
                       <Icon icon='mage:image-upload' />
                       <Input {...getInputProps()} type='file' />
