@@ -176,7 +176,7 @@ export default function GalleryDetailSection({
               render={() => (
                 <FormItem>
                   <FormControl>
-                    <div
+                    <Button
                       {...getRootProps()}
                       className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
                     >
@@ -187,7 +187,7 @@ export default function GalleryDetailSection({
                       ) : (
                         <p className='text-sm'>Upload Photos</p>
                       )}
-                    </div>
+                    </Button>
                   </FormControl>
                   <FormMessage>
                     {fileRejections.length !== 0 && (
