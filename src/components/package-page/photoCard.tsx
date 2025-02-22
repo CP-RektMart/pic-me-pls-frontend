@@ -40,14 +40,9 @@ export default function PhotoCard({
 
   return (
     <div className='flex w-full flex-col rounded-2xl bg-white shadow-sm'>
-      <Image
-        src={imageUrl}
-        alt='image'
-        className='h-auto w-full rounded-t-2xl'
-        layout='responsive'
-        width={10}
-        height={10}
-      />
+      <div className='relative aspect-[4/3] w-full'>
+        <Image src={imageUrl} alt={'photo'} className='object-cover' fill />
+      </div>
 
       <div className='w-full p-2.5'>
         <Form {...form}>
