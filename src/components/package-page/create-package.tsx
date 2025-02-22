@@ -9,8 +9,8 @@ import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import GalleryDetailSection from '@/components/gallery-page/gallery-detail'
-import PhotoCard from '@/components/gallery-page/photoCard'
+import PackageDetailSection from '@/components/package-page/package-detail'
+import PhotoCard from '@/components/package-page/photoCard'
 import {
   Form,
   FormControl,
@@ -20,28 +20,28 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-const gallerySchema = z.object({
+const packageSchema = z.object({
   image: z
     .instanceof(File)
     .refine((file) => file.size !== 0, 'Please upload an image'),
 })
 
-type GalleryFormValues = z.infer<typeof gallerySchema>
+type packageFormValues = z.infer<typeof packageSchema>
 
-export default function CreateGallery() {
+export default function CreatePackage() {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
-  //mock gallery data
-  const [galleries, setGalleries] = useState<File[]>([])
+  //mock package data
+  const [packages, setPackage] = useState<File[]>([])
 
-  const form = useForm<GalleryFormValues>({
-    resolver: zodResolver(gallerySchema),
+  const form = useForm<packageFormValues>({
+    resolver: zodResolver(packageSchema),
     defaultValues: {
       image: new File([''], 'filename'),
     },
   })
 
-  const onSubmit = async (data: GalleryFormValues) => {
+  const onSubmit = async (data: packageFormValues) => {
     setIsEditing((prevState) => !prevState)
 
     if (!isEditing) {
@@ -51,12 +51,12 @@ export default function CreateGallery() {
     //mock data usage
     console.log(data)
 
-    // const response = await updateGallery(data)
+    // const response = await updatepackage(data)
 
     // if (!response.result) {
-    //   toast.error('An error occurred while updating your gallery')
+    //   toast.error('An error occurred while updating your package')
     // } else {
-    //   toast.success('Your gallery has been successfully updated.')
+    //   toast.success('Your package has been successfully updated.')
     // }
   }
 
@@ -68,7 +68,7 @@ export default function CreateGallery() {
         reader.readAsDataURL(acceptedFiles[0])
         form.setValue('image', acceptedFiles[0])
         form.clearErrors('image')
-        setGalleries([...galleries, acceptedFiles[0]])
+        setPackage([...packages, acceptedFiles[0]])
       } catch (error) {
         console.error(error)
         setPreview(null)
@@ -90,20 +90,20 @@ export default function CreateGallery() {
     <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
       <div className='shadow-right space-between h-full bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:w-1/4'>
         {/* defaultValues */}
-        <GalleryDetailSection
+        <PackageDetailSection
           name=''
           description=''
           price={0}
-          setGallery={setGalleries}
-          gallery={galleries}
+          setPackage={setPackage}
+          packages={packages}
         />
       </div>
       <div className='lg:w-3/4'>
-        {galleries.length === 0 ? (
+        {packages.length === 0 ? (
           <div className='h-full'>
             <Form {...form}>
               <form
-                id='gallery-form'
+                id='package-form'
                 onSubmit={form.handleSubmit(onSubmit)}
                 className='flex h-full flex-col gap-y-4'
               >
@@ -160,7 +160,7 @@ export default function CreateGallery() {
           </div>
         ) : (
           <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
-            {galleries.map((_, i) => (
+            {packages.map((_, i) => (
               <div className='flex' key={i}>
                 <PhotoCard
                   key={i}

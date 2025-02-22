@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-const gallerySchema = z.object({
+const packageSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   description: z.string().min(2, 'Description must be at least 2 characters'),
   price: z.number().min(0, 'Price must be at least 0'),
@@ -29,27 +29,27 @@ const gallerySchema = z.object({
     .refine((file) => file.size !== 0, 'Please upload an image'),
 })
 
-type GalleryFormValues = z.infer<typeof gallerySchema>
+type packageFormValues = z.infer<typeof packageSchema>
 
-interface GalleryDetailSectionProps {
+interface packageDetailSectionProps {
   name: string
   description: string
   price: number
-  setGallery: React.Dispatch<React.SetStateAction<File[]>>
-  gallery: File[]
+  setPackage: React.Dispatch<React.SetStateAction<File[]>>
+  packages: File[]
 }
 
-export default function GalleryDetailSection({
+export default function PackageDetailSection({
   name,
   description,
   price,
-  setGallery,
-  gallery,
-}: GalleryDetailSectionProps) {
+  setPackage,
+  packages,
+}: packageDetailSectionProps) {
   const [isEditing, setIsEditing] = useState<boolean>(true)
 
-  const form = useForm<GalleryFormValues>({
-    resolver: zodResolver(gallerySchema),
+  const form = useForm<packageFormValues>({
+    resolver: zodResolver(packageSchema),
     defaultValues: {
       name,
       description,
@@ -58,7 +58,7 @@ export default function GalleryDetailSection({
     },
   })
 
-  const onSubmit = async (data: GalleryFormValues) => {
+  const onSubmit = async (data: packageFormValues) => {
     setIsEditing((prevState) => !prevState)
 
     if (!isEditing) {
@@ -68,12 +68,12 @@ export default function GalleryDetailSection({
     //mock data usage
     console.log(data)
 
-    // const response = await updateGallery(data)
+    // const response = await updatepackage(data)
 
     // if (!response.result) {
-    //   toast.error('An error occurred while updating your gallery')
+    //   toast.error('An error occurred while updating your package')
     // } else {
-    //   toast.success('Your gallery has been successfully updated.')
+    //   toast.success('Your package has been successfully updated.')
     // }
   }
 
@@ -84,7 +84,7 @@ export default function GalleryDetailSection({
         reader.readAsDataURL(acceptedFiles[0])
         form.setValue('image', acceptedFiles[0])
         form.clearErrors('image')
-        setGallery([...gallery, acceptedFiles[0]])
+        setPackage([...packages, acceptedFiles[0]])
       } catch (error) {
         console.error(error)
         form.resetField('image')
@@ -104,17 +104,17 @@ export default function GalleryDetailSection({
   return (
     <div className='h-full'>
       <div className='flex flex-row items-center gap-x-4 gap-y-4'>
-        <Link href='/gallery'>
+        <Link href='/package'>
           <div className='rounded-full p-2 hover:bg-gray-200'>
             <Icon icon='ep:arrow-left-bold' />
           </div>
         </Link>
-        <h1 className='text-xl font-bold'>New Gallery</h1>
+        <h1 className='text-xl font-bold'>New package</h1>
       </div>
       <div className='h-full py-4'>
         <Form {...form}>
           <form
-            id='gallery-form'
+            id='package-form'
             onSubmit={form.handleSubmit(onSubmit)}
             className='flex h-full flex-col gap-y-4'
           >
@@ -126,7 +126,7 @@ export default function GalleryDetailSection({
                   <FormLabel className='text-sm font-medium'>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='Gallery Name'
+                      placeholder='package Name'
                       disabled={!isEditing}
                       {...field}
                     />
@@ -176,7 +176,7 @@ export default function GalleryDetailSection({
               render={() => (
                 <FormItem>
                   <FormControl>
-                    <Button
+                    <div
                       {...getRootProps()}
                       className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
                     >
@@ -187,7 +187,7 @@ export default function GalleryDetailSection({
                       ) : (
                         <p className='text-sm'>Upload Photos</p>
                       )}
-                    </Button>
+                    </div>
                   </FormControl>
                   <FormMessage>
                     {fileRejections.length !== 0 && (
@@ -201,7 +201,7 @@ export default function GalleryDetailSection({
               )}
             />
             <div className='mb-4 mt-auto'>
-              <Link href='/gallery'>
+              <Link href='/package'>
                 <Button type='button' className='w-full hover:bg-zinc-700'>
                   Create
                 </Button>

@@ -51,7 +51,7 @@ export default function PhotoCard({
 
       <div className='w-full p-2.5'>
         <Form {...form}>
-          <form id='gallery-form' className='flex min-h-16 flex-col gap-y-4'>
+          <form id='package-form' className='flex min-h-16 flex-col gap-y-4'>
             <FormField
               control={form.control}
               name='description'

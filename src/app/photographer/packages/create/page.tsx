@@ -1,5 +1,5 @@
-import CreateGallery from '@/components/gallery-page/create-gallery'
+import CreatePackage from '@/components/package-page/create-package'
 
-export default function CreateGalleryPage() {
-  return <CreateGallery />
+export default function CreatePackagePage() {
+  return <CreatePackage />
 }
