@@ -103,124 +103,112 @@ export default function GalleryDetailSection({
 
   return (
     <div className='h-full'>
-      <div className='flex h-full flex-col'>
-        <div className='flex h-full flex-col gap-y-4'>
-          <div className='flex flex-row items-center gap-x-4'>
-            <Link href='/gallery'>
-              <div className='rounded-full p-2 hover:bg-gray-200'>
-                <Icon icon='ep:arrow-left-bold' />
-              </div>
-            </Link>
-            <h1 className='text-xl font-bold'>New Gallery</h1>
+      <div className='flex flex-row items-center gap-x-4 gap-y-4'>
+        <Link href='/gallery'>
+          <div className='rounded-full p-2 hover:bg-gray-200'>
+            <Icon icon='ep:arrow-left-bold' />
           </div>
-          <div className='h-full'>
-            <Form {...form}>
-              <form
-                id='gallery-form'
-                onSubmit={form.handleSubmit(onSubmit)}
-                className='flex h-full flex-col gap-y-4'
-              >
-                <FormField
-                  control={form.control}
-                  name='name'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className='text-sm font-medium'>
-                        Name
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder='Gallery Name'
-                          disabled={!isEditing}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+        </Link>
+        <h1 className='text-xl font-bold'>New Gallery</h1>
+      </div>
+      <div className='h-full py-4'>
+        <Form {...form}>
+          <form
+            id='gallery-form'
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='flex h-full flex-col gap-y-4'
+          >
+            <FormField
+              control={form.control}
+              name='name'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder='Gallery Name'
+                      disabled={!isEditing}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-                <FormField
-                  control={form.control}
-                  name='description'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className='text-sm font-medium'>
-                        Description
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder='Description'
-                          disabled={!isEditing}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <FormField
+              control={form.control}
+              name='description'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>
+                    Description
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder='Description'
+                      disabled={!isEditing}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-                <FormField
-                  control={form.control}
-                  name='price'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className='text-sm font-medium'>
-                        Price
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder='$10'
-                          disabled={!isEditing}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <FormField
+              control={form.control}
+              name='price'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-sm font-medium'>Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder='$10' disabled={!isEditing} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-                <FormField
-                  control={form.control}
-                  name='image'
-                  render={() => (
-                    <FormItem>
-                      <FormControl>
-                        <div
-                          {...getRootProps()}
-                          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
-                        >
-                          <Icon icon='mage:image-upload' />
-                          <Input {...getInputProps()} type='file' />
-                          {isDragActive ? (
-                            <p className='text-sm'>Drop the image!</p>
-                          ) : (
-                            <p className='text-sm'>Upload Photos</p>
-                          )}
-                        </div>
-                      </FormControl>
-                      <FormMessage>
-                        {fileRejections.length !== 0 && (
-                          <p>
-                            Image must be less than 1MB and of type png, jpg, or
-                            jpeg
-                          </p>
-                        )}
-                      </FormMessage>
-                    </FormItem>
-                  )}
-                />
-                <div className='mt-auto'>
-                  <Link href='/gallery'>
-                    <Button type='button' className='w-full hover:bg-zinc-700'>
-                      Create
-                    </Button>
-                  </Link>
-                </div>
-              </form>
-            </Form>
-          </div>
-        </div>
+            <FormField
+              control={form.control}
+              name='image'
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <div
+                      {...getRootProps()}
+                      className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg border border-foreground bg-zinc-50 py-2 shadow-sm shadow-foreground'
+                    >
+                      <Icon icon='mage:image-upload' />
+                      <Input {...getInputProps()} type='file' />
+                      {isDragActive ? (
+                        <p className='text-sm'>Drop the image!</p>
+                      ) : (
+                        <p className='text-sm'>Upload Photos</p>
+                      )}
+                    </div>
+                  </FormControl>
+                  <FormMessage>
+                    {fileRejections.length !== 0 && (
+                      <p>
+                        Image must be less than 1MB and of type png, jpg, or
+                        jpeg
+                      </p>
+                    )}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+            <div className='mb-4 mt-auto'>
+              <Link href='/gallery'>
+                <Button type='button' className='w-full hover:bg-zinc-700'>
+                  Create
+                </Button>
+              </Link>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   )
