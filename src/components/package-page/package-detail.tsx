@@ -126,7 +126,7 @@ export default function PackageDetailSection({
                   <FormLabel className='text-sm font-medium'>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='package Name'
+                      placeholder='Package Name'
                       disabled={!isEditing}
                       {...field}
                     />
