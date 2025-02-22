@@ -90,7 +90,7 @@ export default function CreatePackage() {
     useDropzone({
       onDrop,
       maxFiles: 1,
-      maxSize: 1000000,
+      maxSize: 10000000,
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
 
