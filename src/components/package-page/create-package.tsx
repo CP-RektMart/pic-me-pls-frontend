@@ -32,7 +32,7 @@ export default function CreatePackage() {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
   //mock package data
-  const [packages, setPackage] = useState<File[]>([])
+  const [images, setImages] = useState<File[]>([])
 
   const form = useForm<packageFormValues>({
     resolver: zodResolver(packageSchema),
@@ -68,7 +68,7 @@ export default function CreatePackage() {
         reader.readAsDataURL(acceptedFiles[0])
         form.setValue('image', acceptedFiles[0])
         form.clearErrors('image')
-        setPackage([...packages, acceptedFiles[0]])
+        setImages([...images, acceptedFiles[0]])
       } catch (error) {
         console.error(error)
         setPreview(null)
@@ -94,12 +94,12 @@ export default function CreatePackage() {
           name=''
           description=''
           price={0}
-          setPackage={setPackage}
-          packages={packages}
+          setPackage={setImages}
+          packages={images}
         />
       </div>
       <div className='lg:w-3/4'>
-        {packages.length === 0 ? (
+        {images.length === 0 ? (
           <div className='h-full'>
             <Form {...form}>
               <form
@@ -160,7 +160,7 @@ export default function CreatePackage() {
           </div>
         ) : (
           <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
-            {packages.map((_, i) => (
+            {images.map((_, i) => (
               <div className='flex' key={i}>
                 <PhotoCard
                   key={i}
