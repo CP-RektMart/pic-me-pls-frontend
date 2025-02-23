@@ -19,18 +19,26 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-const packageSchema = z.object({
-  image: z
-    .instanceof(File)
-    .refine((file) => file.size !== 0, 'Please upload an image'),
-})
-
 type packageFormValues = z.infer<typeof packageSchema>
+
+const photoCardFormSchema = z.object({
+  description: z.string(),
+  imageUrl: z.string(),
+})
 
 interface photoCardForm {
   description: string
   imageUrl: string
 }
+
+const packageSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  packageDescription: z
+    .string()
+    .min(2, 'Description must be at least 2 characters'),
+  price: z.number().min(0, 'Price must be at least 0'),
+  images: z.array(photoCardFormSchema),
+})
 
 export default function CreatePackage() {
   const [isEditing, setIsEditing] = useState<boolean>(true)
@@ -41,7 +49,10 @@ export default function CreatePackage() {
   const form = useForm<packageFormValues>({
     resolver: zodResolver(packageSchema),
     defaultValues: {
-      image: new File([''], 'filename'),
+      name: '',
+      packageDescription: '',
+      price: 0,
+      images: [],
     },
   })
 
@@ -70,8 +81,7 @@ export default function CreatePackage() {
       try {
         reader.onload = () => setPreview(reader.result)
         reader.readAsDataURL(acceptedFiles[0])
-        form.setValue('image', acceptedFiles[0])
-        form.clearErrors('image')
+        form.clearErrors('images')
         setPhotoCards([
           ...photoCards,
           { description: '', imageUrl: URL.createObjectURL(acceptedFiles[0]) },
@@ -79,10 +89,10 @@ export default function CreatePackage() {
       } catch (error) {
         console.error(error)
         setPreview(null)
-        form.resetField('image')
+        form.resetField('images')
       }
     },
-    [form]
+    [form, photoCards]
   )
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
@@ -101,16 +111,17 @@ export default function CreatePackage() {
           name=''
           description=''
           price={0}
-          setPhotoCards={setPhotoCards}
           photoCards={photoCards}
           onSubmit={onSubmit}
           isEditing={isEditing}
+          form={form}
+          onDrop={onDrop}
         />
         <div className='flex-1 lg:w-3/4'>
           {photoCards.length === 0 ? (
             <FormField
               control={form.control}
-              name='image'
+              name='images'
               render={() => (
                 <FormItem className='h-full'>
                   <FormControl>
@@ -123,9 +134,9 @@ export default function CreatePackage() {
                           src={preview as string}
                           alt='Uploaded image'
                           className='rounded-lg'
-                          width={600} // Adjust width as needed
-                          height={400} // Adjust height as needed
-                          style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
+                          width={600}
+                          height={400}
+                          style={{ maxHeight: '400px', width: 'auto' }}
                         />
                       )}
                       <Icon icon='mage:image-upload' className='h-20 w-20' />

@@ -1,13 +1,10 @@
 'use client'
 
-import { useCallback } from 'react'
-
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import z from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -19,70 +16,54 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-const packageSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  description: z.string().min(2, 'Description must be at least 2 characters'),
-  price: z.number().min(0, 'Price must be at least 0'),
-  image: z
-    .instanceof(File)
-    .refine((file) => file.size !== 0, 'Please upload an image'),
-})
-
-type packageFormValues = z.infer<typeof packageSchema>
-
 interface photoCardForm {
   description: string
   imageUrl: string
 }
 
+interface packageSchema {
+  name: string
+  packageDescription: string
+  price: number
+  images: {
+    description: string
+    imageUrl: string
+  }[]
+}
+
+type packageFormValues = z.infer<typeof packageSchema>
+
+const photoCardFormSchema = z.object({
+  description: z.string(),
+  imageUrl: z.string(),
+})
+
+const packageSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  packageDescription: z
+    .string()
+    .min(2, 'Description must be at least 2 characters'),
+  price: z.number().min(0, 'Price must be at least 0'),
+  images: z.array(photoCardFormSchema),
+})
+
 interface packageDetailSectionProps {
   name: string
   description: string
   price: number
-  setPhotoCards: React.Dispatch<React.SetStateAction<photoCardForm[]>>
   photoCards: photoCardForm[]
-  onSubmit: (data: packageFormValues) => void
+  onSubmit: (data: packageFormValues) => Promise<void>
   isEditing: boolean
+  form: ReturnType<typeof useForm<packageSchema>>
+  onDrop: (acceptedFiles: File[]) => void
 }
 
 export default function PackageDetailSection({
-  name,
-  description,
-  price,
-  setPhotoCards,
-  photoCards,
   onSubmit,
   isEditing,
+  form,
+  onDrop,
 }: packageDetailSectionProps) {
-  const form = useForm<packageFormValues>({
-    resolver: zodResolver(packageSchema),
-    defaultValues: {
-      name,
-      description,
-      price,
-      image: new File([''], 'filename'),
-    },
-  })
-
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      const reader = new FileReader()
-      try {
-        reader.readAsDataURL(acceptedFiles[0])
-        form.setValue('image', acceptedFiles[0])
-        form.clearErrors('image')
-        setPhotoCards([
-          ...photoCards,
-          { description: '', imageUrl: URL.createObjectURL(acceptedFiles[0]) },
-        ])
-      } catch (error) {
-        console.error(error)
-        form.resetField('image')
-      }
-    },
-    [form]
-  )
-
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
@@ -121,7 +102,7 @@ export default function PackageDetailSection({
 
       <FormField
         control={form.control}
-        name='description'
+        name='packageDescription'
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
@@ -144,7 +125,13 @@ export default function PackageDetailSection({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Price</FormLabel>
             <FormControl>
-              <Input placeholder='$10' disabled={!isEditing} {...field} />
+              <Input
+                type='number'
+                placeholder='$10'
+                disabled={!isEditing}
+                {...field}
+                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -153,7 +140,7 @@ export default function PackageDetailSection({
 
       <FormField
         control={form.control}
-        name='image'
+        name='images'
         render={() => (
           <FormItem>
             <FormControl>
