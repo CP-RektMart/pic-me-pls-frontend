@@ -15,7 +15,12 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import { PackageForm, PhotoCardForm } from './create-package'
+import {
+  MAX_FILES,
+  MAX_FILE_SIZE,
+  PackageForm,
+  PhotoCardForm,
+} from './create-package'
 
 interface packageDetailSectionProps {
   name: string
@@ -35,8 +40,8 @@ export default function PackageDetailSection({
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
-      maxFiles: 10,
-      maxSize: 10000000,
+      maxFiles: MAX_FILES,
+      maxSize: MAX_FILE_SIZE,
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
 

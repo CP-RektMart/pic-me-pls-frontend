@@ -12,6 +12,9 @@ import PackageDetailSection from '@/components/package-page/package-detail'
 import PhotoCard from '@/components/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
+export const MAX_FILES = 10
+export const MAX_FILE_SIZE = 10000000
+
 export type PhotoCardForm = {
   description: string
   image: File
@@ -64,8 +67,8 @@ export default function CreatePackage() {
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
-      maxFiles: 10,
-      maxSize: 10000000,
+      maxFiles: MAX_FILES,
+      maxSize: MAX_FILE_SIZE,
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
 
