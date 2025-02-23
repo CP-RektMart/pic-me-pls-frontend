@@ -72,7 +72,6 @@ export default function CreatePackage() {
   return (
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
-        {/* defaultValues */}
         <PackageDetailSection
           name=''
           description=''
