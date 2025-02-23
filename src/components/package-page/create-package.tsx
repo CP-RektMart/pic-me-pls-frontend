@@ -50,7 +50,6 @@ export default function CreatePackage() {
   })
 
   const onSubmit = async (data: PackageForm) => {
-    //mock data usage
     console.log(data)
     console.log(photoCards)
   }
