@@ -5,15 +5,15 @@ import { Button } from '../ui/button'
 export default function SearchFilterButton({
   searchOptionType,
 }: {
-  searchOptionType: 'filter' | 'sort' | ''
+  searchOptionType: 'Filter' | 'Sort' | ''
 }) {
   return (
     <Button variant='searchFilter' size='searchFilter'>
       <Icon
         icon={
-          searchOptionType === 'filter'
+          searchOptionType === 'Filter'
             ? 'lucide:filter'
-            : searchOptionType === 'sort'
+            : searchOptionType === 'Sort'
               ? 'lucide:arrow-down-wide-narrow'
               : ''
         }
