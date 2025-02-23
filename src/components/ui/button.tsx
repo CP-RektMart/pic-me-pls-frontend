@@ -22,7 +22,7 @@ const buttonVariants = cva(
         login:
           'flex flex-col gap-2.5 items-center justify-center rounded-2xl bg-white shadow-[2px_2px_2px_rgba(0,0,0,0.25)]',
         searchFilter:
-          'flex size-9 items-center justify-center rounded-full bg-slate-100',
+          'flex items-center justify-center rounded-full bg-slate-100 size-9',
       },
       size: {
         default: 'h-9 px-4 py-2',

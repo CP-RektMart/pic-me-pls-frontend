@@ -10,7 +10,9 @@ export default function Greeting({ Name }: { Name: string }) {
       )}
       <div className='flex flex-col'>
         <div className='text-xs text-slate-400'>Good to see you 👋</div>
-        <div className='text-2xl font-medium'>{Name || 'Guest'}</div>
+        <div className='whitespace-nowrap text-2xl font-medium'>
+          {Name || 'Guest'}
+        </div>
       </div>
     </div>
   )

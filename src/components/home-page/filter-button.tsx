@@ -8,7 +8,7 @@ export default function SearchFilterButton({
   searchOptionType: 'Filter' | 'Sort' | ''
 }) {
   return (
-    <Button variant='searchFilter' size='searchFilter'>
+    <Button variant='searchFilter'>
       <Icon
         icon={
           searchOptionType === 'Filter'
