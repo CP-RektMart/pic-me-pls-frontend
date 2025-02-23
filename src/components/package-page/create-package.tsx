@@ -37,6 +37,10 @@ export default function CreatePackage() {
     )
   }
 
+  const handleDeletePhotoCard = (index: number) => {
+    setPhotoCards((prev) => prev.filter((_, i) => i !== index))
+  }
+
   const form = useForm<PackageForm>({
     resolver: zodResolver(packageFormSchema),
     defaultValues: {
@@ -105,18 +109,21 @@ export default function CreatePackage() {
               )}
             </div>
           ) : (
-            <div className='grid h-full grid-cols-2 gap-4 overflow-y-auto p-4 lg:grid-cols-4'>
-              {photoCards.map((photo, i) => (
-                <div className='flex' key={i}>
-                  <PhotoCard
-                    key={i}
-                    description=''
-                    imageUrl={URL.createObjectURL(photo.image)}
-                    handleDescriptionChange={handleDescriptionChange}
-                    index={i}
-                  />
-                </div>
-              ))}
+            <div>
+              <div className='grid h-full grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
+                {photoCards.map((photo, i) => (
+                  <div className='flex' key={i}>
+                    <PhotoCard
+                      key={i}
+                      description=''
+                      imageUrl={URL.createObjectURL(photo.image)}
+                      handleDescriptionChange={handleDescriptionChange}
+                      index={i}
+                      handleDeletePhotoCard={handleDeletePhotoCard}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
