@@ -6,13 +6,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import PackageDetailSection from '@/components/package-page/package-detail'
 import PhotoCard from '@/components/package-page/photoCard'
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -95,84 +94,80 @@ export default function CreatePackage() {
     })
 
   return (
-    <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
-      {/* defaultValues */}
-      <PackageDetailSection
-        name=''
-        description=''
-        price={0}
-        setPhotoCards={setPhotoCards}
-        photoCards={photoCards}
-      />
-      <div className='flex-1 lg:w-3/4'>
-        {photoCards.length === 0 ? (
-          <Form {...form}>
-            <form
-              id='package-form'
-              onSubmit={form.handleSubmit(onSubmit)}
-              className='h-full gap-y-4'
-            >
-              <FormField
-                control={form.control}
-                name='image'
-                render={() => (
-                  <FormItem className='h-full'>
-                    <FormControl>
-                      <div
-                        {...getRootProps()}
-                        className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
-                      >
-                        {preview && (
-                          <Image
-                            src={preview as string}
-                            alt='Uploaded image'
-                            className='rounded-lg'
-                            width={600} // Adjust width as needed
-                            height={400} // Adjust height as needed
-                            style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
-                          />
-                        )}
-                        <Icon icon='mage:image-upload' className='h-20 w-20' />
-                        <Input {...getInputProps()} type='file' />
-                        {isDragActive ? (
-                          <p className='text-sm'>Drop the image!</p>
-                        ) : (
-                          <div className='text-center'>
-                            <p className='text-xl font-bold'>
-                              Ready to add something?
-                            </p>
-                            <p>Drag photos and videos here to get started.</p>
-                          </div>
-                        )}
-                      </div>
-                    </FormControl>
-                    <FormMessage>
-                      {fileRejections.length !== 0 && (
-                        <p>
-                          Image must be less than 1MB and of type png, jpg, or
-                          jpeg
-                        </p>
+    <FormProvider {...form}>
+      <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
+        {/* defaultValues */}
+        <PackageDetailSection
+          name=''
+          description=''
+          price={0}
+          setPhotoCards={setPhotoCards}
+          photoCards={photoCards}
+          onSubmit={onSubmit}
+          isEditing={isEditing}
+        />
+        <div className='flex-1 lg:w-3/4'>
+          {photoCards.length === 0 ? (
+            <FormField
+              control={form.control}
+              name='image'
+              render={() => (
+                <FormItem className='h-full'>
+                  <FormControl>
+                    <div
+                      {...getRootProps()}
+                      className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
+                    >
+                      {preview && (
+                        <Image
+                          src={preview as string}
+                          alt='Uploaded image'
+                          className='rounded-lg'
+                          width={600} // Adjust width as needed
+                          height={400} // Adjust height as needed
+                          style={{ maxHeight: '400px', width: 'auto' }} // Ensure it respects max height
+                        />
                       )}
-                    </FormMessage>
-                  </FormItem>
-                )}
-              />
-            </form>
-          </Form>
-        ) : (
-          <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
-            {photoCards.map((_, i) => (
-              <div className='flex' key={i}>
-                <PhotoCard
-                  key={i}
-                  description=''
-                  imageUrl='/mockPhotoCard.svg'
-                />
-              </div>
-            ))}
-          </div>
-        )}
+                      <Icon icon='mage:image-upload' className='h-20 w-20' />
+                      <Input {...getInputProps()} type='file' />
+                      {isDragActive ? (
+                        <p className='text-sm'>Drop the image!</p>
+                      ) : (
+                        <div className='text-center'>
+                          <p className='text-xl font-bold'>
+                            Ready to add something?
+                          </p>
+                          <p>Drag photos and videos here to get started.</p>
+                        </div>
+                      )}
+                    </div>
+                  </FormControl>
+                  <FormMessage>
+                    {fileRejections.length !== 0 && (
+                      <p>
+                        Image must be less than 10MB and of type png, jpg, or
+                        jpeg
+                      </p>
+                    )}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
+          ) : (
+            <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
+              {photoCards.map((_, i) => (
+                <div className='flex' key={i}>
+                  <PhotoCard
+                    key={i}
+                    description=''
+                    imageUrl='/mockPhotoCard.svg'
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </FormProvider>
   )
 }

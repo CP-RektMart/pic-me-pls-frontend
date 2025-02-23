@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
@@ -11,7 +11,6 @@ import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -42,6 +41,8 @@ interface packageDetailSectionProps {
   price: number
   setPhotoCards: React.Dispatch<React.SetStateAction<photoCardForm[]>>
   photoCards: photoCardForm[]
+  onSubmit: (data: packageFormValues) => void
+  isEditing: boolean
 }
 
 export default function PackageDetailSection({
@@ -50,9 +51,9 @@ export default function PackageDetailSection({
   price,
   setPhotoCards,
   photoCards,
+  onSubmit,
+  isEditing,
 }: packageDetailSectionProps) {
-  const [isEditing, setIsEditing] = useState<boolean>(true)
-
   const form = useForm<packageFormValues>({
     resolver: zodResolver(packageSchema),
     defaultValues: {
@@ -62,25 +63,6 @@ export default function PackageDetailSection({
       image: new File([''], 'filename'),
     },
   })
-
-  const onSubmit = async (data: packageFormValues) => {
-    setIsEditing((prevState) => !prevState)
-
-    if (!isEditing) {
-      return
-    }
-
-    //mock data usage
-    console.log(data)
-
-    // const response = await updatepackage(data)
-
-    // if (!response.result) {
-    //   toast.error('An error occurred while updating your package')
-    // } else {
-    //   toast.success('Your package has been successfully updated.')
-    // }
-  }
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -110,7 +92,7 @@ export default function PackageDetailSection({
     })
 
   return (
-    <div className='shadow-right space-between bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-1/4'>
+    <div className='shadow-right space-between flex flex-col gap-y-4 bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-1/4'>
       <div className='flex flex-row items-center gap-4'>
         <Link href='/package'>
           <div className='rounded-full p-2 hover:bg-gray-200'>
@@ -119,102 +101,96 @@ export default function PackageDetailSection({
         </Link>
         <h1 className='text-xl font-bold'>New package</h1>
       </div>
-      <Form {...form}>
-        <form
-          id='package-form'
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='flex h-full flex-col gap-y-4 py-4'
-        >
-          <FormField
-            control={form.control}
-            name='name'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className='text-sm font-medium'>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder='Package Name'
-                    disabled={!isEditing}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <FormField
+        control={form.control}
+        name='name'
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className='text-sm font-medium'>Name</FormLabel>
+            <FormControl>
+              <Input
+                placeholder='Package Name'
+                disabled={!isEditing}
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-          <FormField
-            control={form.control}
-            name='description'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className='text-sm font-medium'>
-                  Description
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder='Description'
-                    disabled={!isEditing}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <FormField
+        control={form.control}
+        name='description'
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className='text-sm font-medium'>Description</FormLabel>
+            <FormControl>
+              <Input
+                placeholder='Description'
+                disabled={!isEditing}
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-          <FormField
-            control={form.control}
-            name='price'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className='text-sm font-medium'>Price</FormLabel>
-                <FormControl>
-                  <Input placeholder='$10' disabled={!isEditing} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <FormField
+        control={form.control}
+        name='price'
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className='text-sm font-medium'>Price</FormLabel>
+            <FormControl>
+              <Input placeholder='$10' disabled={!isEditing} {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-          <FormField
-            control={form.control}
-            name='image'
-            render={() => (
-              <FormItem>
-                <FormControl>
-                  <div
-                    {...getRootProps()}
-                    className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
-                  >
-                    <Icon icon='mage:image-upload' />
-                    <Input {...getInputProps()} type='file' />
-                    {isDragActive ? (
-                      <p className='text-sm'>Drop the image!</p>
-                    ) : (
-                      <p className='text-sm'>Upload Photos</p>
-                    )}
-                  </div>
-                </FormControl>
-                <FormMessage>
-                  {fileRejections.length !== 0 && (
-                    <p>
-                      Image must be less than 1MB and of type png, jpg, or jpeg
-                    </p>
-                  )}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
-          <div className='mb-4 mt-auto'>
-            <Link href='/package'>
-              <Button type='button' className='w-full hover:bg-zinc-700'>
-                Create
-              </Button>
-            </Link>
-          </div>
-        </form>
-      </Form>
+      <FormField
+        control={form.control}
+        name='image'
+        render={() => (
+          <FormItem>
+            <FormControl>
+              <div
+                {...getRootProps()}
+                className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
+              >
+                <Icon icon='mage:image-upload' />
+                <Input {...getInputProps()} type='file' />
+                {isDragActive ? (
+                  <p className='text-sm'>Drop the image!</p>
+                ) : (
+                  <p className='text-sm'>Upload Photos</p>
+                )}
+              </div>
+            </FormControl>
+            <FormMessage>
+              {fileRejections.length !== 0 && (
+                <p>
+                  Image must be less than 10MB and of type png, jpg, or jpeg
+                </p>
+              )}
+            </FormMessage>
+          </FormItem>
+        )}
+      />
+      <div className='mt-auto'>
+        <Link href='/package'>
+          <Button
+            type='button'
+            className='w-full hover:bg-zinc-700'
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            Create
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }

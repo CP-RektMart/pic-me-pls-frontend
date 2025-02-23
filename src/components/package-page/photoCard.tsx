@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -45,26 +44,22 @@ export default function PhotoCard({
       </div>
 
       <div className='w-full p-2.5'>
-        <Form {...form}>
-          <form id='package-form' className='flex min-h-16 flex-col gap-y-4'>
-            <FormField
-              control={form.control}
-              name='description'
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder='Description (Optional)'
-                      disabled={false}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
+        <FormField
+          control={form.control}
+          name='description'
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  placeholder='Description (Optional)'
+                  disabled={false}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </div>
     </div>
   )
