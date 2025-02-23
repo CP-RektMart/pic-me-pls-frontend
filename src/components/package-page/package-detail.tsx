@@ -46,7 +46,7 @@ export default function PackageDetailSection({
     })
 
   return (
-    <div className='shadow-right space-between flex flex-col gap-y-4 bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-1/4'>
+    <div className='shadow-right space-between flex w-full flex-col gap-y-4 bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-96'>
       <div className='flex flex-row items-center gap-4'>
         <Link href='/photographer/packages'>
           <div className='rounded-full p-2 hover:bg-gray-200'>
