@@ -21,6 +21,8 @@ const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
         login:
           'flex flex-col gap-2.5 items-center justify-center rounded-2xl bg-white shadow-[2px_2px_2px_rgba(0,0,0,0.25)]',
+        searchFilter:
+          'flex size-9 items-center justify-center rounded-full bg-slate-100',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -28,6 +30,7 @@ const buttonVariants = cva(
         lg: 'h-10 rounded-md px-8',
         icon: 'h-9 w-9',
         login: 'h-[154px] w-[152px] gap-2.5 p-6',
+        searchFilter: 'h-9 w-9',
       },
     },
     defaultVariants: {
