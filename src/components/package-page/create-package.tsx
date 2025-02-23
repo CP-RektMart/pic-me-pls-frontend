@@ -62,7 +62,7 @@ export default function CreatePackage() {
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
-      maxFiles: 1,
+      maxFiles: 10,
       maxSize: 10000000,
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
@@ -100,7 +100,7 @@ export default function CreatePackage() {
               </div>
               {fileRejections.length !== 0 && (
                 <p>
-                  Image must be less than 10MB and of type png, jpg, or jpeg
+                  Image must be less than 10 MB and of type png, jpg, or jpeg
                 </p>
               )}
             </div>
