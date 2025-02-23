@@ -12,12 +12,10 @@ import PackageDetailSection from '@/components/package-page/package-detail'
 import PhotoCard from '@/components/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
-export const photoCardFormSchema = z.object({
-  description: z.string(),
-  image: z.instanceof(File),
-})
-
-export type PhotoCardForm = z.infer<typeof photoCardFormSchema>
+export type PhotoCardForm = {
+  description: string
+  image: File
+}
 
 export const packageFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
