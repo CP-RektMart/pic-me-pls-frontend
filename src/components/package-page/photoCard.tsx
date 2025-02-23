@@ -2,41 +2,23 @@
 
 import React from 'react'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-
-const photoCardSchema = z.object({
-  description: z.string().min(2, 'Description must be at least 2 characters'),
-})
-
-type photoCardFormValues = z.infer<typeof photoCardSchema>
 
 interface photoCardFormProps {
   description: string
   imageUrl: string
+  handleDescriptionChange: (index: number, description: string) => void
+  index: number
 }
 
 export default function PhotoCard({
   description,
   imageUrl,
+  handleDescriptionChange,
+  index,
 }: photoCardFormProps) {
-  const form = useForm<photoCardFormValues>({
-    resolver: zodResolver(photoCardSchema),
-    defaultValues: {
-      description,
-    },
-  })
-
   return (
     <div className='w-full rounded-2xl bg-white shadow-sm'>
       <div className='relative aspect-[4/3] w-full'>
@@ -44,21 +26,12 @@ export default function PhotoCard({
       </div>
 
       <div className='w-full p-2.5'>
-        <FormField
-          control={form.control}
-          name='description'
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  placeholder='Description (Optional)'
-                  disabled={false}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+        <Input
+          placeholder='Description (Optional)'
+          onChange={(e) => {
+            handleDescriptionChange(index, e.target.value)
+          }}
+          defaultValue={description}
         />
       </div>
     </div>

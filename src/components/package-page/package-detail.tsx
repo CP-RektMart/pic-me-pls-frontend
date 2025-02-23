@@ -23,14 +23,12 @@ interface packageDetailSectionProps {
   price: number
   photoCards: PhotoCardForm[]
   onSubmit: (data: PackageForm) => Promise<void>
-  isEditing: boolean
   form: ReturnType<typeof useForm<PackageForm>>
   onDrop: (acceptedFiles: File[]) => void
 }
 
 export default function PackageDetailSection({
   onSubmit,
-  isEditing,
   form,
   onDrop,
 }: packageDetailSectionProps) {
@@ -59,11 +57,7 @@ export default function PackageDetailSection({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Name</FormLabel>
             <FormControl>
-              <Input
-                placeholder='Package Name'
-                disabled={!isEditing}
-                {...field}
-              />
+              <Input placeholder='Package Name' {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -77,11 +71,7 @@ export default function PackageDetailSection({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
             <FormControl>
-              <Input
-                placeholder='Description'
-                disabled={!isEditing}
-                {...field}
-              />
+              <Input placeholder='Description' {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -95,12 +85,7 @@ export default function PackageDetailSection({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Price</FormLabel>
             <FormControl>
-              <Input
-                type='number'
-                placeholder='$10'
-                disabled={!isEditing}
-                {...field}
-              />
+              <Input type='number' placeholder='$10' {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

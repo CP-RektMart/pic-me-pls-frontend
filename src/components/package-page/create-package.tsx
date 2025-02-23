@@ -30,9 +30,14 @@ export const packageFormSchema = z.object({
 export type PackageForm = z.infer<typeof packageFormSchema>
 
 export default function CreatePackage() {
-  const [isEditing, setIsEditing] = useState<boolean>(true)
   //mock package data
   const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
+
+  const handleDescriptionChange = (index: number, description: string) => {
+    setPhotoCards((prev) =>
+      prev.map((photo, i) => (i === index ? { ...photo, description } : photo))
+    )
+  }
 
   const form = useForm<PackageForm>({
     resolver: zodResolver(packageFormSchema),
@@ -44,12 +49,6 @@ export default function CreatePackage() {
   })
 
   const onSubmit = async (data: PackageForm) => {
-    setIsEditing((prevState) => !prevState)
-
-    if (!isEditing) {
-      return
-    }
-
     //mock data usage
     console.log(data)
     console.log(photoCards)
@@ -80,7 +79,6 @@ export default function CreatePackage() {
           price={0}
           photoCards={photoCards}
           onSubmit={onSubmit}
-          isEditing={isEditing}
           form={form}
           onDrop={onDrop}
         />
@@ -116,6 +114,8 @@ export default function CreatePackage() {
                     key={i}
                     description=''
                     imageUrl={URL.createObjectURL(photo.image)}
+                    handleDescriptionChange={handleDescriptionChange}
+                    index={i}
                   />
                 </div>
               ))}
