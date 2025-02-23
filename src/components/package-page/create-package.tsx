@@ -91,7 +91,7 @@ export default function CreatePackage() {
                 {...getRootProps()}
                 className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
               >
-                <Icon icon='mage:image-upload' className='h-20 w-20' />
+                <Icon icon='mage:image-upload' className='size-20' />
                 <Input {...getInputProps()} type='file' />
                 {isDragActive ? (
                   <p className='text-sm'>Drop the image!</p>
