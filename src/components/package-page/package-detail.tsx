@@ -4,7 +4,6 @@ import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
-import z from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -16,45 +15,16 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-interface photoCardForm {
-  description: string
-  imageUrl: string
-}
-
-interface packageSchema {
-  name: string
-  packageDescription: string
-  price: number
-  images: {
-    description: string
-    imageUrl: string
-  }[]
-}
-
-type packageFormValues = z.infer<typeof packageSchema>
-
-const photoCardFormSchema = z.object({
-  description: z.string(),
-  imageUrl: z.string(),
-})
-
-const packageSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  packageDescription: z
-    .string()
-    .min(2, 'Description must be at least 2 characters'),
-  price: z.number().min(0, 'Price must be at least 0'),
-  images: z.array(photoCardFormSchema),
-})
+import { PackageForm, PhotoCardForm } from './create-package'
 
 interface packageDetailSectionProps {
   name: string
   description: string
   price: number
-  photoCards: photoCardForm[]
-  onSubmit: (data: packageFormValues) => Promise<void>
+  photoCards: PhotoCardForm[]
+  onSubmit: (data: PackageForm) => Promise<void>
   isEditing: boolean
-  form: ReturnType<typeof useForm<packageSchema>>
+  form: ReturnType<typeof useForm<PackageForm>>
   onDrop: (acceptedFiles: File[]) => void
 }
 
@@ -130,43 +100,29 @@ export default function PackageDetailSection({
                 placeholder='$10'
                 disabled={!isEditing}
                 {...field}
-                onChange={(e) => field.onChange(e.target.valueAsNumber)}
               />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
-
-      <FormField
-        control={form.control}
-        name='images'
-        render={() => (
-          <FormItem>
-            <FormControl>
-              <div
-                {...getRootProps()}
-                className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
-              >
-                <Icon icon='mage:image-upload' />
-                <Input {...getInputProps()} type='file' />
-                {isDragActive ? (
-                  <p className='text-sm'>Drop the image!</p>
-                ) : (
-                  <p className='text-sm'>Upload Photos</p>
-                )}
-              </div>
-            </FormControl>
-            <FormMessage>
-              {fileRejections.length !== 0 && (
-                <p>
-                  Image must be less than 10MB and of type png, jpg, or jpeg
-                </p>
-              )}
-            </FormMessage>
-          </FormItem>
+      <div>
+        <div
+          {...getRootProps()}
+          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
+        >
+          <Icon icon='mage:image-upload' />
+          <Input {...getInputProps()} type='file' />
+          {isDragActive ? (
+            <p className='text-sm'>Drop the image!</p>
+          ) : (
+            <p className='text-sm'>Upload Photos</p>
+          )}
+        </div>
+        {fileRejections.length !== 0 && (
+          <p>Image must be less than 10MB and of type png, jpg, or jpeg</p>
         )}
-      />
+      </div>
       <div className='mt-auto'>
         <Link href='/package'>
           <Button

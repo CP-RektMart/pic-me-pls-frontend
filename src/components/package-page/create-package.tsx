@@ -4,59 +4,46 @@ import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
-import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import PackageDetailSection from '@/components/package-page/package-detail'
 import PhotoCard from '@/components/package-page/photoCard'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-type packageFormValues = z.infer<typeof packageSchema>
-
-const photoCardFormSchema = z.object({
+export const photoCardFormSchema = z.object({
   description: z.string(),
-  imageUrl: z.string(),
+  image: z.instanceof(File),
 })
 
-interface photoCardForm {
-  description: string
-  imageUrl: string
-}
+export type PhotoCardForm = z.infer<typeof photoCardFormSchema>
 
-const packageSchema = z.object({
+export const packageFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   packageDescription: z
     .string()
     .min(2, 'Description must be at least 2 characters'),
-  price: z.number().min(0, 'Price must be at least 0'),
-  images: z.array(photoCardFormSchema),
+  price: z.string().refine((val) => !Number.isNaN(parseFloat(val))),
 })
+
+export type PackageForm = z.infer<typeof packageFormSchema>
 
 export default function CreatePackage() {
   const [isEditing, setIsEditing] = useState<boolean>(true)
-  const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
   //mock package data
-  const [photoCards, setPhotoCards] = useState<photoCardForm[]>([])
+  const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
 
-  const form = useForm<packageFormValues>({
-    resolver: zodResolver(packageSchema),
+  const form = useForm<PackageForm>({
+    resolver: zodResolver(packageFormSchema),
     defaultValues: {
       name: '',
       packageDescription: '',
-      price: 0,
-      images: [],
+      price: '',
     },
   })
 
-  const onSubmit = async (data: packageFormValues) => {
+  const onSubmit = async (data: PackageForm) => {
     setIsEditing((prevState) => !prevState)
 
     if (!isEditing) {
@@ -65,35 +52,15 @@ export default function CreatePackage() {
 
     //mock data usage
     console.log(data)
-
-    // const response = await updatepackage(data)
-
-    // if (!response.result) {
-    //   toast.error('An error occurred while updating your package')
-    // } else {
-    //   toast.success('Your package has been successfully updated.')
-    // }
+    console.log(photoCards)
   }
 
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      const reader = new FileReader()
-      try {
-        reader.onload = () => setPreview(reader.result)
-        reader.readAsDataURL(acceptedFiles[0])
-        form.clearErrors('images')
-        setPhotoCards([
-          ...photoCards,
-          { description: '', imageUrl: URL.createObjectURL(acceptedFiles[0]) },
-        ])
-      } catch (error) {
-        console.error(error)
-        setPreview(null)
-        form.resetField('images')
-      }
-    },
-    [form, photoCards]
-  )
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setPhotoCards((prev) => [
+      ...prev,
+      ...acceptedFiles.map((file) => ({ description: '', image: file })),
+    ])
+  }, [])
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
@@ -119,59 +86,36 @@ export default function CreatePackage() {
         />
         <div className='flex-1 lg:w-3/4'>
           {photoCards.length === 0 ? (
-            <FormField
-              control={form.control}
-              name='images'
-              render={() => (
-                <FormItem className='h-full'>
-                  <FormControl>
-                    <div
-                      {...getRootProps()}
-                      className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
-                    >
-                      {preview && (
-                        <Image
-                          src={preview as string}
-                          alt='Uploaded image'
-                          className='rounded-lg'
-                          width={600}
-                          height={400}
-                          style={{ maxHeight: '400px', width: 'auto' }}
-                        />
-                      )}
-                      <Icon icon='mage:image-upload' className='h-20 w-20' />
-                      <Input {...getInputProps()} type='file' />
-                      {isDragActive ? (
-                        <p className='text-sm'>Drop the image!</p>
-                      ) : (
-                        <div className='text-center'>
-                          <p className='text-xl font-bold'>
-                            Ready to add something?
-                          </p>
-                          <p>Drag photos and videos here to get started.</p>
-                        </div>
-                      )}
-                    </div>
-                  </FormControl>
-                  <FormMessage>
-                    {fileRejections.length !== 0 && (
-                      <p>
-                        Image must be less than 10MB and of type png, jpg, or
-                        jpeg
-                      </p>
-                    )}
-                  </FormMessage>
-                </FormItem>
+            <div className='h-full'>
+              <div
+                {...getRootProps()}
+                className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
+              >
+                <Icon icon='mage:image-upload' className='h-20 w-20' />
+                <Input {...getInputProps()} type='file' />
+                {isDragActive ? (
+                  <p className='text-sm'>Drop the image!</p>
+                ) : (
+                  <div className='text-center'>
+                    <p className='text-xl font-bold'>Ready to add something?</p>
+                    <p>Drag photos and videos here to get started.</p>
+                  </div>
+                )}
+              </div>
+              {fileRejections.length !== 0 && (
+                <p>
+                  Image must be less than 10MB and of type png, jpg, or jpeg
+                </p>
               )}
-            />
+            </div>
           ) : (
             <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
-              {photoCards.map((_, i) => (
+              {photoCards.map((photo, i) => (
                 <div className='flex' key={i}>
                   <PhotoCard
                     key={i}
                     description=''
-                    imageUrl='/mockPhotoCard.svg'
+                    imageUrl={URL.createObjectURL(photo.image)}
                   />
                 </div>
               ))}
