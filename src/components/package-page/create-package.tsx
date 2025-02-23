@@ -80,7 +80,7 @@ export default function CreatePackage() {
           form={form}
           onDrop={onDrop}
         />
-        <div className='flex-1 lg:w-3/4'>
+        <div className='flex-1'>
           {photoCards.length === 0 ? (
             <div className='h-full'>
               <div
@@ -105,7 +105,7 @@ export default function CreatePackage() {
               )}
             </div>
           ) : (
-            <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
+            <div className='grid h-full grid-cols-2 gap-4 overflow-y-auto p-4 lg:grid-cols-4'>
               {photoCards.map((photo, i) => (
                 <div className='flex' key={i}>
                   <PhotoCard
