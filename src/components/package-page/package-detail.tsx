@@ -109,15 +109,13 @@ export default function PackageDetailSection({
         )}
       </div>
       <div className='mt-auto'>
-        <Link href='/package'>
-          <Button
-            type='button'
-            className='w-full hover:bg-zinc-700'
-            onClick={form.handleSubmit(onSubmit)}
-          >
-            Create
-          </Button>
-        </Link>
+        <Button
+          type='button'
+          className='w-full hover:bg-zinc-700'
+          onClick={form.handleSubmit(onSubmit)}
+        >
+          Create
+        </Button>
       </div>
     </div>
   )
