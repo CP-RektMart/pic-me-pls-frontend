@@ -20,9 +20,9 @@ export default function PhotoCard({
   index,
 }: photoCardFormProps) {
   return (
-    <div className='w-full rounded-2xl bg-white shadow-sm'>
-      <div className='relative aspect-[4/3] w-full'>
-        <Image src={imageUrl} alt={'photo'} className='object-cover' fill />
+    <div className='w-full overflow-hidden rounded-2xl bg-white shadow-sm'>
+      <div className='relative aspect-[4/3] w-full bg-zinc-800'>
+        <Image src={imageUrl} alt={'photo'} className='object-contain' fill />
       </div>
 
       <div className='w-full p-2.5'>
