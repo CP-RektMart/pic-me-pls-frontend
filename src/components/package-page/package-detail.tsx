@@ -99,7 +99,7 @@ export default function PackageDetailSection({
             <Icon icon='ep:arrow-left-bold' />
           </div>
         </Link>
-        <h1 className='text-xl font-bold'>New package</h1>
+        <h1 className='text-xl font-bold'>New Package</h1>
       </div>
       <FormField
         control={form.control}
