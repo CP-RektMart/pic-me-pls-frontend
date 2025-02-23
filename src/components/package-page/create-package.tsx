@@ -115,7 +115,7 @@ export default function CreatePackage() {
                   <div className='flex' key={i}>
                     <PhotoCard
                       key={i}
-                      description=''
+                      defaultDescription=''
                       imageUrl={URL.createObjectURL(photo.image)}
                       handleDescriptionChange={handleDescriptionChange}
                       index={i}
