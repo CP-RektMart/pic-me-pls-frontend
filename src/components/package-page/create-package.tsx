@@ -33,7 +33,7 @@ interface photoCardForm {
 }
 
 export default function CreatePackage() {
-  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [isEditing, setIsEditing] = useState<boolean>(true)
   const [preview, setPreview] = useState<string | ArrayBuffer | null>('')
   //mock package data
   const [photoCards, setPhotoCards] = useState<photoCardForm[]>([])
