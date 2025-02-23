@@ -28,7 +28,6 @@ export const packageFormSchema = z.object({
 export type PackageForm = z.infer<typeof packageFormSchema>
 
 export default function CreatePackage() {
-  //mock package data
   const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
