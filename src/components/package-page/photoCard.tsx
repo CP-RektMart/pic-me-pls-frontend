@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 interface photoCardFormProps {
-  defaultDescription: string
+  description: string
   imageUrl: string
   handleDescriptionChange: (index: number, description: string) => void
   index: number
@@ -17,7 +17,7 @@ interface photoCardFormProps {
 }
 
 export default function PhotoCard({
-  defaultDescription,
+  description,
   imageUrl,
   handleDescriptionChange,
   index,
@@ -42,7 +42,7 @@ export default function PhotoCard({
           onChange={(e) => {
             handleDescriptionChange(index, e.target.value)
           }}
-          defaultValue={defaultDescription}
+          value={description}
         />
       </div>
     </div>
