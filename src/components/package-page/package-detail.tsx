@@ -90,7 +90,7 @@ export default function PackageDetailSection({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Price</FormLabel>
             <FormControl>
-              <Input type='number' placeholder='$10' {...field} />
+              <Input type='number' placeholder='&#3647; 2000' {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
