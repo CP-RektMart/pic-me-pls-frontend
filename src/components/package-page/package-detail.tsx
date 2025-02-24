@@ -50,7 +50,7 @@ export default function PackageDetailSection({
       <div className='flex flex-row items-center gap-4'>
         <Link href='/photographer/packages'>
           <div className='rounded-full p-2 hover:bg-gray-200'>
-            <Icon icon='ep:arrow-left-bold' />
+            <Icon icon='lucide:chevron-left' className='size-5' />
           </div>
         </Link>
         <h1 className='text-xl font-bold'>New Package</h1>
@@ -103,7 +103,7 @@ export default function PackageDetailSection({
           {...getRootProps()}
           className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
         >
-          <Icon icon='mage:image-upload' />
+          <Icon icon='lucide:image-up' />
           <Input {...getInputProps()} type='file' />
           {isDragActive ? (
             <p className='text-sm'>Drop the image!</p>

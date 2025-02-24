@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Icon } from '@iconify/react'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -91,7 +91,7 @@ export default function CreatePackage() {
                 {...getRootProps()}
                 className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
               >
-                <Icon icon='mage:image-upload' className='size-20' />
+                <Icon icon='lucide:image-up' className='size-20' />
                 <Input {...getInputProps()} type='file' />
                 {isDragActive ? (
                   <p className='text-sm'>Drop the image!</p>
