@@ -1,11 +1,22 @@
+import { UserProfile } from '@/types/user'
 import Image from 'next/image'
 
-export default function Greeting({ userName }: { userName: string }) {
+export default function Greeting({
+  userProfile,
+}: {
+  userProfile: UserProfile
+}) {
   return (
     <div className='flex items-center gap-2'>
-      {userName ? (
+      {userProfile ? (
         <div className='size-12 min-w-12 rounded-full'>
-          <Image src='Pol.svg' alt='userImage' width={48} height={48} />
+          <Image
+            src={userProfile.profilePictureUrl}
+            alt='userImage'
+            width={48}
+            height={48}
+            className='rounded-full'
+          />
         </div>
       ) : (
         <div className='size-12 min-w-12 rounded-full bg-black/20'></div>
@@ -15,7 +26,7 @@ export default function Greeting({ userName }: { userName: string }) {
           Good to see you 👋
         </div>
         <div className='text-2xl font-medium md:whitespace-nowrap'>
-          {userName || 'Guest'}
+          {userProfile ? userProfile.name : 'Guest'}
         </div>
       </div>
     </div>

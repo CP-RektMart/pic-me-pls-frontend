@@ -4,8 +4,7 @@ import HomePageComponent from '@/components/home-page'
 
 export default async function Home() {
   const session = await auth()
-  console.log(session)
-  let name = ''
+  let userProfile = null
 
   if (session) {
     const response = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
@@ -14,9 +13,8 @@ export default async function Home() {
         Authorization: `Bearer ${session.accessToken}`,
       },
     })
-    const userProfile = (await response.json()).result
-    name = userProfile.name
+    userProfile = (await response.json()).result
   }
 
-  return <HomePageComponent userName={name} />
+  return <HomePageComponent userProfile={userProfile} />
 }
