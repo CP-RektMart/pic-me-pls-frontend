@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
@@ -42,10 +42,6 @@ export default function CreatePackage() {
   const handleDeletePhotoCard = (index: number) => {
     setPhotoCards((prev) => prev.filter((_, i) => i !== index))
   }
-
-  useEffect(() => {
-    console.log('Updated photoCards:', photoCards)
-  }, [photoCards])
 
   const form = useForm<PackageForm>({
     resolver: zodResolver(packageFormSchema),
