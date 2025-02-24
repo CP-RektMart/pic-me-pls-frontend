@@ -88,9 +88,11 @@ export default function PackageDetailSection({
         name='price'
         render={({ field }) => (
           <FormItem>
-            <FormLabel className='text-sm font-medium'>Price</FormLabel>
+            <FormLabel className='text-sm font-medium'>
+              Price Per Hour
+            </FormLabel>
             <FormControl>
-              <Input type='number' placeholder='&#3647; 2000' {...field} />
+              <Input type='number' placeholder='&#3647; 200' {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
