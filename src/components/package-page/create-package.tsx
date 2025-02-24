@@ -25,7 +25,7 @@ export const packageFormSchema = z.object({
   packageDescription: z
     .string()
     .min(2, 'Description must be at least 2 characters'),
-  price: z.string().refine((val) => !Number.isNaN(parseFloat(val))),
+  price: z.number().min(1, 'Price must be at least 1'),
 })
 
 export type PackageForm = z.infer<typeof packageFormSchema>
@@ -52,7 +52,7 @@ export default function CreatePackage() {
     defaultValues: {
       name: '',
       packageDescription: '',
-      price: '',
+      price: 0,
     },
   })
 
