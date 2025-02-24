@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 
@@ -37,12 +38,14 @@ export default function EditPackageDetailSection({
   form,
   onDrop,
 }: packageDetailSectionProps) {
+  const { packageID } = useParams()
+
   const handleDeleteGallery = async () => {
-    console.log('Gallery Deleted')
+    console.log(`Gallery ${packageID} Deleted`)
   }
 
   const handleArchiveGallery = async () => {
-    console.log('Gallery Archived')
+    console.log(`Gallery ${packageID} Archived`)
   }
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
