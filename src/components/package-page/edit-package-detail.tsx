@@ -115,14 +115,20 @@ export default function EditPackageDetailSection({
           <p>Image must be less than 10 MB and of type png, jpg, or jpeg</p>
         )}
       </div>
-      <Button className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'>
-        <Icon icon='lucide:trash-2' />
-        Delete Package
-      </Button>
-      <Button className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'>
-        <Icon icon='lucide:archive-restore' />
-        Archive Package
-      </Button>
+
+      <div>
+        <div className='grid h-full grid-cols-2 gap-4 align-top lg:grid-cols-1'>
+          <Button className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'>
+            <Icon icon='lucide:trash-2' />
+            Delete Package
+          </Button>
+          <Button className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'>
+            <Icon icon='lucide:archive-restore' />
+            Archive Package
+          </Button>
+        </div>
+      </div>
+
       <div className='mt-auto'>
         <Button
           type='button'
