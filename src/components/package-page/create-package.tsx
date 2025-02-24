@@ -89,7 +89,7 @@ export default function CreatePackage() {
             <div className='h-full'>
               <div
                 {...getRootProps()}
-                className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 rounded-none bg-zinc-50'
+                className='flex h-full cursor-pointer flex-col items-center justify-center gap-x-2 gap-y-4 rounded-none bg-zinc-50'
               >
                 <Icon icon='lucide:image-up' className='size-20' />
                 <Input {...getInputProps()} type='file' />
