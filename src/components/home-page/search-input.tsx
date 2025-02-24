@@ -8,7 +8,7 @@ export default function SearchInput({
   searchType: 'Package' | 'Photographer' | ''
 }) {
   return (
-    <div className='relative flex w-full items-center md:ml-10'>
+    <div className='relative flex w-full items-center'>
       <Icon icon='lucide:search' className='absolute left-3 size-4' />
       <Input
         type='text'
