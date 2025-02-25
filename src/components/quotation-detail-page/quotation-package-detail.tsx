@@ -81,7 +81,7 @@ export default function QuotationPackageDetail({
         setApi={setApi}
         plugins={[
           Autoplay({
-            delay: 3000,
+            delay: 5000,
           }),
         ]}
       >
