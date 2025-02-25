@@ -31,7 +31,7 @@ export default function QuotationPackageDetail({
   photographerName,
   packageImages,
 }: QuotationPackageDetailProps) {
-  const [api, setApi] = useState<CarouselApi>()
+  const [api, setApi] = useState<CarouselApi | null>(null)
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
 
@@ -47,6 +47,10 @@ export default function QuotationPackageDetail({
       setCurrent(api.selectedScrollSnap() + 1)
     })
   }, [api])
+
+  const scrollToIndex = (index: number) => {
+    api?.scrollTo(index)
+  }
 
   return (
     <div className='space-y-6 px-2 py-6 lg:px-6'>
@@ -103,8 +107,17 @@ export default function QuotationPackageDetail({
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <div className='py-2 text-center text-sm text-muted-foreground'>
-        Slide {current} of {count}
+
+      <div className='z-20 flex justify-center space-x-2'>
+        {Array.from({ length: count }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => scrollToIndex(index)}
+            className={`h-3 w-3 rounded-full ${
+              current - 1 === index ? 'bg-black' : 'bg-gray-300'
+            }`}
+          />
+        ))}
       </div>
     </div>
   )
