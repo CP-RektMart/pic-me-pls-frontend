@@ -1,3 +1,3 @@
 export default function PhotographerQuotation() {
-  return <div>PhotographerQuotation</div>
+  return <div className='w-full'>PhotographerQuotation</div>
 }
