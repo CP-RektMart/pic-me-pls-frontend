@@ -1,7 +1,12 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
 import Image from 'next/image'
 
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -25,6 +30,23 @@ export default function QuotationPackageDetail({
   photographerName,
   packageImages,
 }: QuotationPackageDetailProps) {
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
   return (
     <div className='space-y-6 px-2 py-6 lg:px-6'>
       <div className='flex flex-row items-center gap-6'>
@@ -53,7 +75,7 @@ export default function QuotationPackageDetail({
         <div className='text-sm font-normal'>{packageDescription}</div>
       </div>
 
-      <Carousel className='mx-auto flex w-full max-w-xs'>
+      <Carousel className='mx-auto flex w-full max-w-xs' setApi={setApi}>
         <CarouselContent className='items-center justify-center'>
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>
@@ -72,6 +94,9 @@ export default function QuotationPackageDetail({
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+      <div className='py-2 text-center text-sm text-muted-foreground'>
+        Slide {current} of {count}
+      </div>
     </div>
   )
 }
