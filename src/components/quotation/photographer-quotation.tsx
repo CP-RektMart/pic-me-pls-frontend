@@ -26,9 +26,6 @@ interface CreateQuotationProps {
   from: string
   to: string
   description: string
-  totalhours: number
-  priceperhour: number
-  totalprice: number
 }
 
 const createQuotationFormSchema = z.object({
@@ -37,9 +34,6 @@ const createQuotationFormSchema = z.object({
   from: z.string().min(2, 'From must be at least 2 characters'),
   to: z.string().min(2, 'To must be at least 2 characters'),
   description: z.string().min(2, 'Description must be at least 2 characters'),
-  totalhours: z.number().min(1, 'Total hours must be at least 1'),
-  priceperhour: z.number().min(1, 'Price per hour must be at least 1'),
-  totalprice: z.number().min(1, 'Total price must be at least 1'),
 })
 
 export default function PhotographerQuotation({
@@ -53,9 +47,6 @@ export default function PhotographerQuotation({
       from: '',
       to: '',
       description: '',
-      totalhours: 5,
-      priceperhour: 400,
-      totalprice: 2000,
     },
   })
 
@@ -189,7 +180,23 @@ export default function PhotographerQuotation({
               </div>
             </FormProvider>
             <hr className='border border-zinc-400' />
-            <div className='flex flex-col gap-2'></div>
+            <div className='flex flex-col gap-2 p-4'>
+              <div className='flex flex-row justify-between'>
+                <div className='text-sm font-normal'>Total hours</div>
+                <div className='text-sm font-normal'>
+                  {(
+                    (new Date(quotations[0].to).getTime() -
+                      new Date(quotations[0].from).getTime()) /
+                    (1000 * 60 * 60)
+                  ).toString()}{' '}
+                  Hours
+                </div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div className='text-sm font-normal'>Price Per Hour</div>
+                <div className='text-sm font-normal'>{}</div>
+              </div>
+            </div>
           </div>
         </div>
       )}

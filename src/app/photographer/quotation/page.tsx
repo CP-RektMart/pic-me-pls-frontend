@@ -7,11 +7,9 @@ export interface quotation {
   packageName: string
   photographerName: string
   customerName: string
-  from: string
-  to: string
+  from: Date
+  to: Date
   description: string
-  duration: string
-  totalPrice: number
 }
 
 const quotations: quotation[] = [
@@ -21,11 +19,9 @@ const quotations: quotation[] = [
     packageName: 'Wedding Package',
     photographerName: 'John Doe',
     customerName: 'Jane Doe',
-    from: '2022-01-01',
-    to: '2022-01-02',
+    from: new Date('2022-01-01 08:00'),
+    to: new Date('2022-01-02 08:00'),
     description: 'Wedding photography package',
-    duration: '2 days',
-    totalPrice: 1000,
   },
 ]
 
