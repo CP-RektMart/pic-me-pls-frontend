@@ -13,12 +13,12 @@ import PackageDetailSection from '@/components/package-page/package-detail'
 import PhotoCard from '@/components/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
-export type PhotoCardForm = {
+export type CreatePhotoCardForm = {
   description: string
   image: File
 }
 
-export const packageFormSchema = z.object({
+export const createpackageFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   packageDescription: z
     .string()
@@ -29,10 +29,10 @@ export const packageFormSchema = z.object({
     .refine((val) => val > 0, 'Price must be a positive number'),
 })
 
-export type PackageForm = z.infer<typeof packageFormSchema>
+export type PackageForm = z.infer<typeof createpackageFormSchema>
 
 export default function CreatePackage() {
-  const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
+  const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -45,7 +45,7 @@ export default function CreatePackage() {
   }
 
   const form = useForm<PackageForm>({
-    resolver: zodResolver(packageFormSchema),
+    resolver: zodResolver(createpackageFormSchema),
     defaultValues: {
       name: '',
       packageDescription: '',
