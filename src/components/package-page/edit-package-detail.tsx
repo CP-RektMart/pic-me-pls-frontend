@@ -3,6 +3,7 @@
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 
@@ -16,23 +17,33 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import { CreatePackageForm, CreatePhotoCardForm } from './create-package'
+import { EditPackageForm, EditPhotoCardForm } from './edit-package'
 
-interface packageDetailSectionProps {
+interface EditPackageDetailSectionProps {
   name: string
   description: string
   price: number
-  photoCards: CreatePhotoCardForm[]
-  onSubmit: (data: CreatePackageForm) => Promise<void>
-  form: ReturnType<typeof useForm<CreatePackageForm>>
+  photoCards: EditPhotoCardForm[]
+  onSubmit: (data: EditPackageForm) => Promise<void>
+  form: ReturnType<typeof useForm<EditPackageForm>>
   onDrop: (acceptedFiles: File[]) => void
 }
 
-export default function PackageDetailSection({
+export default function EditPackageDetailSection({
   onSubmit,
   form,
   onDrop,
-}: packageDetailSectionProps) {
+}: EditPackageDetailSectionProps) {
+  const { packageID } = useParams()
+
+  const handleDeleteGallery = async () => {
+    console.log(`Gallery ${packageID} Deleted`)
+  }
+
+  const handleArchiveGallery = async () => {
+    console.log(`Gallery ${packageID} Archived`)
+  }
+
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
@@ -49,7 +60,7 @@ export default function PackageDetailSection({
             <Icon icon='lucide:chevron-left' className='size-5' />
           </div>
         </Link>
-        <h1 className='text-xl font-bold'>New Package</h1>
+        <h1 className='text-xl font-bold'>Edit Package</h1>
       </div>
       <FormField
         control={form.control}
@@ -97,7 +108,7 @@ export default function PackageDetailSection({
       <div>
         <div
           {...getRootProps()}
-          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
+          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 font-medium text-zinc-900'
         >
           <Icon icon='lucide:image-up' />
           <Input {...getInputProps()} type='file' />
@@ -111,13 +122,33 @@ export default function PackageDetailSection({
           <p>Image must be less than 10 MB and of type png, jpg, or jpeg</p>
         )}
       </div>
+
+      <div>
+        <div className='grid h-full grid-cols-2 gap-4 align-top lg:grid-cols-1'>
+          <Button
+            className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'
+            onClick={handleDeleteGallery}
+          >
+            <Icon icon='lucide:trash-2' />
+            Delete Package
+          </Button>
+          <Button
+            className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'
+            onClick={handleArchiveGallery}
+          >
+            <Icon icon='lucide:archive-restore' />
+            Archive Package
+          </Button>
+        </div>
+      </div>
+
       <div className='mt-auto'>
         <Button
           type='button'
           className='w-full hover:bg-zinc-700'
           onClick={form.handleSubmit(onSubmit)}
         >
-          Create
+          Save
         </Button>
       </div>
     </div>

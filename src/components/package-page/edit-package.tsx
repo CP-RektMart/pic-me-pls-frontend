@@ -9,16 +9,16 @@ import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import PackageDetailSection from '@/components/package-page/package-detail'
+import EditPackageDetailSection from '@/components/package-page/edit-package-detail'
 import PhotoCard from '@/components/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
-export type CreatePhotoCardForm = {
+export type EditPhotoCardForm = {
   description: string
   image: File
 }
 
-export const createpackageFormSchema = z.object({
+export const editpackageFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   packageDescription: z
     .string()
@@ -29,10 +29,10 @@ export const createpackageFormSchema = z.object({
     .refine((val) => val > 0, 'Price must be a positive number'),
 })
 
-export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
+export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
-export default function CreatePackage() {
-  const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
+export default function EditPackage() {
+  const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -44,8 +44,8 @@ export default function CreatePackage() {
     setPhotoCards((prev) => prev.filter((_, i) => i !== index))
   }
 
-  const form = useForm<CreatePackageForm>({
-    resolver: zodResolver(createpackageFormSchema),
+  const form = useForm<EditPackageForm>({
+    resolver: zodResolver(editpackageFormSchema),
     defaultValues: {
       name: '',
       packageDescription: '',
@@ -53,7 +53,7 @@ export default function CreatePackage() {
     },
   })
 
-  const onSubmit = async (data: CreatePackageForm) => {
+  const onSubmit = async (data: EditPackageForm) => {
     console.log(data)
     console.log(photoCards)
   }
@@ -76,7 +76,7 @@ export default function CreatePackage() {
   return (
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
-        <PackageDetailSection
+        <EditPackageDetailSection
           name=''
           description=''
           price={0}
