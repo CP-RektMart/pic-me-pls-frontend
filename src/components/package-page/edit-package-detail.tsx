@@ -17,15 +17,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import { PackageForm, PhotoCardForm } from './create-package'
+import { EditPackageForm, EditPhotoCardForm } from './edit-package'
 
 interface packageDetailSectionProps {
   name: string
   description: string
   price: number
-  photoCards: PhotoCardForm[]
-  onSubmit: (data: PackageForm) => Promise<void>
-  form: ReturnType<typeof useForm<PackageForm>>
+  photoCards: EditPhotoCardForm[]
+  onSubmit: (data: EditPackageForm) => Promise<void>
+  form: ReturnType<typeof useForm<EditPackageForm>>
   onDrop: (acceptedFiles: File[]) => void
 }
 
