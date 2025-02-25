@@ -31,7 +31,7 @@ export const packageFormSchema = z.object({
 
 export type PackageForm = z.infer<typeof packageFormSchema>
 
-export default function CreatePackage() {
+export default function EditPackage() {
   const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
