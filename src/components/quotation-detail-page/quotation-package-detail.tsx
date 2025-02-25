@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import { Badge } from '../ui/badge'
+
 interface QuotationPackageDetailProps {
   packageName: string
   packageDescription: string
@@ -26,6 +28,9 @@ export default function QuotationPackageDetail({
         <div className='flex flex-col'>
           <div className='flex flex-row gap-2.5 text-2xl font-bold'>
             {photographerName}
+            <Badge className='bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700'>
+              Photographer
+            </Badge>
           </div>
           <div className='text-sm font-medium text-gray-500'>
             {photographerPackageCounts} Packages
