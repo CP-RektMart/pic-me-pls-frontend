@@ -19,7 +19,7 @@ export default function QuotationDetail() {
           lobortis inceptos turpis.'
         />
         <QuotationDetailSection
-          quotationID='Q-0001'
+          quotationID='QT123456789'
           status='Pending'
           packageName='Package A'
           photographerName='Patthapol Kittikun'
