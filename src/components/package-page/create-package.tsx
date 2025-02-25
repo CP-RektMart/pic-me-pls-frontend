@@ -29,7 +29,7 @@ export const createpackageFormSchema = z.object({
     .refine((val) => val > 0, 'Price must be a positive number'),
 })
 
-export type PackageForm = z.infer<typeof createpackageFormSchema>
+export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 
 export default function CreatePackage() {
   const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
@@ -44,7 +44,7 @@ export default function CreatePackage() {
     setPhotoCards((prev) => prev.filter((_, i) => i !== index))
   }
 
-  const form = useForm<PackageForm>({
+  const form = useForm<CreatePackageForm>({
     resolver: zodResolver(createpackageFormSchema),
     defaultValues: {
       name: '',
@@ -53,7 +53,7 @@ export default function CreatePackage() {
     },
   })
 
-  const onSubmit = async (data: PackageForm) => {
+  const onSubmit = async (data: CreatePackageForm) => {
     console.log(data)
     console.log(photoCards)
   }
