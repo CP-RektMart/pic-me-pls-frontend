@@ -1,5 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
+import FilterPrice from './filter-price'
+
 export default function FilterPopover() {
   return (
     <Tabs
@@ -11,7 +13,7 @@ export default function FilterPopover() {
         <TabsTrigger value='photographer'>Photographer</TabsTrigger>
       </TabsList>
       <TabsContent value='package'>
-        <div>Package Content</div>
+        <FilterPrice />
       </TabsContent>
       <TabsContent value='photographer'>
         <div>Photographer Content</div>
