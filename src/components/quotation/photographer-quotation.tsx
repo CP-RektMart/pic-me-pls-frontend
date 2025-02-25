@@ -36,6 +36,8 @@ const createQuotationFormSchema = z.object({
   description: z.string().min(2, 'Description must be at least 2 characters'),
 })
 
+const isCreating = false
+
 export default function PhotographerQuotation({
   quotations,
 }: PhotographerQuotationProps) {
@@ -66,61 +68,41 @@ export default function PhotographerQuotation({
           <div className='gap-2.5 text-2xl font-bold lg:px-10'>
             Latest Quotations
           </div>
-          <div className='space-y-4 text-2xl font-bold lg:px-10'>
-            Create Quotation
-            <FormProvider {...form}>
-              <FormField
-                control={form.control}
-                name='package'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>
-                      Package
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='Package Name'
-                        {...field}
-                        className='font-normal'
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          {isCreating ? (
+            <div className='space-y-4 text-2xl font-bold lg:px-10'>
+              Create Quotation
+              <FormProvider {...form}>
+                <FormField
+                  control={form.control}
+                  name='package'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>
+                        Package
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder='Package Name'
+                          {...field}
+                          className='font-normal'
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name='customer'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>
-                      Customer Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='Customer Name'
-                        {...field}
-                        className='font-normal'
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className='grid grid-cols-2 gap-2'>
                 <FormField
                   control={form.control}
                   name='customer'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className='text-sm font-medium'>
-                        From
+                        Customer Name
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder='Start Time'
+                          placeholder='Customer Name'
                           {...field}
                           className='font-normal'
                         />
@@ -129,16 +111,60 @@ export default function PhotographerQuotation({
                     </FormItem>
                   )}
                 />
+
+                <div className='grid grid-cols-2 gap-2'>
+                  <FormField
+                    control={form.control}
+                    name='customer'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-sm font-medium'>
+                          From
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='Start Time'
+                            {...field}
+                            className='font-normal'
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name='customer'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-sm font-medium'>
+                          To
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='End Time'
+                            {...field}
+                            className='font-normal'
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
                 <FormField
                   control={form.control}
                   name='customer'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='text-sm font-medium'>To</FormLabel>
+                      <FormLabel className='text-sm font-medium'>
+                        Description
+                      </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder='End Time'
+                          placeholder='Quotation Remarks'
                           {...field}
                           className='font-normal'
                         />
@@ -147,71 +173,55 @@ export default function PhotographerQuotation({
                     </FormItem>
                   )}
                 />
-              </div>
 
-              <FormField
-                control={form.control}
-                name='customer'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>
-                      Description
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='Quotation Remarks'
-                        {...field}
-                        className='font-normal'
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className='mt-auto'>
-                <Button
-                  type='button'
-                  className='w-full hover:bg-zinc-700'
-                  onClick={form.handleSubmit(onSubmit)}
-                >
-                  Create
-                </Button>
-              </div>
-            </FormProvider>
-            <hr className='border border-zinc-400' />
-            <div className='flex flex-col gap-2 p-4'>
-              <div className='flex flex-row justify-between'>
-                <div className='text-sm font-normal'>Total hours</div>
-                <div className='text-sm font-normal'>
-                  {(
-                    (new Date(quotations[0].to).getTime() -
-                      new Date(quotations[0].from).getTime()) /
-                    (1000 * 60 * 60)
-                  ).toString()}{' '}
-                  Hours
+                <div className='mt-auto'>
+                  <Button
+                    type='button'
+                    className='w-full hover:bg-zinc-700'
+                    onClick={form.handleSubmit(onSubmit)}
+                  >
+                    Create
+                  </Button>
                 </div>
-              </div>
-
-              <div className='flex flex-row justify-between'>
-                <div className='text-sm font-normal'>Price Per Hour</div>
-                <div className='text-sm font-normal'>
-                  {quotations[0].pricePerHour} Baht
+              </FormProvider>
+              <hr className='border border-zinc-400' />
+              <div className='flex flex-col gap-2 p-4'>
+                <div className='flex flex-row justify-between'>
+                  <div className='text-sm font-normal'>Total hours</div>
+                  <div className='text-sm font-normal'>
+                    {(
+                      (new Date(quotations[0].to).getTime() -
+                        new Date(quotations[0].from).getTime()) /
+                      (1000 * 60 * 60)
+                    ).toString()}{' '}
+                    Hours
+                  </div>
                 </div>
-              </div>
 
-              <div className='flex flex-row justify-between'>
-                <div className='text-sm font-normal'>Total Price</div>
-                <div className='text-sm font-normal'>
-                  {quotations[0].pricePerHour *
-                    ((new Date(quotations[0].to).getTime() -
-                      new Date(quotations[0].from).getTime()) /
-                      (1000 * 60 * 60))}{' '}
-                  Baht
+                <div className='flex flex-row justify-between'>
+                  <div className='text-sm font-normal'>Price Per Hour</div>
+                  <div className='text-sm font-normal'>
+                    {quotations[0].pricePerHour} Baht
+                  </div>
+                </div>
+
+                <div className='flex flex-row justify-between'>
+                  <div className='text-sm font-normal'>Total Price</div>
+                  <div className='text-sm font-normal'>
+                    {quotations[0].pricePerHour *
+                      ((new Date(quotations[0].to).getTime() -
+                        new Date(quotations[0].from).getTime()) /
+                        (1000 * 60 * 60))}{' '}
+                    Baht
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className='flex flex-col gap-4 space-y-4 text-2xl font-bold lg:px-10'>
+              <div className='text-center'>{quotations[0].quotationID}</div>
+            </div>
+          )}
         </div>
       )}
     </div>
