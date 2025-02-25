@@ -1,6 +1,21 @@
 import PhotographerQuotation from '@/components/quotation/photographer-quotation'
 import { Button } from '@/components/ui/button'
 
+export interface quotation {
+  quotationID: string
+  status: string
+  packageName: string
+  photographerName: string
+  customerName: string
+  from: string
+  to: string
+  description: string
+  duration: string
+  totalPrice: number
+}
+
+const quotations: quotation[] = []
+
 export default function QuotationPage() {
   return (
     <div className='flex w-full flex-col gap-6 px-32 py-4'>
@@ -10,7 +25,7 @@ export default function QuotationPage() {
         <Button>New Quotation</Button>
       </div>
 
-      <PhotographerQuotation />
+      <PhotographerQuotation quotations={quotations} />
     </div>
   )
 }
