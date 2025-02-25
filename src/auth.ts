@@ -100,6 +100,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
             session.user.bankBranch = token.user.bankBranch
             session.user.instagram = token.user.instagram
             session.user.facebook = token.user.facebook
+            session.user.image = token.user.profilePictureUrl
           }
 
           return session
@@ -114,7 +115,7 @@ declare module 'next-auth' {
     accessToken?: string
     refreshToken?: string
     expireAt?: number
-    user?: Omit<UserType, 'id'> & { userId: number }
+    user?: Omit<UserType, 'id'> & { userId: number } & { image: string }
   }
 
   interface User {

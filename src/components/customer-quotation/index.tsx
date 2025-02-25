@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 
 import QuotationCarousel from '@/components/customer-quotation/carousel'
 import QuotationDetails from '@/components/customer-quotation/details'
+import ProfileHeader from '@/components/customer-quotation/profile-header'
 
 const images = [
   {
@@ -43,17 +44,21 @@ const mockData = {
 export default async function Page({ id }: { id: number }) {
   const session = await auth()
 
-  if (!session) {
+  if (!session || !session.user) {
     redirect(`/login`)
   }
 
   return (
-    <div className='mx-auto p-4'>
+    <div className='mx-auto p-4 lg:py-0'>
       <p className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</p>
-      <div className='mx-auto flex flex-col justify-between gap-6 lg:flex-row'>
-        <div className='flex flex-col gap-6 p-6'>
-          {/* photographer profile */}
-          <div>Photographer profile</div>
+      <div className='mx-auto flex flex-col justify-between gap-4 lg:flex-row lg:gap-6'>
+        <div className='flex flex-col'>
+          <ProfileHeader
+            imageUrl={session.user.image}
+            name={session.user.name}
+            galleriesNumber={999}
+          />
+
           {/* package details */}
           <div className='hidden lg:block'>
             <p className='text-xl font-bold'>{mockData.packageName}</p>
