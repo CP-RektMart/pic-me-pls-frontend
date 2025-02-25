@@ -2,6 +2,12 @@ import QuotationDetailSection from './quotation-detail-section'
 import QuotationPackageDetail from './quotation-package-detail'
 
 export default function QuotationDetail() {
+  const previewImages = [
+    '/packageImage1.svg',
+    '/packageImage2.svg',
+    '/packageImage3.svg',
+  ]
+
   return (
     <div className='w-full gap-6 px-4 py-6 lg:px-16'>
       <div className='text-2xl font-bold'>Quotation</div>
@@ -17,6 +23,7 @@ export default function QuotationDetail() {
           Magna dolor pellentesque pellentesque proin placerat. 
           Tristique interdum curae fames bibendum litora; 
           lobortis inceptos turpis.'
+          packageImages={previewImages}
         />
         <QuotationDetailSection
           quotationID='QT123456789'

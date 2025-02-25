@@ -1,5 +1,13 @@
 import Image from 'next/image'
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+
 import { Badge } from '../ui/badge'
 
 interface QuotationPackageDetailProps {
@@ -7,6 +15,7 @@ interface QuotationPackageDetailProps {
   packageDescription: string
   photographerPackageCounts: number
   photographerName: string
+  packageImages: string[]
 }
 
 export default function QuotationPackageDetail({
@@ -14,6 +23,7 @@ export default function QuotationPackageDetail({
   packageDescription,
   photographerPackageCounts,
   photographerName,
+  packageImages,
 }: QuotationPackageDetailProps) {
   return (
     <div className='space-y-6 px-2 py-6 lg:px-6'>
@@ -37,10 +47,31 @@ export default function QuotationPackageDetail({
           </div>
         </div>
       </div>
+
       <div className='flex flex-col gap-y-2 text-xl font-bold'>
         {packageName}
         <div className='text-sm font-normal'>{packageDescription}</div>
       </div>
+
+      <Carousel className='w-full max-w-xs'>
+        <CarouselContent className='items-center justify-center'>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <CarouselItem key={index}>
+              <div className='justify-center p-1'>
+                <Image
+                  src={packageImages[index % packageImages.length]}
+                  alt='Package Image'
+                  className='rounded-lg'
+                  width={400}
+                  height={400}
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     </div>
   )
 }
