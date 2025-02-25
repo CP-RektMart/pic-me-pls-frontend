@@ -1,3 +1,5 @@
+import { useParams } from 'next/navigation'
+
 import QuotationCarousel from '@/components/customer-quotation/carousel'
 import QuotationDetails from '@/components/customer-quotation/details'
 
@@ -20,9 +22,25 @@ const images = [
   },
 ]
 
-export default async function Page({ id }: { id: number }) {
+const mockData = {
+  status: 'Pending',
+  packageName: 'Package A',
+  photographerName: 'Chanatpakorn S.',
+  customerName: 'Chanotai K.',
+  from: '20/02/2025 14:00',
+  to: '20/02/2025 19:00',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas augue tortor, luctus eget laoreet et, interdum fringilla urna. ',
+  duration: 5,
+  totalPrice: 2000,
+}
+
+export default function Page() {
+  const { id } = useParams<{ id: string }>()
+
   return (
     <div className='mx-auto p-4'>
+      <p className='mb-6 text-2xl font-bold'>Quotation</p>
       <div className='mx-auto flex flex-row justify-between gap-6'>
         <div className='flex flex-col gap-6 p-6'>
           <div>Photographer profile</div>
@@ -30,16 +48,16 @@ export default async function Page({ id }: { id: number }) {
           <QuotationCarousel images={images} />
         </div>
         <QuotationDetails
-          quotationId={id}
-          status='Paid'
-          packageName='Package A'
-          photographerName='Chanatpakorn S.'
-          customerName='Chanotai K.'
-          from='20/02/2025 14:00'
-          to='20/02/2025 19:00'
-          description='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas augue tortor, luctus eget laoreet et, interdum fringilla urna. '
-          duration={5}
-          totalPrice={2000}
+          quotationId={parseInt(id)}
+          status={mockData.status}
+          packageName={mockData.packageName}
+          photographerName={mockData.photographerName}
+          customerName={mockData.customerName}
+          from={mockData.from}
+          to={mockData.to}
+          description={mockData.description}
+          duration={mockData.duration}
+          totalPrice={mockData.totalPrice}
         />
       </div>
     </div>

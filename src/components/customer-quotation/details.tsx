@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator'
 
 interface QuotationDetailsProps {
   quotationId: number
-  status: 'Pending' | 'Confirm' | 'Paid' | 'Cancelled'
+  status: string
   packageName: string
   photographerName: string
   customerName: string
@@ -17,7 +17,7 @@ interface QuotationDetailsProps {
   totalPrice: number
 }
 
-const statusColor = {
+const statusColor: { [key: string]: string } = {
   Pending: 'text-amber-600',
   Confirm: 'text-sky-600',
   Paid: 'text-emerald-600',
