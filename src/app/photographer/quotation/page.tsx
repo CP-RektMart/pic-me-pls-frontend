@@ -10,6 +10,7 @@ export interface quotation {
   from: Date
   to: Date
   description: string
+  pricePerHour: number
 }
 
 const quotations: quotation[] = [
@@ -22,6 +23,7 @@ const quotations: quotation[] = [
     from: new Date('2022-01-01 08:00'),
     to: new Date('2022-01-02 08:00'),
     description: 'Wedding photography package',
+    pricePerHour: 400,
   },
 ]
 

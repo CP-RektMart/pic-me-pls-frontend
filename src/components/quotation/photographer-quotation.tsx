@@ -194,7 +194,9 @@ export default function PhotographerQuotation({
               </div>
               <div className='flex flex-row justify-between'>
                 <div className='text-sm font-normal'>Price Per Hour</div>
-                <div className='text-sm font-normal'>{}</div>
+                <div className='text-sm font-normal'>
+                  {quotations[0].pricePerHour} Baht
+                </div>
               </div>
             </div>
           </div>
