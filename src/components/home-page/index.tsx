@@ -1,5 +1,6 @@
 import { UserProfile } from '@/types/user'
 
+import FilterMultiSelect from './filter-multi-select'
 import SearchBar from './search-bar'
 
 export default function HomePageComponent({
@@ -10,6 +11,7 @@ export default function HomePageComponent({
   return (
     <div className='flex w-screen flex-col px-4 pt-4 md:px-8'>
       <SearchBar userProfile={userProfile} />
+      <FilterMultiSelect />
     </div>
   )
 }
