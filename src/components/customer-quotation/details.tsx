@@ -1,21 +1,9 @@
 import React from 'react'
 
 import { cn } from '@/lib/utils'
+import { type QuotationDetailsProps } from '@/types/quotation'
 
 import { Separator } from '@/components/ui/separator'
-
-interface QuotationDetailsProps {
-  quotationId: number
-  status: string
-  packageName: string
-  photographerName: string
-  customerName: string
-  from: string
-  to: string
-  description: string
-  duration: number
-  totalPrice: number
-}
 
 const statusColor: { [key: string]: string } = {
   Pending: 'text-amber-600',
@@ -26,7 +14,7 @@ const statusColor: { [key: string]: string } = {
 
 export default function QuotationDetails({
   quotationId,
-  status,
+  quotationStatus,
   packageName,
   photographerName,
   customerName,
@@ -38,7 +26,11 @@ export default function QuotationDetails({
 }: QuotationDetailsProps) {
   const detailItems = [
     { title: 'Quotation ID', info: quotationId },
-    { title: 'Status', info: status, style: statusColor[status] },
+    {
+      title: 'Status',
+      info: quotationStatus,
+      style: statusColor[quotationStatus],
+    },
     { title: 'Package Name', info: packageName },
     { title: 'Photographer Name', info: photographerName },
     { title: 'Customer Name', info: customerName },
