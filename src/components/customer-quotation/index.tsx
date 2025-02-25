@@ -37,7 +37,7 @@ export default function Page({
 
   return (
     <Container className='py-4 lg:py-6'>
-      <p className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</p>
+      <h1 className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</h1>
       <div className='mx-auto flex flex-col justify-between gap-4 lg:flex-row lg:gap-6'>
         <div className='flex flex-1 flex-col gap-6'>
           <ProfileHeader
@@ -48,7 +48,7 @@ export default function Page({
 
           {/* package details */}
           <div className='hidden lg:block'>
-            <p className='text-xl font-bold'>{packageName}</p>
+            <h2 className='text-xl font-bold'>{packageName}</h2>
             <p className='mt-2 max-w-96 text-sm'>{description}</p>
             <QuotationCarousel images={quotationImages} />
           </div>
