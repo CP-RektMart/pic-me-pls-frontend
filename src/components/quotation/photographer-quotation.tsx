@@ -20,6 +20,9 @@ export default function PhotographerQuotation({
           <div className='gap-2.5 text-2xl font-bold lg:px-10'>
             Latest Quotations
           </div>
+          <div className='gap-2.5 text-2xl font-bold lg:px-10'>
+            Create Quotation
+          </div>
         </div>
       )}
     </div>
