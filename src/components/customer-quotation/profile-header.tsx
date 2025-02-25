@@ -14,7 +14,7 @@ export default function ProfileHeader({
   galleriesNumber,
 }: ProfileHeaderProps) {
   return (
-    <div className='flex flex-row gap-6'>
+    <div className='flex flex-row items-center gap-6'>
       <Image
         src={imageUrl || '/image.png'}
         alt='image profile'
@@ -22,15 +22,20 @@ export default function ProfileHeader({
         width={112}
         height={112}
       />
-      <div>
-        <div className='flex flex-col gap-1 lg:gap-2.5'>
+      <div className='flex flex-col gap-1'>
+        <div className='flex flex-row items-center gap-2.5'>
           <p className='text-xl font-bold lg:text-2xl'>{name}</p>
-          <div className='flex flex-row items-center gap-3'>
-            <Badge variant='photographer'>Photographer</Badge>
-            <p className='text-center text-sm font-medium text-gray-500 lg:mt-1'>
-              {galleriesNumber} Galleries
-            </p>
-          </div>
+          <Badge variant='photographer' className='hidden lg:block'>
+            Photographer
+          </Badge>
+        </div>
+        <div className='flex flex-row items-center gap-3'>
+          <Badge variant='photographer' className='lg:hidden'>
+            Photographer
+          </Badge>
+          <p className='text-center text-sm font-medium text-gray-500 lg:mt-1'>
+            {galleriesNumber} Galleries
+          </p>
         </div>
       </div>
     </div>

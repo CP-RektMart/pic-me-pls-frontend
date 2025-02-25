@@ -34,7 +34,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
   }, [api])
 
   return (
-    <div className='relative mx-auto hidden w-[450px] lg:block'>
+    <div className='relative mx-auto mt-6 w-[450px]'>
       <Carousel
         setApi={setApi}
         className='w-full'

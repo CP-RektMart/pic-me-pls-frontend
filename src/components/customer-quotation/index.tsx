@@ -52,7 +52,7 @@ export default async function Page({ id }: { id: number }) {
     <div className='mx-auto p-4 lg:py-0'>
       <p className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</p>
       <div className='mx-auto flex flex-col justify-between gap-4 lg:flex-row lg:gap-6'>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-6'>
           <ProfileHeader
             imageUrl={session.user.image}
             name={session.user.name}
@@ -63,8 +63,8 @@ export default async function Page({ id }: { id: number }) {
           <div className='hidden lg:block'>
             <p className='text-xl font-bold'>{mockData.packageName}</p>
             <p className='mt-2 text-sm'>{mockData.description}</p>
+            <QuotationCarousel images={images} />
           </div>
-          <QuotationCarousel images={images} />
         </div>
 
         <QuotationDetails
