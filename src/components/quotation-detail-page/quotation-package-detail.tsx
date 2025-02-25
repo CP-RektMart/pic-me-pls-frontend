@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
+import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 
 import {
@@ -75,7 +76,15 @@ export default function QuotationPackageDetail({
         <div className='text-sm font-normal'>{packageDescription}</div>
       </div>
 
-      <Carousel className='mx-auto flex w-full max-w-xs' setApi={setApi}>
+      <Carousel
+        className='mx-auto flex w-full max-w-xs'
+        setApi={setApi}
+        plugins={[
+          Autoplay({
+            delay: 3000,
+          }),
+        ]}
+      >
         <CarouselContent className='items-center justify-center'>
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>
