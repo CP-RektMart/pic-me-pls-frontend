@@ -15,7 +15,13 @@ export default function PhotographerQuotation({
           <Icon icon='lucide:sticky-note' className='size-20' />
           No Quotations To Show
         </div>
-      ) : null}
+      ) : (
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='gap-2.5 text-2xl font-bold lg:px-10'>
+            Latest Quotations
+          </div>
+        </div>
+      )}
     </div>
   )
 }

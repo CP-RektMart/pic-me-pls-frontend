@@ -14,7 +14,20 @@ export interface quotation {
   totalPrice: number
 }
 
-const quotations: quotation[] = []
+const quotations: quotation[] = [
+  {
+    quotationID: 'Q0001',
+    status: 'Pending',
+    packageName: 'Wedding Package',
+    photographerName: 'John Doe',
+    customerName: 'Jane Doe',
+    from: '2022-01-01',
+    to: '2022-01-02',
+    description: 'Wedding photography package',
+    duration: '2 days',
+    totalPrice: 1000,
+  },
+]
 
 export default function QuotationPage() {
   return (
