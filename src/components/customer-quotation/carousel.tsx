@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -22,10 +22,10 @@ interface ImageCarouselProps {
 }
 
 export default function ImageCarousel({ images }: ImageCarouselProps) {
-  const [api, setApi] = React.useState<CarouselApi | null>(null)
-  const [current, setCurrent] = React.useState<number>(0)
+  const [api, setApi] = useState<CarouselApi | null>(null)
+  const [current, setCurrent] = useState<number>(0)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!api) return
 
     api.on('select', () => {
