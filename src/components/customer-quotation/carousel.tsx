@@ -34,7 +34,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
   }, [api])
 
   return (
-    <div className='relative hidden w-[450px] lg:block'>
+    <div className='relative mx-auto hidden w-[450px] lg:block'>
       <Carousel
         setApi={setApi}
         className='w-full'
@@ -45,12 +45,12 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index}>
-              <div className='relative mx-auto aspect-[16/9] w-96 rounded-2xl'>
+              <div className='relative mx-auto aspect-[16/9] w-96 rounded-2xl bg-zinc-800'>
                 <Image
                   src={image.url || '/placeholder.svg'}
                   alt={image.name}
                   fill
-                  className='rounded-2xl'
+                  className='rounded-2xl object-contain'
                   priority={index === 0}
                 />
               </div>
