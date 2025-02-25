@@ -25,7 +25,10 @@ export const packageFormSchema = z.object({
   packageDescription: z
     .string()
     .min(2, 'Description must be at least 2 characters'),
-  price: z.number().min(1, 'Price must be at least 1'),
+  price: z
+    .string()
+    .transform((val) => parseFloat(val))
+    .refine((val) => val > 0, 'Price must be a positive number'),
 })
 
 export type PackageForm = z.infer<typeof packageFormSchema>
