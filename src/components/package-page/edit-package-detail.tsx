@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input'
 
 import { EditPackageForm, EditPhotoCardForm } from './edit-package'
 
-interface packageDetailSectionProps {
+interface EditPackageDetailSectionProps {
   name: string
   description: string
   price: number
@@ -33,7 +33,7 @@ export default function EditPackageDetailSection({
   onSubmit,
   form,
   onDrop,
-}: packageDetailSectionProps) {
+}: EditPackageDetailSectionProps) {
   const { packageID } = useParams()
 
   const handleDeleteGallery = async () => {
