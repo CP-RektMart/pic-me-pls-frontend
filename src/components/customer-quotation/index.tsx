@@ -29,16 +29,9 @@ export default function Page({
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
 
-  const handleCancel = () => {
-    setStatus('Cancelled')
-  }
-
-  const handleConfirm = () => {
-    setStatus('Confirm')
-  }
-
   const handlePayment = () => {
     setStatus('Paid')
+    // TODO: handle payment
   }
 
   return (
@@ -75,8 +68,12 @@ export default function Page({
           />
           <QuotationButton
             status={status}
-            onCancel={handleCancel}
-            onConfirm={handleConfirm}
+            onCancel={() => {
+              setStatus('Cancelled')
+            }}
+            onConfirm={() => {
+              setStatus('Confirm')
+            }}
             onPay={handlePayment}
           />
         </div>

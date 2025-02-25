@@ -1,6 +1,4 @@
-import { auth } from '@/auth'
 import { type QuotationStatus } from '@/types/quotation'
-import { redirect } from 'next/navigation'
 
 import CustomerQuotation from '@/components/customer-quotation/index'
 
@@ -10,16 +8,14 @@ export default async function Page({
   params: Promise<{ id: number }>
 }) {
   const quotationId = (await params).id
-  const session = await auth()
-
-  if (!session) {
-    redirect('/login')
-  }
 
   const mockData = {
     status: 'Pending',
     packageName: 'Package A',
-    photographerName: 'Chanatpakorn S.',
+    photographer: {
+      name: 'Pattapol K.',
+      imageUrl: 'https://images.unsplash.com/photo-1517849845537-4d257902454a',
+    },
     customerName: 'Chanotai K.',
     from: '20/02/2025 14:00',
     to: '20/02/2025 19:00',
@@ -53,12 +49,13 @@ export default async function Page({
 
   return (
     <CustomerQuotation
-      {...mockData}
+      photographerName={mockData.photographer.name}
       quotationImages={mockData.images}
       quotationId={quotationId}
       quotationStatus={mockData.status as QuotationStatus}
-      photographerImageUrl={session.user?.image || ''}
+      photographerImageUrl={mockData.photographer.imageUrl}
       galleriesNumber={5}
+      {...mockData}
     />
   )
 }
