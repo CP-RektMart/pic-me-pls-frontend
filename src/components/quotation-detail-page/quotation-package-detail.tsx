@@ -1,8 +1,20 @@
 import Image from 'next/image'
 
-export default function QuotationPackageDetail() {
+interface QuotationPackageDetailProps {
+  packageName: string
+  packageDescription: string
+  photographerPackageCounts: number
+  photographerName: string
+}
+
+export default function QuotationPackageDetail({
+  packageName,
+  packageDescription,
+  photographerPackageCounts,
+  photographerName,
+}: QuotationPackageDetailProps) {
   return (
-    <div className='gap-6 p-6'>
+    <div className='space-y-6 p-6'>
       <div className='flex flex-row items-center gap-6'>
         <Image
           src='/photographerProfile.svg'
@@ -13,10 +25,16 @@ export default function QuotationPackageDetail() {
         />
         <div className='flex flex-col'>
           <div className='flex flex-row gap-2.5 text-2xl font-bold'>
-            Patthapol Kittikun
+            {photographerName}
           </div>
-          <div className='text-sm font-medium text-gray-500'>10 Galleries</div>
+          <div className='text-sm font-medium text-gray-500'>
+            {photographerPackageCounts} Packages
+          </div>
         </div>
+      </div>
+      <div className='flex flex-col gap-y-2 text-xl font-bold'>
+        {packageName}
+        <div className='text-sm font-normal'>{packageDescription}</div>
       </div>
     </div>
   )
