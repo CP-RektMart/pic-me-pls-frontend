@@ -1,3 +1,4 @@
+import QuotationDetailSection from './quotation-detail-section'
 import QuotationPackageDetail from './quotation-package-detail'
 
 export default function QuotationDetail() {
@@ -16,6 +17,24 @@ export default function QuotationDetail() {
           Magna dolor pellentesque pellentesque proin placerat. 
           Tristique interdum curae fames bibendum litora; 
           lobortis inceptos turpis.'
+        />
+        <QuotationDetailSection
+          quotationID='Q-0001'
+          status='Pending'
+          packageName='Package A'
+          photographerName='Patthapol Kittikun'
+          customerName='Chanatpakorn Sirintornsophon'
+          from='20/02/2025 14:00'
+          to='20/02/2025 19:00'
+          description='Lorem ipsum odor amet, consectetuer adipiscing elit.
+          Pharetra ante finibus fames tortor pellentesque fringilla placerat.
+          Curabitur urna donec tortor pulvinar pellentesque.
+          Potenti diam sapien nostra inceptos interdum ridiculus condimentum.
+          Magna dolor pellentesque pellentesque proin placerat.
+          Tristique interdum curae fames bibendum litora;
+          lobortis inceptos turpis.'
+          duration='5 Hours'
+          totalPrice={2000}
         />
       </div>
     </div>
