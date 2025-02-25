@@ -192,10 +192,22 @@ export default function PhotographerQuotation({
                   Hours
                 </div>
               </div>
+
               <div className='flex flex-row justify-between'>
                 <div className='text-sm font-normal'>Price Per Hour</div>
                 <div className='text-sm font-normal'>
                   {quotations[0].pricePerHour} Baht
+                </div>
+              </div>
+
+              <div className='flex flex-row justify-between'>
+                <div className='text-sm font-normal'>Total Price</div>
+                <div className='text-sm font-normal'>
+                  {quotations[0].pricePerHour *
+                    ((new Date(quotations[0].to).getTime() -
+                      new Date(quotations[0].from).getTime()) /
+                      (1000 * 60 * 60))}{' '}
+                  Baht
                 </div>
               </div>
             </div>
