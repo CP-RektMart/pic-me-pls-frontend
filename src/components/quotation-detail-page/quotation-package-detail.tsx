@@ -25,14 +25,14 @@ export default function QuotationPackageDetail({
           width={64}
           height={64}
         />
-        <div className='flex flex-col'>
-          <div className='flex flex-row gap-2.5 text-2xl font-bold'>
+        <div className='grid grid-cols-2 gap-1 lg:grid-cols-[70%_30%]'>
+          <div className='col-span-2 flex flex-row gap-2.5 text-2xl font-bold lg:col-span-1'>
             {photographerName}
-            <Badge className='bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700'>
-              Photographer
-            </Badge>
           </div>
-          <div className='text-sm font-medium text-gray-500'>
+          <Badge className='justify-center bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700'>
+            Photographer
+          </Badge>
+          <div className='self-center text-sm font-medium text-gray-500'>
             {photographerPackageCounts} Packages
           </div>
         </div>
