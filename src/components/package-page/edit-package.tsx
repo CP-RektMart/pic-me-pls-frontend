@@ -13,12 +13,12 @@ import EditPackageDetailSection from '@/components/package-page/edit-package-det
 import PhotoCard from '@/components/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
-export type PhotoCardForm = {
+export type EditPhotoCardForm = {
   description: string
   image: File
 }
 
-export const packageFormSchema = z.object({
+export const editpackageFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   packageDescription: z
     .string()
@@ -29,10 +29,10 @@ export const packageFormSchema = z.object({
     .refine((val) => val > 0, 'Price must be a positive number'),
 })
 
-export type PackageForm = z.infer<typeof packageFormSchema>
+export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
 export default function EditPackage() {
-  const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
+  const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -44,8 +44,8 @@ export default function EditPackage() {
     setPhotoCards((prev) => prev.filter((_, i) => i !== index))
   }
 
-  const form = useForm<PackageForm>({
-    resolver: zodResolver(packageFormSchema),
+  const form = useForm<EditPackageForm>({
+    resolver: zodResolver(editpackageFormSchema),
     defaultValues: {
       name: '',
       packageDescription: '',
@@ -53,7 +53,7 @@ export default function EditPackage() {
     },
   })
 
-  const onSubmit = async (data: PackageForm) => {
+  const onSubmit = async (data: EditPackageForm) => {
     console.log(data)
     console.log(photoCards)
   }
