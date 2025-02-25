@@ -53,7 +53,7 @@ export default function QuotationPackageDetail({
         <div className='text-sm font-normal'>{packageDescription}</div>
       </div>
 
-      <Carousel className='w-full max-w-xs'>
+      <Carousel className='mx-auto flex w-full max-w-xs'>
         <CarouselContent className='items-center justify-center'>
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>
