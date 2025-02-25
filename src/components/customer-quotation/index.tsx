@@ -7,6 +7,7 @@ import {
   type QuotationStatus,
 } from '@/types/quotation'
 
+import Container from '@/components/container'
 import QuotationButton from '@/components/customer-quotation/button'
 import QuotationCarousel from '@/components/customer-quotation/carousel'
 import QuotationDetails from '@/components/customer-quotation/details'
@@ -35,10 +36,10 @@ export default function Page({
   }
 
   return (
-    <div className='mx-auto p-4 lg:px-0'>
+    <Container className='py-4 lg:py-6'>
       <p className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</p>
       <div className='mx-auto flex flex-col justify-between gap-4 lg:flex-row lg:gap-6'>
-        <div className='flex flex-col gap-6'>
+        <div className='flex flex-1 flex-col gap-6'>
           <ProfileHeader
             imageUrl={photographerImageUrl}
             name={photographerName}
@@ -53,7 +54,7 @@ export default function Page({
           </div>
         </div>
 
-        <div>
+        <div className='flex-1'>
           <QuotationDetails
             quotationId={quotationId}
             quotationStatus={status as QuotationStatus}
@@ -78,6 +79,6 @@ export default function Page({
           />
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
