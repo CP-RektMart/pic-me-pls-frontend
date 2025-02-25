@@ -16,7 +16,7 @@ export default function QuotationPackageDetail({
   photographerName,
 }: QuotationPackageDetailProps) {
   return (
-    <div className='space-y-6 p-6'>
+    <div className='space-y-6 px-2 py-6 lg:px-6'>
       <div className='flex flex-row items-center gap-6'>
         <Image
           src='/photographerProfile.svg'

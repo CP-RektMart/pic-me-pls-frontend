@@ -40,7 +40,7 @@ export default function QuotationDetailSection({
   }
 
   return (
-    <div className='flex flex-col gap-4 px-4 lg:px-20'>
+    <div className='flex flex-col gap-4 px-5 py-6 lg:px-20'>
       <div className='flex flex-row justify-between text-sm font-normal'>
         <div>Quotation ID</div>
         <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
