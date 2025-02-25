@@ -21,9 +21,9 @@ export default function QuotationPackageDetail({
         <Image
           src='/photographerProfile.svg'
           alt='Photographer'
-          className='rounded-full'
-          width={112}
-          height={112}
+          className='rounded-full lg:size-28'
+          width={64}
+          height={64}
         />
         <div className='flex flex-col'>
           <div className='flex flex-row gap-2.5 text-2xl font-bold'>
