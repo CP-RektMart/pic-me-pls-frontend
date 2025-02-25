@@ -41,6 +41,22 @@ const isCreating = false
 export default function PhotographerQuotation({
   quotations,
 }: PhotographerQuotationProps) {
+  let statusColour
+
+  switch (quotations[0].status) {
+    case 'Pending':
+      statusColour = 'text-amber-700'
+      break
+    case 'Confirmed':
+      statusColour = 'text-sky-700'
+      break
+    case 'Paid':
+      statusColour = 'text-emerald-700'
+      break
+    default:
+      statusColour = 'text-red-700'
+  }
+
   const form = useForm<CreateQuotationProps>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
@@ -220,6 +236,107 @@ export default function PhotographerQuotation({
           ) : (
             <div className='flex flex-col gap-4 space-y-4 text-2xl font-bold lg:px-10'>
               <div className='text-center'>{quotations[0].quotationID}</div>
+
+              <div className='flex flex-col gap-4 py-6'>
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Quotation ID</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].quotationID}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Status</div>
+                  <div
+                    className={`max-h-24 max-w-48 overflow-hidden text-ellipsis text-right ${statusColour}`}
+                  >
+                    {quotations[0].status}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Package Name</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].packageName}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Photographer Name</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].photographerName}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Customer Name</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].customerName}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>From</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].from.toLocaleString()}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>To</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].to.toLocaleString()}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Description</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].description}
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Duration</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {(
+                      (new Date(quotations[0].to).getTime() -
+                        new Date(quotations[0].from).getTime()) /
+                      (1000 * 60 * 60)
+                    ).toString()}{' '}
+                    Hours
+                  </div>
+                </div>
+
+                <hr className='border border-gray-200' />
+
+                <div className='flex flex-row justify-between text-sm font-normal'>
+                  <div>Total Price</div>
+                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                    {quotations[0].pricePerHour *
+                      ((new Date(quotations[0].to).getTime() -
+                        new Date(quotations[0].from).getTime()) /
+                        (1000 * 60 * 60))}{' '}
+                    Baht
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>
