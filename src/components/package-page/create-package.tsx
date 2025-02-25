@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
+import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useDropzone } from 'react-dropzone'
@@ -11,9 +12,6 @@ import { z } from 'zod'
 import PackageDetailSection from '@/components/package-page/package-detail'
 import PhotoCard from '@/components/package-page/photoCard'
 import { Input } from '@/components/ui/input'
-
-export const MAX_FILES = 10
-export const MAX_FILE_SIZE = 10000000
 
 export type PhotoCardForm = {
   description: string
