@@ -17,6 +17,7 @@ interface formData {
 export default async function updateProfile(
   formData: formData
 ): Promise<ServerResponse<string | null>> {
+  // TODO: Change to openapi-fetcher
   try {
     const session = await auth()
 

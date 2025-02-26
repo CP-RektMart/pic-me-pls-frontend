@@ -15,7 +15,9 @@ export default async function Page() {
     '/api/v1/photographer/citizen-card'
   )
 
-  console.log(response)
+  if (response.status === 404) {
+    redirect('/photographer/verify')
+  }
 
   if (!response.ok) {
     redirect('/login')
