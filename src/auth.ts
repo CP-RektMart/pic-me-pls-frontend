@@ -61,7 +61,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
 
           // Login
           try {
-            console.log('here1')
             const { data, response } = await client.POST('/api/v1/auth/login', {
               body: {
                 idToken: account.id_token,
@@ -69,14 +68,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
               },
             })
 
-            console.log('here2')
             if (
               response.status !== 200 ||
               !data ||
               !data.result ||
               'error' in data
             ) {
-              console.log(response, data)
               return false
             }
 
