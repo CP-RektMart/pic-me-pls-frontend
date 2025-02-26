@@ -4,6 +4,198 @@
  */
 
 export interface paths {
+  '/api/v1/admin/categories': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * create category
+     * @description create category
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description request body */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateCategoryRequest']
+        }
+      }
+      responses: {
+        /** @description Created */
+        201: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/admin/categories/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * delete category
+     * @description delete category
+     */
+    delete: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description category id */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    options?: never
+    head?: never
+    /**
+     * update category
+     * @description update category
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description category id */
+          id: number
+        }
+        cookie?: never
+      }
+      /** @description request body (don't need to include id) */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.UpdateCategoryRequest']
+        }
+      }
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
   '/api/v1/auth/login': {
     parameters: {
       query?: never
@@ -193,8 +385,8 @@ export interface paths {
     get?: never
     put?: never
     /**
-     * register
-     * @description register
+     * Register
+     * @description Register
      */
     post: {
       parameters: {
@@ -243,6 +435,211 @@ export interface paths {
     options?: never
     head?: never
     patch?: never
+    trace?: never
+  }
+  '/api/v1/categories': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * list category
+     * @description list category
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number for pagination (default: 1) */
+          page?: number
+          /** @description Number of records per page (default: 20) */
+          pageSize?: number
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-PaginationResponse[dto_CategoryResponse]']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/customer/quotations/{id}/cancel': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * cancelled quotation
+     * @description cancelled quotaion
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description quotaion id */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
+  '/api/v1/customer/quotations/{id}/confirm': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * confirm quotation
+     * @description confirm quotaion
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description quotaion id */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
     trace?: never
   }
   '/api/v1/me': {
@@ -313,7 +710,7 @@ export interface paths {
       /** @description Bank Branch */
       requestBody?: {
         content: {
-          'application/x-www-form-urlencoded': string
+          'multipart/form-data': string
         }
       }
       responses: {
@@ -346,6 +743,178 @@ export interface paths {
         }
       }
     }
+    trace?: never
+  }
+  '/api/v1/objects': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Upload image
+     * @description receive formData body, path (string, folder path, don't include ".." or prefix with "/") and file
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description folder enum (PACKAGE, VERIFY_CITIZENCARD, PROFILE_IMAGE) */
+      requestBody?: {
+        content: {
+          'application/x-www-form-urlencoded': string
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_ObjectUploadResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    /**
+     * Delete image
+     * @description Delete image
+     */
+    delete: {
+      parameters: {
+        query: {
+          /** @description image url */
+          URL: string
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/packages': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get all packages
+     * @description Show all available packages with pagination
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number */
+          page?: number
+          /** @description Page size */
+          pageSize?: number
+          /** @description Minimum price */
+          minPrice?: number
+          /** @description Maximum price */
+          maxPrice?: number
+          /** @description Photographer ID */
+          photographerId?: number
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.PaginationResponse-dto_PackageResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
     trace?: never
   }
   '/api/v1/photographer/citizen-card': {
@@ -405,7 +974,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  '/api/v1/photographer/reverify': {
+  '/api/v1/photographer/citizen-card/reverify': {
     parameters: {
       query?: never
       header?: never
@@ -429,10 +998,10 @@ export interface paths {
         path?: never
         cookie?: never
       }
-      /** @description Expire Date */
+      /** @description request request */
       requestBody: {
         content: {
-          'application/x-www-form-urlencoded': string
+          'application/json': components['schemas']['dto.ReVerifyCitizenCardRequest']
         }
       }
       responses: {
@@ -467,7 +1036,7 @@ export interface paths {
     }
     trace?: never
   }
-  '/api/v1/photographer/verify': {
+  '/api/v1/photographer/citizen-card/verify': {
     parameters: {
       query?: never
       header?: never
@@ -487,10 +1056,10 @@ export interface paths {
         path?: never
         cookie?: never
       }
-      /** @description form data */
+      /** @description request request */
       requestBody: {
         content: {
-          'multipart/form-data': Record<string, never>
+          'application/json': components['schemas']['dto.VerifyCitizenCardRequest']
         }
       }
       responses: {
@@ -529,24 +1098,541 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/api/v1/photographer/media': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create Media
+     * @description Create media by photographer
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Media details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateMediaRequest']
+        }
+      }
+      responses: {
+        /** @description Created */
+        201: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/photographer/media/{mediaId}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * Delete Media
+     * @description Delete media
+     */
+    delete: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Media details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.DeleteMediaRequest']
+        }
+      }
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    options?: never
+    head?: never
+    /**
+     * Update Media
+     * @description Update media
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Media details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.UpdateMediaRequest']
+        }
+      }
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
+  '/api/v1/photographer/packages': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create Package
+     * @description Create Package by photographer
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Package details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreatePackageRequest']
+        }
+      }
+      responses: {
+        /** @description Created */
+        201: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/photographer/packages/{packageId}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Update package
+     * @description Update
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Package details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.UpdatePackageRequest']
+        }
+      }
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
+  '/api/v1/photographers': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get All Photographers
+     * @description Retrieve a paginated list of photographers, optionally filtered by name.
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number for pagination (default: 1) */
+          page?: number
+          /** @description Number of records per page (default: 5, max: 20) */
+          pageSize?: number
+          /** @description Filter by photographer's name (case-insensitive) */
+          name?: string
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.PaginationResponse-dto_PhotographerResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/quotations': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * list quotations
+     * @description list quotations
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number */
+          page?: number
+          /** @description Page size */
+          page_size?: number
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.PaginationResponse-QuotationResponse']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.PaginationResponse-QuotationResponse']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/quotations/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Quotation By ID
+     * @description Get Quotation By ID
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_QuotationResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
 export type webhooks = Record<string, never>
 export interface components {
   schemas: {
+    'dto.CategoryResponse': {
+      description?: string
+      id?: number
+      name?: string
+    }
     'dto.CitizenCardResponse': {
       citizenId?: string
       expireDate?: string
       laserId?: string
       picture?: string
     }
+    'dto.CreateCategoryRequest': {
+      description: string
+      name: string
+    }
+    'dto.CreateMediaRequest': {
+      description?: string
+      packageId: number
+      pictureUrl: string
+    }
+    'dto.CreatePackageRequest': {
+      description: string
+      media: components['schemas']['dto.MediaPackageRequest'][]
+      name: string
+      price: number
+    }
+    'dto.DeleteMediaRequest': {
+      mediaId?: number
+    }
     'dto.HttpError': {
       error?: string
+    }
+    'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
+      result?: components['schemas']['dto.PaginationResponse-dto_CategoryResponse']
     }
     'dto.HttpResponse-dto_CitizenCardResponse': {
       result?: components['schemas']['dto.CitizenCardResponse']
     }
     'dto.HttpResponse-dto_LoginResponse': {
       result?: components['schemas']['dto.LoginResponse']
+    }
+    'dto.HttpResponse-dto_ObjectUploadResponse': {
+      result?: components['schemas']['dto.ObjectUploadResponse']
+    }
+    'dto.HttpResponse-dto_QuotationResponse': {
+      result?: components['schemas']['dto.QuotationResponse']
     }
     'dto.HttpResponse-dto_RegisterResponse': {
       result?: components['schemas']['dto.RegisterResponse']
@@ -568,6 +1654,78 @@ export interface components {
       refreshToken?: string
       user?: components['schemas']['dto.UserResponse']
     }
+    'dto.MediaPackageRequest': {
+      description?: string
+      pictureUrl: string
+    }
+    'dto.MediaResponse': {
+      id?: number
+      pictureUrl?: string
+    }
+    'dto.ObjectUploadResponse': {
+      url?: string
+    }
+    'dto.PackageResponse': {
+      categories?: components['schemas']['dto.CategoryResponse'][]
+      description?: string
+      id?: number
+      media?: components['schemas']['dto.MediaResponse'][]
+      name?: string
+      photographer?: components['schemas']['dto.PhotographerResponse']
+      price?: number
+      reviews?: components['schemas']['dto.ReviewResponse'][]
+      tags?: components['schemas']['dto.TagResponse'][]
+    }
+    'dto.PaginationResponse-QuotationResponse': {
+      data?: components['schemas']['dto.QuotationResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PaginationResponse-dto_CategoryResponse': {
+      data?: components['schemas']['dto.CategoryResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PaginationResponse-dto_PackageResponse': {
+      data?: components['schemas']['dto.PackageResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PaginationResponse-dto_PhotographerResponse': {
+      data?: components['schemas']['dto.PhotographerResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PhotographerResponse': {
+      activeStatus?: boolean
+      email?: string
+      id?: number
+      isVerified?: boolean
+      name?: string
+      phoneNumber?: string
+      profilePictureUrl?: string
+    }
+    'dto.QuotationResponse': {
+      customer?: components['schemas']['dto.UserResponse']
+      description?: string
+      fromDate?: string
+      id?: number
+      package?: components['schemas']['dto.PackageResponse']
+      photographer?: components['schemas']['dto.PhotographerResponse']
+      price?: number
+      status?: components['schemas']['model.QuotationStatus']
+      toDate?: string
+    }
+    'dto.ReVerifyCitizenCardRequest': {
+      citizenId?: string
+      expireDate?: string
+      imageUrl?: string
+      laserId?: string
+    }
     'dto.RefreshTokenRequest': {
       refreshToken: string
     }
@@ -584,10 +1742,36 @@ export interface components {
       refreshToken?: string
       user?: components['schemas']['dto.UserResponse']
     }
+    'dto.ReviewResponse': {
+      comment?: string
+      customer?: string
+      id?: number
+      rating?: number
+    }
+    'dto.TagResponse': {
+      id?: number
+      name?: string
+    }
     'dto.TokenResponse': {
       accessToken?: string
       exp?: number
       refreshToken?: string
+    }
+    'dto.UpdateCategoryRequest': {
+      description?: string
+      id: number
+      name?: string
+    }
+    'dto.UpdateMediaRequest': {
+      description?: string
+      mediaId: number
+      pictureUrl?: string
+    }
+    'dto.UpdatePackageRequest': {
+      description?: string
+      name?: string
+      packageId?: number
+      price?: number
     }
     'dto.UserResponse': {
       accountNo?: string
@@ -600,8 +1784,16 @@ export interface components {
       name?: string
       phoneNumber?: string
       profilePictureUrl?: string
-      role?: string
+      role?: components['schemas']['model.UserRole']
     }
+    'dto.VerifyCitizenCardRequest': {
+      citizenId: string
+      expireDate: string
+      imageUrl: string
+      laserId: string
+    }
+    'model.QuotationStatus': string
+    'model.UserRole': string
   }
   responses: never
   parameters: never

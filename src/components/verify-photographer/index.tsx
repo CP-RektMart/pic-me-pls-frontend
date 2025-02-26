@@ -64,8 +64,8 @@ export default function VerifyPhotographer() {
     setIsSubmitting(true)
     try {
       await verifyCitizenCardAction({
-        cardPicture: data.cardPicture,
         citizenId: data.citizenId,
+        image: data.cardPicture,
         expireDate: data.expireDate,
         laserId: data.laserId,
       })
