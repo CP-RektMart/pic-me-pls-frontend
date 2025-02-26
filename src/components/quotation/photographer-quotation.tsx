@@ -170,11 +170,22 @@ export default function PhotographerQuotation({
                 <div className='flex flex-col gap-4'>
                   {quotations.map((quotation) => (
                     //to be replaced with card component
-                    <DrawerTrigger asChild key={quotation.quotationID}>
-                      <Button onClick={() => setCurrentQuotation(quotation)}>
+                    <div key={quotation.quotationID}>
+                      <DrawerTrigger asChild>
+                        <Button
+                          onClick={() => setCurrentQuotation(quotation)}
+                          className='w-full lg:hidden'
+                        >
+                          {quotation.quotationID}
+                        </Button>
+                      </DrawerTrigger>
+                      <Button
+                        onClick={() => setCurrentQuotation(quotation)}
+                        className='hidden w-full lg:block'
+                      >
                         {quotation.quotationID}
                       </Button>
-                    </DrawerTrigger>
+                    </div>
                   ))}
                 </div>
               )}
