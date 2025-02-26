@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-// import { QuotationDrawer } from './quotation-drawer'
+import { QuotationDrawer } from './quotation-drawer'
 
 export interface PhotographerQuotationProps {
   quotations: quotation[]
@@ -617,7 +617,7 @@ export default function PhotographerQuotation({
           </div>
           {/* end of lg case */}
 
-          {/* <div className='lg:hidden'>
+          <div className='lg:hidden'>
             <QuotationDrawer
               isCreating={isCreating}
               setIsCreating={setIsCreating}
@@ -625,8 +625,11 @@ export default function PhotographerQuotation({
               setIsEditing={setIsEditing}
               currentQuotation={currentQuotation}
               setCurrentQuotation={setCurrentQuotation}
+              packages={packages}
+              selectedPackage={selectedPackage}
+              setSelectedPackage={setSelectedPackage}
             />
-          </div> */}
+          </div>
         </div>
       )}
     </div>
