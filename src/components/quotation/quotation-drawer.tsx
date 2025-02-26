@@ -567,24 +567,3 @@ export function QuotationDrawer({
     </DrawerContent>
   )
 }
-
-{
-  /* <DrawerTrigger asChild>
-        <Button variant='outline'>Open Drawer</Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <div className='mx-auto w-full max-w-sm'>
-          <DrawerHeader>
-            <DrawerTitle>Move Goal</DrawerTitle>
-            <DrawerDescription>Set your daily activity goal.</DrawerDescription>
-          </DrawerHeader>
-
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose asChild>
-              <Button variant='outline'>Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </div>
-      </DrawerContent> */
-}
