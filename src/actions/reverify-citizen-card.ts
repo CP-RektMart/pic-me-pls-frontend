@@ -1,20 +1,33 @@
 'use server'
 
-import { reverifyCitizenCard } from '@/api/photographer/reverify-citizen-card'
+import { client } from '@/api/client'
+import { uploadObject } from '@/api/upload-object'
 
 export interface ReverifyCitizenCardAction {
-  cardPicture?: File
-  citizenId: string
-  laserId: string
-  expireDate: Date
+  citizenId?: string
+  image?: File
+  laserId?: string
+  expireDate?: Date
 }
 
 export default async function reverifyCitizenCardAction(
   payload: ReverifyCitizenCardAction
 ) {
-  try {
-    await reverifyCitizenCard(payload)
-  } catch {
-    return
+  let imageUrl: string | undefined = undefined
+  if (payload.image) {
+    const { url } = await uploadObject({
+      file: payload.image,
+      folder: 'VERIFY_CITIZENCARD',
+    })
+    imageUrl = url
   }
+
+  await client.PATCH('/api/v1/photographer/citizen-card/reverify', {
+    body: {
+      imageUrl: imageUrl,
+      citizenId: payload.citizenId,
+      laserId: payload.laserId,
+      expireDate: payload.expireDate?.toISOString(),
+    },
+  })
 }
