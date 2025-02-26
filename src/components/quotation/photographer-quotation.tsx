@@ -136,9 +136,18 @@ export default function PhotographerQuotation({
         <div className='flex flex-row justify-between'>
           <div className='text-2xl font-bold'>Quotation Manager</div>
 
+          <Button
+            onClick={onCreateQuotationButtonClicked}
+            className='hidden lg:block'
+          >
+            New Quotation
+          </Button>
           <DrawerTrigger asChild>
-            <Button onClick={onCreateQuotationButtonClicked}>
-              New Quotation
+            <Button
+              onClick={onCreateQuotationButtonClicked}
+              className='lg:hidden'
+            >
+              <Icon icon='lucide:plus' />
             </Button>
           </DrawerTrigger>
         </div>
