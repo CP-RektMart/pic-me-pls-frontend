@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import { quotation } from '@/app/photographer/quotation/page'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
@@ -68,6 +70,8 @@ const isCreating = true
 export default function PhotographerQuotation({
   quotations,
 }: PhotographerQuotationProps) {
+  const [selectedPackage, setSelectedPackage] = useState<string>('')
+
   let statusColour
 
   switch (quotations[0].status) {
@@ -130,9 +134,15 @@ export default function PhotographerQuotation({
                         Package
                       </FormLabel>
                       <FormControl className='font-normal'>
-                        <Select>
+                        <Select
+                          onValueChange={(value) => {
+                            setSelectedPackage(value)
+                            field.onChange(value)
+                          }}
+                          value={field.value}
+                        >
                           <SelectTrigger className='w-full font-normal'>
-                            <SelectValue placeholder='Package' {...field} />
+                            <SelectValue placeholder='Package' />
                           </SelectTrigger>
                           <SelectContent>
                             {packages.map((pkg) => (
@@ -265,7 +275,9 @@ export default function PhotographerQuotation({
                 <div className='flex flex-row justify-between'>
                   <div className='text-sm font-normal'>Price Per Hour</div>
                   <div className='text-sm font-normal'>
-                    {quotations[0].pricePerHour} Baht
+                    {packages.find((pkg) => pkg.name === selectedPackage)
+                      ?.price ?? 0}{' '}
+                    Baht
                   </div>
                 </div>
 
