@@ -27,7 +27,7 @@ const quotations: quotation[] = [
   },
   {
     quotationID: 'Q0002',
-    status: 'Accepted',
+    status: 'Confirmed',
     packageName: 'Birthday Package',
     photographerName: 'John Doe',
     customerName: 'Jane Doe',
@@ -38,7 +38,7 @@ const quotations: quotation[] = [
   },
   {
     quotationID: 'Q0003',
-    status: 'Rejected',
+    status: 'Paid',
     packageName: 'Graduation Package',
     photographerName: 'John Doe',
     customerName: 'Jane Doe',
@@ -46,6 +46,17 @@ const quotations: quotation[] = [
     to: new Date('2022-01-02 08:00'),
     description: 'Graduation photography package',
     pricePerHour: 200,
+  },
+  {
+    quotationID: 'Q0004',
+    status: 'Cancelled',
+    packageName: 'Wedding Package',
+    photographerName: 'John Doe',
+    customerName: 'Jane Doe',
+    from: new Date('2022-01-01 08:00'),
+    to: new Date('2022-01-02 08:00'),
+    description: 'Wedding photography package',
+    pricePerHour: 400,
   },
 ]
 
