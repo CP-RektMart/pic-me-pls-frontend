@@ -26,6 +26,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
+import { QuotationDrawer } from './quotation-drawer'
+
 interface PhotographerQuotationProps {
   quotations: quotation[]
   packages: PackageForm[]
@@ -159,7 +161,7 @@ export default function PhotographerQuotation({
           </div>
 
           {/* right side of lg, drawer in mobile */}
-          <div className='hidden lg:flex'>
+          <div className='hidden lg:block'>
             {isCreating ? (
               <div className='space-y-4 text-2xl font-bold lg:px-10'>
                 Create Quotation
@@ -505,7 +507,7 @@ export default function PhotographerQuotation({
               ) : (
                 <div className='flex flex-col gap-4 space-y-4 text-2xl font-bold lg:px-10'>
                   <div className='flex w-full flex-row justify-between'>
-                    {quotations[0].quotationID}
+                    {currentQuotation.quotationID}
                     <Button onClick={onEditButtonClicked}>Edit</Button>
                   </div>
 
@@ -615,7 +617,9 @@ export default function PhotographerQuotation({
           </div>
           {/* end of lg case */}
 
-          <div className='lg:hidden'></div>
+          <div className='lg:hidden'>
+            <QuotationDrawer />
+          </div>
         </div>
       )}
     </div>
