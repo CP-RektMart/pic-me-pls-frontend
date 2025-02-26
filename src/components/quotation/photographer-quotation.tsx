@@ -128,7 +128,7 @@ export default function PhotographerQuotation({
 
         <Button onClick={onCreateQuotationButtonClicked}>New Quotation</Button>
       </div>
-      {quotations.length == 0 && !isCreating ? (
+      {quotations.length == 0 && !isCreating && !isEditing ? (
         <div className='flex h-full flex-col items-center justify-center gap-3'>
           <Icon icon='lucide:sticky-note' className='size-20' />
           No Quotations To Show
