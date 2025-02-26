@@ -629,19 +629,17 @@ export default function PhotographerQuotation({
             </div>
             {/* end of lg case */}
 
-            <div>
-              <QuotationDrawer
-                isCreating={isCreating}
-                setIsCreating={setIsCreating}
-                isEditing={isEditing}
-                setIsEditing={setIsEditing}
-                currentQuotation={currentQuotation}
-                setCurrentQuotation={setCurrentQuotation}
-                packages={packages}
-                selectedPackage={selectedPackage}
-                setSelectedPackage={setSelectedPackage}
-              />
-            </div>
+            <QuotationDrawer
+              isCreating={isCreating}
+              setIsCreating={setIsCreating}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              currentQuotation={currentQuotation}
+              setCurrentQuotation={setCurrentQuotation}
+              packages={packages}
+              selectedPackage={selectedPackage}
+              setSelectedPackage={setSelectedPackage}
+            />
           </div>
         )}
       </Drawer>
