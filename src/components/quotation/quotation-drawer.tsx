@@ -7,7 +7,13 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { PackageForm } from '@/components/package-page/create-package'
 import { Button } from '@/components/ui/button'
-import { DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
+import {
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
 import {
   FormControl,
   FormField,
@@ -554,6 +560,10 @@ export function QuotationDrawer({
           </div>
         )
       ) : null}
+      <DrawerHeader className='lg:hidden'>
+        <DrawerTitle></DrawerTitle>
+        <DrawerDescription></DrawerDescription>
+      </DrawerHeader>
     </DrawerContent>
   )
 }
