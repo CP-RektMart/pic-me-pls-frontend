@@ -108,7 +108,7 @@ export function QuotationDrawer({
       : 0
 
   return (
-    <DrawerContent className='p-2'>
+    <DrawerContent className='p-6'>
       {isCreating ? (
         <div className='space-y-4 text-2xl font-bold lg:px-10'>
           Create Quotation
