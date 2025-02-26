@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import z from 'zod'
 
+import { PackageForm } from '@/components/package-page/create-package'
 import { Button } from '@/components/ui/button'
 import {
   FormControl,
@@ -25,10 +26,9 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import { PackageForm } from '../package-page/create-package'
-
 interface PhotographerQuotationProps {
   quotations: quotation[]
+  packages: PackageForm[]
 }
 
 interface CreateQuotationProps {
@@ -47,28 +47,11 @@ const createQuotationFormSchema = z.object({
   description: z.string().min(2, 'Description must be at least 2 characters'),
 })
 
-const packages: PackageForm[] = [
-  {
-    name: 'Wedding Package',
-    packageDescription: 'Wedding photography package',
-    price: 400,
-  },
-  {
-    name: 'Birthday Package',
-    packageDescription: 'Birthday photography package',
-    price: 300,
-  },
-  {
-    name: 'Graduation Package',
-    packageDescription: 'Graduation photography package',
-    price: 200,
-  },
-]
-
 const isCreating = true
 
 export default function PhotographerQuotation({
   quotations,
+  packages,
 }: PhotographerQuotationProps) {
   const [selectedPackage, setSelectedPackage] = useState<string>('')
 
