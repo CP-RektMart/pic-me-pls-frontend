@@ -289,7 +289,10 @@ export default function PhotographerQuotation({
             </div>
           ) : (
             <div className='flex flex-col gap-4 space-y-4 text-2xl font-bold lg:px-10'>
-              <div className='text-center'>{quotations[0].quotationID}</div>
+              <div className='flex w-full flex-row justify-between'>
+                {quotations[0].quotationID}
+                <Button>Edit</Button>
+              </div>
 
               <div className='flex flex-col gap-4 py-6'>
                 <div className='flex flex-row justify-between text-sm font-normal'>
