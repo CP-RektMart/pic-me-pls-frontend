@@ -86,6 +86,11 @@ export default function PhotographerQuotation({
     },
   })
 
+  const onCreateQuotationButtonClicked = () => {
+    setIsCreating(true)
+    setIsEditing(false)
+  }
+
   const onEditButtonClicked = () => {
     setIsEditing(true)
     setIsCreating(false)
@@ -121,14 +126,7 @@ export default function PhotographerQuotation({
       <div className='flex flex-row justify-between'>
         <div className='text-2xl font-bold'>Quotation Manager</div>
 
-        <Button
-          onClick={() => {
-            setIsCreating(true)
-            setIsCreating(false)
-          }}
-        >
-          New Quotation
-        </Button>
+        <Button onClick={onCreateQuotationButtonClicked}>New Quotation</Button>
       </div>
       {quotations.length == 0 && !isCreating ? (
         <div className='flex h-full flex-col items-center justify-center gap-3'>
