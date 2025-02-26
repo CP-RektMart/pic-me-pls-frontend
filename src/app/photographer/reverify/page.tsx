@@ -11,10 +11,10 @@ export default async function Page() {
     redirect('/login')
   }
 
+  // Guard if the user has not verified
   const { data, response } = await client.GET(
     '/api/v1/photographer/citizen-card'
   )
-
   if (response.status === 404) {
     redirect('/photographer/verify')
   }
