@@ -26,14 +26,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import { QuotationDrawer } from './quotation-drawer'
+// import { QuotationDrawer } from './quotation-drawer'
 
-interface PhotographerQuotationProps {
+export interface PhotographerQuotationProps {
   quotations: quotation[]
   packages: PackageForm[]
 }
 
-interface CreateQuotationProps {
+export interface CreateQuotationProps {
   package: string
   customer: string
   from: string
@@ -41,7 +41,7 @@ interface CreateQuotationProps {
   description: string
 }
 
-const createQuotationFormSchema = z.object({
+export const createQuotationFormSchema = z.object({
   package: z.string().min(2, 'Gallery must be at least 2 characters'),
   customer: z.string().min(2, 'Customer must be at least 2 characters'),
   from: z.string().min(2, 'From must be at least 2 characters'),
@@ -61,7 +61,7 @@ export default function PhotographerQuotation({
     null
   )
 
-  let statusColour
+  let statusColour: string
 
   switch (currentQuotation?.status) {
     case 'Pending':
@@ -617,9 +617,16 @@ export default function PhotographerQuotation({
           </div>
           {/* end of lg case */}
 
-          <div className='lg:hidden'>
-            <QuotationDrawer />
-          </div>
+          {/* <div className='lg:hidden'>
+            <QuotationDrawer
+              isCreating={isCreating}
+              setIsCreating={setIsCreating}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              currentQuotation={currentQuotation}
+              setCurrentQuotation={setCurrentQuotation}
+            />
+          </div> */}
         </div>
       )}
     </div>
