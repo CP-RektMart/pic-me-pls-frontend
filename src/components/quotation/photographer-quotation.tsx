@@ -54,7 +54,7 @@ export default function PhotographerQuotation({
   const [selectedPackage, setSelectedPackage] = useState<string>('')
 
   const [isCreating, setIsCreating] = useState<boolean>(false)
-  const [isEditing, setIsEditing] = useState<boolean>(true)
+  const [isEditing, setIsEditing] = useState<boolean>(false)
   const [currentQuotation, setCurrentQuotation] = useState<quotation | null>(
     null
   )
@@ -137,7 +137,10 @@ export default function PhotographerQuotation({
               <div className='flex flex-col gap-4'>
                 {quotations.map((quotation) => (
                   //to be replaced with card component
-                  <Button key={quotation.quotationID}>
+                  <Button
+                    key={quotation.quotationID}
+                    onClick={() => setCurrentQuotation(quotation)}
+                  >
                     {quotation.quotationID}
                   </Button>
                 ))}
