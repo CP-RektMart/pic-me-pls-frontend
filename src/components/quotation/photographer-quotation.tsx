@@ -55,11 +55,13 @@ export default function PhotographerQuotation({
 
   const [isCreating, setIsCreating] = useState<boolean>(false)
   const [isEditing, setIsEditing] = useState<boolean>(true)
-  const [quotationID, setQuotationID] = useState<string | null>('1')
+  const [currentQuotation, setCurrentQuotation] = useState<quotation | null>(
+    null
+  )
 
   let statusColour
 
-  switch (quotations[0].status) {
+  switch (currentQuotation?.status) {
     case 'Pending':
       statusColour = 'text-amber-700'
       break
@@ -87,14 +89,14 @@ export default function PhotographerQuotation({
   const onSubmit = async (data: CreateQuotationProps) => {
     setIsCreating(false)
     setIsEditing(false)
-    setQuotationID(null)
+    setCurrentQuotation(null)
     console.log(data)
   }
 
   const onSaveEditing = async (data: CreateQuotationProps) => {
     setIsCreating(false)
     setIsEditing(false)
-    setQuotationID(null)
+    setCurrentQuotation(null)
     console.log(data)
   }
 
@@ -299,11 +301,11 @@ export default function PhotographerQuotation({
                 </div>
               </div>
             </div>
-          ) : quotationID != null ? (
+          ) : currentQuotation != null ? (
             isEditing ? (
               <div className='space-y-4 text-2xl font-bold lg:px-10'>
                 <div className='w-full text-center'>
-                  Editing : {quotationID}
+                  Editing : {currentQuotation.quotationID}
                 </div>
 
                 <FormProvider {...form}>
@@ -482,7 +484,7 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>Quotation ID</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotationID}
+                      {currentQuotation.quotationID}
                     </div>
                   </div>
 
@@ -493,7 +495,7 @@ export default function PhotographerQuotation({
                     <div
                       className={`max-h-24 max-w-48 overflow-hidden text-ellipsis text-right ${statusColour}`}
                     >
-                      {quotations[0].status}
+                      {currentQuotation.status}
                     </div>
                   </div>
 
@@ -502,7 +504,7 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>Package Name</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotations[0].packageName}
+                      {currentQuotation.packageName}
                     </div>
                   </div>
 
@@ -511,7 +513,7 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>Photographer Name</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotations[0].photographerName}
+                      {currentQuotation.photographerName}
                     </div>
                   </div>
 
@@ -520,7 +522,7 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>Customer Name</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotations[0].customerName}
+                      {currentQuotation.customerName}
                     </div>
                   </div>
 
@@ -529,7 +531,7 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>From</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotations[0].from.toLocaleString()}
+                      {currentQuotation.from.toLocaleString()}
                     </div>
                   </div>
 
@@ -538,7 +540,7 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>To</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotations[0].to.toLocaleString()}
+                      {currentQuotation.to.toLocaleString()}
                     </div>
                   </div>
 
@@ -547,7 +549,7 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>Description</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotations[0].description}
+                      {currentQuotation.description}
                     </div>
                   </div>
 
@@ -557,8 +559,8 @@ export default function PhotographerQuotation({
                     <div>Duration</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
                       {(
-                        (new Date(quotations[0].to).getTime() -
-                          new Date(quotations[0].from).getTime()) /
+                        (new Date(currentQuotation.to).getTime() -
+                          new Date(currentQuotation.from).getTime()) /
                         (1000 * 60 * 60)
                       ).toString()}{' '}
                       Hours
@@ -570,9 +572,9 @@ export default function PhotographerQuotation({
                   <div className='flex flex-row justify-between text-sm font-normal'>
                     <div>Total Price</div>
                     <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                      {quotations[0].pricePerHour *
-                        ((new Date(quotations[0].to).getTime() -
-                          new Date(quotations[0].from).getTime()) /
+                      {currentQuotation.pricePerHour *
+                        ((new Date(currentQuotation.to).getTime() -
+                          new Date(currentQuotation.from).getTime()) /
                           (1000 * 60 * 60))}{' '}
                       Baht
                     </div>
