@@ -54,6 +54,8 @@ export default function PhotographerQuotation({
   const [selectedPackage, setSelectedPackage] = useState<string>('')
 
   const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [isEditing, setIsEditing] = useState<boolean>(true)
+  const [quotationID, setQuotationID] = useState<string | null>('1')
 
   let statusColour
 
@@ -83,6 +85,16 @@ export default function PhotographerQuotation({
   })
 
   const onSubmit = async (data: CreateQuotationProps) => {
+    setIsCreating(false)
+    setIsEditing(false)
+    setQuotationID(null)
+    console.log(data)
+  }
+
+  const onSaveEditing = async (data: CreateQuotationProps) => {
+    setIsCreating(false)
+    setIsEditing(false)
+    setQuotationID(null)
     console.log(data)
   }
 
@@ -287,115 +299,288 @@ export default function PhotographerQuotation({
                 </div>
               </div>
             </div>
-          ) : (
-            <div className='flex flex-col gap-4 space-y-4 text-2xl font-bold lg:px-10'>
-              <div className='flex w-full flex-row justify-between'>
-                {quotations[0].quotationID}
-                <Button>Edit</Button>
+          ) : quotationID != null ? (
+            isEditing ? (
+              <div className='space-y-4 text-2xl font-bold lg:px-10'>
+                <div className='w-full text-center'>
+                  Editing : {quotationID}
+                </div>
+
+                <FormProvider {...form}>
+                  <FormField
+                    control={form.control}
+                    name='package'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-sm font-medium'>
+                          Package
+                        </FormLabel>
+                        <FormControl className='font-normal'>
+                          <Select
+                            onValueChange={(value) => {
+                              setSelectedPackage(value)
+                              field.onChange(value)
+                            }}
+                            value={field.value}
+                          >
+                            <SelectTrigger className='w-full font-normal'>
+                              <SelectValue placeholder='Package' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {packages.map((pkg) => (
+                                <SelectItem
+                                  key={pkg.name}
+                                  value={pkg.name}
+                                  className='font-normal'
+                                >
+                                  {pkg.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name='customer'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-sm font-medium'>
+                          Customer Name
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='Customer Name'
+                            {...field}
+                            className='font-normal'
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className='grid grid-cols-2 gap-2'>
+                    <FormField
+                      control={form.control}
+                      name='from'
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className='text-sm font-medium'>
+                            From
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type='datetime-local'
+                              placeholder='Start Time'
+                              {...field}
+                              className='font-normal'
+                              step={1800}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name='to'
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className='text-sm font-medium'>
+                            To
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type='datetime-local'
+                              placeholder='End Time'
+                              {...field}
+                              className='font-normal'
+                              step={1800}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name='description'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-sm font-medium'>
+                          Description
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='Quotation Remarks'
+                            {...field}
+                            className='font-normal'
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <hr className='border border-zinc-400' />
+                  <div className='flex flex-col gap-2 p-4'>
+                    <div className='flex flex-row justify-between'>
+                      <div className='text-sm font-normal'>Total hours</div>
+                      <div className='text-sm font-normal'>
+                        {totalHours > 0 ? totalHours.toFixed(0) : 0} Hours
+                      </div>
+                    </div>
+
+                    <div className='flex flex-row justify-between'>
+                      <div className='text-sm font-normal'>Price Per Hour</div>
+                      <div className='text-sm font-normal'>
+                        {packages.find((pkg) => pkg.name === selectedPackage)
+                          ?.price ?? 0}{' '}
+                        Baht
+                      </div>
+                    </div>
+
+                    <div className='flex flex-row justify-between'>
+                      <div className='text-sm font-normal'>Total Price</div>
+                      <div className='text-sm font-normal'>
+                        {((packages.find((pkg) => pkg.name === selectedPackage)
+                          ?.price ??
+                          0) ||
+                          0) * totalHours}{' '}
+                        Baht
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='mt-auto'>
+                    <Button
+                      type='button'
+                      className='w-full hover:bg-zinc-700'
+                      onClick={form.handleSubmit(onSaveEditing)}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                </FormProvider>
               </div>
-
-              <div className='flex flex-col gap-4 py-6'>
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Quotation ID</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].quotationID}
-                  </div>
+            ) : (
+              <div className='flex flex-col gap-4 space-y-4 text-2xl font-bold lg:px-10'>
+                <div className='flex w-full flex-row justify-between'>
+                  {quotations[0].quotationID}
+                  <Button>Edit</Button>
                 </div>
 
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Status</div>
-                  <div
-                    className={`max-h-24 max-w-48 overflow-hidden text-ellipsis text-right ${statusColour}`}
-                  >
-                    {quotations[0].status}
+                <div className='flex flex-col gap-4 py-6'>
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Quotation ID</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotationID}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Package Name</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].packageName}
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Status</div>
+                    <div
+                      className={`max-h-24 max-w-48 overflow-hidden text-ellipsis text-right ${statusColour}`}
+                    >
+                      {quotations[0].status}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Photographer Name</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].photographerName}
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Package Name</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotations[0].packageName}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Customer Name</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].customerName}
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Photographer Name</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotations[0].photographerName}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>From</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].from.toLocaleString()}
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Customer Name</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotations[0].customerName}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>To</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].to.toLocaleString()}
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>From</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotations[0].from.toLocaleString()}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Description</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].description}
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>To</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotations[0].to.toLocaleString()}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Duration</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {(
-                      (new Date(quotations[0].to).getTime() -
-                        new Date(quotations[0].from).getTime()) /
-                      (1000 * 60 * 60)
-                    ).toString()}{' '}
-                    Hours
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Description</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotations[0].description}
+                    </div>
                   </div>
-                </div>
 
-                <hr className='border border-gray-200' />
+                  <hr className='border border-gray-200' />
 
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Total Price</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {quotations[0].pricePerHour *
-                      ((new Date(quotations[0].to).getTime() -
-                        new Date(quotations[0].from).getTime()) /
-                        (1000 * 60 * 60))}{' '}
-                    Baht
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Duration</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {(
+                        (new Date(quotations[0].to).getTime() -
+                          new Date(quotations[0].from).getTime()) /
+                        (1000 * 60 * 60)
+                      ).toString()}{' '}
+                      Hours
+                    </div>
+                  </div>
+
+                  <hr className='border border-gray-200' />
+
+                  <div className='flex flex-row justify-between text-sm font-normal'>
+                    <div>Total Price</div>
+                    <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
+                      {quotations[0].pricePerHour *
+                        ((new Date(quotations[0].to).getTime() -
+                          new Date(quotations[0].from).getTime()) /
+                          (1000 * 60 * 60))}{' '}
+                      Baht
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )
+          ) : null}
         </div>
       )}
     </div>
