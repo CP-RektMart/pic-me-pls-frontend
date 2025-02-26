@@ -36,7 +36,7 @@ const createQuotationFormSchema = z.object({
   description: z.string().min(2, 'Description must be at least 2 characters'),
 })
 
-const isCreating = false
+const isCreating = true
 
 export default function PhotographerQuotation({
   quotations,
@@ -83,6 +83,12 @@ export default function PhotographerQuotation({
         <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
           <div className='gap-2.5 text-2xl font-bold lg:px-10'>
             Latest Quotations
+            {quotations.length == 0 ? (
+              <div className='flex h-full flex-col items-center justify-center gap-3'>
+                <Icon icon='lucide:sticky-note' className='size-20' />
+                No Quotations To Show
+              </div>
+            ) : null}
           </div>
           {isCreating ? (
             <div className='space-y-4 text-2xl font-bold lg:px-10'>
