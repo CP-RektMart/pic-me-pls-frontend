@@ -89,6 +89,12 @@ export default function PhotographerQuotation({
     },
   })
 
+  const onClose = () => {
+    setIsCreating(false)
+    setIsEditing(false)
+    setCurrentQuotation(null)
+  }
+
   const onCreateQuotationButtonClicked = () => {
     setIsCreating(true)
     setIsEditing(false)
@@ -126,7 +132,7 @@ export default function PhotographerQuotation({
 
   return (
     <div className='size-full space-y-6'>
-      <Drawer>
+      <Drawer onOpenChange={(open) => !open && onClose?.()}>
         <div className='flex flex-row justify-between'>
           <div className='text-2xl font-bold'>Quotation Manager</div>
 
