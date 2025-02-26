@@ -137,7 +137,7 @@ export default function PhotographerQuotation({
                 <div className='grid grid-cols-2 gap-2'>
                   <FormField
                     control={form.control}
-                    name='customer'
+                    name='from'
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className='text-sm font-medium'>
@@ -145,9 +145,11 @@ export default function PhotographerQuotation({
                         </FormLabel>
                         <FormControl>
                           <Input
+                            type='datetime-local'
                             placeholder='Start Time'
                             {...field}
                             className='font-normal'
+                            step={1800}
                           />
                         </FormControl>
                         <FormMessage />
@@ -157,7 +159,7 @@ export default function PhotographerQuotation({
 
                   <FormField
                     control={form.control}
-                    name='customer'
+                    name='to'
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className='text-sm font-medium'>
@@ -165,9 +167,11 @@ export default function PhotographerQuotation({
                         </FormLabel>
                         <FormControl>
                           <Input
+                            type='datetime-local'
                             placeholder='End Time'
                             {...field}
                             className='font-normal'
+                            step={1800}
                           />
                         </FormControl>
                         <FormMessage />
@@ -178,7 +182,7 @@ export default function PhotographerQuotation({
 
                 <FormField
                   control={form.control}
-                  name='customer'
+                  name='description'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className='text-sm font-medium'>
@@ -212,9 +216,9 @@ export default function PhotographerQuotation({
                   <div className='text-sm font-normal'>Total hours</div>
                   <div className='text-sm font-normal'>
                     {(
-                      (new Date(quotations[0].to).getTime() -
-                        new Date(quotations[0].from).getTime()) /
-                      (1000 * 60 * 60)
+                      (new Date(form.getValues('to')).getTime() -
+                        new Date(form.getValues('from')).getTime()) /
+                        (1000 * 60 * 60) || ''
                     ).toString()}{' '}
                     Hours
                   </div>
