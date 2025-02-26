@@ -10,6 +10,7 @@ import z from 'zod'
 
 import { PackageForm } from '@/components/package-page/create-package'
 import { Button } from '@/components/ui/button'
+import { Drawer, DrawerTrigger } from '@/components/ui/drawer'
 import {
   FormControl,
   FormField,
@@ -128,7 +129,13 @@ export default function PhotographerQuotation({
       <div className='flex flex-row justify-between'>
         <div className='text-2xl font-bold'>Quotation Manager</div>
 
-        <Button onClick={onCreateQuotationButtonClicked}>New Quotation</Button>
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button onClick={onCreateQuotationButtonClicked}>
+              New Quotation
+            </Button>
+          </DrawerTrigger>
+        </Drawer>
       </div>
       {quotations.length == 0 && !isCreating && !isEditing ? (
         <div className='flex h-full flex-col items-center justify-center gap-3'>
@@ -147,15 +154,16 @@ export default function PhotographerQuotation({
               </div>
             ) : (
               <div className='flex flex-col gap-4'>
-                {quotations.map((quotation) => (
-                  //to be replaced with card component
-                  <Button
-                    key={quotation.quotationID}
-                    onClick={() => setCurrentQuotation(quotation)}
-                  >
-                    {quotation.quotationID}
-                  </Button>
-                ))}
+                <Drawer>
+                  {quotations.map((quotation) => (
+                    //to be replaced with card component
+                    <DrawerTrigger asChild key={quotation.quotationID}>
+                      <Button onClick={() => setCurrentQuotation(quotation)}>
+                        {quotation.quotationID}
+                      </Button>
+                    </DrawerTrigger>
+                  ))}
+                </Drawer>
               </div>
             )}
           </div>
@@ -617,7 +625,7 @@ export default function PhotographerQuotation({
           </div>
           {/* end of lg case */}
 
-          <div className='lg:hidden'>
+          <div>
             <QuotationDrawer
               isCreating={isCreating}
               setIsCreating={setIsCreating}
