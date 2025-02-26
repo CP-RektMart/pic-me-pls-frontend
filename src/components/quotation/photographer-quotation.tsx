@@ -47,13 +47,13 @@ const createQuotationFormSchema = z.object({
   description: z.string().min(2, 'Description must be at least 2 characters'),
 })
 
-const isCreating = true
-
 export default function PhotographerQuotation({
   quotations,
   packages,
 }: PhotographerQuotationProps) {
   const [selectedPackage, setSelectedPackage] = useState<string>('')
+
+  const [isCreating, setIsCreating] = useState<boolean>(false)
 
   let statusColour
 
@@ -98,7 +98,12 @@ export default function PhotographerQuotation({
       : 0
 
   return (
-    <div className='size-full'>
+    <div className='size-full space-y-6'>
+      <div className='flex flex-row justify-between'>
+        <div className='text-2xl font-bold'>Quotation Manager</div>
+
+        <Button onClick={() => setIsCreating(true)}>New Quotation</Button>
+      </div>
       {quotations.length == 0 && !isCreating ? (
         <div className='flex h-full flex-col items-center justify-center gap-3'>
           <Icon icon='lucide:sticky-note' className='size-20' />
