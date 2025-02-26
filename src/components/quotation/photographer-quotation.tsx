@@ -125,14 +125,24 @@ export default function PhotographerQuotation({
         </div>
       ) : (
         <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
-          <div className='gap-2.5 text-2xl font-bold lg:px-10'>
-            Latest Quotations
+          <div className='gap-2.5 space-y-2.5 text-2xl font-bold lg:px-10'>
+            <div>Latest Quotations</div>
+
             {quotations.length == 0 ? (
               <div className='flex h-full flex-col items-center justify-center gap-3'>
                 <Icon icon='lucide:sticky-note' className='size-20' />
                 No Quotations To Show
               </div>
-            ) : null}
+            ) : (
+              <div className='flex flex-col gap-4'>
+                {quotations.map((quotation) => (
+                  //to be replaced with card component
+                  <Button key={quotation.quotationID}>
+                    {quotation.quotationID}
+                  </Button>
+                ))}
+              </div>
+            )}
           </div>
           {isCreating ? (
             <div className='space-y-4 text-2xl font-bold lg:px-10'>
