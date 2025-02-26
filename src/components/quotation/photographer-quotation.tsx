@@ -103,6 +103,17 @@ export default function PhotographerQuotation({
     console.log(data)
   }
 
+  const watchFrom = form.watch('from')
+  const watchTo = form.watch('to')
+
+  const totalHours =
+    watchFrom && watchTo
+      ? Math.ceil(
+          (new Date(watchTo).getTime() - new Date(watchFrom).getTime()) /
+            (1000 * 60 * 60)
+        )
+      : 0
+
   return (
     <div className='size-full'>
       {quotations.length == 0 && !isCreating ? (
@@ -263,12 +274,7 @@ export default function PhotographerQuotation({
                 <div className='flex flex-row justify-between'>
                   <div className='text-sm font-normal'>Total hours</div>
                   <div className='text-sm font-normal'>
-                    {(
-                      (new Date(form.getValues('to')).getTime() -
-                        new Date(form.getValues('from')).getTime()) /
-                        (1000 * 60 * 60) || ''
-                    ).toString()}{' '}
-                    Hours
+                    {totalHours > 0 ? totalHours.toFixed(0) : 0} Hours
                   </div>
                 </div>
 
@@ -287,10 +293,7 @@ export default function PhotographerQuotation({
                     {((packages.find((pkg) => pkg.name === selectedPackage)
                       ?.price ??
                       0) ||
-                      0) *
-                      ((new Date(form.getValues('to')).getTime() -
-                        new Date(form.getValues('from')).getTime()) /
-                        (1000 * 60 * 60) || 0)}{' '}
+                      0) * totalHours}{' '}
                     Baht
                   </div>
                 </div>
