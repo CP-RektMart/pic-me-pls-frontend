@@ -18,7 +18,7 @@ export default async function ProfilePage() {
 
   return (
     <ProfileComponent
-      isPhotographer={userProfile.role == 'PHOTOGRAPHER'}
+      isPhotographer={userProfile.role === 'PHOTOGRAPHER'}
       imageUrl={userProfile.profilePictureUrl || '/image.png'}
       name={userProfile.name || ''}
       email={userProfile.email || ''}

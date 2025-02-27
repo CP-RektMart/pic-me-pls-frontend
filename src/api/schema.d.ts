@@ -707,10 +707,10 @@ export interface paths {
         path?: never
         cookie?: never
       }
-      /** @description Bank Branch */
-      requestBody?: {
+      /** @description request request */
+      requestBody: {
         content: {
-          'multipart/form-data': string
+          'application/json': components['schemas']['dto.UserUpdateRequest']
         }
       }
       responses: {
@@ -1614,7 +1614,7 @@ export interface components {
       price: number
     }
     'dto.DeleteMediaRequest': {
-      mediaId?: number
+      mediaID?: number
     }
     'dto.HttpError': {
       error?: string
@@ -1764,13 +1764,13 @@ export interface components {
     }
     'dto.UpdateMediaRequest': {
       description?: string
-      mediaId: number
+      mediaID: number
       pictureUrl?: string
     }
     'dto.UpdatePackageRequest': {
       description?: string
       name?: string
-      packageId?: number
+      packageID?: number
       price?: number
     }
     'dto.UserResponse': {
@@ -1785,6 +1785,16 @@ export interface components {
       phoneNumber?: string
       profilePictureUrl?: string
       role?: components['schemas']['model.UserRole']
+    }
+    'dto.UserUpdateRequest': {
+      accountNo?: string
+      bank?: string
+      bankBranch?: string
+      facebook?: string
+      instagram?: string
+      name?: string
+      phoneNumber?: string
+      profilePictureUrl?: string
     }
     'dto.VerifyCitizenCardRequest': {
       citizenId: string
