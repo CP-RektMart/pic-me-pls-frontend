@@ -30,6 +30,7 @@ import {
 } from '@/components/ui/select'
 
 import Container from '../container'
+import { Badge } from '../ui/badge'
 
 const profileSchema = z.object({
   image: z.instanceof(File).optional(),
@@ -47,6 +48,7 @@ type ProfileFormValues = z.infer<typeof profileSchema>
 
 interface ProfileProps {
   isPhotographer: boolean
+  isPhotographerVerified: boolean
   imageUrl: string
   name: string
   email: string
@@ -60,6 +62,7 @@ interface ProfileProps {
 
 export default function Profile({
   isPhotographer,
+  isPhotographerVerified,
   imageUrl,
   name,
   email,
@@ -139,41 +142,70 @@ export default function Profile({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <div className='relative my-8'>
-                        <div className='relative size-56'>
-                          <Image
-                            alt='Profile Picture'
-                            src={
-                              field.value
-                                ? URL.createObjectURL(field.value)
-                                : imageUrl
+                      <div className='flex flex-col items-center'>
+                        <div className='relative my-8'>
+                          <div className='relative size-56'>
+                            <Image
+                              alt='Profile Picture'
+                              src={
+                                field.value
+                                  ? URL.createObjectURL(field.value)
+                                  : imageUrl
+                              }
+                              fill
+                              className='h-auto w-auto rounded-full object-cover shadow'
+                            />
+                          </div>
+                          {isEditing && (
+                            <label
+                              htmlFor='profile-picture'
+                              className='absolute bottom-2 right-2 z-10'
+                            >
+                              <div className='flex size-10 cursor-pointer items-center justify-center rounded-full bg-slate-100 shadow-md hover:bg-slate-200'>
+                                <Icon
+                                  icon='lucide:edit'
+                                  className='h-4 w-4 text-zinc-800'
+                                />
+                              </div>
+                            </label>
+                          )}
+                          <input
+                            type='file'
+                            id='profile-picture'
+                            className='hidden'
+                            onChange={(e) =>
+                              field.onChange(e.target.files?.[0])
                             }
-                            fill
-                            className='h-auto w-auto rounded-full object-cover shadow'
+                            onBlur={field.onBlur}
+                            name={field.name}
+                            ref={field.ref}
                           />
                         </div>
-                        {isEditing && (
-                          <label
-                            htmlFor='profile-picture'
-                            className='absolute bottom-2 right-2 z-10'
-                          >
-                            <div className='flex size-10 cursor-pointer items-center justify-center rounded-full bg-slate-100 shadow-md hover:bg-slate-200'>
-                              <Icon
-                                icon='lucide:edit'
-                                className='h-4 w-4 text-zinc-800'
-                              />
+                        <div className='flex flex-col items-center justify-center space-y-4'>
+                          {isPhotographer ? (
+                            <div className='flex gap-2'>
+                              <Badge variant='photographer'>Photographer</Badge>
+                              {isPhotographerVerified && (
+                                <Badge
+                                  variant='secondary'
+                                  className='gap-1 bg-green-100 text-green-700'
+                                >
+                                  <Icon icon='lucide:verified' />
+                                  Verified
+                                </Badge>
+                              )}
                             </div>
-                          </label>
-                        )}
-                        <input
-                          type='file'
-                          id='profile-picture'
-                          className='hidden'
-                          onChange={(e) => field.onChange(e.target.files?.[0])}
-                          onBlur={field.onBlur}
-                          name={field.name}
-                          ref={field.ref}
-                        />
+                          ) : (
+                            <Badge variant='customer'>Customer</Badge>
+                          )}
+                          <div>
+                            <Link href='/photographer/reverify'>
+                              <Button type='button' variant='secondary'>
+                                Revalidate Citizen Card
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -354,14 +386,6 @@ export default function Profile({
                       </FormItem>
                     )}
                   />
-
-                  <div className='mt-4'>
-                    <Link href='/photographer/reverify'>
-                      <Button type='button' className='hover:bg-zinc-700'>
-                        Revalidate Account
-                      </Button>
-                    </Link>
-                  </div>
                 </div>
               )}
             </div>
