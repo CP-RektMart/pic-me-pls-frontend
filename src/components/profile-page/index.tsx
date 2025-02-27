@@ -92,7 +92,6 @@ export default function Profile({
 
   const onSubmit = async (data: ProfileFormValues) => {
     setIsSubmitting(true)
-    console.log(data)
 
     try {
       await updateProfileAction(data)

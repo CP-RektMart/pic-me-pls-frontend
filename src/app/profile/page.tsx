@@ -17,20 +17,14 @@ export default async function ProfilePage() {
 
   const userProfile = profile.result
 
-  let isPhotographerVerified = false
-  if (userProfile.role === 'PHOTOGRAPHER') {
-    const { response: citizenCardResponse, data: citizenCard } =
-      await client.GET('/api/v1/photographer/citizen-card')
-
-    if (citizenCardResponse.ok && !citizenCard?.result) {
-      isPhotographerVerified = true
-    }
-  }
+  const { data: citizenCard } = await client.GET(
+    '/api/v1/photographer/citizen-card'
+  )
 
   return (
     <ProfileComponent
       isPhotographer={userProfile.role === 'PHOTOGRAPHER'}
-      isPhotographerVerified={isPhotographerVerified}
+      isPhotographerVerified={!!citizenCard}
       imageUrl={userProfile.profilePictureUrl || '/image.png'}
       name={userProfile.name || ''}
       email={userProfile.email || ''}
