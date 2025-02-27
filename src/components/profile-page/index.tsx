@@ -198,11 +198,20 @@ export default function Profile({
                             <Badge variant='customer'>Customer</Badge>
                           )}
                           <div>
-                            <Link href='/photographer/reverify'>
-                              <Button type='button' variant='secondary'>
-                                Revalidate Citizen Card
-                              </Button>
-                            </Link>
+                            {isPhotographer &&
+                              (isPhotographerVerified ? (
+                                <Link href='/photographer/reverify'>
+                                  <Button type='button' variant='secondary'>
+                                    Revalidate Citizen Card
+                                  </Button>
+                                </Link>
+                              ) : (
+                                <Link href='/photographer/verify'>
+                                  <Button type='button' variant='secondary'>
+                                    Verify Citizen Card
+                                  </Button>
+                                </Link>
+                              ))}
                           </div>
                         </div>
                       </div>
