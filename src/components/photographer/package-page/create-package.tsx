@@ -2,36 +2,37 @@
 
 import { useCallback, useState } from 'react'
 
+import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import PackageDetailSection from '@/components/package-page/package-detail'
-import PhotoCard from '@/components/package-page/photoCard'
+import PackageDetailSection from '@/components/photographer/package-page/package-detail'
+import PhotoCard from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
-export const MAX_FILES = 10
-export const MAX_FILE_SIZE = 10000000
-
-export type PhotoCardForm = {
+export type CreatePhotoCardForm = {
   description: string
   image: File
 }
 
-export const packageFormSchema = z.object({
+export const createpackageFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   packageDescription: z
     .string()
     .min(2, 'Description must be at least 2 characters'),
-  price: z.number().min(1, 'Price must be at least 1'),
+  price: z
+    .string()
+    .transform((val) => parseFloat(val))
+    .refine((val) => val > 0, 'Price must be a positive number'),
 })
 
-export type PackageForm = z.infer<typeof packageFormSchema>
+export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 
 export default function CreatePackage() {
-  const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
+  const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -43,8 +44,8 @@ export default function CreatePackage() {
     setPhotoCards((prev) => prev.filter((_, i) => i !== index))
   }
 
-  const form = useForm<PackageForm>({
-    resolver: zodResolver(packageFormSchema),
+  const form = useForm<CreatePackageForm>({
+    resolver: zodResolver(createpackageFormSchema),
     defaultValues: {
       name: '',
       packageDescription: '',
@@ -52,7 +53,7 @@ export default function CreatePackage() {
     },
   })
 
-  const onSubmit = async (data: PackageForm) => {
+  const onSubmit = async (data: CreatePackageForm) => {
     console.log(data)
     console.log(photoCards)
   }

@@ -1,5 +1,6 @@
 'use client'
 
+import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
@@ -15,20 +16,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import {
-  MAX_FILES,
-  MAX_FILE_SIZE,
-  PackageForm,
-  PhotoCardForm,
-} from './create-package'
+import { CreatePackageForm, CreatePhotoCardForm } from './create-package'
 
 interface packageDetailSectionProps {
   name: string
   description: string
   price: number
-  photoCards: PhotoCardForm[]
-  onSubmit: (data: PackageForm) => Promise<void>
-  form: ReturnType<typeof useForm<PackageForm>>
+  photoCards: CreatePhotoCardForm[]
+  onSubmit: (data: CreatePackageForm) => Promise<void>
+  form: ReturnType<typeof useForm<CreatePackageForm>>
   onDrop: (acceptedFiles: File[]) => void
 }
 
