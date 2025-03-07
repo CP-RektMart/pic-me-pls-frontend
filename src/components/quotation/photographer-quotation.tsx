@@ -547,7 +547,9 @@ export default function PhotographerQuotation({
 
                     <QuotationDetails
                       quotationId={Number(currentQuotation.quotationID)}
-                      quotationStatus={status as QuotationStatus}
+                      quotationStatus={
+                        currentQuotation?.status as QuotationStatus
+                      }
                       packageName={currentQuotation.packageName}
                       photographerName={currentQuotation.photographerName}
                       customerName={currentQuotation.customerName}

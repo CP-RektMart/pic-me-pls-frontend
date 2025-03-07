@@ -2,9 +2,11 @@
 
 // import { useState } from 'react'
 import { quotation } from '@/app/photographer/quotation/page'
+import { QuotationStatus } from '@/types/quotation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
+import QuotationDetails from '@/components/customer-quotation/details'
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 import {
@@ -56,22 +58,6 @@ export function QuotationDrawer({
   selectedPackage,
   setSelectedPackage,
 }: QuotationDrawerProps) {
-  let statusColour: string
-
-  switch (currentQuotation?.status) {
-    case 'Pending':
-      statusColour = 'text-amber-700'
-      break
-    case 'Confirmed':
-      statusColour = 'text-sky-700'
-      break
-    case 'Paid':
-      statusColour = 'text-emerald-700'
-      break
-    default:
-      statusColour = 'text-red-700'
-  }
-
   const form = useForm<CreateQuotationProps>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
@@ -464,106 +450,27 @@ export function QuotationDrawer({
                 <Button onClick={onEditButtonClicked}>Edit</Button>
               </div>
 
-              <div className='flex flex-col gap-4 py-6'>
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Quotation ID</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.quotationID}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Status</div>
-                  <div
-                    className={`max-h-24 max-w-48 overflow-hidden text-ellipsis text-right ${statusColour}`}
-                  >
-                    {currentQuotation.status}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Package Name</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.packageName}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Photographer Name</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.photographerName}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Customer Name</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.customerName}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>From</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.from.toLocaleString()}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>To</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.to.toLocaleString()}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Description</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.description}
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Duration</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {(
-                      (new Date(currentQuotation.to).getTime() -
-                        new Date(currentQuotation.from).getTime()) /
-                      (1000 * 60 * 60)
-                    ).toString()}{' '}
-                    Hours
-                  </div>
-                </div>
-
-                <hr className='border border-gray-200' />
-
-                <div className='flex flex-row justify-between text-sm font-normal'>
-                  <div>Total Price</div>
-                  <div className='max-h-24 max-w-48 overflow-hidden text-ellipsis text-right'>
-                    {currentQuotation.pricePerHour *
-                      ((new Date(currentQuotation.to).getTime() -
-                        new Date(currentQuotation.from).getTime()) /
-                        (1000 * 60 * 60))}{' '}
-                    Baht
-                  </div>
-                </div>
-              </div>
+              <QuotationDetails
+                quotationId={Number(currentQuotation.quotationID)}
+                quotationStatus={currentQuotation?.status as QuotationStatus}
+                packageName={currentQuotation.packageName}
+                photographerName={currentQuotation.photographerName}
+                customerName={currentQuotation.customerName}
+                from={currentQuotation.from.toISOString()}
+                to={currentQuotation.to.toISOString()}
+                description={currentQuotation.description}
+                duration={
+                  (new Date(currentQuotation.to).getTime() -
+                    new Date(currentQuotation.from).getTime()) /
+                  (1000 * 60 * 60)
+                }
+                totalPrice={
+                  currentQuotation.pricePerHour *
+                  ((new Date(currentQuotation.to).getTime() -
+                    new Date(currentQuotation.from).getTime()) /
+                    (1000 * 60 * 60))
+                }
+              />
             </div>
           )
         ) : null}
