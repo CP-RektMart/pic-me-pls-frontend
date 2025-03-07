@@ -2,13 +2,17 @@
 
 // import { useState } from 'react'
 import { quotation } from '@/app/photographer/quotation/page'
+import { cn } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Icon } from '@iconify/react/dist/iconify.js'
+import { format } from 'date-fns'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import QuotationDetails from '@/components/customer-quotation/details'
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
 import {
   DrawerContent,
   DrawerDescription,
@@ -24,6 +28,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 import {
   Select,
   SelectContent,
@@ -178,19 +187,44 @@ export function QuotationDrawer({
                   control={form.control}
                   name='from'
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className='text-sm font-medium'>
-                        From
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type='datetime-local'
-                          placeholder='Start Time'
-                          {...field}
-                          className='font-normal'
-                          step={1800}
-                        />
-                      </FormControl>
+                    <FormItem className='flex flex-col'>
+                      <FormLabel>From</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'pl-3 text-left font-normal',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, 'PPP')
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <Icon
+                                icon='calender'
+                                className='ml-auto h-4 w-4 opacity-50'
+                              />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className='w-auto p-0' align='start'>
+                          <Calendar
+                            mode='single'
+                            selected={
+                              field.value ? new Date(field.value) : undefined
+                            }
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date < new Date() || date > new Date('3024-01-01')
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -200,17 +234,44 @@ export function QuotationDrawer({
                   control={form.control}
                   name='to'
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className='text-sm font-medium'>To</FormLabel>
-                      <FormControl>
-                        <Input
-                          type='datetime-local'
-                          placeholder='End Time'
-                          {...field}
-                          className='font-normal'
-                          step={1800}
-                        />
-                      </FormControl>
+                    <FormItem className='flex flex-col'>
+                      <FormLabel>To</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'pl-3 text-left font-normal',
+                                !field.value && 'text-muted-foreground'
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, 'PPP')
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <Icon
+                                icon='calender'
+                                className='ml-auto h-4 w-4 opacity-50'
+                              />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className='w-auto p-0' align='start'>
+                          <Calendar
+                            mode='single'
+                            selected={
+                              field.value ? new Date(field.value) : undefined
+                            }
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date < new Date() || date > new Date('3024-01-01')
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
                       <FormMessage />
                     </FormItem>
                   )}
