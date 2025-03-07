@@ -5,7 +5,7 @@ import { quotation } from '@/app/photographer/quotation/page'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { PackageForm } from '@/components/package-page/create-package'
+import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 import {
   DrawerContent,
@@ -40,7 +40,7 @@ interface QuotationDrawerProps {
   setIsEditing: (isEditing: boolean) => void
   currentQuotation: quotation | null
   setCurrentQuotation: (currentQuotation: quotation | null) => void
-  packages: PackageForm[]
+  packages: EditPackageForm[]
   selectedPackage: string
   setSelectedPackage: (selectedPackage: string) => void
 }

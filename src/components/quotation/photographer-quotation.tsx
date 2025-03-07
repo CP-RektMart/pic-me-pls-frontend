@@ -8,7 +8,7 @@ import { Icon } from '@iconify/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import z from 'zod'
 
-import { PackageForm } from '@/components/package-page/create-package'
+import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerTrigger } from '@/components/ui/drawer'
 import {
@@ -31,7 +31,7 @@ import { QuotationDrawer } from './quotation-drawer'
 
 export interface PhotographerQuotationProps {
   quotations: quotation[]
-  packages: PackageForm[]
+  packages: EditPackageForm[]
 }
 
 export interface CreateQuotationProps {

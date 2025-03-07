@@ -1,4 +1,4 @@
-import { PackageForm } from '@/components/package-page/create-package'
+import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import PhotographerQuotation from '@/components/quotation/photographer-quotation'
 
 export interface quotation {
@@ -60,7 +60,7 @@ const quotations: quotation[] = [
   },
 ]
 
-const packages: PackageForm[] = [
+const packages: EditPackageForm[] = [
   {
     name: 'Wedding Package',
     packageDescription: 'Wedding photography package',
