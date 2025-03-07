@@ -2,7 +2,7 @@ import { EditPackageForm } from '@/components/photographer/package-page/edit-pac
 import PhotographerQuotation from '@/components/quotation/photographer-quotation'
 
 export interface quotation {
-  quotationID: string
+  quotationID: number
   status: string
   packageName: string
   photographerName: string
@@ -15,7 +15,7 @@ export interface quotation {
 
 const quotations: quotation[] = [
   {
-    quotationID: 'Q0001',
+    quotationID: 1,
     status: 'Pending',
     packageName: 'Wedding Package',
     photographerName: 'John Doe',
@@ -26,7 +26,7 @@ const quotations: quotation[] = [
     pricePerHour: 400,
   },
   {
-    quotationID: 'Q0002',
+    quotationID: 2,
     status: 'Confirmed',
     packageName: 'Birthday Package',
     photographerName: 'John Doe',
@@ -37,7 +37,7 @@ const quotations: quotation[] = [
     pricePerHour: 300,
   },
   {
-    quotationID: 'Q0003',
+    quotationID: 3,
     status: 'Paid',
     packageName: 'Graduation Package',
     photographerName: 'John Doe',
@@ -48,7 +48,7 @@ const quotations: quotation[] = [
     pricePerHour: 200,
   },
   {
-    quotationID: 'Q0004',
+    quotationID: 4,
     status: 'Cancelled',
     packageName: 'Wedding Package',
     photographerName: 'John Doe',
