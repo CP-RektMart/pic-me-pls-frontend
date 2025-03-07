@@ -444,7 +444,7 @@ export function QuotationDrawer({
               </FormProvider>
             </div>
           ) : (
-            <div className='flex flex-col gap-4 space-y-4 text-2xl font-bold lg:px-10'>
+            <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
               <div className='flex w-full flex-row justify-between'>
                 {currentQuotation.quotationID}
                 <Button onClick={onEditButtonClicked}>Edit</Button>
