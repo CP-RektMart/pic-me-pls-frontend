@@ -99,6 +99,16 @@ export function QuotationDrawer({
         )
       : 0
 
+  function formatDate(date: Date) {
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
+    const year = date.getFullYear()
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`
+  }
+
   return (
     <div className='lg:hidden'>
       <DrawerContent className='p-6 lg:hidden'>
@@ -456,8 +466,8 @@ export function QuotationDrawer({
                 packageName={currentQuotation.packageName}
                 photographerName={currentQuotation.photographerName}
                 customerName={currentQuotation.customerName}
-                from={currentQuotation.from.toISOString()}
-                to={currentQuotation.to.toISOString()}
+                from={formatDate(currentQuotation.from)}
+                to={formatDate(currentQuotation.to)}
                 description={currentQuotation.description}
                 duration={
                   (new Date(currentQuotation.to).getTime() -

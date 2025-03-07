@@ -63,22 +63,15 @@ export default function PhotographerQuotation({
   const [currentQuotation, setCurrentQuotation] = useState<quotation | null>(
     null
   )
+  function formatDate(date: Date) {
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
+    const year = date.getFullYear()
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
 
-  // let statusColour: string
-
-  // switch (currentQuotation?.status) {
-  //   case 'Pending':
-  //     statusColour = 'text-amber-700'
-  //     break
-  //   case 'Confirmed':
-  //     statusColour = 'text-sky-700'
-  //     break
-  //   case 'Paid':
-  //     statusColour = 'text-emerald-700'
-  //     break
-  //   default:
-  //     statusColour = 'text-red-700'
-  // }
+    return `${day}/${month}/${year} ${hours}:${minutes}`
+  }
 
   const form = useForm<CreateQuotationProps>({
     resolver: zodResolver(createQuotationFormSchema),
@@ -553,8 +546,8 @@ export default function PhotographerQuotation({
                       packageName={currentQuotation.packageName}
                       photographerName={currentQuotation.photographerName}
                       customerName={currentQuotation.customerName}
-                      from={currentQuotation.from.toISOString()}
-                      to={currentQuotation.to.toISOString()}
+                      from={formatDate(currentQuotation.from)}
+                      to={formatDate(currentQuotation.to)}
                       description={currentQuotation.description}
                       duration={
                         (new Date(currentQuotation.to).getTime() -
