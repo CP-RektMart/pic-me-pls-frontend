@@ -27,7 +27,7 @@ const quotations: quotation[] = [
   },
   {
     quotationID: 2,
-    status: 'Confirmed',
+    status: 'Confirm',
     packageName: 'Birthday Package',
     photographerName: 'John Doe',
     customerName: 'Jane Doe',
