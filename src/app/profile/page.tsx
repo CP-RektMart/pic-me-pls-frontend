@@ -4,9 +4,10 @@ import { redirect } from 'next/navigation'
 import ProfileComponent from '@/components/profile-page'
 
 export default async function ProfilePage() {
-  const { response, data: profile } = await client.GET('/api/v1/me')
+  const { response: profileResponse, data: profile } =
+    await client.GET('/api/v1/me')
 
-  if (response.status !== 200) {
+  if (profileResponse.status !== 200) {
     redirect('/login')
   }
 
@@ -16,9 +17,14 @@ export default async function ProfilePage() {
 
   const userProfile = profile.result
 
+  const { data: citizenCard } = await client.GET(
+    '/api/v1/photographer/citizen-card'
+  )
+
   return (
     <ProfileComponent
-      isPhotographer={userProfile.role == 'PHOTOGRAPHER'}
+      isPhotographer={userProfile.role === 'PHOTOGRAPHER'}
+      isPhotographerVerified={!!citizenCard}
       imageUrl={userProfile.profilePictureUrl || '/image.png'}
       name={userProfile.name || ''}
       email={userProfile.email || ''}

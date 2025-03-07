@@ -1,11 +1,11 @@
 'use server'
 
-import { auth } from '@/auth'
-import { ServerResponse } from '@/types/server'
+import { client } from '@/api/client'
+import { uploadObject } from '@/api/upload-object'
 
-interface formData {
+interface UpdateProfileAction {
+  image?: File
   name: string
-  email: string
   phone: string
   facebook?: string
   instagram?: string
@@ -14,49 +14,28 @@ interface formData {
   bankBranch?: string
 }
 
-export default async function updateProfile(
-  formData: formData
-): Promise<ServerResponse<string | null>> {
-  // TODO: Change to openapi-fetcher
-  try {
-    const session = await auth()
-
-    if (!session || !session.user) {
-      return {
-        result: null,
-        error: 'Failed to authenticate',
-      }
-    }
-
-    const form = new FormData()
-    form.append('id', session.user.userId.toString())
-    form.append('name', formData.name)
-    form.append('email', formData.email)
-    form.append('phoneNumber', formData.phone.replace(/-/g, ''))
-    form.append('facebook', formData.facebook || '')
-    form.append('instagram', formData.instagram || '')
-    form.append('bank', formData.bank || '')
-    form.append('accountNo', formData.accountNo || '')
-    form.append('bankBranch', formData.bankBranch || '')
-    if (session.user.role) form.append('role', session.user.role)
-
-    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-      body: form,
+export default async function updateProfileAction(
+  payload: UpdateProfileAction
+) {
+  let imageUrl: string | undefined = undefined
+  if (payload.image) {
+    const { url } = await uploadObject({
+      file: payload.image,
+      folder: 'PROFILE_IMAGE',
     })
-
-    const data = await res.json()
-
-    return data
-  } catch (err) {
-    console.log(err)
-
-    return {
-      result: null,
-      error: 'Failed to update user profile',
-    }
+    imageUrl = url
   }
+
+  await client.PATCH('/api/v1/me', {
+    body: {
+      profilePictureUrl: imageUrl,
+      name: payload.name,
+      phoneNumber: payload.phone.replaceAll('-', ''),
+      facebook: payload.facebook,
+      instagram: payload.instagram,
+      bank: payload.bank,
+      accountNo: payload.accountNo,
+      bankBranch: payload.bankBranch,
+    },
+  })
 }
