@@ -546,7 +546,7 @@ export default function PhotographerQuotation({
                     </div>
 
                     <QuotationDetails
-                      quotationId={Number(currentQuotation.quotationID)}
+                      quotationId={currentQuotation.quotationID}
                       quotationStatus={
                         currentQuotation?.status as QuotationStatus
                       }

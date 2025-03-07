@@ -451,7 +451,7 @@ export function QuotationDrawer({
               </div>
 
               <QuotationDetails
-                quotationId={Number(currentQuotation.quotationID)}
+                quotationId={currentQuotation.quotationID}
                 quotationStatus={currentQuotation?.status as QuotationStatus}
                 packageName={currentQuotation.packageName}
                 photographerName={currentQuotation.photographerName}
