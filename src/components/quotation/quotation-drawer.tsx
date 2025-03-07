@@ -4,7 +4,7 @@ import { quotation } from '@/app/photographer/quotation/page'
 import { cn } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Icon } from '@iconify/react/dist/iconify.js'
+import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -194,7 +194,7 @@ export function QuotationDrawer({
                             <Button
                               variant={'outline'}
                               className={cn(
-                                'pl-3 text-left font-normal',
+                                'justify-between pl-3 text-left font-normal',
                                 !field.value && 'text-muted-foreground'
                               )}
                             >
@@ -204,7 +204,7 @@ export function QuotationDrawer({
                                 <span>Pick a date</span>
                               )}
                               <Icon
-                                icon='calender'
+                                icon='uil:calender'
                                 className='ml-auto h-4 w-4 opacity-50'
                               />
                             </Button>
@@ -241,7 +241,7 @@ export function QuotationDrawer({
                             <Button
                               variant={'outline'}
                               className={cn(
-                                'pl-3 text-left font-normal',
+                                'justify-between pl-3 text-left font-normal',
                                 !field.value && 'text-muted-foreground'
                               )}
                             >
@@ -251,7 +251,7 @@ export function QuotationDrawer({
                                 <span>Pick a date</span>
                               )}
                               <Icon
-                                icon='calender'
+                                icon='uil:calender'
                                 className='ml-auto h-4 w-4 opacity-50'
                               />
                             </Button>
