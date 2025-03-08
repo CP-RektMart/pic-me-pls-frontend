@@ -19,6 +19,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import {
   Select,
   SelectContent,
@@ -27,6 +28,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
+import { Textarea } from '../ui/text-area'
 import { CreateQuotationProps } from './photographer-quotation'
 
 interface QuotationProps {
@@ -44,6 +46,36 @@ export default function QuotationForm({
   totalHours,
   packages,
 }: QuotationProps) {
+  function formatDate(date: Date) {
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
+    const year = date.getFullYear()
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`
+  }
+
+  const handleFromChange = (type: 'hour' | 'minute', value: string) => {
+    const date = new Date(form.getValues().from)
+    if (type === 'hour') {
+      date.setHours(parseInt(value))
+    } else {
+      date.setMinutes(parseInt(value))
+    }
+    form.setValue('from', formatDate(date))
+  }
+
+  const handleToChange = (type: 'hour' | 'minute', value: string) => {
+    const date = new Date(form.getValues().to)
+    if (type === 'hour') {
+      date.setHours(parseInt(value))
+    } else {
+      date.setMinutes(parseInt(value))
+    }
+    form.setValue('to', formatDate(date))
+  }
+
   return (
     <div className='space-y-4'>
       <FormField
@@ -112,14 +144,14 @@ export default function QuotationForm({
                     <Button
                       variant={'outline'}
                       className={cn(
-                        'justify-between pl-3 text-left font-normal',
+                        'w-full pl-3 text-left font-normal',
                         !field.value && 'text-muted-foreground'
                       )}
                     >
                       {field.value ? (
-                        format(field.value, 'PPP')
+                        format(field.value, 'dd/MM/yyyy HH:mm')
                       ) : (
-                        <span>Pick a date</span>
+                        <span>DD/MM/YYYY HH:mm</span>
                       )}
                       <Icon
                         icon='uil:calender'
@@ -128,16 +160,73 @@ export default function QuotationForm({
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className='w-auto p-0' align='start'>
-                  <Calendar
-                    mode='single'
-                    selected={field.value ? new Date(field.value) : undefined}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date < new Date() || date > new Date('3024-01-01')
-                    }
-                    initialFocus
-                  />
+                <PopoverContent className='w-auto p-0'>
+                  <div className='sm:flex'>
+                    <Calendar
+                      mode='single'
+                      selected={field.value ? new Date(field.value) : undefined}
+                      onSelect={field.onChange}
+                      initialFocus
+                    />
+                    <div className='flex flex-col divide-y sm:h-[300px] sm:flex-row sm:divide-x sm:divide-y-0'>
+                      <ScrollArea className='w-64 sm:w-auto'>
+                        <div className='flex p-2 sm:flex-col'>
+                          {Array.from({ length: 24 }, (_, i) => i).map(
+                            (hour) => (
+                              <Button
+                                key={hour}
+                                size='icon'
+                                variant={
+                                  field.value &&
+                                  new Date(field.value).getHours() === hour
+                                    ? 'default'
+                                    : 'ghost'
+                                }
+                                className='aspect-square shrink-0 sm:w-full'
+                                onClick={() =>
+                                  handleFromChange('hour', hour.toString())
+                                }
+                              >
+                                {hour}
+                              </Button>
+                            )
+                          )}
+                        </div>
+                        <ScrollBar
+                          orientation='horizontal'
+                          className='sm:hidden'
+                        />
+                      </ScrollArea>
+                      <ScrollArea className='w-64 sm:w-auto'>
+                        <div className='flex p-2 sm:flex-col'>
+                          {Array.from({ length: 12 }, (_, i) => i * 5).map(
+                            (minute) => (
+                              <Button
+                                key={minute}
+                                size='icon'
+                                variant={
+                                  field.value &&
+                                  new Date(field.value).getMinutes() === minute
+                                    ? 'default'
+                                    : 'ghost'
+                                }
+                                className='aspect-square shrink-0 sm:w-full'
+                                onClick={() =>
+                                  handleFromChange('minute', minute.toString())
+                                }
+                              >
+                                {minute.toString().padStart(2, '0')}
+                              </Button>
+                            )
+                          )}
+                        </div>
+                        <ScrollBar
+                          orientation='horizontal'
+                          className='sm:hidden'
+                        />
+                      </ScrollArea>
+                    </div>
+                  </div>
                 </PopoverContent>
               </Popover>
               <FormMessage />
@@ -157,14 +246,14 @@ export default function QuotationForm({
                     <Button
                       variant={'outline'}
                       className={cn(
-                        'justify-between pl-3 text-left font-normal',
+                        'w-full pl-3 text-left font-normal',
                         !field.value && 'text-muted-foreground'
                       )}
                     >
                       {field.value ? (
-                        format(field.value, 'PPP')
+                        format(field.value, 'dd/MM/yyyy HH:mm')
                       ) : (
-                        <span>Pick a date</span>
+                        <span>DD/MM/YYYY HH:mm</span>
                       )}
                       <Icon
                         icon='uil:calender'
@@ -173,16 +262,73 @@ export default function QuotationForm({
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className='w-auto p-0' align='start'>
-                  <Calendar
-                    mode='single'
-                    selected={field.value ? new Date(field.value) : undefined}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date < new Date() || date > new Date('3024-01-01')
-                    }
-                    initialFocus
-                  />
+                <PopoverContent className='w-auto p-0'>
+                  <div className='sm:flex'>
+                    <Calendar
+                      mode='single'
+                      selected={field.value ? new Date(field.value) : undefined}
+                      onSelect={field.onChange}
+                      initialFocus
+                    />
+                    <div className='flex flex-col divide-y sm:h-[300px] sm:flex-row sm:divide-x sm:divide-y-0'>
+                      <ScrollArea className='w-64 sm:w-auto'>
+                        <div className='flex p-2 sm:flex-col'>
+                          {Array.from({ length: 24 }, (_, i) => i).map(
+                            (hour) => (
+                              <Button
+                                key={hour}
+                                size='icon'
+                                variant={
+                                  field.value &&
+                                  new Date(field.value).getHours() === hour
+                                    ? 'default'
+                                    : 'ghost'
+                                }
+                                className='aspect-square shrink-0 sm:w-full'
+                                onClick={() =>
+                                  handleToChange('hour', hour.toString())
+                                }
+                              >
+                                {hour}
+                              </Button>
+                            )
+                          )}
+                        </div>
+                        <ScrollBar
+                          orientation='horizontal'
+                          className='sm:hidden'
+                        />
+                      </ScrollArea>
+                      <ScrollArea className='w-64 sm:w-auto'>
+                        <div className='flex p-2 sm:flex-col'>
+                          {Array.from({ length: 12 }, (_, i) => i * 5).map(
+                            (minute) => (
+                              <Button
+                                key={minute}
+                                size='icon'
+                                variant={
+                                  field.value &&
+                                  new Date(field.value).getMinutes() === minute
+                                    ? 'default'
+                                    : 'ghost'
+                                }
+                                className='aspect-square shrink-0 sm:w-full'
+                                onClick={() =>
+                                  handleToChange('minute', minute.toString())
+                                }
+                              >
+                                {minute.toString().padStart(2, '0')}
+                              </Button>
+                            )
+                          )}
+                        </div>
+                        <ScrollBar
+                          orientation='horizontal'
+                          className='sm:hidden'
+                        />
+                      </ScrollArea>
+                    </div>
+                  </div>
                 </PopoverContent>
               </Popover>
               <FormMessage />
@@ -198,7 +344,7 @@ export default function QuotationForm({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
             <FormControl>
-              <Input
+              <Textarea
                 placeholder='Quotation Remarks'
                 {...field}
                 className='font-normal'
