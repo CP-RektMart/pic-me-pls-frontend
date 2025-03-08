@@ -33,7 +33,6 @@ import {
 
 import { createQuotationFormSchema } from './photographer-quotation'
 import { CreateQuotationProps } from './photographer-quotation'
-import QuotationForm from './quotation-form'
 
 interface QuotationDrawerProps {
   isCreating: boolean
@@ -116,12 +115,125 @@ export function QuotationDrawer({
           <div className='space-y-4 text-2xl font-bold lg:px-10'>
             Create Quotation
             <FormProvider {...form}>
-              <QuotationForm
-                form={form}
-                setSelectedPackage={setSelectedPackage}
-                selectedPackage={selectedPackage}
-                totalHours={totalHours}
-                packages={packages}
+              <FormField
+                control={form.control}
+                name='package'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-sm font-medium'>
+                      Package
+                    </FormLabel>
+                    <FormControl className='font-normal'>
+                      <Select
+                        onValueChange={(value) => {
+                          setSelectedPackage(value)
+                          field.onChange(value)
+                        }}
+                        value={field.value}
+                      >
+                        <SelectTrigger className='w-full font-normal'>
+                          <SelectValue placeholder='Package' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {packages.map((pkg) => (
+                            <SelectItem
+                              key={pkg.name}
+                              value={pkg.name}
+                              className='font-normal'
+                            >
+                              {pkg.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='customer'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-sm font-medium'>
+                      Customer Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Customer Name'
+                        {...field}
+                        className='font-normal'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className='grid grid-cols-2 gap-2'>
+                <FormField
+                  control={form.control}
+                  name='from'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>
+                        From
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type='datetime-local'
+                          placeholder='Start Time'
+                          {...field}
+                          className='font-normal'
+                          step={1800}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='to'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-sm font-medium'>To</FormLabel>
+                      <FormControl>
+                        <Input
+                          type='datetime-local'
+                          placeholder='End Time'
+                          {...field}
+                          className='font-normal'
+                          step={1800}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name='description'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className='text-sm font-medium'>
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Quotation Remarks'
+                        {...field}
+                        className='font-normal'
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
 
               <div className='mt-auto'>

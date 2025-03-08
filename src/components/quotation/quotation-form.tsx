@@ -1,7 +1,8 @@
 import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
@@ -29,23 +30,41 @@ import {
 } from '@/components/ui/select'
 
 import { Textarea } from '../ui/text-area'
-import { CreateQuotationProps } from './photographer-quotation'
+import {
+  CreateQuotationProps,
+  createQuotationFormSchema,
+} from './photographer-quotation'
 
 interface QuotationProps {
-  form: ReturnType<typeof useForm<CreateQuotationProps>>
+  transactionType: string
+  onSubmit: (data: {
+    package: string
+    customer: string
+    from: string
+    to: string
+    description: string
+  }) => void
+  packages: EditPackageForm[]
   setSelectedPackage: (value: string) => void
   selectedPackage: string
-  totalHours: number
-  packages: EditPackageForm[]
 }
 
 export default function QuotationForm({
-  form,
+  transactionType,
+  onSubmit,
+  packages,
   setSelectedPackage,
   selectedPackage,
-  totalHours,
-  packages,
 }: QuotationProps) {
+  const form = useForm<CreateQuotationProps>({
+    resolver: zodResolver(createQuotationFormSchema),
+    defaultValues: {
+      package: '',
+      customer: '',
+      description: '',
+    },
+  })
+
   function formatDate(date: Date) {
     const day = String(date.getDate()).padStart(2, '0')
     const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
@@ -76,8 +95,19 @@ export default function QuotationForm({
     form.setValue('to', formatDate(date))
   }
 
+  const watchFrom = form.watch('from')
+  const watchTo = form.watch('to')
+
+  const totalHours =
+    watchFrom && watchTo
+      ? Math.ceil(
+          (new Date(watchTo).getTime() - new Date(watchFrom).getTime()) /
+            (1000 * 60 * 60)
+        )
+      : 0
+
   return (
-    <div className='space-y-4'>
+    <FormProvider {...form}>
       <FormField
         control={form.control}
         name='package'
@@ -149,7 +179,13 @@ export default function QuotationForm({
                       )}
                     >
                       {field.value ? (
-                        format(field.value, 'dd/MM/yyyy HH:mm')
+                        new Date(field.value).toLocaleString('en-GB', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })
                       ) : (
                         <span>DD/MM/YYYY HH:mm</span>
                       )}
@@ -164,7 +200,7 @@ export default function QuotationForm({
                   <div className='sm:flex'>
                     <Calendar
                       mode='single'
-                      selected={field.value ? new Date(field.value) : undefined}
+                      //   selected={field.value ? new Date(field.value) : undefined}
                       onSelect={field.onChange}
                       initialFocus
                     />
@@ -382,6 +418,16 @@ export default function QuotationForm({
           </div>
         </div>
       </div>
-    </div>
+
+      <div className='mt-auto'>
+        <Button
+          type='button'
+          className='w-full hover:bg-zinc-700'
+          onClick={form.handleSubmit(onSubmit)}
+        >
+          {transactionType === 'create' ? 'Create' : 'Save'}
+        </Button>
+      </div>
+    </FormProvider>
   )
 }

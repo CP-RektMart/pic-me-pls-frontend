@@ -4,30 +4,13 @@ import { useState } from 'react'
 
 import { quotation } from '@/app/photographer/quotation/page'
 import { QuotationStatus } from '@/types/quotation'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
-import { FormProvider, useForm } from 'react-hook-form'
 import z from 'zod'
 
 import QuotationDetails from '@/components/customer-quotation/details'
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerTrigger } from '@/components/ui/drawer'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 
 import { QuotationDrawer } from './quotation-drawer'
 import QuotationForm from './quotation-form'
@@ -48,10 +31,12 @@ export interface CreateQuotationProps {
 export const createQuotationFormSchema = z.object({
   package: z.string().min(2, 'Gallery must be at least 2 characters'),
   customer: z.string().min(2, 'Customer must be at least 2 characters'),
-  from: z.string().min(2, 'From must be at least 2 characters'),
-  to: z.string().min(2, 'To must be at least 2 characters'),
+  from: z.date(),
+  to: z.date(),
   description: z.string().min(2, 'Description must be at least 2 characters'),
 })
+
+export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
 
 export default function PhotographerQuotation({
   quotations,
@@ -73,17 +58,6 @@ export default function PhotographerQuotation({
 
     return `${day}/${month}/${year} ${hours}:${minutes}`
   }
-
-  const form = useForm<CreateQuotationProps>({
-    resolver: zodResolver(createQuotationFormSchema),
-    defaultValues: {
-      package: '',
-      customer: '',
-      from: '',
-      to: '',
-      description: '',
-    },
-  })
 
   const onClose = () => {
     setIsCreating(false)
@@ -114,17 +88,6 @@ export default function PhotographerQuotation({
     setCurrentQuotation(null)
     console.log(data)
   }
-
-  const watchFrom = form.watch('from')
-  const watchTo = form.watch('to')
-
-  const totalHours =
-    watchFrom && watchTo
-      ? Math.ceil(
-          (new Date(watchTo).getTime() - new Date(watchFrom).getTime()) /
-            (1000 * 60 * 60)
-        )
-      : 0
 
   return (
     <div className='size-full space-y-6'>
@@ -192,25 +155,13 @@ export default function PhotographerQuotation({
               {isCreating ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
                   Create Quotation
-                  <FormProvider {...form}>
-                    <QuotationForm
-                      form={form}
-                      setSelectedPackage={setSelectedPackage}
-                      selectedPackage={selectedPackage}
-                      totalHours={totalHours}
-                      packages={packages}
-                    />
-
-                    <div className='mt-auto'>
-                      <Button
-                        type='button'
-                        className='w-full hover:bg-zinc-700'
-                        onClick={form.handleSubmit(onSubmit)}
-                      >
-                        Create
-                      </Button>
-                    </div>
-                  </FormProvider>
+                  <QuotationForm
+                    transactionType='Create'
+                    packages={packages}
+                    onSubmit={onSubmit}
+                    setSelectedPackage={setSelectedPackage}
+                    selectedPackage={selectedPackage}
+                  />
                 </div>
               ) : currentQuotation != null ? (
                 isEditing ? (
@@ -219,174 +170,13 @@ export default function PhotographerQuotation({
                       Editing : {currentQuotation.quotationID}
                     </div>
 
-                    <FormProvider {...form}>
-                      <FormField
-                        control={form.control}
-                        name='package'
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className='text-sm font-medium'>
-                              Package
-                            </FormLabel>
-                            <FormControl className='font-normal'>
-                              <Select
-                                onValueChange={(value) => {
-                                  setSelectedPackage(value)
-                                  field.onChange(value)
-                                }}
-                                value={field.value}
-                              >
-                                <SelectTrigger className='w-full font-normal'>
-                                  <SelectValue placeholder='Package' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {packages.map((pkg) => (
-                                    <SelectItem
-                                      key={pkg.name}
-                                      value={pkg.name}
-                                      className='font-normal'
-                                    >
-                                      {pkg.name}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name='customer'
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className='text-sm font-medium'>
-                              Customer Name
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder='Customer Name'
-                                {...field}
-                                className='font-normal'
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <div className='grid grid-cols-2 gap-2'>
-                        <FormField
-                          control={form.control}
-                          name='from'
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className='text-sm font-medium'>
-                                From
-                              </FormLabel>
-                              <FormControl>
-                                <Input
-                                  type='datetime-local'
-                                  placeholder='Start Time'
-                                  {...field}
-                                  className='font-normal'
-                                  step={1800}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name='to'
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className='text-sm font-medium'>
-                                To
-                              </FormLabel>
-                              <FormControl>
-                                <Input
-                                  type='datetime-local'
-                                  placeholder='End Time'
-                                  {...field}
-                                  className='font-normal'
-                                  step={1800}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <FormField
-                        control={form.control}
-                        name='description'
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className='text-sm font-medium'>
-                              Description
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder='Quotation Remarks'
-                                {...field}
-                                className='font-normal'
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <hr className='border border-zinc-400' />
-                      <div className='flex flex-col gap-2 p-4'>
-                        <div className='flex flex-row justify-between'>
-                          <div className='text-sm font-normal'>Total hours</div>
-                          <div className='text-sm font-normal'>
-                            {totalHours > 0 ? totalHours.toFixed(0) : 0} Hours
-                          </div>
-                        </div>
-
-                        <div className='flex flex-row justify-between'>
-                          <div className='text-sm font-normal'>
-                            Price Per Hour
-                          </div>
-                          <div className='text-sm font-normal'>
-                            {packages.find(
-                              (pkg) => pkg.name === selectedPackage
-                            )?.price ?? 0}{' '}
-                            Baht
-                          </div>
-                        </div>
-
-                        <div className='flex flex-row justify-between'>
-                          <div className='text-sm font-normal'>Total Price</div>
-                          <div className='text-sm font-normal'>
-                            {((packages.find(
-                              (pkg) => pkg.name === selectedPackage
-                            )?.price ??
-                              0) ||
-                              0) * totalHours}{' '}
-                            Baht
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className='mt-auto'>
-                        <Button
-                          type='button'
-                          className='w-full hover:bg-zinc-700'
-                          onClick={form.handleSubmit(onSaveEditing)}
-                        >
-                          Save
-                        </Button>
-                      </div>
-                    </FormProvider>
+                    <QuotationForm
+                      transactionType='Edit'
+                      packages={packages}
+                      onSubmit={onSaveEditing}
+                      setSelectedPackage={setSelectedPackage}
+                      selectedPackage={selectedPackage}
+                    />
                   </div>
                 ) : (
                   <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
