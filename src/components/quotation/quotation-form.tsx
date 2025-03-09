@@ -177,16 +177,16 @@ export default function QuotationForm({
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className='w-auto p-0'>
-                  <div className='sm:flex'>
+                  <div className='lg:flex'>
                     <Calendar
                       mode='single'
                       selected={field.value ? new Date(field.value) : undefined}
                       onSelect={field.onChange}
                       initialFocus
                     />
-                    <div className='flex flex-col divide-y sm:h-[300px] sm:flex-row sm:divide-x sm:divide-y-0'>
-                      <ScrollArea className='w-64 sm:w-auto'>
-                        <div className='flex p-2 sm:flex-col'>
+                    <div className='flex flex-col divide-y lg:h-[300px] lg:flex-row lg:divide-x lg:divide-y-0'>
+                      <ScrollArea className='w-64 lg:w-auto'>
+                        <div className='flex p-2 lg:flex-col'>
                           {Array.from({ length: 24 }, (_, i) => i).map(
                             (hour) => (
                               <Button
@@ -198,7 +198,7 @@ export default function QuotationForm({
                                     ? 'default'
                                     : 'ghost'
                                 }
-                                className='aspect-square shrink-0 sm:w-full'
+                                className='aspect-square shrink-0 lg:w-full'
                                 onClick={() =>
                                   field.onChange(
                                     formatDate(
@@ -216,11 +216,11 @@ export default function QuotationForm({
                         </div>
                         <ScrollBar
                           orientation='horizontal'
-                          className='sm:hidden'
+                          className='lg:hidden'
                         />
                       </ScrollArea>
-                      <ScrollArea className='w-64 sm:w-auto'>
-                        <div className='flex p-2 sm:flex-col'>
+                      <ScrollArea className='w-64 lg:w-auto'>
+                        <div className='flex p-2 lg:flex-col'>
                           {Array.from({ length: 12 }, (_, i) => i * 5).map(
                             (minute) => (
                               <Button
@@ -232,7 +232,7 @@ export default function QuotationForm({
                                     ? 'default'
                                     : 'ghost'
                                 }
-                                className='aspect-square shrink-0 sm:w-full'
+                                className='aspect-square shrink-0 lg:w-full'
                                 onClick={() =>
                                   field.onChange(
                                     formatDate(
@@ -250,7 +250,7 @@ export default function QuotationForm({
                         </div>
                         <ScrollBar
                           orientation='horizontal'
-                          className='sm:hidden'
+                          className='lg:hidden'
                         />
                       </ScrollArea>
                     </div>
@@ -291,16 +291,16 @@ export default function QuotationForm({
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className='w-auto p-0'>
-                  <div className='sm:flex'>
+                  <div className='lg:flex'>
                     <Calendar
                       mode='single'
                       selected={field.value ? new Date(field.value) : undefined}
                       onSelect={field.onChange}
                       initialFocus
                     />
-                    <div className='flex flex-col divide-y sm:h-[300px] sm:flex-row sm:divide-x sm:divide-y-0'>
-                      <ScrollArea className='w-64 sm:w-auto'>
-                        <div className='flex p-2 sm:flex-col'>
+                    <div className='flex flex-col divide-y lg:h-[300px] lg:flex-row lg:divide-x lg:divide-y-0'>
+                      <ScrollArea className='w-64 lg:w-auto'>
+                        <div className='flex p-2 lg:flex-col'>
                           {Array.from({ length: 24 }, (_, i) => i).map(
                             (hour) => (
                               <Button
@@ -312,7 +312,7 @@ export default function QuotationForm({
                                     ? 'default'
                                     : 'ghost'
                                 }
-                                className='aspect-square shrink-0 sm:w-full'
+                                className='aspect-square shrink-0 lg:w-full'
                                 onClick={() =>
                                   field.onChange(
                                     formatDate(
@@ -330,11 +330,11 @@ export default function QuotationForm({
                         </div>
                         <ScrollBar
                           orientation='horizontal'
-                          className='sm:hidden'
+                          className='lg:hidden'
                         />
                       </ScrollArea>
-                      <ScrollArea className='w-64 sm:w-auto'>
-                        <div className='flex p-2 sm:flex-col'>
+                      <ScrollArea className='w-64 lg:w-auto'>
+                        <div className='flex p-2 lg:flex-col'>
                           {Array.from({ length: 12 }, (_, i) => i * 5).map(
                             (minute) => (
                               <Button
@@ -346,7 +346,7 @@ export default function QuotationForm({
                                     ? 'default'
                                     : 'ghost'
                                 }
-                                className='aspect-square shrink-0 sm:w-full'
+                                className='aspect-square shrink-0 lg:w-full'
                                 onClick={() =>
                                   field.onChange(
                                     formatDate(
@@ -364,7 +364,7 @@ export default function QuotationForm({
                         </div>
                         <ScrollBar
                           orientation='horizontal'
-                          className='sm:hidden'
+                          className='lg:hidden'
                         />
                       </ScrollArea>
                     </div>
