@@ -75,26 +75,6 @@ export default function QuotationForm({
     return new Date(`${month}/${day}/${year} ${hours}:${minutes}`)
   }
 
-  const handleFromChange = (type: 'hour' | 'minute', value: string) => {
-    const date = new Date(form.getValues().from)
-    if (type === 'hour') {
-      date.setHours(parseInt(value))
-    } else {
-      date.setMinutes(parseInt(value))
-    }
-    form.setValue('from', formatDate(date))
-  }
-
-  const handleToChange = (type: 'hour' | 'minute', value: string) => {
-    const date = new Date(form.getValues().to)
-    if (type === 'hour') {
-      date.setHours(parseInt(value))
-    } else {
-      date.setMinutes(parseInt(value))
-    }
-    form.setValue('to', formatDate(date))
-  }
-
   const watchFrom = form.watch('from')
   const watchTo = form.watch('to')
 
@@ -220,7 +200,13 @@ export default function QuotationForm({
                                 }
                                 className='aspect-square shrink-0 sm:w-full'
                                 onClick={() =>
-                                  handleFromChange('hour', hour.toString())
+                                  field.onChange(
+                                    formatDate(
+                                      new Date(
+                                        new Date(field.value).setHours(hour)
+                                      )
+                                    )
+                                  )
                                 }
                               >
                                 {hour}
@@ -248,7 +234,13 @@ export default function QuotationForm({
                                 }
                                 className='aspect-square shrink-0 sm:w-full'
                                 onClick={() =>
-                                  handleFromChange('minute', minute.toString())
+                                  field.onChange(
+                                    formatDate(
+                                      new Date(
+                                        new Date(field.value).setMinutes(minute)
+                                      )
+                                    )
+                                  )
                                 }
                               >
                                 {minute.toString().padStart(2, '0')}
@@ -322,7 +314,13 @@ export default function QuotationForm({
                                 }
                                 className='aspect-square shrink-0 sm:w-full'
                                 onClick={() =>
-                                  handleToChange('hour', hour.toString())
+                                  field.onChange(
+                                    formatDate(
+                                      new Date(
+                                        new Date(field.value).setHours(hour)
+                                      )
+                                    )
+                                  )
                                 }
                               >
                                 {hour}
@@ -350,7 +348,13 @@ export default function QuotationForm({
                                 }
                                 className='aspect-square shrink-0 sm:w-full'
                                 onClick={() =>
-                                  handleToChange('minute', minute.toString())
+                                  field.onChange(
+                                    formatDate(
+                                      new Date(
+                                        new Date(field.value).setMinutes(minute)
+                                      )
+                                    )
+                                  )
                                 }
                               >
                                 {minute.toString().padStart(2, '0')}
