@@ -40,8 +40,8 @@ interface QuotationProps {
   onSubmit: (data: {
     package: string
     customer: string
-    from: string
-    to: string
+    from: Date
+    to: Date
     description: string
   }) => void
   packages: EditPackageForm[]
@@ -72,7 +72,7 @@ export default function QuotationForm({
     const hours = String(date.getHours()).padStart(2, '0')
     const minutes = String(date.getMinutes()).padStart(2, '0')
 
-    return `${month}/${day}/${year} ${hours}:${minutes}`
+    return new Date(`${month}/${day}/${year} ${hours}:${minutes}`)
   }
 
   const handleFromChange = (type: 'hour' | 'minute', value: string) => {

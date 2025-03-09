@@ -73,8 +73,8 @@ export function QuotationDrawer({
     defaultValues: {
       package: '',
       customer: '',
-      from: '',
-      to: '',
+      from: new Date(),
+      to: new Date(),
       description: '',
     },
   })
@@ -116,7 +116,7 @@ export function QuotationDrawer({
     const hours = String(date.getHours()).padStart(2, '0')
     const minutes = String(date.getMinutes()).padStart(2, '0')
 
-    return `${day}/${month}/${year} ${hours}:${minutes}`
+    return new Date(`${month}/${day}/${year} ${hours}:${minutes}`)
   }
 
   const handleFromChange = (type: 'hour' | 'minute', value: string) => {
@@ -843,8 +843,8 @@ export function QuotationDrawer({
                 packageName={currentQuotation.packageName}
                 photographerName={currentQuotation.photographerName}
                 customerName={currentQuotation.customerName}
-                from={formatDate(currentQuotation.from)}
-                to={formatDate(currentQuotation.to)}
+                from={formatDate(currentQuotation.from).toString()}
+                to={formatDate(currentQuotation.to).toString()}
                 description={currentQuotation.description}
                 duration={
                   (new Date(currentQuotation.to).getTime() -

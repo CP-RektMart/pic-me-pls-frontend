@@ -23,8 +23,8 @@ export interface PhotographerQuotationProps {
 export interface CreateQuotationProps {
   package: string
   customer: string
-  from: string
-  to: string
+  from: Date
+  to: Date
   description: string
 }
 
