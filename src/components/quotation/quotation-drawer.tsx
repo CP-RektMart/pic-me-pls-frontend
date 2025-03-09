@@ -455,6 +455,36 @@ export function QuotationDrawer({
                 )}
               />
 
+              <hr className='border border-zinc-400' />
+              <div className='flex flex-col gap-2 p-4'>
+                <div className='flex flex-row justify-between'>
+                  <div className='text-sm font-normal'>Total hours</div>
+                  <div className='text-sm font-normal'>
+                    {totalHours > 0 ? totalHours.toFixed(0) : 0} Hours
+                  </div>
+                </div>
+
+                <div className='flex flex-row justify-between'>
+                  <div className='text-sm font-normal'>Price Per Hour</div>
+                  <div className='text-sm font-normal'>
+                    {packages.find((pkg) => pkg.name === selectedPackage)
+                      ?.price ?? 0}{' '}
+                    Baht
+                  </div>
+                </div>
+
+                <div className='flex flex-row justify-between'>
+                  <div className='text-sm font-normal'>Total Price</div>
+                  <div className='text-sm font-normal'>
+                    {((packages.find((pkg) => pkg.name === selectedPackage)
+                      ?.price ??
+                      0) ||
+                      0) * totalHours}{' '}
+                    Baht
+                  </div>
+                </div>
+              </div>
+
               <div className='mt-auto'>
                 <DrawerTrigger asChild>
                   <Button
