@@ -1,6 +1,5 @@
 import { UserProfile } from '@/types/user'
 
-import FilterMultiSelect from './filter-multi-select'
 import FilterPopover from './filter-popover'
 import SearchBar from './search-bar'
 
@@ -10,9 +9,8 @@ export default function HomePageComponent({
   userProfile: UserProfile
 }) {
   return (
-    <div className='flex w-screen flex-col px-4 pt-4 md:px-8'>
+    <div className='max-w-screen flex w-full flex-col px-4 pt-4 md:px-32'>
       <SearchBar userProfile={userProfile} />
-      <FilterMultiSelect />
       <FilterPopover />
     </div>
   )

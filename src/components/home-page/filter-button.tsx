@@ -2,18 +2,18 @@ import { Icon } from '@iconify/react'
 
 import { Button } from '../ui/button'
 
-export default function SearchFilterButton({
-  searchOptionType,
+export default function FilterButton({
+  OptionType,
 }: {
-  searchOptionType: 'Filter' | 'Sort' | ''
+  OptionType: 'Filter' | 'Sort' | ''
 }) {
   return (
-    <Button variant='searchFilter'>
+    <Button variant='filter'>
       <Icon
         icon={
-          searchOptionType === 'Filter'
+          OptionType === 'Filter'
             ? 'lucide:filter'
-            : searchOptionType === 'Sort'
+            : OptionType === 'Sort'
               ? 'lucide:arrow-down-wide-narrow'
               : ''
         }

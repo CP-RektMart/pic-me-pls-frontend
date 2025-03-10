@@ -1,7 +1,8 @@
 import { UserProfile } from '@/types/user'
 
-import SearchFilterButton from './filter-button'
+import FilterButton from './filter-button'
 import Greeting from './gretting'
+import PackageFilterButton from './package-filter-button'
 import SearchInput from './search-input'
 
 export default function SearchBar({
@@ -14,8 +15,8 @@ export default function SearchBar({
       <Greeting userProfile={userProfile} />
       <div className='item-center flex w-full gap-3'>
         <SearchInput searchType='Package' />
-        <SearchFilterButton searchOptionType='Sort' />
-        <SearchFilterButton searchOptionType='Filter' />
+        <PackageFilterButton />
+        <FilterButton OptionType='Sort' />
       </div>
     </div>
   )

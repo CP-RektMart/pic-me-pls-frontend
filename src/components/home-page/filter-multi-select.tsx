@@ -16,7 +16,7 @@ export default function FilterMultiSelect() {
   const [selectedCategories, setselectedCategories] = useState<string[]>([])
 
   return (
-    <div className='max-w-xl'>
+    <div className='w-full'>
       <MultiSelect
         options={categoriesList}
         onValueChange={setselectedCategories}
