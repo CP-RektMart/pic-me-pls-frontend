@@ -46,6 +46,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      embla-carousel-autoplay:
+        specifier: ^8.5.2
+        version: 8.5.2(embla-carousel@8.5.2)
       embla-carousel-react:
         specifier: ^8.5.2
         version: 8.5.2(react@19.0.0)
@@ -2201,6 +2204,14 @@ packages:
       {
         integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==,
       }
+
+  embla-carousel-autoplay@8.5.2:
+    resolution:
+      {
+        integrity: sha512-27emJ0px3q/c0kCHCjwRrEbYcyYUPfGO3g5IBWF1i7714TTzE6L9P81V6PHLoSMAKJ1aHoT2e7YFOsuFKCbyag==,
+      }
+    peerDependencies:
+      embla-carousel: 8.5.2
 
   embla-carousel-react@8.5.2:
     resolution:
@@ -6357,6 +6368,10 @@ snapshots:
       gopd: 1.2.0
 
   eastasianwidth@0.2.0: {}
+
+  embla-carousel-autoplay@8.5.2(embla-carousel@8.5.2):
+    dependencies:
+      embla-carousel: 8.5.2
 
   embla-carousel-react@8.5.2(react@19.0.0):
     dependencies:
