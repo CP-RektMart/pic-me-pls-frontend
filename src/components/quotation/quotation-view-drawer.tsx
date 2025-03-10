@@ -22,6 +22,7 @@ interface ViewQuotationDrawerProps {
   setSelectedPackage: (selectedPackage: string) => void
   selectedPackage: string
   quotation: quotation
+  onEditButtonClicked: () => void
 }
 
 export default function ViewQuotationDrawer({
@@ -29,6 +30,7 @@ export default function ViewQuotationDrawer({
   setIsEditing,
   setCurrentQuotation,
   quotation,
+  onEditButtonClicked,
 }: ViewQuotationDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -65,9 +67,7 @@ export default function ViewQuotationDrawer({
               <div className='flex justify-end'>
                 <Button
                   onClick={() => {
-                    setIsCreating(false)
-                    setCurrentQuotation(quotation)
-                    setIsEditing(true)
+                    onEditButtonClicked()
                   }}
                   className='w-16 lg:block'
                 >
