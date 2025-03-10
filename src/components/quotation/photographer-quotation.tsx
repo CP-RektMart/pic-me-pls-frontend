@@ -10,9 +10,8 @@ import z from 'zod'
 import QuotationDetails from '@/components/customer-quotation/details'
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
-import { Drawer, DrawerTrigger } from '@/components/ui/drawer'
 
-import { QuotationDrawer } from './quotation-drawer'
+import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
 
 export interface PhotographerQuotationProps {
@@ -59,12 +58,6 @@ export default function PhotographerQuotation({
     return `${day}/${month}/${year} ${hours}:${minutes}`
   }
 
-  const onClose = () => {
-    setIsCreating(false)
-    setIsEditing(false)
-    setCurrentQuotation(null)
-  }
-
   const onCreateQuotationButtonClicked = () => {
     setIsCreating(true)
     setIsEditing(false)
@@ -91,151 +84,150 @@ export default function PhotographerQuotation({
 
   return (
     <div className='size-full space-y-6'>
-      <Drawer onOpenChange={(open) => !open && onClose?.()}>
-        <div className='flex flex-row justify-between'>
-          <div className='text-2xl font-bold'>Quotation Manager</div>
+      <div className='flex flex-row justify-between'>
+        <div className='text-2xl font-bold'>Quotation Manager</div>
 
-          <Button
-            onClick={onCreateQuotationButtonClicked}
-            className='hidden lg:block'
-          >
-            New Quotation
-          </Button>
-          <DrawerTrigger asChild>
-            <Button
-              onClick={onCreateQuotationButtonClicked}
-              className='lg:hidden'
-            >
-              <Icon icon='lucide:plus' />
-            </Button>
-          </DrawerTrigger>
+        <Button
+          onClick={onCreateQuotationButtonClicked}
+          className='hidden lg:block'
+        >
+          New Quotation
+        </Button>
+        <CreateQuotationDrawer
+          setIsEditing={setIsEditing}
+          setIsCreating={setIsCreating}
+          setCurrentQuotation={setCurrentQuotation}
+          onSubmit={onSubmit}
+          packages={packages}
+          selectedPackage={selectedPackage}
+          setSelectedPackage={setSelectedPackage}
+        />
+      </div>
+      {quotations.length == 0 && !isCreating && !isEditing ? (
+        <div className='flex h-full flex-col items-center justify-center gap-3'>
+          <Icon icon='lucide:sticky-note' className='size-20' />
+          No Quotations To Show
         </div>
-        {quotations.length == 0 && !isCreating && !isEditing ? (
-          <div className='flex h-full flex-col items-center justify-center gap-3'>
-            <Icon icon='lucide:sticky-note' className='size-20' />
-            No Quotations To Show
-          </div>
-        ) : (
-          <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
-            <div className='gap-2.5 space-y-2.5 text-2xl font-bold lg:px-10'>
-              <div>Latest Quotations</div>
+      ) : (
+        <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='gap-2.5 space-y-2.5 text-2xl font-bold lg:px-10'>
+            <div>Latest Quotations</div>
 
-              {quotations.length == 0 ? (
-                <div className='flex h-full flex-col items-center justify-center gap-3'>
-                  <Icon icon='lucide:sticky-note' className='size-20' />
-                  No Quotations To Show
-                </div>
-              ) : (
-                <div className='flex flex-col gap-4'>
-                  {quotations.map((quotation) => (
-                    //to be replaced with card component
-                    <div key={quotation.quotationID}>
-                      <DrawerTrigger asChild>
-                        <Button
-                          onClick={() => {
-                            setIsCreating(false)
-                            setCurrentQuotation(quotation)
-                          }}
-                          className='w-full lg:hidden'
-                        >
-                          {quotation.quotationID}
-                        </Button>
-                      </DrawerTrigger>
+            {quotations.length == 0 ? (
+              <div className='flex h-full flex-col items-center justify-center gap-3'>
+                <Icon icon='lucide:sticky-note' className='size-20' />
+                No Quotations To Show
+              </div>
+            ) : (
+              <div className='flex flex-col gap-4'>
+                {quotations.map((quotation) => (
+                  //to be replaced with card component
+                  <div key={quotation.quotationID}>
+                    {/* <DrawerTrigger asChild>
                       <Button
                         onClick={() => {
                           setIsCreating(false)
                           setCurrentQuotation(quotation)
                         }}
-                        className='hidden w-full lg:block'
+                        className='w-full lg:hidden'
                       >
                         {quotation.quotationID}
                       </Button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                    </DrawerTrigger> */}
+                    <Button
+                      onClick={() => {
+                        setIsCreating(false)
+                        setCurrentQuotation(quotation)
+                      }}
+                      className='hidden w-full lg:block'
+                    >
+                      {quotation.quotationID}
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
-            {/* right side of lg, drawer in mobile */}
-            <div className='hidden lg:block'>
-              {isCreating ? (
+          {/* right side of lg, drawer in mobile */}
+          <div className='hidden lg:block'>
+            {isCreating ? (
+              <div className='space-y-4 text-2xl font-bold lg:px-10'>
+                Create Quotation
+                <QuotationForm
+                  transactionType='Create'
+                  packages={packages}
+                  onSubmit={onSubmit}
+                  setSelectedPackage={setSelectedPackage}
+                  selectedPackage={selectedPackage}
+                />
+              </div>
+            ) : currentQuotation != null ? (
+              isEditing ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                  Create Quotation
+                  <div className='w-full text-center'>
+                    Editing : {currentQuotation.quotationID}
+                  </div>
+
                   <QuotationForm
-                    transactionType='Create'
+                    transactionType='Edit'
                     packages={packages}
-                    onSubmit={onSubmit}
+                    onSubmit={onSaveEditing}
                     setSelectedPackage={setSelectedPackage}
                     selectedPackage={selectedPackage}
                   />
                 </div>
-              ) : currentQuotation != null ? (
-                isEditing ? (
-                  <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                    <div className='w-full text-center'>
-                      Editing : {currentQuotation.quotationID}
-                    </div>
-
-                    <QuotationForm
-                      transactionType='Edit'
-                      packages={packages}
-                      onSubmit={onSaveEditing}
-                      setSelectedPackage={setSelectedPackage}
-                      selectedPackage={selectedPackage}
-                    />
+              ) : (
+                <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
+                  <div className='flex w-full flex-row justify-between font-bold'>
+                    {currentQuotation.quotationID}
+                    {currentQuotation.status == 'Pending' ? (
+                      <Button onClick={onEditButtonClicked}>Edit</Button>
+                    ) : null}
                   </div>
-                ) : (
-                  <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
-                    <div className='flex w-full flex-row justify-between font-bold'>
-                      {currentQuotation.quotationID}
-                      {currentQuotation.status == 'Pending' ? (
-                        <Button onClick={onEditButtonClicked}>Edit</Button>
-                      ) : null}
-                    </div>
 
-                    <QuotationDetails
-                      quotationId={currentQuotation.quotationID}
-                      quotationStatus={
-                        currentQuotation?.status as QuotationStatus
-                      }
-                      packageName={currentQuotation.packageName}
-                      photographerName={currentQuotation.photographerName}
-                      customerName={currentQuotation.customerName}
-                      from={formatDate(currentQuotation.from)}
-                      to={formatDate(currentQuotation.to)}
-                      description={currentQuotation.description}
-                      duration={
-                        (new Date(currentQuotation.to).getTime() -
-                          new Date(currentQuotation.from).getTime()) /
-                        (1000 * 60 * 60)
-                      }
-                      totalPrice={
-                        currentQuotation.pricePerHour *
-                        ((new Date(currentQuotation.to).getTime() -
-                          new Date(currentQuotation.from).getTime()) /
-                          (1000 * 60 * 60))
-                      }
-                    />
-                  </div>
-                )
-              ) : null}
-            </div>
-            {/* end of lg case */}
-
-            <QuotationDrawer
-              isCreating={isCreating}
-              setIsCreating={setIsCreating}
-              isEditing={isEditing}
-              setIsEditing={setIsEditing}
-              currentQuotation={currentQuotation}
-              setCurrentQuotation={setCurrentQuotation}
-              packages={packages}
-              selectedPackage={selectedPackage}
-              setSelectedPackage={setSelectedPackage}
-            />
+                  <QuotationDetails
+                    quotationId={currentQuotation.quotationID}
+                    quotationStatus={
+                      currentQuotation?.status as QuotationStatus
+                    }
+                    packageName={currentQuotation.packageName}
+                    photographerName={currentQuotation.photographerName}
+                    customerName={currentQuotation.customerName}
+                    from={formatDate(currentQuotation.from)}
+                    to={formatDate(currentQuotation.to)}
+                    description={currentQuotation.description}
+                    duration={
+                      (new Date(currentQuotation.to).getTime() -
+                        new Date(currentQuotation.from).getTime()) /
+                      (1000 * 60 * 60)
+                    }
+                    totalPrice={
+                      currentQuotation.pricePerHour *
+                      ((new Date(currentQuotation.to).getTime() -
+                        new Date(currentQuotation.from).getTime()) /
+                        (1000 * 60 * 60))
+                    }
+                  />
+                </div>
+              )
+            ) : null}
           </div>
-        )}
-      </Drawer>
+          {/* end of lg case */}
+
+          {/* <QuotationDrawer
+            isCreating={isCreating}
+            setIsCreating={setIsCreating}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            currentQuotation={currentQuotation}
+            setCurrentQuotation={setCurrentQuotation}
+            packages={packages}
+            selectedPackage={selectedPackage}
+            setSelectedPackage={setSelectedPackage}
+          /> */}
+        </div>
+      )}
     </div>
   )
 }
