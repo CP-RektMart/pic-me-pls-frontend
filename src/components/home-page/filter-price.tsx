@@ -1,13 +1,18 @@
 'use client'
 
-import { useState } from 'react'
-
 import { Input } from '@/components/ui/input'
 
-export default function FilterPrice() {
-  const [minPrice, setMinPrice] = useState<string>('')
-  const [maxPrice, setMaxPrice] = useState<string>('')
-
+export default function FilterPrice({
+  minPrice,
+  setMinPrice,
+  maxPrice,
+  setMaxPrice,
+}: {
+  minPrice: string
+  setMinPrice: (value: string) => void
+  maxPrice: string
+  setMaxPrice: (value: string) => void
+}) {
   const preventNegativeInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === '-' || e.key === 'e') {
       e.preventDefault()

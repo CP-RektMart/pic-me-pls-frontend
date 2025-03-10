@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import { MultiSelect } from '@/components/ui/multi-select'
 
 const categoriesList = [
@@ -12,15 +10,19 @@ const categoriesList = [
   { value: 'loveyourmom', label: 'ถ่ายแม่มึง' },
 ]
 
-export default function FilterMultiSelect() {
-  const [selectedCategories, setselectedCategories] = useState<string[]>([])
-
+export default function FilterMultiSelect({
+  selectedCategories,
+  setSelectedCategories,
+}: {
+  selectedCategories: string[]
+  setSelectedCategories: (value: string[]) => void
+}) {
   return (
     <div className='w-full'>
       <MultiSelect
         options={categoriesList}
-        onValueChange={setselectedCategories}
-        defaultValue={selectedCategories}
+        onValueChange={setSelectedCategories}
+        value={selectedCategories}
         placeholder='Select Category'
         variant='inverted'
         animation={0}
