@@ -46,6 +46,7 @@ export default function ViewQuotationDrawer({
         if (!open) onClose()
       }}
     >
+      {/* to be replaced with card component */}
       <Button
         onClick={() => {
           setIsCreating(false)
@@ -56,7 +57,6 @@ export default function ViewQuotationDrawer({
       >
         {quotation.quotationID}
       </Button>
-
       <DrawerContent className='p-6 lg:hidden'>
         <div className='space-y-4 text-2xl font-bold lg:px-10'>
           <div className='grid grid-cols-2 justify-between'>
