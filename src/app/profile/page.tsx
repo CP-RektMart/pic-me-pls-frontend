@@ -1,34 +1,33 @@
-import { auth } from '@/auth'
+import { client } from '@/api/client'
 import { redirect } from 'next/navigation'
 
 import ProfileComponent from '@/components/profile-page'
 
 export default async function ProfilePage() {
-  const session = await auth()
+  const { response: profileResponse, data: profile } =
+    await client.GET('/api/v1/me')
 
-  if (!session) {
-    redirect(`/login`)
+  if (profileResponse.status !== 200) {
+    redirect('/login')
   }
 
-  const response = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  })
-
-  if (!response.ok) {
-    redirect(`/login`)
+  if (!profile || !profile.result) {
+    return <div></div>
   }
 
-  const userProfile = (await response.json()).result
+  const userProfile = profile.result
+
+  const { data: citizenCard } = await client.GET(
+    '/api/v1/photographer/citizen-card'
+  )
 
   return (
     <ProfileComponent
-      isPhotographer={userProfile.role == 'PHOTOGRAPHER'}
+      isPhotographer={userProfile.role === 'PHOTOGRAPHER'}
+      isPhotographerVerified={!!citizenCard}
       imageUrl={userProfile.profilePictureUrl || '/image.png'}
-      name={userProfile.name}
-      email={userProfile.email}
+      name={userProfile.name || ''}
+      email={userProfile.email || ''}
       phone={
         userProfile.phoneNumber
           ? userProfile.phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
