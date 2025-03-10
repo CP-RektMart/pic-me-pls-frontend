@@ -41,7 +41,7 @@ interface QuotationProps {
   selectedPackage: string
 }
 
-export default function QuotationForm({
+export default function QuotationFormDrawer({
   transactionType,
   onSubmit,
   packages,
