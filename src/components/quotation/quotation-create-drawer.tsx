@@ -75,6 +75,7 @@ export default function CreateQuotationDrawer({
             packages={packages}
             setSelectedPackage={setSelectedPackage}
             selectedPackage={selectedPackage}
+            setIsOpen={setIsOpen}
           />
         </div>
         <DrawerHeader className='lg:hidden'>

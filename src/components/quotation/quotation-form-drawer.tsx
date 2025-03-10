@@ -44,6 +44,7 @@ interface QuotationProps {
   packages: EditPackageForm[]
   setSelectedPackage: (value: string) => void
   selectedPackage: string
+  setIsOpen: (isOpen: boolean) => void
 }
 
 export default function QuotationFormDrawer({
@@ -52,6 +53,7 @@ export default function QuotationFormDrawer({
   packages,
   setSelectedPackage,
   selectedPackage,
+  setIsOpen,
 }: QuotationProps) {
   const form = useForm<CreateQuotationProps>({
     resolver: zodResolver(createQuotationFormSchema),
@@ -223,7 +225,11 @@ export default function QuotationFormDrawer({
           <Button
             type='button'
             className='w-full hover:bg-zinc-700'
-            onClick={form.handleSubmit(onSubmit)}
+            onClick={() => {
+              form.handleSubmit(onSubmit)
+              form.reset()
+              setIsOpen(false)
+            }}
           >
             {transactionType === 'create' ? 'Create' : 'Save'}
           </Button>

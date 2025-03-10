@@ -83,6 +83,7 @@ export default function ViewQuotationDrawer({
               packages={packages}
               setSelectedPackage={setSelectedPackage}
               selectedPackage={selectedPackage}
+              setIsOpen={setIsOpen}
             />
           </div>
         ) : (
