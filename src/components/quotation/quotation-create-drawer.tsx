@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { quotation } from '@/app/photographer/quotation/page'
 import { Icon } from '@iconify/react'
 
+import Container from '@/components/container'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -66,22 +67,24 @@ export default function CreateQuotationDrawer({
         <Icon icon='lucide:plus' />
       </Button>
 
-      <DrawerContent className='p-6 lg:hidden'>
-        <div className='space-y-4 text-2xl font-bold lg:px-10'>
-          Create Quotation
-          <QuotationFormDrawer
-            transactionType='create'
-            onSubmit={onSubmit}
-            packages={packages}
-            setSelectedPackage={setSelectedPackage}
-            selectedPackage={selectedPackage}
-            setIsOpen={setIsOpen}
-          />
-        </div>
-        <DrawerHeader className='lg:hidden'>
-          <DrawerTitle></DrawerTitle>
-          <DrawerDescription></DrawerDescription>
-        </DrawerHeader>
+      <DrawerContent className='py-6 lg:hidden'>
+        <Container>
+          <div className='space-y-4 text-2xl font-bold lg:px-10'>
+            Create Quotation
+            <QuotationFormDrawer
+              transactionType='create'
+              onSubmit={onSubmit}
+              packages={packages}
+              setSelectedPackage={setSelectedPackage}
+              selectedPackage={selectedPackage}
+              setIsOpen={setIsOpen}
+            />
+          </div>
+          <DrawerHeader className='lg:hidden'>
+            <DrawerTitle></DrawerTitle>
+            <DrawerDescription></DrawerDescription>
+          </DrawerHeader>
+        </Container>
       </DrawerContent>
     </Drawer>
   )
