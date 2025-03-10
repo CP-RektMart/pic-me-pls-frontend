@@ -45,7 +45,7 @@ export function formatDate(date: Date) {
   const hours = String(date.getHours()).padStart(2, '0')
   const minutes = String(date.getMinutes()).padStart(2, '0')
 
-  return new Date(`${day}/${month}/${year} ${hours}:${minutes}`)
+  return new Date(`${month}/${day}/${year} ${hours}:${minutes}`)
 }
 
 export default function PhotographerQuotation({
