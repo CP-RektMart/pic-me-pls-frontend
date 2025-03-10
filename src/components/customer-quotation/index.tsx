@@ -25,7 +25,7 @@ export default function Page({
   duration,
   totalPrice,
   photographerImageUrl,
-  galleriesNumber,
+  packageNumber,
   quotationImages,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
@@ -43,7 +43,7 @@ export default function Page({
           <ProfileHeader
             imageUrl={photographerImageUrl}
             name={photographerName}
-            galleriesNumber={galleriesNumber}
+            packageNumber={packageNumber}
           />
 
           {/* package details */}

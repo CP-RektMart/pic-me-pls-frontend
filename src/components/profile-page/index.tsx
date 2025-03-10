@@ -33,7 +33,7 @@ import Container from '../container'
 import { Badge } from '../ui/badge'
 
 const profileSchema = z.object({
-  image: z.instanceof(File).optional(),
+  image: z.any().refine((val) => val.length > 0, 'File is required'),
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   phone: z.string().regex(/^0\d{2}-\d{3}-\d{4}$/, 'Invalid phone format'),

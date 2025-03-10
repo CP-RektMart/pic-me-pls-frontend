@@ -1382,6 +1382,140 @@ export interface paths {
     }
     trace?: never
   }
+  '/api/v1/photographer/quotations': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create a quotation
+     * @description Creates a new quotation for a customer and package
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Quotation details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateQuotationRequest']
+        }
+      }
+      responses: {
+        /** @description Created */
+        201: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_QuotationResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/photographer/quotations/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Update a quotation
+     * @description Updates an existing quotation
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description Quotation ID */
+          id: number
+        }
+        cookie?: never
+      }
+      /** @description Quotation update details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateQuotationRequest']
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
   '/api/v1/photographers': {
     parameters: {
       query?: never
@@ -1523,7 +1657,10 @@ export interface paths {
       parameters: {
         query?: never
         header?: never
-        path?: never
+        path: {
+          /** @description quotaion id */
+          id: number
+        }
         cookie?: never
       }
       requestBody?: never
@@ -1613,6 +1750,14 @@ export interface components {
       name: string
       price: number
     }
+    'dto.CreateQuotationRequest': {
+      customerId: number
+      description?: string
+      fromDate: string
+      packageId: number
+      price: number
+      toDate: string
+    }
     'dto.DeleteMediaRequest': {
       mediaID?: number
     }
@@ -1659,6 +1804,7 @@ export interface components {
       pictureUrl: string
     }
     'dto.MediaResponse': {
+      description?: string
       id?: number
       pictureUrl?: string
     }
