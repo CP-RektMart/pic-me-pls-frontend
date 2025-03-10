@@ -151,7 +151,6 @@ export default function PhotographerQuotation({
             )}
           </div>
 
-          {/* right side of lg, drawer in mobile */}
           <div className='hidden lg:block'>
             {isCreating ? (
               <div className='space-y-4 text-2xl font-bold lg:px-10'>
@@ -215,19 +214,6 @@ export default function PhotographerQuotation({
               )
             ) : null}
           </div>
-          {/* end of lg case */}
-
-          {/* <QuotationDrawer
-            isCreating={isCreating}
-            setIsCreating={setIsCreating}
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-            currentQuotation={currentQuotation}
-            setCurrentQuotation={setCurrentQuotation}
-            packages={packages}
-            selectedPackage={selectedPackage}
-            setSelectedPackage={setSelectedPackage}
-          /> */}
         </div>
       )}
     </div>
