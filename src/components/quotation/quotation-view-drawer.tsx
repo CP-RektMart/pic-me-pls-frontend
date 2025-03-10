@@ -13,7 +13,10 @@ import {
 } from '@/components/ui/drawer'
 
 import QuotationDetails from '../customer-quotation/details'
+import { EditPackageForm } from '../photographer/package-page/edit-package'
 import { formatDate } from './photographer-quotation'
+import { CreateQuotationProps } from './photographer-quotation'
+import QuotationFormDrawer from './quotation-form-drawer'
 
 interface ViewQuotationDrawerProps {
   setIsCreating: (isCreating: boolean) => void
@@ -23,6 +26,9 @@ interface ViewQuotationDrawerProps {
   selectedPackage: string
   quotation: quotation
   onEditButtonClicked: () => void
+  isEditing: boolean
+  onSaveEditing: (data: CreateQuotationProps) => void
+  packages: EditPackageForm[]
 }
 
 export default function ViewQuotationDrawer({
@@ -31,6 +37,11 @@ export default function ViewQuotationDrawer({
   setCurrentQuotation,
   quotation,
   onEditButtonClicked,
+  isEditing,
+  onSaveEditing,
+  packages,
+  setSelectedPackage,
+  selectedPackage,
 }: ViewQuotationDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -60,45 +71,62 @@ export default function ViewQuotationDrawer({
         {quotation.quotationID}
       </Button>
       <DrawerContent className='p-6 lg:hidden'>
-        <div className='space-y-4 text-2xl lg:px-10'>
-          <div className='grid grid-cols-2 justify-between font-bold'>
-            <div>{quotation.quotationID}</div>
-            {quotation.status === 'Pending' ? (
-              <div className='flex justify-end'>
-                <Button
-                  onClick={() => {
-                    onEditButtonClicked()
-                  }}
-                  className='w-16 lg:block'
-                >
-                  Edit
-                </Button>
-              </div>
-            ) : null}
-          </div>
+        {isEditing ? (
+          <div className='space-y-4 text-2xl lg:px-10'>
+            <div className='w-full text-center font-bold'>
+              Editing : {quotation.quotationID}
+            </div>
 
-          <QuotationDetails
-            quotationId={quotation.quotationID}
-            quotationStatus={quotation?.status as QuotationStatus}
-            packageName={quotation.packageName}
-            photographerName={quotation.photographerName}
-            customerName={quotation.customerName}
-            from={formatDate(quotation.from).toString()}
-            to={formatDate(quotation.to).toString()}
-            description={quotation.description}
-            duration={
-              (new Date(quotation.to).getTime() -
-                new Date(quotation.from).getTime()) /
-              (1000 * 60 * 60)
-            }
-            totalPrice={
-              quotation.pricePerHour *
-              ((new Date(quotation.to).getTime() -
-                new Date(quotation.from).getTime()) /
-                (1000 * 60 * 60))
-            }
-          />
-        </div>
+            <QuotationFormDrawer
+              transactionType='edit'
+              onSubmit={onSaveEditing}
+              packages={packages}
+              setSelectedPackage={setSelectedPackage}
+              selectedPackage={selectedPackage}
+            />
+          </div>
+        ) : (
+          <div className='space-y-4 text-2xl lg:px-10'>
+            <div className='grid grid-cols-2 justify-between font-bold'>
+              <div>{quotation.quotationID}</div>
+              {quotation.status === 'Pending' ? (
+                <div className='flex justify-end'>
+                  <Button
+                    onClick={() => {
+                      onEditButtonClicked()
+                    }}
+                    className='w-16 lg:block'
+                  >
+                    Edit
+                  </Button>
+                </div>
+              ) : null}
+            </div>
+
+            <QuotationDetails
+              quotationId={quotation.quotationID}
+              quotationStatus={quotation?.status as QuotationStatus}
+              packageName={quotation.packageName}
+              photographerName={quotation.photographerName}
+              customerName={quotation.customerName}
+              from={formatDate(quotation.from).toString()}
+              to={formatDate(quotation.to).toString()}
+              description={quotation.description}
+              duration={
+                (new Date(quotation.to).getTime() -
+                  new Date(quotation.from).getTime()) /
+                (1000 * 60 * 60)
+              }
+              totalPrice={
+                quotation.pricePerHour *
+                ((new Date(quotation.to).getTime() -
+                  new Date(quotation.from).getTime()) /
+                  (1000 * 60 * 60))
+              }
+            />
+          </div>
+        )}
+
         <DrawerHeader className='lg:hidden'>
           <DrawerTitle></DrawerTitle>
           <DrawerDescription></DrawerDescription>

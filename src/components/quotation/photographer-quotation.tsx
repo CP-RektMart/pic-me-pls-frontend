@@ -132,6 +132,9 @@ export default function PhotographerQuotation({
                       setSelectedPackage={setSelectedPackage}
                       selectedPackage={selectedPackage}
                       onEditButtonClicked={onEditButtonClicked}
+                      isEditing={isEditing}
+                      onSaveEditing={onSaveEditing}
+                      packages={packages}
                     />
                     <Button
                       onClick={() => {
