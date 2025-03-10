@@ -60,8 +60,8 @@ export default function ViewQuotationDrawer({
         {quotation.quotationID}
       </Button>
       <DrawerContent className='p-6 lg:hidden'>
-        <div className='space-y-4 text-2xl font-bold lg:px-10'>
-          <div className='grid grid-cols-2 justify-between'>
+        <div className='space-y-4 text-2xl lg:px-10'>
+          <div className='grid grid-cols-2 justify-between font-bold'>
             <div>{quotation.quotationID}</div>
             {quotation.status === 'Pending' ? (
               <div className='flex justify-end'>
