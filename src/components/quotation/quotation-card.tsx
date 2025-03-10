@@ -2,6 +2,8 @@ import { cn } from '@/lib/utils'
 import { QuotationDetailsProps } from '@/types/quotation'
 import Image from 'next/image'
 
+import { QuotationStatusTag } from '@/components/quotation/quotation-status-tag'
+
 export interface QuotationCardProps extends QuotationDetailsProps {
   // TODO: Add the image url in endpoint? or retrieve, now is mocking
   photographerImageUrl?: string
@@ -38,9 +40,7 @@ export default function QuotationCard({
               <p className='text-start text-xs text-gray-500'>{quotationId}</p>
             </div>
           </div>
-          <div className='rounded-full bg-[#FFF8E7] px-2 py-1 text-sm text-[#B86E00]'>
-            {quotationStatus}
-          </div>
+          <QuotationStatusTag variant={quotationStatus} />
         </div>
 
         {/* Seperator */}

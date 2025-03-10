@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { quotation } from '@/app/photographer/quotation/page'
+import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 
 import Container from '@/components/container'
@@ -16,7 +17,6 @@ import {
 
 import QuotationDetails from '../customer-quotation/details'
 import { EditPackageForm } from '../photographer/package-page/edit-package'
-import { formatDate } from './photographer-quotation'
 import { CreateQuotationProps } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
@@ -67,8 +67,8 @@ export default function ViewQuotationDrawer({
         packageName={quotation.packageName}
         photographerName={quotation.photographerName}
         customerName={quotation.customerName}
-        from={formatDate(quotation.from).toString()}
-        to={formatDate(quotation.to).toString()}
+        from={formatDateToString(quotation.from).toString()}
+        to={formatDateToString(quotation.to).toString()}
         description={quotation.description}
         duration={
           (new Date(quotation.to).getTime() -
@@ -129,8 +129,8 @@ export default function ViewQuotationDrawer({
                 packageName={quotation.packageName}
                 photographerName={quotation.photographerName}
                 customerName={quotation.customerName}
-                from={formatDate(quotation.from).toString()}
-                to={formatDate(quotation.to).toString()}
+                from={formatDateToString(quotation.from)}
+                to={formatDateToString(quotation.to)}
                 description={quotation.description}
                 duration={
                   (new Date(quotation.to).getTime() -

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { quotation } from '@/app/photographer/quotation/page'
+import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 import { Icon } from '@iconify/react'
 import z from 'zod'
@@ -38,18 +39,6 @@ export const createQuotationFormSchema = z.object({
 })
 
 export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
-
-export function formatDate(date: Date) {
-  return new Date(date)
-    .toLocaleString('en-GB', {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })
-    .replace(/,/g, '')
-}
 
 export default function PhotographerQuotation({
   quotations,
@@ -124,7 +113,7 @@ export default function PhotographerQuotation({
                 No Quotations To Show
               </div>
             ) : (
-              <div className='flex flex-col gap-4'>
+              <div className='flex flex-col gap-4 font-normal'>
                 {quotations.map((quotation) => (
                   <div key={quotation.quotationID}>
                     <ViewQuotationDrawer
@@ -145,8 +134,8 @@ export default function PhotographerQuotation({
                       packageName={quotation.packageName}
                       photographerName={quotation.photographerName}
                       customerName={quotation.customerName}
-                      from={formatDate(quotation.from).toString()}
-                      to={formatDate(quotation.to).toString()}
+                      from={formatDateToString(quotation.from)}
+                      to={formatDateToString(quotation.to)}
                       description={quotation.description}
                       duration={
                         (new Date(quotation.to).getTime() -
@@ -215,8 +204,8 @@ export default function PhotographerQuotation({
                     packageName={currentQuotation.packageName}
                     photographerName={currentQuotation.photographerName}
                     customerName={currentQuotation.customerName}
-                    from={formatDate(currentQuotation.from).toString()}
-                    to={formatDate(currentQuotation.to).toString()}
+                    from={formatDateToString(currentQuotation.from)}
+                    to={formatDateToString(currentQuotation.to)}
                     description={currentQuotation.description}
                     duration={
                       (new Date(currentQuotation.to).getTime() -
