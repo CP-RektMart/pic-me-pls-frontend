@@ -54,12 +54,12 @@ export default function CreatePackage() {
       name: '',
       packageDescription: '',
       price: 0,
-      category: category,
+      category: '',
     },
   })
 
   const onSubmit = async (data: CreatePackageForm) => {
-    console.log(data)
+    console.log(data, category)
     console.log(photoCards)
   }
 

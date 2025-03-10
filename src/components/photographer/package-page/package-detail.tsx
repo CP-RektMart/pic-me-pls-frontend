@@ -82,7 +82,7 @@ export default function PackageDetailSection({
         name='category'
         render={({ field }) => (
           <FormItem>
-            <FormLabel className='text-sm font-medium'>Package</FormLabel>
+            <FormLabel className='text-sm font-medium'>Category</FormLabel>
             <FormControl className='font-normal'>
               <Select
                 onValueChange={(value) => {
@@ -92,7 +92,7 @@ export default function PackageDetailSection({
                 value={field.value}
               >
                 <SelectTrigger className='w-full font-normal'>
-                  <SelectValue placeholder='Package' />
+                  <SelectValue placeholder='Category' />
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((cat) => (
