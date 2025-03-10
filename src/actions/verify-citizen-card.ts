@@ -1,10 +1,11 @@
 'use server'
 
-import { verifyCitizenCard } from '@/api/photographer/verify-citizen-card'
+import { client } from '@/api/client'
+import { uploadObject } from '@/api/upload-object'
 
 export interface VerifyCitizenCardAction {
-  cardPicture: File
   citizenId: string
+  image: File
   laserId: string
   expireDate: Date
 }
@@ -12,9 +13,19 @@ export interface VerifyCitizenCardAction {
 export default async function verifyCitizenCardAction(
   payload: VerifyCitizenCardAction
 ) {
-  try {
-    await verifyCitizenCard(payload)
-  } catch {
-    return
-  }
+  const { url } = await uploadObject({
+    file: payload.image,
+    folder: 'VERIFY_CITIZENCARD',
+  })
+
+  await client.POST('/api/v1/photographer/citizen-card/verify', {
+    body: {
+      imageUrl: url,
+      citizenId: payload.citizenId,
+      laserId: payload.laserId,
+      expireDate: payload.expireDate.toISOString(),
+    },
+  })
+
+  return
 }

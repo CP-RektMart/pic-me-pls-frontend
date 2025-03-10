@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import { format } from 'date-fns'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -53,6 +54,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>
 
 export default function VerifyPhotographer() {
+  const router = useRouter()
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
@@ -64,13 +66,14 @@ export default function VerifyPhotographer() {
     setIsSubmitting(true)
     try {
       await verifyCitizenCardAction({
-        cardPicture: data.cardPicture,
         citizenId: data.citizenId,
+        image: data.cardPicture,
         expireDate: data.expireDate,
         laserId: data.laserId,
       })
 
       toast.success('Your citizen card has been successfully verified')
+      router.push('/photographer')
     } catch {
       toast.error('An error occurred while verifying your citizen card')
     }
