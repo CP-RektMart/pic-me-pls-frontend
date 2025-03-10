@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
+import ViewQuotationDrawer from './quotation-view-drawer'
 
 export interface PhotographerQuotationProps {
   quotations: quotation[]
@@ -37,6 +38,16 @@ export const createQuotationFormSchema = z.object({
 
 export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
 
+export function formatDate(date: Date) {
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
+  const year = date.getFullYear()
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+
+  return new Date(`${day}/${month}/${year} ${hours}:${minutes}`)
+}
+
 export default function PhotographerQuotation({
   quotations,
   packages,
@@ -48,15 +59,6 @@ export default function PhotographerQuotation({
   const [currentQuotation, setCurrentQuotation] = useState<quotation | null>(
     null
   )
-  function formatDate(date: Date) {
-    const day = String(date.getDate()).padStart(2, '0')
-    const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
-    const year = date.getFullYear()
-    const hours = String(date.getHours()).padStart(2, '0')
-    const minutes = String(date.getMinutes()).padStart(2, '0')
-
-    return `${day}/${month}/${year} ${hours}:${minutes}`
-  }
 
   const onCreateQuotationButtonClicked = () => {
     setIsCreating(true)
@@ -134,6 +136,14 @@ export default function PhotographerQuotation({
                         {quotation.quotationID}
                       </Button>
                     </DrawerTrigger> */}
+                    <ViewQuotationDrawer
+                      setIsCreating={setIsCreating}
+                      setIsEditing={setIsEditing}
+                      setCurrentQuotation={setCurrentQuotation}
+                      quotation={quotation}
+                      setSelectedPackage={setSelectedPackage}
+                      selectedPackage={selectedPackage}
+                    />
                     <Button
                       onClick={() => {
                         setIsCreating(false)
@@ -194,8 +204,8 @@ export default function PhotographerQuotation({
                     packageName={currentQuotation.packageName}
                     photographerName={currentQuotation.photographerName}
                     customerName={currentQuotation.customerName}
-                    from={formatDate(currentQuotation.from)}
-                    to={formatDate(currentQuotation.to)}
+                    from={formatDate(currentQuotation.from).toString()}
+                    to={formatDate(currentQuotation.to).toString()}
                     description={currentQuotation.description}
                     duration={
                       (new Date(currentQuotation.to).getTime() -
