@@ -188,7 +188,9 @@ export default function PhotographerQuotation({
                   <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
                     <div className='flex w-full flex-row justify-between font-bold'>
                       {currentQuotation.quotationID}
-                      <Button onClick={onEditButtonClicked}>Edit</Button>
+                      {currentQuotation.status == 'Pending' ? (
+                        <Button onClick={onEditButtonClicked}>Edit</Button>
+                      ) : null}
                     </div>
 
                     <QuotationDetails
