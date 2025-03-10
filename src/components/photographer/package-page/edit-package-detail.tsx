@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/text-area'
 
 import { EditPackageForm, EditPhotoCardForm } from './edit-package'
 
@@ -83,7 +84,11 @@ export default function EditPackageDetailSection({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
             <FormControl>
-              <Input placeholder='Description' {...field} />
+              <Textarea
+                placeholder='Description'
+                {...field}
+                className='font-normal'
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
