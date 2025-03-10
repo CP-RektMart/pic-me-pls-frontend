@@ -2,9 +2,12 @@
 
 import { useState } from 'react'
 
+import createQuotationAction from '@/actions/create-quotation'
+import updateQuotationAction from '@/actions/update-quotation'
 import { quotation } from '@/app/photographer/quotation/page'
 import { QuotationStatus } from '@/types/quotation'
 import { Icon } from '@iconify/react'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import QuotationDetails from '@/components/customer-quotation/details'
@@ -76,13 +79,30 @@ export default function PhotographerQuotation({
   }
 
   const onSubmit = async (data: CreateQuotationProps) => {
+    try {
+      await createQuotationAction(data)
+      toast.success('Created Quotation successfully')
+    } catch {
+      toast.error('An error occurred while creating a quotation')
+    }
+
     setIsCreating(false)
     setIsEditing(false)
     setCurrentQuotation(null)
-    console.log(data)
   }
 
   const onSaveEditing = async (data: CreateQuotationProps) => {
+    try {
+      if (currentQuotation?.quotationID) {
+        await updateQuotationAction(currentQuotation.quotationID, data)
+      } else {
+        toast.error('Quotation ID is missing')
+      }
+      toast.success('Updated Quotation successfully')
+    } catch {
+      toast.error('An error occurred while updated a quotation')
+    }
+
     setIsCreating(false)
     setIsEditing(false)
     setCurrentQuotation(null)
