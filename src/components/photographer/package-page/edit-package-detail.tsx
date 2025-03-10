@@ -16,6 +16,13 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/text-area'
 
 import { EditPackageForm, EditPhotoCardForm } from './edit-package'
@@ -24,16 +31,20 @@ interface EditPackageDetailSectionProps {
   name: string
   description: string
   price: number
+  categories: string[]
   photoCards: EditPhotoCardForm[]
   onSubmit: (data: EditPackageForm) => Promise<void>
   form: ReturnType<typeof useForm<EditPackageForm>>
   onDrop: (acceptedFiles: File[]) => void
+  setCategory: (category: string) => void
 }
 
 export default function EditPackageDetailSection({
   onSubmit,
   form,
   onDrop,
+  categories,
+  setCategory,
 }: EditPackageDetailSectionProps) {
   const { packageID } = useParams()
 
@@ -71,6 +82,37 @@ export default function EditPackageDetailSection({
             <FormLabel className='text-sm font-medium'>Name</FormLabel>
             <FormControl>
               <Input placeholder='Package Name' {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name='category'
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className='text-sm font-medium'>Package</FormLabel>
+            <FormControl className='font-normal'>
+              <Select
+                onValueChange={(value) => {
+                  setCategory(value)
+                  field.onChange(value)
+                }}
+                value={field.value}
+              >
+                <SelectTrigger className='w-full font-normal'>
+                  <SelectValue placeholder='Package' />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat} className='font-normal'>
+                      {cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </FormControl>
             <FormMessage />
           </FormItem>

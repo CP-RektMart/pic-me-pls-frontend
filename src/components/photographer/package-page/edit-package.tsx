@@ -27,12 +27,16 @@ export const editpackageFormSchema = z.object({
     .string()
     .transform((val) => parseFloat(val))
     .refine((val) => val > 0, 'Price must be a positive number'),
+  category: z.string(),
 })
 
 export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
+const categories = ['Wedding', 'Birthday', 'Corporate', 'Others']
+
 export default function EditPackage() {
   const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
+  const [category, setCategory] = useState<string>('')
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -50,6 +54,7 @@ export default function EditPackage() {
       name: '',
       packageDescription: '',
       price: 0,
+      category: category,
     },
   })
 
@@ -77,6 +82,7 @@ export default function EditPackage() {
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
         <EditPackageDetailSection
+          categories={categories}
           name=''
           description=''
           price={0}
@@ -84,6 +90,7 @@ export default function EditPackage() {
           onSubmit={onSubmit}
           form={form}
           onDrop={onDrop}
+          setCategory={setCategory}
         />
         <div className='flex-1'>
           {photoCards.length === 0 ? (
