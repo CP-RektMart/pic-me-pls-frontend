@@ -1,3 +1,4 @@
+import { formatDateToDate } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -21,7 +22,6 @@ import {
 
 import { DateTimePicker } from '../ui/date-time-picker'
 import { Textarea } from '../ui/text-area'
-import { formatDate } from './photographer-quotation'
 import {
   CreateQuotationProps,
   createQuotationFormSchema,
@@ -133,7 +133,7 @@ export default function QuotationForm({
               <DateTimePicker
                 value={field.value}
                 onChange={field.onChange}
-                formatDate={formatDate}
+                formatDate={formatDateToDate}
               />
               <FormMessage />
             </FormItem>
@@ -149,7 +149,7 @@ export default function QuotationForm({
               <DateTimePicker
                 value={field.value}
                 onChange={field.onChange}
-                formatDate={formatDate}
+                formatDate={formatDateToDate}
               />
               <FormMessage />
             </FormItem>

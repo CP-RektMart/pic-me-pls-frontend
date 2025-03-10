@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { quotation } from '@/app/photographer/quotation/page'
+import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 import { Icon } from '@iconify/react'
 import z from 'zod'
@@ -11,6 +12,7 @@ import QuotationDetails from '@/components/customer-quotation/details'
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 
+import QuotationCard from './quotation-card'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
 import ViewQuotationDrawer from './quotation-view-drawer'
@@ -37,16 +39,6 @@ export const createQuotationFormSchema = z.object({
 })
 
 export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
-
-export function formatDate(date: Date) {
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
-  const year = date.getFullYear()
-  const hours = String(date.getHours()).padStart(2, '0')
-  const minutes = String(date.getMinutes()).padStart(2, '0')
-
-  return new Date(`${month}/${day}/${year} ${hours}:${minutes}`)
-}
 
 export default function PhotographerQuotation({
   quotations,
@@ -106,9 +98,9 @@ export default function PhotographerQuotation({
         />
       </div>
       {quotations.length == 0 && !isCreating && !isEditing ? (
-        <div className='flex h-full flex-col items-center justify-center gap-3'>
-          <Icon icon='lucide:sticky-note' className='size-20' />
-          No Quotations To Show
+        <div className='text-medium flex h-[69vh] flex-col place-content-center items-center justify-center gap-3 font-medium text-gray-500'>
+          <Icon icon='lucide:sticky-note' className='h-20 w-12 text-gray-500' />
+          <span>You don&apos;t have any quotations yet</span>
         </div>
       ) : (
         <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
@@ -121,7 +113,7 @@ export default function PhotographerQuotation({
                 No Quotations To Show
               </div>
             ) : (
-              <div className='flex flex-col gap-4'>
+              <div className='flex flex-col gap-4 font-normal'>
                 {quotations.map((quotation) => (
                   <div key={quotation.quotationID}>
                     <ViewQuotationDrawer
@@ -136,15 +128,32 @@ export default function PhotographerQuotation({
                       onSaveEditing={onSaveEditing}
                       packages={packages}
                     />
-                    <Button
-                      onClick={() => {
+                    <QuotationCard
+                      quotationId={quotation.quotationID}
+                      quotationStatus={quotation.status as QuotationStatus}
+                      packageName={quotation.packageName}
+                      photographerName={quotation.photographerName}
+                      customerName={quotation.customerName}
+                      from={formatDateToString(quotation.from)}
+                      to={formatDateToString(quotation.to)}
+                      description={quotation.description}
+                      duration={
+                        (new Date(quotation.to).getTime() -
+                          new Date(quotation.from).getTime()) /
+                        (1000 * 60 * 60)
+                      }
+                      totalPrice={
+                        quotation.pricePerHour *
+                        ((new Date(quotation.to).getTime() -
+                          new Date(quotation.from).getTime()) /
+                          (1000 * 60 * 60))
+                      }
+                      onClickEvent={() => {
                         setIsCreating(false)
                         setCurrentQuotation(quotation)
                       }}
                       className='hidden w-full lg:block'
-                    >
-                      {quotation.quotationID}
-                    </Button>
+                    />
                   </div>
                 ))}
               </div>
@@ -195,8 +204,8 @@ export default function PhotographerQuotation({
                     packageName={currentQuotation.packageName}
                     photographerName={currentQuotation.photographerName}
                     customerName={currentQuotation.customerName}
-                    from={formatDate(currentQuotation.from).toString()}
-                    to={formatDate(currentQuotation.to).toString()}
+                    from={formatDateToString(currentQuotation.from)}
+                    to={formatDateToString(currentQuotation.to)}
                     description={currentQuotation.description}
                     duration={
                       (new Date(currentQuotation.to).getTime() -

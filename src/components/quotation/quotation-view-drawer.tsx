@@ -1,9 +1,11 @@
 import { useState } from 'react'
 
 import { quotation } from '@/app/photographer/quotation/page'
+import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 
 import Container from '@/components/container'
+import QuotationCard from '@/components/quotation/quotation-card'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -15,7 +17,6 @@ import {
 
 import QuotationDetails from '../customer-quotation/details'
 import { EditPackageForm } from '../photographer/package-page/edit-package'
-import { formatDate } from './photographer-quotation'
 import { CreateQuotationProps } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
@@ -60,17 +61,33 @@ export default function ViewQuotationDrawer({
         if (!open) onClose()
       }}
     >
-      {/* to be replaced with card component */}
-      <Button
-        onClick={() => {
+      <QuotationCard
+        quotationId={quotation.quotationID}
+        quotationStatus={quotation.status as QuotationStatus}
+        packageName={quotation.packageName}
+        photographerName={quotation.photographerName}
+        customerName={quotation.customerName}
+        from={formatDateToString(quotation.from).toString()}
+        to={formatDateToString(quotation.to).toString()}
+        description={quotation.description}
+        duration={
+          (new Date(quotation.to).getTime() -
+            new Date(quotation.from).getTime()) /
+          (1000 * 60 * 60)
+        }
+        totalPrice={
+          quotation.pricePerHour *
+          ((new Date(quotation.to).getTime() -
+            new Date(quotation.from).getTime()) /
+            (1000 * 60 * 60))
+        }
+        onClickEvent={() => {
           setIsCreating(false)
           setCurrentQuotation(quotation)
           setIsOpen(true)
         }}
-        className='w-full lg:hidden'
-      >
-        {quotation.quotationID}
-      </Button>
+        className='block w-full lg:hidden'
+      />
       <DrawerContent className='py-6 lg:hidden'>
         <Container>
           {isEditing ? (
@@ -112,8 +129,8 @@ export default function ViewQuotationDrawer({
                 packageName={quotation.packageName}
                 photographerName={quotation.photographerName}
                 customerName={quotation.customerName}
-                from={formatDate(quotation.from).toString()}
-                to={formatDate(quotation.to).toString()}
+                from={formatDateToString(quotation.from)}
+                to={formatDateToString(quotation.to)}
                 description={quotation.description}
                 duration={
                   (new Date(quotation.to).getTime() -
