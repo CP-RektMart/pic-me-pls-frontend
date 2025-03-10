@@ -132,14 +132,20 @@ export default function PhotographerQuotation({
                     <div key={quotation.quotationID}>
                       <DrawerTrigger asChild>
                         <Button
-                          onClick={() => setCurrentQuotation(quotation)}
+                          onClick={() => {
+                            setIsCreating(false)
+                            setCurrentQuotation(quotation)
+                          }}
                           className='w-full lg:hidden'
                         >
                           {quotation.quotationID}
                         </Button>
                       </DrawerTrigger>
                       <Button
-                        onClick={() => setCurrentQuotation(quotation)}
+                        onClick={() => {
+                          setIsCreating(false)
+                          setCurrentQuotation(quotation)
+                        }}
                         className='hidden w-full lg:block'
                       >
                         {quotation.quotationID}
