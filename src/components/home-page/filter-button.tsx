@@ -4,11 +4,13 @@ import { Button } from '../ui/button'
 
 export default function FilterButton({
   OptionType,
+  onClick,
 }: {
   OptionType: 'Filter' | 'Sort' | ''
+  onClick?: () => void
 }) {
   return (
-    <Button variant='filter'>
+    <Button variant='filter' onClick={onClick}>
       <Icon
         icon={
           OptionType === 'Filter'
