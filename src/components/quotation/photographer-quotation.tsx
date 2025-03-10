@@ -11,6 +11,7 @@ import QuotationDetails from '@/components/customer-quotation/details'
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 
+import QuotationCard from '../customer-quotation/card'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
 import ViewQuotationDrawer from './quotation-view-drawer'
@@ -39,13 +40,15 @@ export const createQuotationFormSchema = z.object({
 export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
 
 export function formatDate(date: Date) {
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-based
-  const year = date.getFullYear()
-  const hours = String(date.getHours()).padStart(2, '0')
-  const minutes = String(date.getMinutes()).padStart(2, '0')
-
-  return new Date(`${month}/${day}/${year} ${hours}:${minutes}`)
+  return new Date(date)
+    .toLocaleString('en-GB', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+    .replace(/,/g, '')
 }
 
 export default function PhotographerQuotation({
@@ -112,16 +115,18 @@ export default function PhotographerQuotation({
         </div>
       ) : (
         <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
-          <div className='gap-2.5 space-y-2.5 text-2xl font-bold lg:px-10'>
+          <div className='space-y-4 text-2xl font-bold lg:px-10'>
             <div>Latest Quotations</div>
-
             {quotations.length == 0 ? (
-              <div className='flex h-full flex-col items-center justify-center gap-3'>
-                <Icon icon='lucide:sticky-note' className='size-20' />
-                No Quotations To Show
+              <div className='text-medium flex h-[69vh] flex-col place-content-center items-center justify-center gap-3 font-medium text-gray-500'>
+                <Icon
+                  icon='lucide:sticky-note'
+                  className='h-20 w-12 text-gray-500'
+                />
+                <span>You don&apos;t have any quotations yet</span>
               </div>
             ) : (
-              <div className='flex flex-col gap-4'>
+              <div className='flex h-[69vh] flex-col gap-4 overflow-y-scroll border-gray-300'>
                 {quotations.map((quotation) => (
                   <div key={quotation.quotationID}>
                     <ViewQuotationDrawer
@@ -136,15 +141,32 @@ export default function PhotographerQuotation({
                       onSaveEditing={onSaveEditing}
                       packages={packages}
                     />
-                    <Button
-                      onClick={() => {
+                    <QuotationCard
+                      quotationId={quotation.quotationID}
+                      quotationStatus={quotation.status as QuotationStatus}
+                      packageName={quotation.packageName}
+                      photographerName={quotation.photographerName}
+                      customerName={quotation.customerName}
+                      from={formatDate(quotation.from).toString()}
+                      to={formatDate(quotation.to).toString()}
+                      description={quotation.description}
+                      duration={
+                        (new Date(quotation.to).getTime() -
+                          new Date(quotation.from).getTime()) /
+                        (1000 * 60 * 60)
+                      }
+                      totalPrice={
+                        quotation.pricePerHour *
+                        ((new Date(quotation.to).getTime() -
+                          new Date(quotation.from).getTime()) /
+                          (1000 * 60 * 60))
+                      }
+                      onClickEvent={() => {
                         setIsCreating(false)
                         setCurrentQuotation(quotation)
                       }}
                       className='hidden w-full lg:block'
-                    >
-                      {quotation.quotationID}
-                    </Button>
+                    />
                   </div>
                 ))}
               </div>

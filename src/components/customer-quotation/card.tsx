@@ -1,23 +1,27 @@
+import { cn } from '@/lib/utils'
 import { QuotationDetailsProps } from '@/types/quotation'
 import Image from 'next/image'
 
 export interface QuotationCardProps extends QuotationDetailsProps {
-  photographerImageUrl: string
+  // TODO: Add the image url in endpoint? or retrieve, now is mocking
+  photographerImageUrl?: string
+  className?: string
   onClickEvent?: () => void
 }
 
 export default function QuotationCard({
   quotationId,
-  photographerImageUrl,
+  photographerImageUrl = '/image.png',
   photographerName,
   from,
   to,
   quotationStatus,
   totalPrice,
+  className,
   onClickEvent,
 }: QuotationCardProps) {
   return (
-    <button onClick={onClickEvent} className='mx-auto w-full'>
+    <button onClick={onClickEvent} className={cn('mx-auto w-full', className)}>
       <div className='rounded-3xl border bg-white shadow-sm'>
         <div className='flex items-center justify-between px-5 pb-3 pt-4'>
           <div className='flex items-center gap-4'>
@@ -31,7 +35,7 @@ export default function QuotationCard({
             </div>
             <div>
               <h2 className='text-base font-medium'>{photographerName}</h2>
-              <p className='text-xs text-gray-500'>{quotationId}</p>
+              <p className='text-start text-xs text-gray-500'>{quotationId}</p>
             </div>
           </div>
           <div className='rounded-full bg-[#FFF8E7] px-2 py-1 text-sm text-[#B86E00]'>
