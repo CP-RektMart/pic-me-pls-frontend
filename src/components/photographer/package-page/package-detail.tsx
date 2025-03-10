@@ -15,6 +15,13 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/text-area'
 
 import { CreatePackageForm, CreatePhotoCardForm } from './create-package'
@@ -27,12 +34,16 @@ interface packageDetailSectionProps {
   onSubmit: (data: CreatePackageForm) => Promise<void>
   form: ReturnType<typeof useForm<CreatePackageForm>>
   onDrop: (acceptedFiles: File[]) => void
+  setCategory: (category: string) => void
+  categories: string[]
 }
 
 export default function PackageDetailSection({
   onSubmit,
   form,
   onDrop,
+  categories,
+  setCategory,
 }: packageDetailSectionProps) {
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
@@ -60,6 +71,37 @@ export default function PackageDetailSection({
             <FormLabel className='text-sm font-medium'>Name</FormLabel>
             <FormControl>
               <Input placeholder='Package Name' {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name='category'
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className='text-sm font-medium'>Package</FormLabel>
+            <FormControl className='font-normal'>
+              <Select
+                onValueChange={(value) => {
+                  setCategory(value)
+                  field.onChange(value)
+                }}
+                value={field.value}
+              >
+                <SelectTrigger className='w-full font-normal'>
+                  <SelectValue placeholder='Package' />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat} className='font-normal'>
+                      {cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </FormControl>
             <FormMessage />
           </FormItem>

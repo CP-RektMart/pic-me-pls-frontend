@@ -32,7 +32,7 @@ export const editpackageFormSchema = z.object({
 
 export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
-const categories = ['Wedding', 'Birthday', 'Corporate', 'Others']
+export const categories = ['Wedding', 'Birthday', 'Corporate', 'Others']
 
 export default function EditPackage() {
   const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])

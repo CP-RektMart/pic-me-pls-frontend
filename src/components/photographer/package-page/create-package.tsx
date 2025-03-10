@@ -13,6 +13,8 @@ import PackageDetailSection from '@/components/photographer/package-page/package
 import PhotoCard from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
+import { categories } from './edit-package'
+
 export type CreatePhotoCardForm = {
   description: string
   image: File
@@ -27,12 +29,14 @@ export const createpackageFormSchema = z.object({
     .string()
     .transform((val) => parseFloat(val))
     .refine((val) => val > 0, 'Price must be a positive number'),
+  category: z.string(),
 })
 
 export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 
 export default function CreatePackage() {
   const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
+  const [category, setCategory] = useState<string>('')
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -50,6 +54,7 @@ export default function CreatePackage() {
       name: '',
       packageDescription: '',
       price: 0,
+      category: category,
     },
   })
 
@@ -84,6 +89,8 @@ export default function CreatePackage() {
           onSubmit={onSubmit}
           form={form}
           onDrop={onDrop}
+          setCategory={setCategory}
+          categories={categories}
         />
         <div className='flex-1'>
           {photoCards.length === 0 ? (
