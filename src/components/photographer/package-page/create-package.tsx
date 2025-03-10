@@ -9,8 +9,8 @@ import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import PackageDetailSection from '@/components/package-page/package-detail'
-import PhotoCard from '@/components/package-page/photoCard'
+import PackageDetailSection from '@/components/photographer/package-page/package-detail'
+import PhotoCard from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
 export type CreatePhotoCardForm = {

@@ -9,7 +9,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "generate": "openapi-typescript https://picmepls-api.chanatpakorn.gay/openapi -o ./src/api/schema.d.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -18,6 +19,7 @@
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-popover": "^1.1.6",
+    "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-separator": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.1",
@@ -32,6 +34,7 @@
     "next": "15.1.6",
     "next-auth": "5.0.0-beta.25",
     "next-themes": "^0.4.4",
+    "openapi-fetch": "^0.13.4",
     "react": "^19.0.0",
     "react-day-picker": "8.10.1",
     "react-dom": "^19.0.0",
@@ -60,11 +63,12 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "husky": "^9.1.7",
+    "openapi-typescript": "^7.6.1",
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.7.3"
   },
   "packageManager": "pnpm@9.15.3",
   "config": {
