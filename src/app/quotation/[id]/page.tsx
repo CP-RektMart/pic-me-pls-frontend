@@ -16,6 +16,10 @@ export default async function Page({
     params: { path: { id: quotationId } },
   })
 
+  if (response.status === 404) {
+    return <p>Quotation not found</p>
+  }
+
   if (response.status !== 200) {
     return <p>Internal server error</p>
   }
@@ -30,8 +34,6 @@ export default async function Page({
   ) {
     return <p>Internal server error</p>
   }
-
-  console.log(data)
 
   const formatDate = (date: string) => {
     if (!date) {
