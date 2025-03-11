@@ -5,13 +5,7 @@ import { Icon } from '@iconify/react'
 
 import Container from '@/components/container'
 import { Button } from '@/components/ui/button'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-} from '@/components/ui/drawer'
+import { Drawer, DrawerContent } from '@/components/ui/drawer'
 
 import { EditPackageForm } from '../photographer/package-page/edit-package'
 import { CreateQuotationProps } from './photographer-quotation'
@@ -76,10 +70,6 @@ export default function CreateQuotationDrawer({
               setIsOpen={setIsOpen}
             />
           </div>
-          <DrawerHeader className='lg:hidden'>
-            <DrawerTitle></DrawerTitle>
-            <DrawerDescription></DrawerDescription>
-          </DrawerHeader>
         </Container>
       </DrawerContent>
     </Drawer>
