@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { quotation } from '@/app/photographer/quotation/page'
+import { quotation } from '@/actions/get-quotations'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 import { Icon } from '@iconify/react'

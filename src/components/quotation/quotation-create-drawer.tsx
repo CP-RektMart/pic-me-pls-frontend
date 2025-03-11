@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { quotation } from '@/app/photographer/quotation/page'
+import { quotation } from '@/actions/get-quotations'
 import { Icon } from '@iconify/react'
 
 import Container from '@/components/container'
