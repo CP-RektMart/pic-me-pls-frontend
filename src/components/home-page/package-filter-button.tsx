@@ -3,17 +3,20 @@
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
+import { Category } from '@/types/user'
 
 import FilterButton from './filter-button'
 import FilterPopover from './filter-popover'
 import { Action, FilterState } from './filterReducer'
 
 interface PackageFilterButtonProps {
+  categories: Category[]
   filters: FilterState
   handleFilter: React.Dispatch<Action>
 }
 
 export default function PackageFilterButton({
+  categories,
   filters,
   handleFilter,
 }: PackageFilterButtonProps) {
@@ -27,6 +30,7 @@ export default function PackageFilterButton({
       />
       <div className={cn(isOpen ? 'block' : 'hidden')}>
         <FilterPopover
+          categories={categories}
           minPrice={filters.minPrice}
           maxPrice={filters.maxPrice}
           selectedCategories={filters.categories}

@@ -1,7 +1,10 @@
+import { Category } from '@/types/user'
+
 import FilterMultiSelect from './filter-multi-select'
 import FilterPrice from './filter-price'
 
 export default function FilterPopover({
+  categories,
   minPrice,
   setMinPrice,
   maxPrice,
@@ -9,6 +12,7 @@ export default function FilterPopover({
   selectedCategories,
   setSelectedCategories,
 }: {
+  categories: Category[]
   minPrice: string
   setMinPrice: (value: string) => void
   maxPrice: string
@@ -26,6 +30,7 @@ export default function FilterPopover({
           setMaxPrice={setMaxPrice}
         />
         <FilterMultiSelect
+          categories={categories}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />

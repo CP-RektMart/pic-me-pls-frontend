@@ -1,22 +1,23 @@
 'use client'
 
+import { Category } from '@/types/user'
+
 import { MultiSelect } from '@/components/ui/multi-select'
 
-const categoriesList = [
-  { value: 'wedding', label: 'งานแต่ง' },
-  { value: 'funeral', label: 'งานศพ' },
-  { value: 'graduation', label: 'งานรับปริญญา' },
-  { value: 'kid', label: 'เด็ก' },
-  { value: 'loveyourmom', label: 'ถ่ายแม่มึง' },
-]
-
 export default function FilterMultiSelect({
+  categories,
   selectedCategories,
   setSelectedCategories,
 }: {
+  categories: Category[]
   selectedCategories: string[]
   setSelectedCategories: (value: string[]) => void
 }) {
+  const categoriesList = categories.map(({ name }) => ({
+    label: name ?? 'Unknown',
+    value: name?.toLowerCase() ?? 'unknown',
+  }))
+
   return (
     <div className='w-full'>
       <MultiSelect
