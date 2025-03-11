@@ -21,8 +21,8 @@ import QuotationFormDrawer from './quotation-form-drawer'
 
 interface QuotationViewDrawerProps {
   setCurrentQuotation: (currentQuotation: quotation | null) => void
-  setSelectedPackage: (selectedPackage: string) => void
-  selectedPackage: string
+  setSelectedPackageId: (selectedPackageId: string) => void
+  selectedPackageId: string
   quotation: quotation
   onEditButtonClicked: () => void
   onSaveEditing: (data: CreateQuotationProps) => void
@@ -37,8 +37,8 @@ export default function QuotationViewDrawer({
   onEditButtonClicked,
   onSaveEditing,
   packages,
-  setSelectedPackage,
-  selectedPackage,
+  setSelectedPackageId,
+  selectedPackageId,
   setWindowstate,
   windowState,
 }: QuotationViewDrawerProps) {
@@ -112,8 +112,8 @@ export default function QuotationViewDrawer({
             transactionType='edit'
             onSubmit={onSaveEditing}
             packages={packages}
-            setSelectedPackage={setSelectedPackage}
-            selectedPackage={selectedPackage}
+            setSelectedPackageId={setSelectedPackageId}
+            selectedPackageId={selectedPackageId}
             setIsOpen={setIsOpen}
           />
         ) : (

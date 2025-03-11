@@ -33,15 +33,16 @@ import QuotationSummary from './quotation-summary'
 interface QuotationProps {
   transactionType: string
   onSubmit: (data: {
-    package: string
-    customer: string
+    packageId: string
+    customerId: string
     from: Date
     to: Date
     description: string
+    price: number
   }) => void
   packages: Package[]
-  setSelectedPackage: (value: string) => void
-  selectedPackage: string
+  setSelectedPackageId: (value: string) => void
+  selectedPackageId: string
   setIsOpen: (isOpen: boolean) => void
 }
 
@@ -49,15 +50,15 @@ export default function QuotationFormDrawer({
   transactionType,
   onSubmit,
   packages,
-  setSelectedPackage,
-  selectedPackage,
+  setSelectedPackageId,
+  selectedPackageId,
   setIsOpen,
 }: QuotationProps) {
   const form = useForm<CreateQuotationProps>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
-      package: '',
-      customer: '',
+      packageId: '',
+      customerId: '',
       description: '',
     },
   })
@@ -80,14 +81,14 @@ export default function QuotationFormDrawer({
       <div className='space-y-2 px-4 pb-4'>
         <FormField
           control={form.control}
-          name='package'
+          name='packageId'
           render={({ field }) => (
             <FormItem>
               <FormLabel className='text-sm font-medium'>Package</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={(value) => {
-                    setSelectedPackage(value)
+                    setSelectedPackageId(value)
                     field.onChange(value)
                   }}
                   value={field.value}
@@ -97,7 +98,7 @@ export default function QuotationFormDrawer({
                   </SelectTrigger>
                   <SelectContent>
                     {packages.map((pkg) => (
-                      <SelectItem key={pkg.name} value={pkg.name}>
+                      <SelectItem key={pkg.id} value={String(pkg.id)}>
                         {pkg.name}
                       </SelectItem>
                     ))}
@@ -111,14 +112,12 @@ export default function QuotationFormDrawer({
 
         <FormField
           control={form.control}
-          name='customer'
+          name='customerId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-sm font-medium'>
-                Customer Name
-              </FormLabel>
+              <FormLabel className='text-sm font-medium'>Customer Id</FormLabel>
               <FormControl>
-                <Input placeholder='Customer Name' {...field} />
+                <Input placeholder='Customer Id' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -171,7 +170,7 @@ export default function QuotationFormDrawer({
       <QuotationSummary
         packages={packages}
         totalHours={totalHours}
-        selectedPackage={selectedPackage}
+        selectedPackageId={selectedPackageId}
       />
 
       <div className='mt-auto'>

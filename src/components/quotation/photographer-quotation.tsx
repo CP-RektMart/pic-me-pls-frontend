@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { Package } from '@/actions/get-packages'
 import { quotation } from '@/actions/get-quotations'
+// import  createQuotationAction  from '@/actions/create-quotation'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
@@ -24,16 +25,17 @@ export interface PhotographerQuotationProps {
 }
 
 export interface CreateQuotationProps {
-  package: string
-  customer: string
+  packageId: string
+  customerId: string
+  price: number
   from: Date
   to: Date
   description: string
 }
 
 export const createQuotationFormSchema = z.object({
-  package: z.string().min(2, 'Gallery must be at least 2 characters'),
-  customer: z.string().min(2, 'Customer must be at least 2 characters'),
+  packageId: z.string(),
+  customerId: z.string(),
   from: z.date(),
   to: z.date(),
   description: z.string().min(2, 'Description must be at least 2 characters'),
@@ -45,7 +47,7 @@ export default function PhotographerQuotation({
   quotations,
   packages,
 }: PhotographerQuotationProps) {
-  const [selectedPackage, setSelectedPackage] = useState<string>('')
+  const [selectedPackageId, setSelectedPackageId] = useState<string>('')
 
   const [windowState, setWindowstate] = useState<WindowState>(null)
   const [currentQuotation, setCurrentQuotation] = useState<quotation | null>(
@@ -61,15 +63,17 @@ export default function PhotographerQuotation({
   }
 
   const onSubmit = async (data: CreateQuotationProps) => {
+    console.log('test')
+    console.log(data)
     setWindowstate(null)
     setCurrentQuotation(null)
-    console.log(data)
   }
 
   const onSaveEditing = async (data: CreateQuotationProps) => {
+    console.log('test')
+    console.log(data)
     setWindowstate(null)
     setCurrentQuotation(null)
-    console.log(data)
   }
 
   return (
@@ -91,8 +95,8 @@ export default function PhotographerQuotation({
           setCurrentQuotation={setCurrentQuotation}
           onSubmit={onSubmit}
           packages={packages}
-          selectedPackage={selectedPackage}
-          setSelectedPackage={setSelectedPackage}
+          selectedPackageId={selectedPackageId}
+          setSelectedPackageId={setSelectedPackageId}
         />
       </div>
 
@@ -120,8 +124,8 @@ export default function PhotographerQuotation({
                       setWindowstate={setWindowstate}
                       setCurrentQuotation={setCurrentQuotation}
                       quotation={quotation}
-                      setSelectedPackage={setSelectedPackage}
-                      selectedPackage={selectedPackage}
+                      setSelectedPackageId={setSelectedPackageId}
+                      selectedPackageId={selectedPackageId}
                       onEditButtonClicked={onEditButtonClicked}
                       onSaveEditing={onSaveEditing}
                       packages={packages}
@@ -168,8 +172,8 @@ export default function PhotographerQuotation({
                   transactionType='create'
                   packages={packages}
                   onSubmit={onSubmit}
-                  setSelectedPackage={setSelectedPackage}
-                  selectedPackage={selectedPackage}
+                  setSelectedPackageId={setSelectedPackageId}
+                  selectedPackageId={selectedPackageId}
                 />
               </div>
             ) : currentQuotation != null ? (
@@ -182,8 +186,8 @@ export default function PhotographerQuotation({
                     transactionType='Edit'
                     packages={packages}
                     onSubmit={onSaveEditing}
-                    setSelectedPackage={setSelectedPackage}
-                    selectedPackage={selectedPackage}
+                    setSelectedPackageId={setSelectedPackageId}
+                    selectedPackageId={selectedPackageId}
                   />
                 </div>
               ) : (

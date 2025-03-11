@@ -1,6 +1,7 @@
 'use client'
 
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
+import { Category } from '@/types/category'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -16,6 +17,14 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/text-area'
 
 import { EditPackageForm, EditPhotoCardForm } from './edit-package'
 
@@ -23,6 +32,7 @@ interface EditPackageDetailSectionProps {
   name: string
   description: string
   price: number
+  categories: Category[]
   photoCards: EditPhotoCardForm[]
   onSubmit: (data: EditPackageForm) => Promise<void>
   form: ReturnType<typeof useForm<EditPackageForm>>
@@ -33,6 +43,7 @@ export default function EditPackageDetailSection({
   onSubmit,
   form,
   onDrop,
+  categories,
 }: EditPackageDetailSectionProps) {
   const { packageID } = useParams()
 
@@ -78,12 +89,42 @@ export default function EditPackageDetailSection({
 
       <FormField
         control={form.control}
+        name='category'
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className='text-sm font-medium'>Category</FormLabel>
+            <FormControl className='font-normal'>
+              <Select
+                onValueChange={(value) => {
+                  field.onChange(value)
+                }}
+                value={field.value}
+              >
+                <SelectTrigger className='w-full font-normal'>
+                  <SelectValue placeholder='Category' />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem key={category.id} value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
         name='packageDescription'
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
             <FormControl>
-              <Input placeholder='Description' {...field} />
+              <Textarea placeholder='Description' {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

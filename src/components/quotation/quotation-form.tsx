@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { Package } from '@/actions/get-packages'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -32,30 +32,32 @@ import QuotationSummary from './quotation-summary'
 interface QuotationProps {
   transactionType: string
   onSubmit: (data: {
-    package: string
-    customer: string
+    packageId: string
+    customerId: string
     from: Date
     to: Date
     description: string
+    price: number
   }) => void
   packages: Package[]
-  setSelectedPackage: (value: string) => void
-  selectedPackage: string
+  setSelectedPackageId: (value: string) => void
+  selectedPackageId: string
 }
 
 export default function QuotationForm({
   transactionType,
   onSubmit,
   packages,
-  setSelectedPackage,
-  selectedPackage,
+  setSelectedPackageId,
+  selectedPackageId,
 }: QuotationProps) {
   const form = useForm<CreateQuotationProps>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
-      package: '',
-      customer: '',
+      packageId: '',
+      customerId: '',
       description: '',
+      price: 0,
     },
   })
 
@@ -72,19 +74,30 @@ export default function QuotationForm({
     return 0
   }, [watchFrom, watchTo])
 
+  useEffect(() => {
+    console.log('test')
+    const selectedPkg = packages.find(
+      (pkg) => String(pkg.id) === selectedPackageId
+    )
+    if (selectedPkg && totalHours > 0) {
+      const calculatedPrice = selectedPkg.price * totalHours
+      form.setValue('price', calculatedPrice)
+    }
+  }, [selectedPackageId, totalHours])
+
   return (
     <FormProvider {...form}>
       <div className='space-y-4 p-4'>
         <FormField
           control={form.control}
-          name='package'
+          name='packageId'
           render={({ field }) => (
             <FormItem>
               <FormLabel className='text-sm font-medium'>Package</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={(value) => {
-                    setSelectedPackage(value)
+                    setSelectedPackageId(value)
                     field.onChange(value)
                   }}
                   value={field.value}
@@ -94,7 +107,7 @@ export default function QuotationForm({
                   </SelectTrigger>
                   <SelectContent>
                     {packages.map((pkg) => (
-                      <SelectItem key={pkg.name} value={pkg.name}>
+                      <SelectItem key={pkg.id} value={String(pkg.id)}>
                         {pkg.name}
                       </SelectItem>
                     ))}
@@ -108,12 +121,10 @@ export default function QuotationForm({
 
         <FormField
           control={form.control}
-          name='customer'
+          name='customerId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-sm font-medium'>
-                Customer Name
-              </FormLabel>
+              <FormLabel className='text-sm font-medium'>Customer Id</FormLabel>
               <FormControl>
                 <Input
                   className='font-medium'
@@ -176,7 +187,7 @@ export default function QuotationForm({
       <QuotationSummary
         packages={packages}
         totalHours={totalHours}
-        selectedPackage={selectedPackage}
+        selectedPackageId={selectedPackageId}
       />
 
       <div className='mt-auto'>
