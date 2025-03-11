@@ -18,8 +18,7 @@ import { CreateQuotationProps } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface CreateQuotationDrawerProps {
-  setIsCreating: (isCreating: boolean) => void
-  setIsEditing: (isEditing: boolean) => void
+  setWindowstate: (windowstate: string) => void
   setCurrentQuotation: (currentQuotation: quotation | null) => void
   onSubmit: (data: CreateQuotationProps) => void
   packages: EditPackageForm[]
@@ -28,25 +27,22 @@ interface CreateQuotationDrawerProps {
 }
 
 export default function CreateQuotationDrawer({
-  setIsCreating,
-  setIsEditing,
   setCurrentQuotation,
   onSubmit,
   packages,
   setSelectedPackage,
   selectedPackage,
+  setWindowstate,
 }: CreateQuotationDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const onClose = () => {
-    setIsCreating(false)
-    setIsEditing(false)
+    setWindowstate('')
     setCurrentQuotation(null)
   }
 
   const onCreateQuotationButtonClicked = () => {
-    setIsCreating(true)
-    setIsEditing(false)
+    setWindowstate('create')
   }
 
   return (

@@ -21,35 +21,32 @@ import { CreateQuotationProps } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface ViewQuotationDrawerProps {
-  setIsCreating: (isCreating: boolean) => void
-  setIsEditing: (isEditing: boolean) => void
   setCurrentQuotation: (currentQuotation: quotation | null) => void
   setSelectedPackage: (selectedPackage: string) => void
   selectedPackage: string
   quotation: quotation
   onEditButtonClicked: () => void
-  isEditing: boolean
   onSaveEditing: (data: CreateQuotationProps) => void
   packages: EditPackageForm[]
+  setWindowstate: (windowstate: string) => void
+  windowState: string
 }
 
 export default function ViewQuotationDrawer({
-  setIsCreating,
-  setIsEditing,
   setCurrentQuotation,
   quotation,
   onEditButtonClicked,
-  isEditing,
   onSaveEditing,
   packages,
   setSelectedPackage,
   selectedPackage,
+  setWindowstate,
+  windowState,
 }: ViewQuotationDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const onClose = () => {
-    setIsCreating(false)
-    setIsEditing(false)
+    setWindowstate('')
     setCurrentQuotation(null)
   }
 
@@ -82,16 +79,15 @@ export default function ViewQuotationDrawer({
             (1000 * 60 * 60))
         }
         onClickEvent={() => {
-          setIsCreating(false)
+          setWindowstate('')
           setCurrentQuotation(quotation)
           setIsOpen(true)
-          setIsEditing(false)
         }}
         className='block w-full lg:hidden'
       />
       <DrawerContent className='py-6 lg:hidden'>
         <Container>
-          {isEditing && quotation.status === 'Pending' ? (
+          {windowState === 'edit' && quotation.status === 'Pending' ? (
             <div className='space-y-4 text-2xl lg:px-10'>
               <div className='w-full text-center font-bold'>
                 Editing : {quotation.quotationID}
