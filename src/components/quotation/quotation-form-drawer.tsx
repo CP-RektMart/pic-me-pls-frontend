@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
+import { DrawerTrigger } from '@/components/ui/drawer'
 import {
   FormControl,
   FormField,
@@ -41,14 +42,16 @@ interface QuotationProps {
   packages: Package[]
   setSelectedPackage: (value: string) => void
   selectedPackage: string
+  setIsOpen: (isOpen: boolean) => void
 }
 
-export default function QuotationForm({
+export default function QuotationFormDrawer({
   transactionType,
   onSubmit,
   packages,
   setSelectedPackage,
   selectedPackage,
+  setIsOpen,
 }: QuotationProps) {
   const form = useForm<CreateQuotationProps>({
     resolver: zodResolver(createQuotationFormSchema),
@@ -74,7 +77,7 @@ export default function QuotationForm({
 
   return (
     <FormProvider {...form}>
-      <div className='space-y-4 p-4'>
+      <div className='space-y-2 px-4 pb-4'>
         <FormField
           control={form.control}
           name='package'
@@ -115,11 +118,7 @@ export default function QuotationForm({
                 Customer Name
               </FormLabel>
               <FormControl>
-                <Input
-                  className='font-medium'
-                  placeholder='Customer Name'
-                  {...field}
-                />
+                <Input placeholder='Customer Name' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -159,11 +158,7 @@ export default function QuotationForm({
             <FormItem>
               <FormLabel className='text-sm font-medium'>Description</FormLabel>
               <FormControl>
-                <Textarea
-                  className='font-medium'
-                  placeholder='Quotation Remarks'
-                  {...field}
-                />
+                <Textarea placeholder='Quotation Remarks' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -180,13 +175,19 @@ export default function QuotationForm({
       />
 
       <div className='mt-auto'>
-        <Button
-          type='button'
-          className='w-full hover:bg-zinc-700'
-          onClick={form.handleSubmit(onSubmit)}
-        >
-          {transactionType === 'create' ? 'Create' : 'Save'}
-        </Button>
+        <DrawerTrigger asChild>
+          <Button
+            type='button'
+            className='w-full hover:bg-zinc-700'
+            onClick={() => {
+              form.handleSubmit(onSubmit)
+              form.reset()
+              setIsOpen(false)
+            }}
+          >
+            {transactionType === 'create' ? 'Create' : 'Save'}
+          </Button>
+        </DrawerTrigger>
       </div>
     </FormProvider>
   )

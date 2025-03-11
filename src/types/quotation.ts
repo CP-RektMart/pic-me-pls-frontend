@@ -1,4 +1,4 @@
-export type QuotationStatus = 'Pending' | 'Confirm' | 'Paid' | 'Cancelled' | ''
+export type QuotationStatus = 'Pending' | 'Confirm' | 'Paid' | 'Cancelled'
 
 export interface QuotationDetailsProps {
   quotationId: number
@@ -18,3 +18,5 @@ export interface CustomerQuotationProps extends QuotationDetailsProps {
   galleriesNumber: number
   quotationImages: { url: string; name: string }[]
 }
+
+export type WindowState = 'create' | 'edit' | null

@@ -41,7 +41,7 @@ export default function QuotationDetails({
     { title: 'Total Price', info: `${totalPrice} Baht` },
   ]
   return (
-    <div className='flex justify-center p-4'>
+    <div className='flex justify-center px-4'>
       <div className='flex w-full flex-col'>
         {detailItems.map((item, i) => (
           <React.Fragment key={i}>
