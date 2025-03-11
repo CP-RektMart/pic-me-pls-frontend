@@ -22,7 +22,12 @@ export default async function Page({
 
   const quotation = data?.result
 
-  if (!quotation || !quotation.fromDate || !quotation.toDate) {
+  if (
+    !quotation ||
+    !quotation.fromDate ||
+    !quotation.toDate ||
+    !quotation.status
+  ) {
     return <p>Internal server error</p>
   }
 
@@ -57,10 +62,13 @@ export default async function Page({
     name: media.description || '',
   }))
 
+  const quotationStatus =
+    quotation.status[0] + quotation.status.slice(1).toLowerCase()
+
   return (
     <CustomerQuotation
       quotationId={quotationId}
-      quotationStatus={quotation.status as QuotationStatus}
+      quotationStatus={quotationStatus as QuotationStatus}
       packageName={quotation.package?.name || 'Package'}
       photographerName={quotation.photographer?.name || 'Photographer'}
       customerName={quotation.customer?.name || 'Customer'}
@@ -70,7 +78,7 @@ export default async function Page({
       duration={duration}
       totalPrice={quotation.price || 0}
       photographerImageUrl={quotation.photographer?.profilePictureUrl || ''}
-      packageNumber={quotation.photographer?.packages?.length || 0}
+      packageNumber={quotation.photographer?.packages.length || 0}
       quotationImages={images || []}
     />
   )
