@@ -31,7 +31,7 @@ export default function Page({
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
 
   const handlePayment = () => {
-    setStatus('Paid')
+    setStatus('PAID')
     // TODO: handle payment
   }
 
@@ -70,10 +70,10 @@ export default function Page({
           <QuotationButton
             status={status}
             onCancel={() => {
-              setStatus('Cancelled')
+              setStatus('CANCELLED')
             }}
             onConfirm={() => {
-              setStatus('Confirm')
+              setStatus('CONFIRM')
             }}
             onPay={handlePayment}
           />

@@ -6,10 +6,10 @@ import { type QuotationDetailsProps } from '@/types/quotation'
 import { Separator } from '@/components/ui/separator'
 
 const statusColor: { [key: string]: string } = {
-  Pending: 'text-amber-600',
-  Confirm: 'text-sky-600',
-  Paid: 'text-emerald-600',
-  Cancelled: 'text-red-600',
+  PENDING: 'text-amber-600',
+  CONFIRM: 'text-sky-600',
+  PAID: 'text-emerald-600',
+  CANCELLED: 'text-red-600',
 }
 
 export default function QuotationDetails({
@@ -40,6 +40,7 @@ export default function QuotationDetails({
     { title: 'Duration', info: `${duration} Hour${duration > 1 ? 's' : ''}` },
     { title: 'Total Price', info: `${totalPrice} Baht` },
   ]
+
   return (
     <div className='flex justify-center p-4'>
       <div className='flex w-full flex-col'>

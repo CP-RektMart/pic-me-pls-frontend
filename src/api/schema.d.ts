@@ -873,6 +873,8 @@ export interface paths {
                     maxPrice?: number;
                     /** @description Photographer ID */
                     photographerId?: number;
+                    /** @description list of categoryIDs separate by comma ex: 1,2 */
+                    categoryIds?: string;
                 };
                 header?: never;
                 path?: never;
@@ -1322,7 +1324,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/photographer/packages/{packageId}": {
+    "/api/v1/photographer/packages/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1337,13 +1339,16 @@ export interface paths {
         head?: never;
         /**
          * Update package
-         * @description Update
+         * @description Update package
          */
         patch: {
             parameters: {
                 query?: never;
                 header?: never;
-                path?: never;
+                path: {
+                    /** @description package id */
+                    id: number;
+                };
                 cookie?: never;
             };
             /** @description Package details */
@@ -1745,7 +1750,8 @@ export interface components {
             pictureUrl: string;
         };
         "dto.CreatePackageRequest": {
-            description: string;
+            categoryId?: number;
+            description?: string;
             media: components["schemas"]["dto.MediaPackageRequest"][];
             name: string;
             price: number;
@@ -1757,6 +1763,13 @@ export interface components {
             packageId: number;
             price: number;
             toDate: string;
+        };
+        "dto.CustomerResponse": {
+            email?: string;
+            id?: number;
+            name?: string;
+            phoneNumber?: string;
+            profilePictureUrl?: string;
         };
         "dto.DeleteMediaRequest": {
             mediaID?: number;
@@ -1812,7 +1825,7 @@ export interface components {
             url?: string;
         };
         "dto.PackageResponse": {
-            categories?: components["schemas"]["dto.CategoryResponse"][];
+            category?: components["schemas"]["dto.CategoryResponse"];
             description?: string;
             id?: number;
             media?: components["schemas"]["dto.MediaResponse"][];
@@ -1890,7 +1903,7 @@ export interface components {
         };
         "dto.ReviewResponse": {
             comment?: string;
-            customer?: string;
+            customer?: components["schemas"]["dto.CustomerResponse"];
             id?: number;
             rating?: number;
         };
@@ -1914,9 +1927,10 @@ export interface components {
             pictureUrl?: string;
         };
         "dto.UpdatePackageRequest": {
+            categoryId?: number;
             description?: string;
+            id: number;
             name?: string;
-            packageID?: number;
             price?: number;
         };
         "dto.UserResponse": {

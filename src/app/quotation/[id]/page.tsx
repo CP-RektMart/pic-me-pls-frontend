@@ -54,7 +54,7 @@ export default async function Page({
     const from = new Date(fromDate)
     const to = new Date(toDate)
     const durationInHours = (to.getTime() - from.getTime()) / (1000 * 60 * 60)
-    return Math.ceil(durationInHours)
+    return parseFloat(durationInHours.toFixed(1))
   }
 
   const duration = calculateDuration(quotation.fromDate, quotation.toDate)
@@ -64,13 +64,10 @@ export default async function Page({
     name: media.description || '',
   }))
 
-  const quotationStatus =
-    quotation.status[0] + quotation.status.slice(1).toLowerCase()
-
   return (
     <CustomerQuotation
       quotationId={quotationId}
-      quotationStatus={quotationStatus as QuotationStatus}
+      quotationStatus={quotation.status as QuotationStatus}
       packageName={quotation.package?.name || 'Package'}
       photographerName={quotation.photographer?.name || 'Photographer'}
       customerName={quotation.customer?.name || 'Customer'}
