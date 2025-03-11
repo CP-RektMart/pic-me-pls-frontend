@@ -3,8 +3,8 @@
 import { client } from '@/api/client'
 
 export interface QuotationAction {
-  packageId: number
-  customerId: number
+  packageId: string
+  customerId: string
   price: number
   from: Date
   to: Date
@@ -12,15 +12,16 @@ export interface QuotationAction {
 }
 
 export default async function createQuotationAction(payload: QuotationAction) {
-
   await client.POST('/api/v1/photographer/quotations', {
     body: {
-      customerId: payload.customerId,
-      packageId: payload.packageId,
+      customerId: parseInt(payload.customerId),
+      packageId: parseInt(payload.packageId),
       price: payload.price,
       description: payload.description,
       fromDate: payload.from.toISOString(),
       toDate: payload.to.toISOString(),
     },
   })
+
+  return
 }

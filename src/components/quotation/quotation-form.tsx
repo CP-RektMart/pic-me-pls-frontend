@@ -74,16 +74,16 @@ export default function QuotationForm({
     return 0
   }, [watchFrom, watchTo])
 
-  useEffect(() => {
-    console.log('test')
-    const selectedPkg = packages.find(
+  const calculatedPrice = useMemo(() => {
+    const selectedPackage = packages.find(
       (pkg) => String(pkg.id) === selectedPackageId
     )
-    if (selectedPkg && totalHours > 0) {
-      const calculatedPrice = selectedPkg.price * totalHours
-      form.setValue('price', calculatedPrice)
-    }
-  }, [selectedPackageId, totalHours])
+    return totalHours * (selectedPackage?.price || 0)
+  }, [totalHours, selectedPackageId, packages])
+
+  useEffect(() => {
+    form.setValue('price', calculatedPrice)
+  }, [calculatedPrice, form])
 
   return (
     <FormProvider {...form}>

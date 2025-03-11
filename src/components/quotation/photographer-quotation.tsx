@@ -2,12 +2,13 @@
 
 import { useState } from 'react'
 
+import createQuotationAction from '@/actions/create-quotation'
 import { Package } from '@/actions/get-packages'
 import { quotation } from '@/actions/get-quotations'
-// import  createQuotationAction  from '@/actions/create-quotation'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import QuotationDetails from '@/components/customer-quotation/details'
@@ -39,6 +40,7 @@ export const createQuotationFormSchema = z.object({
   from: z.date(),
   to: z.date(),
   description: z.string().min(2, 'Description must be at least 2 characters'),
+  price: z.number(),
 })
 
 export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
@@ -63,14 +65,20 @@ export default function PhotographerQuotation({
   }
 
   const onSubmit = async (data: CreateQuotationProps) => {
-    console.log('test')
     console.log(data)
+
+    try {
+      await createQuotationAction(data)
+      toast.success('Your quotation has been successfully created.')
+    } catch {
+      toast.error('An error occurred while create your quotation')
+    }
+
     setWindowstate(null)
     setCurrentQuotation(null)
   }
 
   const onSaveEditing = async (data: CreateQuotationProps) => {
-    console.log('test')
     console.log(data)
     setWindowstate(null)
     setCurrentQuotation(null)
