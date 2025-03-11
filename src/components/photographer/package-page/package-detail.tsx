@@ -1,6 +1,7 @@
 'use client'
 
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
+import { category } from '@/types/category'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
@@ -34,7 +35,7 @@ interface packageDetailSectionProps {
   onSubmit: (data: CreatePackageForm) => Promise<void>
   form: ReturnType<typeof useForm<CreatePackageForm>>
   onDrop: (acceptedFiles: File[]) => void
-  categories: { id: string; name: string }[]
+  categories: category[]
 }
 
 export default function PackageDetailSection({

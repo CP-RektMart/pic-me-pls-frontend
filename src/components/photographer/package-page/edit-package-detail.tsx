@@ -1,6 +1,7 @@
 'use client'
 
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
+import { category } from '@/types/category'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -31,7 +32,7 @@ interface EditPackageDetailSectionProps {
   name: string
   description: string
   price: number
-  categories: { id: string; name: string }[]
+  categories: category[]
   photoCards: EditPhotoCardForm[]
   onSubmit: (data: EditPackageForm) => Promise<void>
   form: ReturnType<typeof useForm<EditPackageForm>>
