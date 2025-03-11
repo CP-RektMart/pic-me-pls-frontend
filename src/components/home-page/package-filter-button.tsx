@@ -6,12 +6,18 @@ import { cn } from '@/lib/utils'
 
 import FilterButton from './filter-button'
 import FilterPopover from './filter-popover'
+import { Action, FilterState } from './filterReducer'
 
-export default function PackageFilterButton() {
+interface PackageFilterButtonProps {
+  filters: FilterState
+  handleFilter: React.Dispatch<Action>
+}
+
+export default function PackageFilterButton({
+  filters,
+  handleFilter,
+}: PackageFilterButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [minPrice, setMinPrice] = useState<string>('')
-  const [maxPrice, setMaxPrice] = useState<string>('')
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
   return (
     <div className='relative'>
@@ -21,12 +27,18 @@ export default function PackageFilterButton() {
       />
       <div className={cn(isOpen ? 'block' : 'hidden')}>
         <FilterPopover
-          minPrice={minPrice}
-          setMinPrice={setMinPrice}
-          maxPrice={maxPrice}
-          setMaxPrice={setMaxPrice}
-          selectedCategories={selectedCategories}
-          setSelectedCategories={setSelectedCategories}
+          minPrice={filters.minPrice}
+          maxPrice={filters.maxPrice}
+          selectedCategories={filters.categories}
+          setMinPrice={(value) =>
+            handleFilter({ type: 'minPrice', payload: value })
+          }
+          setMaxPrice={(value) =>
+            handleFilter({ type: 'maxPrice', payload: value })
+          }
+          setSelectedCategories={(categories) =>
+            handleFilter({ type: 'category', payload: categories })
+          }
         />
       </div>
     </div>
