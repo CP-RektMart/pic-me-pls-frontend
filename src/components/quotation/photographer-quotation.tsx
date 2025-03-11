@@ -107,6 +107,7 @@ export default function PhotographerQuotation({
               <div className='flex flex-col gap-4 font-normal'>
                 {quotations.map((quotation) => (
                   <div key={quotation.quotationID}>
+                    {/* Mobile */}
                     <QuotationViewDrawer
                       windowState={windowState}
                       setWindowstate={setWindowstate}
@@ -118,6 +119,9 @@ export default function PhotographerQuotation({
                       onSaveEditing={onSaveEditing}
                       packages={packages}
                     />
+
+                    {/* Desktop */}
+
                     <QuotationCard
                       quotationId={quotation.quotationID}
                       quotationStatus={quotation.status as QuotationStatus}
