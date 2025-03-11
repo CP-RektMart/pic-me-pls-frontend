@@ -1,20 +1,14 @@
-import { auth } from '@/auth'
+import { client } from '@/api/client'
 
 import HomePageComponent from '@/components/home-page'
 
 export default async function Home() {
-  const session = await auth()
-  let userProfile = null
+  const { data: profile } = await client.GET('/api/v1/me')
 
-  if (session) {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/me`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-    })
-    userProfile = (await response.json()).result
+  if (!profile || !profile.result) {
+    return <HomePageComponent userProfile={undefined} />
   }
+  const userProfile = profile.result
 
   return <HomePageComponent userProfile={userProfile} />
 }

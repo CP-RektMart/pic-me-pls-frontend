@@ -1,4 +1,4 @@
-import { UserProfile } from '@/types/user'
+import { User } from '@/types/user'
 
 import FilterButton from './filter-button'
 import Greeting from './greeting'
@@ -8,7 +8,7 @@ import SearchInput from './search-input'
 export default function SearchBar({
   userProfile,
 }: {
-  userProfile: UserProfile
+  userProfile: User | undefined
 }) {
   return (
     <div className='flex flex-col gap-4 md:flex-row md:items-center'>

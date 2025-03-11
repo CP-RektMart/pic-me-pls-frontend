@@ -7,7 +7,7 @@ export type UserRole = 'CUSTOMER' | 'PHOTOGRAPHER' | 'ADMIN'
 export type User = components['schemas']['dto.UserResponse']
 
 export type UserProfile = {
-  id: string
+  id?: number
   name: string
   email: string
   phoneNumber: string
