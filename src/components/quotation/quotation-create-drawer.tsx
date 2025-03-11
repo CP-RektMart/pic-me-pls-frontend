@@ -14,13 +14,13 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 
-import { CreateQuotationProps } from './photographer-quotation'
+import { CreateQuotationForm } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface CreateQuotationDrawerProps {
   setWindowstate: (windowstate: WindowState) => void
   setCurrentQuotation: (currentQuotation: quotation | null) => void
-  onSubmit: (data: CreateQuotationProps) => void
+  onSubmit: (data: CreateQuotationForm) => void
   packages: Package[]
   setSelectedPackage: (selectedPackage: string) => void
   selectedPackage: string

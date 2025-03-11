@@ -24,7 +24,7 @@ import {
 import { DateTimePicker } from '../ui/date-time-picker'
 import { Textarea } from '../ui/text-area'
 import {
-  CreateQuotationProps,
+  CreateQuotationForm,
   createQuotationFormSchema,
 } from './photographer-quotation'
 import QuotationSummary from './quotation-summary'
@@ -50,7 +50,7 @@ export default function QuotationForm({
   setSelectedPackage,
   selectedPackage,
 }: QuotationProps) {
-  const form = useForm<CreateQuotationProps>({
+  const form = useForm<CreateQuotationForm>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
       package: '',

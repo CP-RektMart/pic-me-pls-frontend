@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/drawer'
 
 import QuotationDetails from '../customer-quotation/details'
-import { CreateQuotationProps } from './photographer-quotation'
+import { CreateQuotationForm } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface QuotationViewDrawerProps {
@@ -25,7 +25,7 @@ interface QuotationViewDrawerProps {
   selectedPackage: string
   quotation: quotation
   onEditButtonClicked: () => void
-  onSaveEditing: (data: CreateQuotationProps) => void
+  onSaveEditing: (data: CreateQuotationForm) => void
   packages: Package[]
   setWindowstate: (windowstate: WindowState) => void
   windowState: WindowState

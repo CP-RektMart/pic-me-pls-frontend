@@ -23,14 +23,6 @@ export interface PhotographerQuotationProps {
   packages: Package[]
 }
 
-export interface CreateQuotationProps {
-  package: string
-  customer: string
-  from: Date
-  to: Date
-  description: string
-}
-
 export const createQuotationFormSchema = z.object({
   package: z.string().min(2, 'Gallery must be at least 2 characters'),
   customer: z.string().min(2, 'Customer must be at least 2 characters'),
@@ -60,13 +52,13 @@ export default function PhotographerQuotation({
     setWindowstate('edit')
   }
 
-  const onSubmit = async (data: CreateQuotationProps) => {
+  const onSubmit = async (data: CreateQuotationForm) => {
     setWindowstate(null)
     setCurrentQuotation(null)
     console.log(data)
   }
 
-  const onSaveEditing = async (data: CreateQuotationProps) => {
+  const onSaveEditing = async (data: CreateQuotationForm) => {
     setWindowstate(null)
     setCurrentQuotation(null)
     console.log(data)
