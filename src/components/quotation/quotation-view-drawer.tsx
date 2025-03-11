@@ -4,15 +4,14 @@ import { quotation } from '@/actions/get-quotations'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 
-import Container from '@/components/container'
 import QuotationCard from '@/components/quotation/quotation-card'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
+  DrawerTrigger,
 } from '@/components/ui/drawer'
 
 import QuotationDetails from '../customer-quotation/details'
@@ -32,7 +31,7 @@ interface ViewQuotationDrawerProps {
   windowState: string
 }
 
-export default function ViewQuotationDrawer({
+export default function QuotationViewDrawer({
   setCurrentQuotation,
   quotation,
   onEditButtonClicked,
@@ -58,97 +57,88 @@ export default function ViewQuotationDrawer({
         if (!open) onClose()
       }}
     >
-      <QuotationCard
-        quotationId={quotation.quotationID}
-        quotationStatus={quotation.status as QuotationStatus}
-        packageName={quotation.packageName}
-        photographerName={quotation.photographerName}
-        customerName={quotation.customerName}
-        from={formatDateToString(quotation.from).toString()}
-        to={formatDateToString(quotation.to).toString()}
-        description={quotation.description}
-        duration={
-          (new Date(quotation.to).getTime() -
-            new Date(quotation.from).getTime()) /
-          (1000 * 60 * 60)
-        }
-        totalPrice={
-          quotation.pricePerHour *
-          ((new Date(quotation.to).getTime() -
-            new Date(quotation.from).getTime()) /
-            (1000 * 60 * 60))
-        }
-        onClickEvent={() => {
-          setWindowstate('')
-          setCurrentQuotation(quotation)
-          setIsOpen(true)
-        }}
-        className='block w-full lg:hidden'
-      />
-      <DrawerContent className='py-6 lg:hidden'>
-        <Container>
-          {windowState === 'edit' && quotation.status === 'Pending' ? (
-            <div className='space-y-4 text-2xl lg:px-10'>
-              <div className='w-full text-center font-bold'>
-                Editing : {quotation.quotationID}
-              </div>
+      <DrawerTrigger asChild>
+        <QuotationCard
+          quotationId={quotation.quotationID}
+          quotationStatus={quotation.status as QuotationStatus}
+          packageName={quotation.packageName}
+          photographerName={quotation.photographerName}
+          customerName={quotation.customerName}
+          from={formatDateToString(quotation.from).toString()}
+          to={formatDateToString(quotation.to).toString()}
+          description={quotation.description}
+          duration={
+            (new Date(quotation.to).getTime() -
+              new Date(quotation.from).getTime()) /
+            (1000 * 60 * 60)
+          }
+          totalPrice={
+            quotation.pricePerHour *
+            ((new Date(quotation.to).getTime() -
+              new Date(quotation.from).getTime()) /
+              (1000 * 60 * 60))
+          }
+          onClickEvent={() => {
+            setWindowstate('')
+            setCurrentQuotation(quotation)
+            setIsOpen(true)
+          }}
+          className='block w-full lg:hidden'
+        />
+      </DrawerTrigger>
 
-              <QuotationFormDrawer
-                transactionType='edit'
-                onSubmit={onSaveEditing}
-                packages={packages}
-                setSelectedPackage={setSelectedPackage}
-                selectedPackage={selectedPackage}
-                setIsOpen={setIsOpen}
-              />
-            </div>
-          ) : (
-            <div className='space-y-4 text-2xl lg:px-10'>
-              <div className='grid grid-cols-2 justify-between font-bold'>
-                <div>{quotation.quotationID}</div>
-                {quotation.status === 'Pending' ? (
-                  <div className='flex justify-end'>
-                    <Button
-                      onClick={() => {
-                        onEditButtonClicked()
-                      }}
-                      className='w-16 lg:block'
-                    >
-                      Edit
-                    </Button>
-                  </div>
-                ) : null}
-              </div>
+      <DrawerContent className='space-y-4 px-4 pb-10'>
+        {/* header */}
+        <DrawerHeader className='flex items-center justify-between space-y-4 px-4 py-0 text-2xl'>
+          <DrawerTitle className='font-bold'>
+            Quotation : {quotation.quotationID}
+          </DrawerTitle>
 
-              <QuotationDetails
-                quotationId={quotation.quotationID}
-                quotationStatus={quotation?.status as QuotationStatus}
-                packageName={quotation.packageName}
-                photographerName={quotation.photographerName}
-                customerName={quotation.customerName}
-                from={formatDateToString(quotation.from)}
-                to={formatDateToString(quotation.to)}
-                description={quotation.description}
-                duration={
-                  (new Date(quotation.to).getTime() -
-                    new Date(quotation.from).getTime()) /
-                  (1000 * 60 * 60)
-                }
-                totalPrice={
-                  quotation.pricePerHour *
-                  ((new Date(quotation.to).getTime() -
-                    new Date(quotation.from).getTime()) /
-                    (1000 * 60 * 60))
-                }
-              />
-            </div>
+          {quotation.status === 'Pending' && windowState !== 'edit' && (
+            <Button
+              onClick={() => {
+                onEditButtonClicked()
+              }}
+              className='!mt-0'
+            >
+              Edit
+            </Button>
           )}
+        </DrawerHeader>
 
-          <DrawerHeader className='lg:hidden'>
-            <DrawerTitle></DrawerTitle>
-            <DrawerDescription></DrawerDescription>
-          </DrawerHeader>
-        </Container>
+        {/* body */}
+        {windowState === 'edit' && quotation.status === 'Pending' ? (
+          <QuotationFormDrawer
+            transactionType='edit'
+            onSubmit={onSaveEditing}
+            packages={packages}
+            setSelectedPackage={setSelectedPackage}
+            selectedPackage={selectedPackage}
+            setIsOpen={setIsOpen}
+          />
+        ) : (
+          <QuotationDetails
+            quotationId={quotation.quotationID}
+            quotationStatus={quotation?.status as QuotationStatus}
+            packageName={quotation.packageName}
+            photographerName={quotation.photographerName}
+            customerName={quotation.customerName}
+            from={formatDateToString(quotation.from)}
+            to={formatDateToString(quotation.to)}
+            description={quotation.description}
+            duration={
+              (new Date(quotation.to).getTime() -
+                new Date(quotation.from).getTime()) /
+              (1000 * 60 * 60)
+            }
+            totalPrice={
+              quotation.pricePerHour *
+              ((new Date(quotation.to).getTime() -
+                new Date(quotation.from).getTime()) /
+                (1000 * 60 * 60))
+            }
+          />
+        )}
       </DrawerContent>
     </Drawer>
   )
