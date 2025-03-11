@@ -642,6 +642,66 @@ export interface paths {
     }
     trace?: never
   }
+  '/api/v1/customers/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get customer public profile
+     * @description Get customer public profile
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description customer's userId */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_CustomerPublicResponse']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/api/v1/me': {
     parameters: {
       query?: never
@@ -873,6 +933,8 @@ export interface paths {
           maxPrice?: number
           /** @description Photographer ID */
           photographerId?: number
+          /** @description list of categoryIDs separate by comma ex: 1,2 */
+          categoryIds?: string
         }
         header?: never
         path?: never
@@ -1322,7 +1384,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  '/api/v1/photographer/packages/{packageId}': {
+  '/api/v1/photographer/packages/{id}': {
     parameters: {
       query?: never
       header?: never
@@ -1337,13 +1399,16 @@ export interface paths {
     head?: never
     /**
      * Update package
-     * @description Update
+     * @description Update package
      */
     patch: {
       parameters: {
         query?: never
         header?: never
-        path?: never
+        path: {
+          /** @description package id */
+          id: number
+        }
         cookie?: never
       }
       /** @description Package details */
@@ -1362,6 +1427,140 @@ export interface paths {
         }
         /** @description Bad Request */
         400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
+  '/api/v1/photographer/quotations': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create a quotation
+     * @description Creates a new quotation for a customer and package
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Quotation details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateQuotationRequest']
+        }
+      }
+      responses: {
+        /** @description Created */
+        201: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_QuotationResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/photographer/quotations/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Update a quotation
+     * @description Updates an existing quotation
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description Quotation ID */
+          id: number
+        }
+        cookie?: never
+      }
+      /** @description Quotation update details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateQuotationRequest']
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
           headers: {
             [name: string]: unknown
           }
@@ -1523,7 +1722,10 @@ export interface paths {
       parameters: {
         query?: never
         header?: never
-        path?: never
+        path: {
+          /** @description quotaion id */
+          id: number
+        }
         cookie?: never
       }
       requestBody?: never
@@ -1608,10 +1810,31 @@ export interface components {
       pictureUrl: string
     }
     'dto.CreatePackageRequest': {
-      description: string
+      categoryId?: number
+      description?: string
       media: components['schemas']['dto.MediaPackageRequest'][]
       name: string
       price: number
+    }
+    'dto.CreateQuotationRequest': {
+      customerId: number
+      description?: string
+      fromDate: string
+      packageId: number
+      price: number
+      toDate: string
+    }
+    'dto.CustomerPublicResponse': {
+      id?: number
+      name?: string
+      profilePictureUrl?: string
+    }
+    'dto.CustomerResponse': {
+      email?: string
+      id?: number
+      name?: string
+      phoneNumber?: string
+      profilePictureUrl?: string
     }
     'dto.DeleteMediaRequest': {
       mediaID?: number
@@ -1624,6 +1847,9 @@ export interface components {
     }
     'dto.HttpResponse-dto_CitizenCardResponse': {
       result?: components['schemas']['dto.CitizenCardResponse']
+    }
+    'dto.HttpResponse-dto_CustomerPublicResponse': {
+      result?: components['schemas']['dto.CustomerPublicResponse']
     }
     'dto.HttpResponse-dto_LoginResponse': {
       result?: components['schemas']['dto.LoginResponse']
@@ -1659,6 +1885,7 @@ export interface components {
       pictureUrl: string
     }
     'dto.MediaResponse': {
+      description?: string
       id?: number
       pictureUrl?: string
     }
@@ -1666,7 +1893,7 @@ export interface components {
       url?: string
     }
     'dto.PackageResponse': {
-      categories?: components['schemas']['dto.CategoryResponse'][]
+      category?: components['schemas']['dto.CategoryResponse']
       description?: string
       id?: number
       media?: components['schemas']['dto.MediaResponse'][]
@@ -1706,6 +1933,7 @@ export interface components {
       id?: number
       isVerified?: boolean
       name?: string
+      packages?: components['schemas']['dto.SmallPackageResponse'][]
       phoneNumber?: string
       profilePictureUrl?: string
     }
@@ -1744,9 +1972,14 @@ export interface components {
     }
     'dto.ReviewResponse': {
       comment?: string
-      customer?: string
+      customer?: components['schemas']['dto.CustomerResponse']
       id?: number
       rating?: number
+    }
+    'dto.SmallPackageResponse': {
+      description?: string
+      id?: number
+      name?: string
     }
     'dto.TagResponse': {
       id?: number
@@ -1768,9 +2001,10 @@ export interface components {
       pictureUrl?: string
     }
     'dto.UpdatePackageRequest': {
+      categoryId?: number
       description?: string
+      id: number
       name?: string
-      packageID?: number
       price?: number
     }
     'dto.UserResponse': {
