@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -60,13 +62,15 @@ export default function QuotationForm({
   const watchFrom = form.watch('from')
   const watchTo = form.watch('to')
 
-  const totalHours =
-    watchFrom && watchTo
-      ? Math.ceil(
-          (new Date(watchTo).getTime() - new Date(watchFrom).getTime()) /
-            (1000 * 60 * 60)
-        )
-      : 0
+  const totalHours = useMemo(() => {
+    if (watchFrom && watchTo) {
+      return Math.ceil(
+        (new Date(watchTo).getTime() - new Date(watchFrom).getTime()) /
+          (1000 * 60 * 60)
+      )
+    }
+    return 0
+  }, [watchFrom, watchTo])
 
   return (
     <FormProvider {...form}>
