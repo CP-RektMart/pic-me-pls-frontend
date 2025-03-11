@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { Package } from '@/actions/get-packages'
 import { quotation } from '@/actions/get-quotations'
 import { WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
@@ -13,7 +14,6 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 
-import { EditPackageForm } from '../photographer/package-page/edit-package'
 import { CreateQuotationProps } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
@@ -21,7 +21,7 @@ interface CreateQuotationDrawerProps {
   setWindowstate: (windowstate: WindowState) => void
   setCurrentQuotation: (currentQuotation: quotation | null) => void
   onSubmit: (data: CreateQuotationProps) => void
-  packages: EditPackageForm[]
+  packages: Package[]
   setSelectedPackage: (selectedPackage: string) => void
   selectedPackage: string
 }

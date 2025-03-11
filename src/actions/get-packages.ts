@@ -1,3 +1,9 @@
+export interface Package {
+  name: string
+  packageDescription: string
+  price: number
+}
+
 export function getPackages() {
   return [
     {

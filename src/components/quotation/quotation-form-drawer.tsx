@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 
+import { Package } from '@/actions/get-packages'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 import { DrawerTrigger } from '@/components/ui/drawer'
 import {
@@ -39,7 +39,7 @@ interface QuotationProps {
     to: Date
     description: string
   }) => void
-  packages: EditPackageForm[]
+  packages: Package[]
   setSelectedPackage: (value: string) => void
   selectedPackage: string
   setIsOpen: (isOpen: boolean) => void

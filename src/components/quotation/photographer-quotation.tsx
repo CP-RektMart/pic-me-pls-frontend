@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 
+import { Package } from '@/actions/get-packages'
 import { quotation } from '@/actions/get-quotations'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
@@ -9,7 +10,6 @@ import { Icon } from '@iconify/react'
 import z from 'zod'
 
 import QuotationDetails from '@/components/customer-quotation/details'
-import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 
 import Container from '../container'
@@ -20,7 +20,7 @@ import QuotationViewDrawer from './quotation-view-drawer'
 
 export interface PhotographerQuotationProps {
   quotations: quotation[]
-  packages: EditPackageForm[]
+  packages: Package[]
 }
 
 export interface CreateQuotationProps {

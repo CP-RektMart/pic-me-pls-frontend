@@ -1,9 +1,9 @@
-import { EditPackageForm } from '../photographer/package-page/edit-package'
+import { Package } from '@/actions/get-packages'
 
 interface QuotationSummaryProps {
   totalHours: number
   selectedPackage: string
-  packages: EditPackageForm[]
+  packages: Package[]
 }
 
 export default function QuotationSummary({
