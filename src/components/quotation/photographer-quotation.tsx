@@ -174,7 +174,7 @@ export default function PhotographerQuotation({
                 />
               </div>
             ) : currentQuotation != null ? (
-              isEditing ? (
+              isEditing && currentQuotation.status === 'Pending' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
                   <div className='w-full text-center'>
                     Editing : {currentQuotation.quotationID}

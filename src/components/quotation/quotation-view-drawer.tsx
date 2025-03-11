@@ -91,7 +91,7 @@ export default function ViewQuotationDrawer({
       />
       <DrawerContent className='py-6 lg:hidden'>
         <Container>
-          {isEditing ? (
+          {isEditing && quotation.status === 'Pending' ? (
             <div className='space-y-4 text-2xl lg:px-10'>
               <div className='w-full text-center font-bold'>
                 Editing : {quotation.quotationID}
