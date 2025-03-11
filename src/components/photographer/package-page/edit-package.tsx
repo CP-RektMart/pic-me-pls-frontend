@@ -76,11 +76,13 @@ export default function EditPackage() {
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
 
+  const categories = getCategories()
+
   return (
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
         <EditPackageDetailSection
-          categories={getCategories()}
+          categories={categories}
           name=''
           description=''
           price={0}

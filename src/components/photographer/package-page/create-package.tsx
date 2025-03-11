@@ -76,6 +76,8 @@ export default function CreatePackage() {
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
 
+  const categories = getCategories()
+
   return (
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
@@ -87,7 +89,7 @@ export default function CreatePackage() {
           onSubmit={onSubmit}
           form={form}
           onDrop={onDrop}
-          categories={getCategories()}
+          categories={categories}
         />
         <div className='flex-1'>
           {photoCards.length === 0 ? (
