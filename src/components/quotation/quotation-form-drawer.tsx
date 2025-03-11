@@ -1,4 +1,3 @@
-import { formatDateToDate } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -129,11 +128,7 @@ export default function QuotationFormDrawer({
             render={({ field }) => (
               <FormItem className='flex flex-col'>
                 <FormLabel>From</FormLabel>
-                <DateTimePicker
-                  value={field.value}
-                  onChange={field.onChange}
-                  formatDate={formatDateToDate}
-                />
+                <DateTimePicker value={field.value} onChange={field.onChange} />
                 <FormMessage />
               </FormItem>
             )}
@@ -145,11 +140,7 @@ export default function QuotationFormDrawer({
             render={({ field }) => (
               <FormItem className='flex flex-col'>
                 <FormLabel>To</FormLabel>
-                <DateTimePicker
-                  value={field.value}
-                  onChange={field.onChange}
-                  formatDate={formatDateToDate}
-                />
+                <DateTimePicker value={field.value} onChange={field.onChange} />
                 <FormMessage />
               </FormItem>
             )}

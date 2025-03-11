@@ -3,6 +3,7 @@
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
+import { formatDateToDate } from '@/lib/utils'
 import { Icon } from '@iconify/react'
 
 import { Button } from '@/components/ui/button'
@@ -18,7 +19,6 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 interface DateTimePickerProps {
   value: Date | null
   onChange: (date: Date) => void
-  formatDate: (date: Date) => Date
 }
 
 export function DateTimePicker(props: DateTimePickerProps) {
@@ -55,7 +55,7 @@ export function DateTimePicker(props: DateTimePickerProps) {
           <Calendar
             mode='single'
             selected={value ? new Date(value) : undefined}
-            onSelect={(day) => day && onChange(props.formatDate(day))}
+            onSelect={(day) => day && onChange(formatDateToDate(day))}
             initialFocus
           />
           <div className='flex flex-col divide-y lg:h-[300px] lg:flex-row lg:divide-x lg:divide-y-0'>
@@ -75,7 +75,7 @@ export function DateTimePicker(props: DateTimePickerProps) {
                       if (value) {
                         const newDate = new Date(value)
                         newDate.setHours(hour)
-                        onChange(props.formatDate(newDate))
+                        onChange(formatDateToDate(newDate))
                       }
                     }}
                   >
@@ -101,7 +101,7 @@ export function DateTimePicker(props: DateTimePickerProps) {
                       if (value) {
                         const newDate = new Date(value)
                         newDate.setHours(minute)
-                        onChange(props.formatDate(newDate))
+                        onChange(formatDateToDate(newDate))
                       }
                     }}
                   >
