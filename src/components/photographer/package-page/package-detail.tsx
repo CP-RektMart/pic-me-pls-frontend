@@ -93,11 +93,7 @@ export default function PackageDetailSection({
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((category) => (
-                    <SelectItem
-                      key={category.id}
-                      value={category.name}
-                      className='font-normal'
-                    >
+                    <SelectItem key={category.id} value={category.name}>
                       {category.name}
                     </SelectItem>
                   ))}
