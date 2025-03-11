@@ -26,6 +26,7 @@ import {
   CreateQuotationProps,
   createQuotationFormSchema,
 } from './photographer-quotation'
+import QuotationSummary from './quotation-summary'
 
 interface QuotationProps {
   transactionType: string
@@ -169,30 +170,11 @@ export default function QuotationForm({
 
       <hr className='border-[0.5px] border-zinc-400' />
 
-      <div className='flex flex-col gap-2 p-4 text-sm font-normal'>
-        <div className='flex flex-row justify-between'>
-          <div>Total hours</div>
-          <div>{totalHours > 0 ? totalHours.toFixed(0) : 0} Hours</div>
-        </div>
-
-        <div className='flex flex-row justify-between'>
-          <div>Price Per Hour</div>
-          <div>
-            {packages.find((pkg) => pkg.name === selectedPackage)?.price ?? 0}{' '}
-            Baht
-          </div>
-        </div>
-
-        <div className='flex flex-row justify-between text-base font-bold'>
-          <div>Total Price</div>
-          <div>
-            {((packages.find((pkg) => pkg.name === selectedPackage)?.price ??
-              0) ||
-              0) * totalHours}{' '}
-            Baht
-          </div>
-        </div>
-      </div>
+      <QuotationSummary
+        packages={packages}
+        totalHours={totalHours}
+        selectedPackage={selectedPackage}
+      />
 
       <div className='mt-auto'>
         <Button
