@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
-import { categories } from '@/actions/get-package-categories'
+import { getCategories } from '@/actions/get-package-categories'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
@@ -87,7 +87,7 @@ export default function CreatePackage() {
           onSubmit={onSubmit}
           form={form}
           onDrop={onDrop}
-          categories={categories}
+          categories={getCategories()}
         />
         <div className='flex-1'>
           {photoCards.length === 0 ? (

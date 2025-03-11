@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
-import { categories } from '@/actions/get-package-categories'
+import { getCategories } from '@/actions/get-package-categories'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
@@ -80,7 +80,7 @@ export default function EditPackage() {
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
         <EditPackageDetailSection
-          categories={categories}
+          categories={getCategories()}
           name=''
           description=''
           price={0}
