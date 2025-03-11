@@ -1,6 +1,4 @@
-import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
-
-export function getPackages(): EditPackageForm[] {
+export function getPackages() {
   return [
     {
       name: 'Wedding Package',

@@ -10,7 +10,7 @@ export interface quotation {
   pricePerHour: number
 }
 
-export function getQuotations(): quotation[] {
+export function getQuotations() {
   return [
     {
       quotationID: 1,
