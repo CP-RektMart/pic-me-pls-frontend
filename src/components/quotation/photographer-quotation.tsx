@@ -76,12 +76,15 @@ export default function PhotographerQuotation({
       <div className='flex flex-row justify-between'>
         <div className='text-2xl font-bold'>Quotation Manager</div>
 
+        {/* Desktop */}
         <Button
           onClick={onCreateQuotationButtonClicked}
           className='hidden lg:block'
         >
           New Quotation
         </Button>
+
+        {/* Mobile */}
         <CreateQuotationDrawer
           setWindowstate={setWindowstate}
           setCurrentQuotation={setCurrentQuotation}

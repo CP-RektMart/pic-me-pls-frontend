@@ -3,9 +3,14 @@ import { useState } from 'react'
 import { quotation } from '@/actions/get-quotations'
 import { Icon } from '@iconify/react'
 
-import Container from '@/components/container'
 import { Button } from '@/components/ui/button'
-import { Drawer, DrawerContent } from '@/components/ui/drawer'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
 
 import { EditPackageForm } from '../photographer/package-page/edit-package'
 import { CreateQuotationProps } from './photographer-quotation'
@@ -47,30 +52,35 @@ export default function CreateQuotationDrawer({
         if (!open) onClose()
       }}
     >
-      <Button
-        onClick={() => {
-          setIsOpen(true)
-          onCreateQuotationButtonClicked()
-        }}
-        className='lg:hidden'
-      >
-        <Icon icon='lucide:plus' />
-      </Button>
+      <DrawerTrigger asChild>
+        <Button
+          onClick={() => {
+            setIsOpen(true)
+            onCreateQuotationButtonClicked()
+          }}
+          className='lg:hidden'
+        >
+          <Icon icon='lucide:plus' />
+        </Button>
+      </DrawerTrigger>
 
-      <DrawerContent className='py-6 lg:hidden'>
-        <Container>
-          <div className='space-y-4 text-2xl font-bold lg:px-10'>
+      <DrawerContent className='space-y-4 px-4 pb-10'>
+        {/* header */}
+        <DrawerHeader className='flex items-center justify-between space-y-4 px-4 py-0'>
+          <DrawerTitle className='text-xl font-bold'>
             Create Quotation
-            <QuotationFormDrawer
-              transactionType='create'
-              onSubmit={onSubmit}
-              packages={packages}
-              setSelectedPackage={setSelectedPackage}
-              selectedPackage={selectedPackage}
-              setIsOpen={setIsOpen}
-            />
-          </div>
-        </Container>
+          </DrawerTitle>
+        </DrawerHeader>
+
+        {/* body */}
+        <QuotationFormDrawer
+          transactionType='create'
+          onSubmit={onSubmit}
+          packages={packages}
+          setSelectedPackage={setSelectedPackage}
+          selectedPackage={selectedPackage}
+          setIsOpen={setIsOpen}
+        />
       </DrawerContent>
     </Drawer>
   )

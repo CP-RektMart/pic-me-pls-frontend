@@ -89,8 +89,8 @@ export default function QuotationViewDrawer({
 
       <DrawerContent className='space-y-4 px-4 pb-10'>
         {/* header */}
-        <DrawerHeader className='flex items-center justify-between space-y-4 px-4 py-0 text-2xl'>
-          <DrawerTitle className='font-bold'>
+        <DrawerHeader className='flex items-center justify-between space-y-4 px-4 py-0'>
+          <DrawerTitle className='text-xl font-bold'>
             Quotation : {quotation.quotationID}
           </DrawerTitle>
 
