@@ -1,0 +1,25 @@
+export interface Package {
+  name: string
+  packageDescription: string
+  price: number
+}
+
+export function getPackages() {
+  return [
+    {
+      name: 'Wedding Package',
+      packageDescription: 'Wedding photography package',
+      price: 400,
+    },
+    {
+      name: 'Birthday Package',
+      packageDescription: 'Birthday photography package',
+      price: 300,
+    },
+    {
+      name: 'Graduation Package',
+      packageDescription: 'Graduation photography package',
+      price: 200,
+    },
+  ]
+}
