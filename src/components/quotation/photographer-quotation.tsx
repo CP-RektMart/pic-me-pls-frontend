@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import createQuotationAction from '@/actions/create-quotation'
 import { Package } from '@/actions/get-packages'
-import { quotation } from '@/actions/get-quotations'
+import { Quotation } from '@/actions/get-quotations'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
@@ -21,7 +21,7 @@ import QuotationForm from './quotation-form'
 import QuotationViewDrawer from './quotation-view-drawer'
 
 export interface PhotographerQuotationProps {
-  quotations: quotation[]
+  quotations: Quotation[]
   packages: Package[]
 }
 
@@ -52,7 +52,7 @@ export default function PhotographerQuotation({
   const [selectedPackageId, setSelectedPackageId] = useState<string>('')
 
   const [windowState, setWindowstate] = useState<WindowState>(null)
-  const [currentQuotation, setCurrentQuotation] = useState<quotation | null>(
+  const [currentQuotation, setCurrentQuotation] = useState<Quotation | null>(
     null
   )
 
@@ -127,6 +127,7 @@ export default function PhotographerQuotation({
               <div className='flex flex-col gap-4 font-normal'>
                 {quotations.map((quotation) => (
                   <div key={quotation.quotationID}>
+                    {/* Mobile */}
                     <QuotationViewDrawer
                       windowState={windowState}
                       setWindowstate={setWindowstate}
@@ -138,6 +139,9 @@ export default function PhotographerQuotation({
                       onSaveEditing={onSaveEditing}
                       packages={packages}
                     />
+
+                    {/* Desktop */}
+
                     <QuotationCard
                       quotationId={quotation.quotationID}
                       quotationStatus={quotation.status as QuotationStatus}

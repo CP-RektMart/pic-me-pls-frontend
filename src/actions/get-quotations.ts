@@ -1,4 +1,4 @@
-export interface quotation {
+export interface Quotation {
   quotationID: number
   status: string
   packageName: string

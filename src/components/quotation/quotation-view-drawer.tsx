@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Package } from '@/actions/get-packages'
-import { quotation } from '@/actions/get-quotations'
+import { Quotation } from '@/actions/get-quotations'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 
@@ -16,16 +16,16 @@ import {
 } from '@/components/ui/drawer'
 
 import QuotationDetails from '../customer-quotation/details'
-import { CreateQuotationProps } from './photographer-quotation'
+import { CreateQuotationForm } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface QuotationViewDrawerProps {
-  setCurrentQuotation: (currentQuotation: quotation | null) => void
+  setCurrentQuotation: (currentQuotation: Quotation | null) => void
   setSelectedPackageId: (selectedPackageId: string) => void
   selectedPackageId: string
-  quotation: quotation
+  quotation: Quotation
   onEditButtonClicked: () => void
-  onSaveEditing: (data: CreateQuotationProps) => void
+  onSaveEditing: (data: CreateQuotationForm) => void
   packages: Package[]
   setWindowstate: (windowstate: WindowState) => void
   windowState: WindowState
