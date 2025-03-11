@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { quotation } from '@/actions/get-quotations'
 import { formatDateToString } from '@/lib/utils'
-import { QuotationStatus } from '@/types/quotation'
+import { QuotationStatus, WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
 import z from 'zod'
 
@@ -12,6 +12,7 @@ import QuotationDetails from '@/components/customer-quotation/details'
 import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
 import { Button } from '@/components/ui/button'
 
+import Container from '../container'
 import QuotationCard from './quotation-card'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
@@ -46,7 +47,7 @@ export default function PhotographerQuotation({
 }: PhotographerQuotationProps) {
   const [selectedPackage, setSelectedPackage] = useState<string>('')
 
-  const [windowState, setWindowstate] = useState<string>('')
+  const [windowState, setWindowstate] = useState<WindowState>(null)
   const [currentQuotation, setCurrentQuotation] = useState<quotation | null>(
     null
   )
@@ -60,19 +61,19 @@ export default function PhotographerQuotation({
   }
 
   const onSubmit = async (data: CreateQuotationProps) => {
-    setWindowstate('')
+    setWindowstate(null)
     setCurrentQuotation(null)
     console.log(data)
   }
 
   const onSaveEditing = async (data: CreateQuotationProps) => {
-    setWindowstate('')
+    setWindowstate(null)
     setCurrentQuotation(null)
     console.log(data)
   }
 
   return (
-    <div className='size-full space-y-6'>
+    <Container className='space-y-6 py-4 lg:py-6'>
       <div className='flex flex-row justify-between'>
         <div className='text-2xl font-bold'>Quotation Manager</div>
 
@@ -94,7 +95,8 @@ export default function PhotographerQuotation({
           setSelectedPackage={setSelectedPackage}
         />
       </div>
-      {quotations.length == 0 && windowState === '' ? (
+
+      {quotations.length == 0 && !windowState ? (
         <div className='text-medium flex h-[69vh] flex-col place-content-center items-center justify-center gap-3 font-medium text-gray-500'>
           <Icon icon='lucide:sticky-note' className='h-20 w-12 text-gray-500' />
           <span>You don&apos;t have any quotations yet</span>
@@ -146,7 +148,7 @@ export default function PhotographerQuotation({
                       }
                       onClickEvent={() => {
                         setCurrentQuotation(quotation)
-                        setWindowstate('')
+                        setWindowstate(null)
                       }}
                       className='hidden w-full lg:block'
                     />
@@ -158,8 +160,10 @@ export default function PhotographerQuotation({
 
           <div className='hidden lg:block'>
             {windowState === 'create' ? (
-              <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                Create Quotation
+              <div className='px-10'>
+                <div className='space-y-4 text-2xl font-bold'>
+                  Create Quotation
+                </div>
                 <QuotationForm
                   transactionType='create'
                   packages={packages}
@@ -172,9 +176,7 @@ export default function PhotographerQuotation({
               windowState === 'edit' &&
               currentQuotation.status === 'Pending' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                  <div className='w-full text-center'>
-                    Editing : {currentQuotation.quotationID}
-                  </div>
+                  <div>Quotation : {currentQuotation.quotationID}</div>
 
                   <QuotationForm
                     transactionType='Edit'
@@ -187,7 +189,7 @@ export default function PhotographerQuotation({
               ) : (
                 <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
                   <div className='flex w-full flex-row justify-between font-bold'>
-                    {currentQuotation.quotationID}
+                    <div>Quotation : {currentQuotation.quotationID}</div>
                     {currentQuotation.status == 'Pending' ? (
                       <Button onClick={onEditButtonClicked}>Edit</Button>
                     ) : null}
@@ -222,6 +224,6 @@ export default function PhotographerQuotation({
           </div>
         </div>
       )}
-    </div>
+    </Container>
   )
 }

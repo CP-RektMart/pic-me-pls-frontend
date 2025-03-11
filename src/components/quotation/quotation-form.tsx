@@ -70,71 +70,33 @@ export default function QuotationForm({
 
   return (
     <FormProvider {...form}>
-      <FormField
-        control={form.control}
-        name='package'
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className='text-sm font-medium'>Package</FormLabel>
-            <FormControl className='font-normal'>
-              <Select
-                onValueChange={(value) => {
-                  setSelectedPackage(value)
-                  field.onChange(value)
-                }}
-                value={field.value}
-              >
-                <SelectTrigger className='w-full font-normal'>
-                  <SelectValue placeholder='Package' />
-                </SelectTrigger>
-                <SelectContent>
-                  {packages.map((pkg) => (
-                    <SelectItem
-                      key={pkg.name}
-                      value={pkg.name}
-                      className='font-normal'
-                    >
-                      {pkg.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name='customer'
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className='text-sm font-medium'>Customer Name</FormLabel>
-            <FormControl>
-              <Input
-                placeholder='Customer Name'
-                {...field}
-                className='font-normal'
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <div className='grid grid-cols-2 gap-2'>
+      <div className='space-y-4 p-4'>
         <FormField
           control={form.control}
-          name='from'
+          name='package'
           render={({ field }) => (
-            <FormItem className='flex flex-col'>
-              <FormLabel>From</FormLabel>
-              <DateTimePicker
-                value={field.value}
-                onChange={field.onChange}
-                formatDate={formatDateToDate}
-              />
+            <FormItem>
+              <FormLabel className='text-sm font-medium'>Package</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={(value) => {
+                    setSelectedPackage(value)
+                    field.onChange(value)
+                  }}
+                  value={field.value}
+                >
+                  <SelectTrigger className='w-full font-normal'>
+                    <SelectValue placeholder='Package' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {packages.map((pkg) => (
+                      <SelectItem key={pkg.name} value={pkg.name}>
+                        {pkg.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -142,59 +104,88 @@ export default function QuotationForm({
 
         <FormField
           control={form.control}
-          name='to'
+          name='customer'
           render={({ field }) => (
-            <FormItem className='flex flex-col'>
-              <FormLabel>To</FormLabel>
-              <DateTimePicker
-                value={field.value}
-                onChange={field.onChange}
-                formatDate={formatDateToDate}
-              />
+            <FormItem>
+              <FormLabel className='text-sm font-medium'>
+                Customer Name
+              </FormLabel>
+              <FormControl>
+                <Input placeholder='Customer Name' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className='grid grid-cols-2 gap-2'>
+          <FormField
+            control={form.control}
+            name='from'
+            render={({ field }) => (
+              <FormItem className='flex flex-col'>
+                <FormLabel>From</FormLabel>
+                <DateTimePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  formatDate={formatDateToDate}
+                />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='to'
+            render={({ field }) => (
+              <FormItem className='flex flex-col'>
+                <FormLabel>To</FormLabel>
+                <DateTimePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  formatDate={formatDateToDate}
+                />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <FormField
+          control={form.control}
+          name='description'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='text-sm font-medium'>Description</FormLabel>
+              <FormControl>
+                <Textarea placeholder='Quotation Remarks' {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
       </div>
 
-      <FormField
-        control={form.control}
-        name='description'
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className='text-sm font-medium'>Description</FormLabel>
-            <FormControl>
-              <Textarea
-                placeholder='Quotation Remarks'
-                {...field}
-                className='font-normal'
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <hr className='border-[0.5px] border-zinc-400' />
 
-      <hr className='border border-zinc-400' />
-      <div className='flex flex-col gap-2 p-4'>
+      <div className='flex flex-col gap-2 p-4 text-sm font-normal'>
         <div className='flex flex-row justify-between'>
-          <div className='text-sm font-normal'>Total hours</div>
-          <div className='text-sm font-normal'>
-            {totalHours > 0 ? totalHours.toFixed(0) : 0} Hours
-          </div>
+          <div>Total hours</div>
+          <div>{totalHours > 0 ? totalHours.toFixed(0) : 0} Hours</div>
         </div>
 
         <div className='flex flex-row justify-between'>
-          <div className='text-sm font-normal'>Price Per Hour</div>
-          <div className='text-sm font-normal'>
+          <div>Price Per Hour</div>
+          <div>
             {packages.find((pkg) => pkg.name === selectedPackage)?.price ?? 0}{' '}
             Baht
           </div>
         </div>
 
-        <div className='flex flex-row justify-between'>
-          <div className='text-sm font-normal'>Total Price</div>
-          <div className='text-sm font-normal'>
+        <div className='flex flex-row justify-between text-base font-bold'>
+          <div>Total Price</div>
+          <div>
             {((packages.find((pkg) => pkg.name === selectedPackage)?.price ??
               0) ||
               0) * totalHours}{' '}

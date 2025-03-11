@@ -80,7 +80,7 @@ export default function QuotationFormDrawer({
           render={({ field }) => (
             <FormItem>
               <FormLabel className='text-sm font-medium'>Package</FormLabel>
-              <FormControl className='font-normal'>
+              <FormControl>
                 <Select
                   onValueChange={(value) => {
                     setSelectedPackage(value)
@@ -93,11 +93,7 @@ export default function QuotationFormDrawer({
                   </SelectTrigger>
                   <SelectContent>
                     {packages.map((pkg) => (
-                      <SelectItem
-                        key={pkg.name}
-                        value={pkg.name}
-                        className='font-normal'
-                      >
+                      <SelectItem key={pkg.name} value={pkg.name}>
                         {pkg.name}
                       </SelectItem>
                     ))}
@@ -118,11 +114,7 @@ export default function QuotationFormDrawer({
                 Customer Name
               </FormLabel>
               <FormControl>
-                <Input
-                  placeholder='Customer Name'
-                  {...field}
-                  className='font-normal'
-                />
+                <Input placeholder='Customer Name' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -170,11 +162,7 @@ export default function QuotationFormDrawer({
             <FormItem>
               <FormLabel className='text-sm font-medium'>Description</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder='Quotation Remarks'
-                  {...field}
-                  className='font-normal'
-                />
+                <Textarea placeholder='Quotation Remarks' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

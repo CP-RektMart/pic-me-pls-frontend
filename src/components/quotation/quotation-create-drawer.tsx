@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { quotation } from '@/actions/get-quotations'
+import { WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
 
 import { Button } from '@/components/ui/button'
@@ -17,7 +18,7 @@ import { CreateQuotationProps } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface CreateQuotationDrawerProps {
-  setWindowstate: (windowstate: string) => void
+  setWindowstate: (windowstate: WindowState) => void
   setCurrentQuotation: (currentQuotation: quotation | null) => void
   onSubmit: (data: CreateQuotationProps) => void
   packages: EditPackageForm[]
@@ -36,7 +37,7 @@ export default function CreateQuotationDrawer({
   const [isOpen, setIsOpen] = useState(false)
 
   const onClose = () => {
-    setWindowstate('')
+    setWindowstate(null)
     setCurrentQuotation(null)
   }
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { quotation } from '@/actions/get-quotations'
 import { formatDateToString } from '@/lib/utils'
-import { QuotationStatus } from '@/types/quotation'
+import { QuotationStatus, WindowState } from '@/types/quotation'
 
 import QuotationCard from '@/components/quotation/quotation-card'
 import { Button } from '@/components/ui/button'
@@ -27,8 +27,8 @@ interface QuotationViewDrawerProps {
   onEditButtonClicked: () => void
   onSaveEditing: (data: CreateQuotationProps) => void
   packages: EditPackageForm[]
-  setWindowstate: (windowstate: string) => void
-  windowState: string
+  setWindowstate: (windowstate: WindowState) => void
+  windowState: WindowState
 }
 
 export default function QuotationViewDrawer({
@@ -45,7 +45,7 @@ export default function QuotationViewDrawer({
   const [isOpen, setIsOpen] = useState(false)
 
   const onClose = () => {
-    setWindowstate('')
+    setWindowstate(null)
     setCurrentQuotation(null)
   }
 
@@ -79,7 +79,7 @@ export default function QuotationViewDrawer({
               (1000 * 60 * 60))
           }
           onClickEvent={() => {
-            setWindowstate('')
+            setWindowstate(null)
             setCurrentQuotation(quotation)
             setIsOpen(true)
           }}
