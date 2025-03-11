@@ -85,7 +85,7 @@ export default function RegisterPageComponent() {
               <div className='text-sm'>
                 {'Already have an account? '}{' '}
                 <Link href='/login' className='text-blue-500 hover:underline'>
-                  Sign in
+                  Login
                 </Link>
               </div>
             </motion.div>
