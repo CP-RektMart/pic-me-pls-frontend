@@ -128,10 +128,10 @@ export default function QuotationForm({
         name='customer'
         render={({ field }) => (
           <FormItem>
-            <FormLabel className='text-sm font-medium'>Customer Name</FormLabel>
+            <FormLabel className='text-sm font-medium'>Customer Id</FormLabel>
             <FormControl>
               <Input
-                placeholder='Customer Name'
+                placeholder='Customer Id'
                 {...field}
                 className='font-normal'
               />

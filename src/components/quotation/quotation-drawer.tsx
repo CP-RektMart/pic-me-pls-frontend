@@ -169,11 +169,11 @@ export function QuotationDrawer({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='text-sm font-medium'>
-                      Customer Name
+                      Customer Id
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='Customer Name'
+                        placeholder='Customer Id'
                         {...field}
                         className='font-normal'
                       />
@@ -549,11 +549,11 @@ export function QuotationDrawer({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className='text-sm font-medium'>
-                        Customer Name
+                        Customer Id
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder='Customer Name'
+                          placeholder='Customer Id'
                           {...field}
                           className='font-normal'
                         />
