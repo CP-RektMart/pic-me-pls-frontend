@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
+import { categories } from '@/actions/get-package-categories'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
@@ -12,8 +13,6 @@ import { z } from 'zod'
 import PackageDetailSection from '@/components/photographer/package-page/package-detail'
 import PhotoCard from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
-
-import { categories } from './edit-package'
 
 export type CreatePhotoCardForm = {
   description: string
