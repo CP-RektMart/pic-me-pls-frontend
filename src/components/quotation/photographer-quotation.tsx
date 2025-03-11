@@ -151,6 +151,7 @@ export default function PhotographerQuotation({
                       onClickEvent={() => {
                         setIsCreating(false)
                         setCurrentQuotation(quotation)
+                        setIsEditing(false)
                       }}
                       className='hidden w-full lg:block'
                     />

@@ -85,6 +85,7 @@ export default function ViewQuotationDrawer({
           setIsCreating(false)
           setCurrentQuotation(quotation)
           setIsOpen(true)
+          setIsEditing(false)
         }}
         className='block w-full lg:hidden'
       />
