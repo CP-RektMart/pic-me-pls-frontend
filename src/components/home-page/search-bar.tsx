@@ -1,7 +1,7 @@
 import { UserProfile } from '@/types/user'
 
 import FilterButton from './filter-button'
-import Greeting from './gretting'
+import Greeting from './greeting'
 import PackageFilterButton from './package-filter-button'
 import SearchInput from './search-input'
 

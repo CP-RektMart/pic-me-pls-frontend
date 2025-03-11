@@ -13,7 +13,10 @@ export default function PackageFilterButton() {
 
   return (
     <div className='relative'>
-      <FilterButton OptionType='Filter' onClick={() => setIsOpen(!isOpen)} />
+      <FilterButton
+        OptionType='Filter'
+        onClick={() => setIsOpen((prev) => !prev)}
+      />
       <div className={isOpen ? 'block' : 'hidden'}>
         <FilterPopover
           minPrice={minPrice}
