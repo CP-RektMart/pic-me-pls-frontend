@@ -116,11 +116,7 @@ export default function PackageDetailSection({
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
             <FormControl>
-              <Textarea
-                placeholder='Description'
-                {...field}
-                className='font-normal'
-              />
+              <Textarea placeholder='Description' {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
