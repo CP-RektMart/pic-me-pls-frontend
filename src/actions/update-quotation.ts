@@ -3,8 +3,8 @@
 import { client } from '@/api/client'
 
 export interface QuotationAction {
-  packageId: number
-  customerId: number
+  packageId: string
+  customerId: string
   price: number
   from: Date
   to: Date
@@ -15,12 +15,11 @@ export default async function updateQuotationAction(
   quotationId: number,
   payload: QuotationAction
 ) {
-
   await client.PATCH(`/api/v1/photographer/quotations/{id}`, {
     params: { path: { id: quotationId } },
     body: {
-      customerId: payload.customerId,
-      packageId: payload.packageId,
+      customerId: parseInt(payload.customerId),
+      packageId: parseInt(payload.packageId),
       price: payload.price,
       description: payload.description,
       fromDate: payload.from.toISOString(),

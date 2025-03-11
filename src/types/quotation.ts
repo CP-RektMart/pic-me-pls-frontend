@@ -1,4 +1,4 @@
-export type QuotationStatus = 'Pending' | 'Confirm' | 'Paid' | 'Cancelled'
+export type QuotationStatus = 'PENDING' | 'CONFIRMED' | 'PAID' | 'CANCELLED'
 
 export interface QuotationDetailsProps {
   quotationId: number

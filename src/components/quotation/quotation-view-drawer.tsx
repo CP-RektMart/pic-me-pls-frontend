@@ -94,7 +94,7 @@ export default function QuotationViewDrawer({
             Quotation : {quotation.quotationID}
           </DrawerTitle>
 
-          {quotation.status === 'Pending' && windowState !== 'edit' && (
+          {quotation.status === 'PENDING' && windowState !== 'edit' && (
             <Button
               onClick={() => {
                 onEditButtonClicked()
@@ -107,7 +107,7 @@ export default function QuotationViewDrawer({
         </DrawerHeader>
 
         {/* body */}
-        {windowState === 'edit' && quotation.status === 'Pending' ? (
+        {windowState === 'edit' && quotation.status === 'PENDING' ? (
           <QuotationFormDrawer
             transactionType='edit'
             onSubmit={onSaveEditing}

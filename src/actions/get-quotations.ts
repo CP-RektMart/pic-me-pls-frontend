@@ -1,60 +1,49 @@
+import { client } from '@/api/client'
+
 export interface Quotation {
   quotationID: number
   status: string
   packageName: string
+  packageId: string
   photographerName: string
+  photographerId: string
   customerName: string
+  customerId: string
   from: Date
   to: Date
   description: string
   pricePerHour: number
+  // TODO: category
 }
 
-export function getQuotations() {
-  return [
-    {
-      quotationID: 1,
-      status: 'Pending',
-      packageName: 'Wedding Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Wedding photography package',
-      pricePerHour: 400,
-    },
-    {
-      quotationID: 2,
-      status: 'Confirm',
-      packageName: 'Birthday Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Birthday photography package',
-      pricePerHour: 300,
-    },
-    {
-      quotationID: 3,
-      status: 'Paid',
-      packageName: 'Graduation Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Graduation photography package',
-      pricePerHour: 200,
-    },
-    {
-      quotationID: 4,
-      status: 'Cancelled',
-      packageName: 'Wedding Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Wedding photography package',
-      pricePerHour: 400,
-    },
-  ]
+export async function getQuotations(): Promise<Quotation[]> {
+  const { data: quotations } = await client.GET('/api/v1/quotations')
+
+  return (
+    quotations?.result?.data?.map(
+      (q: {
+        id: string
+        status: string
+        package: { name: string; id: string; price: number }
+        photographer: { name: string; id: string }
+        customer: { name: string; id: string }
+        fromDate: string
+        toDate: string
+        description: string
+      }): Quotation => ({
+        quotationID: parseInt(q.id),
+        status: q.status,
+        packageName: q.package.name,
+        packageId: q.package.id,
+        photographerName: q.photographer.name,
+        photographerId: q.photographer.id,
+        customerName: q.customer.name,
+        customerId: q.customer.id,
+        from: new Date(q.fromDate),
+        to: new Date(q.toDate),
+        description: q.description,
+        pricePerHour: q.package.price,
+      })
+    ) || []
+  )
 }

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import createQuotationAction from '@/actions/create-quotation'
 import { Package } from '@/actions/get-packages'
 import { Quotation } from '@/actions/get-quotations'
+import updateQuotationAction from '@/actions/update-quotation'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
@@ -79,7 +80,17 @@ export default function PhotographerQuotation({
   }
 
   const onSaveEditing = async (data: CreateQuotationProps) => {
-    console.log(data)
+    try {
+      if (currentQuotation?.quotationID !== undefined) {
+        await updateQuotationAction(currentQuotation.quotationID, data)
+      } else {
+        toast.error('Quotation ID is missing.')
+      }
+      toast.success('Your quotation has been successfully created.')
+    } catch {
+      toast.error('An error occurred while create your quotation')
+    }
+
     setWindowstate(null)
     setCurrentQuotation(null)
   }
@@ -190,7 +201,7 @@ export default function PhotographerQuotation({
               </div>
             ) : currentQuotation != null ? (
               windowState === 'edit' &&
-              currentQuotation.status === 'Pending' ? (
+              currentQuotation.status === 'PENDING' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
                   <div>Quotation : {currentQuotation.quotationID}</div>
 
@@ -206,7 +217,7 @@ export default function PhotographerQuotation({
                 <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
                   <div className='flex w-full flex-row justify-between font-bold'>
                     <div>Quotation : {currentQuotation.quotationID}</div>
-                    {currentQuotation.status == 'Pending' ? (
+                    {currentQuotation.status == 'PENDING' ? (
                       <Button onClick={onEditButtonClicked}>Edit</Button>
                     ) : null}
                   </div>
