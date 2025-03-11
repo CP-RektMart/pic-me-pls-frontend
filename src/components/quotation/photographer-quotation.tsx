@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button'
 import QuotationCard from './quotation-card'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
-import ViewQuotationDrawer from './quotation-view-drawer'
+import QuotationViewDrawer from './quotation-view-drawer'
 
 export interface PhotographerQuotationProps {
   quotations: quotation[]
@@ -110,7 +110,7 @@ export default function PhotographerQuotation({
               <div className='flex flex-col gap-4 font-normal'>
                 {quotations.map((quotation) => (
                   <div key={quotation.quotationID}>
-                    <ViewQuotationDrawer
+                    <QuotationViewDrawer
                       windowState={windowState}
                       setWindowstate={setWindowstate}
                       setCurrentQuotation={setCurrentQuotation}

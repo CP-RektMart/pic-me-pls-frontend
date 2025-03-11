@@ -19,7 +19,7 @@ import { EditPackageForm } from '../photographer/package-page/edit-package'
 import { CreateQuotationProps } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
-interface ViewQuotationDrawerProps {
+interface QuotationViewDrawerProps {
   setCurrentQuotation: (currentQuotation: quotation | null) => void
   setSelectedPackage: (selectedPackage: string) => void
   selectedPackage: string
@@ -41,7 +41,7 @@ export default function QuotationViewDrawer({
   selectedPackage,
   setWindowstate,
   windowState,
-}: ViewQuotationDrawerProps) {
+}: QuotationViewDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const onClose = () => {
