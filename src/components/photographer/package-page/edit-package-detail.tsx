@@ -36,7 +36,6 @@ interface EditPackageDetailSectionProps {
   onSubmit: (data: EditPackageForm) => Promise<void>
   form: ReturnType<typeof useForm<EditPackageForm>>
   onDrop: (acceptedFiles: File[]) => void
-  setCategory: (category: string) => void
 }
 
 export default function EditPackageDetailSection({
@@ -44,7 +43,6 @@ export default function EditPackageDetailSection({
   form,
   onDrop,
   categories,
-  setCategory,
 }: EditPackageDetailSectionProps) {
   const { packageID } = useParams()
 
@@ -97,7 +95,6 @@ export default function EditPackageDetailSection({
             <FormControl className='font-normal'>
               <Select
                 onValueChange={(value) => {
-                  setCategory(value)
                   field.onChange(value)
                 }}
                 value={field.value}

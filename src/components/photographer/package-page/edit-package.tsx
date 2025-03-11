@@ -61,7 +61,6 @@ export const categories = [
 
 export default function EditPackage() {
   const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
-  const [category, setCategory] = useState<string>('')
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -84,7 +83,7 @@ export default function EditPackage() {
   })
 
   const onSubmit = async (data: EditPackageForm) => {
-    console.log(data, category)
+    console.log(data)
     console.log(photoCards)
   }
 
@@ -115,7 +114,6 @@ export default function EditPackage() {
           onSubmit={onSubmit}
           form={form}
           onDrop={onDrop}
-          setCategory={setCategory}
         />
         <div className='flex-1'>
           {photoCards.length === 0 ? (

@@ -36,7 +36,6 @@ export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 
 export default function CreatePackage() {
   const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
-  const [category, setCategory] = useState<string>('')
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -59,7 +58,7 @@ export default function CreatePackage() {
   })
 
   const onSubmit = async (data: CreatePackageForm) => {
-    console.log(data, category)
+    console.log(data)
     console.log(photoCards)
   }
 
@@ -89,7 +88,6 @@ export default function CreatePackage() {
           onSubmit={onSubmit}
           form={form}
           onDrop={onDrop}
-          setCategory={setCategory}
           categories={categories}
         />
         <div className='flex-1'>

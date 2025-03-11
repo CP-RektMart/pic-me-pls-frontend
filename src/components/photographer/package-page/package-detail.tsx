@@ -34,7 +34,6 @@ interface packageDetailSectionProps {
   onSubmit: (data: CreatePackageForm) => Promise<void>
   form: ReturnType<typeof useForm<CreatePackageForm>>
   onDrop: (acceptedFiles: File[]) => void
-  setCategory: (category: string) => void
   categories: { id: string; name: string }[]
 }
 
@@ -43,7 +42,6 @@ export default function PackageDetailSection({
   form,
   onDrop,
   categories,
-  setCategory,
 }: packageDetailSectionProps) {
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
@@ -86,7 +84,6 @@ export default function PackageDetailSection({
             <FormControl className='font-normal'>
               <Select
                 onValueChange={(value) => {
-                  setCategory(value)
                   field.onChange(value)
                 }}
                 value={field.value}
