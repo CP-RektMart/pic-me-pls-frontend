@@ -1,17 +1,18 @@
-import { User } from '@/types/user'
 import Image from 'next/image'
 
 export default function Greeting({
-  userProfile,
+  userName,
+  userProfilePictureUrl,
 }: {
-  userProfile: User | undefined
+  userName: string | undefined
+  userProfilePictureUrl: string | undefined
 }) {
   return (
     <div className='flex items-center gap-2'>
-      {userProfile ? (
+      {userProfilePictureUrl ? (
         <div className='size-12 min-w-12 rounded-full'>
           <Image
-            src={userProfile.profilePictureUrl || '/image.png'}
+            src={userProfilePictureUrl || '/image.png'}
             alt='userImage'
             width={48}
             height={48}
@@ -26,7 +27,7 @@ export default function Greeting({
           Good to see you 👋
         </div>
         <div className='text-2xl font-medium md:whitespace-nowrap'>
-          {userProfile ? userProfile.name : 'Guest'}
+          {userName ? userName : 'Guest'}
         </div>
       </div>
     </div>

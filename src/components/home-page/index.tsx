@@ -25,7 +25,10 @@ export default function HomePageComponent({
   return (
     <div className='max-w-screen flex w-full flex-col px-4 pt-4 md:px-32'>
       <div className='flex flex-col gap-4 md:flex-row md:items-center'>
-        <Greeting userProfile={userProfile} />
+        <Greeting
+          userName={userProfile?.name}
+          userProfilePictureUrl={userProfile?.profilePictureUrl}
+        />
         <SearchBar
           categories={categories}
           filters={filters}
