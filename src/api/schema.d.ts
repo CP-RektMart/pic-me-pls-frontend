@@ -642,6 +642,66 @@ export interface paths {
         };
         trace?: never;
     };
+    "/api/v1/customers/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get customer public profile
+         * @description Get customer public profile
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description customer's userId */
+                    id: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["dto.HttpResponse-dto_CustomerPublicResponse"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["dto.HttpError"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["dto.HttpError"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/me": {
         parameters: {
             query?: never;
@@ -1764,6 +1824,11 @@ export interface components {
             price: number;
             toDate: string;
         };
+        "dto.CustomerPublicResponse": {
+            id?: number;
+            name?: string;
+            profilePictureUrl?: string;
+        };
         "dto.CustomerResponse": {
             email?: string;
             id?: number;
@@ -1782,6 +1847,9 @@ export interface components {
         };
         "dto.HttpResponse-dto_CitizenCardResponse": {
             result?: components["schemas"]["dto.CitizenCardResponse"];
+        };
+        "dto.HttpResponse-dto_CustomerPublicResponse": {
+            result?: components["schemas"]["dto.CustomerPublicResponse"];
         };
         "dto.HttpResponse-dto_LoginResponse": {
             result?: components["schemas"]["dto.LoginResponse"];
@@ -1865,6 +1933,7 @@ export interface components {
             id?: number;
             isVerified?: boolean;
             name?: string;
+            packages?: components["schemas"]["dto.SmallPackageResponse"][];
             phoneNumber?: string;
             profilePictureUrl?: string;
         };
@@ -1906,6 +1975,11 @@ export interface components {
             customer?: components["schemas"]["dto.CustomerResponse"];
             id?: number;
             rating?: number;
+        };
+        "dto.SmallPackageResponse": {
+            description?: string;
+            id?: number;
+            name?: string;
         };
         "dto.TagResponse": {
             id?: number;

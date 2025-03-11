@@ -77,7 +77,7 @@ export default async function Page({
       duration={duration}
       totalPrice={quotation.price || 0}
       photographerImageUrl={quotation.photographer?.profilePictureUrl || ''}
-      packageNumber={quotation.photographer?.packages.length || 0}
+      packageNumber={quotation.photographer?.packages?.length || 0}
       quotationImages={images || []}
     />
   )
