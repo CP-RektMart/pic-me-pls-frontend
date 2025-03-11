@@ -35,7 +35,7 @@ interface packageDetailSectionProps {
   form: ReturnType<typeof useForm<CreatePackageForm>>
   onDrop: (acceptedFiles: File[]) => void
   setCategory: (category: string) => void
-  categories: string[]
+  categories: { id: string; name: string }[]
 }
 
 export default function PackageDetailSection({
@@ -95,9 +95,13 @@ export default function PackageDetailSection({
                   <SelectValue placeholder='Category' />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map((cat) => (
-                    <SelectItem key={cat} value={cat} className='font-normal'>
-                      {cat}
+                  {categories.map((category) => (
+                    <SelectItem
+                      key={category.id}
+                      value={category.name}
+                      className='font-normal'
+                    >
+                      {category.name}
                     </SelectItem>
                   ))}
                 </SelectContent>

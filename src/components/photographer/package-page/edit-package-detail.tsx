@@ -31,7 +31,7 @@ interface EditPackageDetailSectionProps {
   name: string
   description: string
   price: number
-  categories: string[]
+  categories: { id: string; name: string }[]
   photoCards: EditPhotoCardForm[]
   onSubmit: (data: EditPackageForm) => Promise<void>
   form: ReturnType<typeof useForm<EditPackageForm>>
@@ -106,9 +106,13 @@ export default function EditPackageDetailSection({
                   <SelectValue placeholder='Category' />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map((cat) => (
-                    <SelectItem key={cat} value={cat} className='font-normal'>
-                      {cat}
+                  {categories.map((category) => (
+                    <SelectItem
+                      key={category.id}
+                      value={category.name}
+                      className='font-normal'
+                    >
+                      {category.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
