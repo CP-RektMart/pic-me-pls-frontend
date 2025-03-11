@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+import { cn } from '@/lib/utils'
+
 import FilterButton from './filter-button'
 import FilterPopover from './filter-popover'
 
@@ -17,7 +19,7 @@ export default function PackageFilterButton() {
         OptionType='Filter'
         onClick={() => setIsOpen((prev) => !prev)}
       />
-      <div className={isOpen ? 'block' : 'hidden'}>
+      <div className={cn(isOpen ? 'block' : 'hidden')}>
         <FilterPopover
           minPrice={minPrice}
           setMinPrice={setMinPrice}
