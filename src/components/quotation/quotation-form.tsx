@@ -128,7 +128,7 @@ export default function QuotationForm({
               <FormControl>
                 <Input
                   className='font-medium'
-                  placeholder='Customer Name'
+                  placeholder='Customer Id'
                   {...field}
                 />
               </FormControl>
