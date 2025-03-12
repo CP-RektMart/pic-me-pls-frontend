@@ -10,18 +10,20 @@ export default function Greeting({
 }) {
   return (
     <div className='flex items-center gap-2'>
-      {userProfilePictureUrl ? (
-        <div className='relative size-12 rounded-full'>
-          <Image
-            src={userProfilePictureUrl || ProfileMockImage}
-            alt='userImage'
-            fill
-            className='rounded-full object-cover'
-          />
-        </div>
-      ) : (
-        <div className='size-12 min-w-12 rounded-full bg-black/20'></div>
-      )}
+      <div>
+        {userProfilePictureUrl ? (
+          <div className='relative size-12 rounded-full'>
+            <Image
+              src={userProfilePictureUrl || ProfileMockImage}
+              alt='userImage'
+              fill
+              className='rounded-full object-cover'
+            />
+          </div>
+        ) : (
+          <div className='size-12 rounded-full bg-black/20'></div>
+        )}
+      </div>
       <div className='flex flex-col'>
         <div className='text-xs text-slate-400 md:whitespace-nowrap'>
           Good to see you 👋

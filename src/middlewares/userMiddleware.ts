@@ -13,6 +13,7 @@ export const userMiddleware: MiddlewareFactory = (next) => {
 
     if (
       !isPhotographerPath &&
+      request.nextUrl.pathname !== '/' &&
       request.nextUrl.pathname !== '/login' &&
       request.nextUrl.pathname !== '/sign-up' &&
       request.nextUrl.pathname !== '/profile'
