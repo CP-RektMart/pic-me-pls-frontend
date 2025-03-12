@@ -58,6 +58,10 @@ export default function HomePageComponent({
   }
 
   useEffect(() => {
+    onSearchClick()
+  }, [])
+
+  useEffect(() => {
     setPackages((prevPackages) => sortPackages(prevPackages, filters.sort))
   }, [filters.sort])
 
