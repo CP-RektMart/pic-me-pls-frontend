@@ -100,7 +100,7 @@ export function DateTimePicker(props: DateTimePickerProps) {
                     onClick={() => {
                       if (value) {
                         const newDate = new Date(value)
-                        newDate.setHours(minute)
+                        newDate.setMinutes(minute)
                         onChange(formatDateToDate(newDate))
                       }
                     }}
