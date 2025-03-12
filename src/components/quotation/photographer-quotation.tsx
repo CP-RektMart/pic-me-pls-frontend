@@ -172,7 +172,7 @@ export default function PhotographerQuotation({
               windowState === 'edit' &&
               currentQuotation.status === 'Pending' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                  <div>Quotation : {currentQuotation.quotationID}</div>
+                  <div>Quotation {currentQuotation.quotationID}</div>
 
                   <QuotationForm
                     transactionType='Edit'
@@ -185,7 +185,7 @@ export default function PhotographerQuotation({
               ) : (
                 <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
                   <div className='flex w-full flex-row justify-between font-bold'>
-                    <div>Quotation : {currentQuotation.quotationID}</div>
+                    <div>Quotation {currentQuotation.quotationID}</div>
                     {currentQuotation.status == 'Pending' ? (
                       <Button onClick={onEditButtonClicked}>Edit</Button>
                     ) : null}

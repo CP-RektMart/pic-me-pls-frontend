@@ -91,7 +91,7 @@ export default function QuotationViewDrawer({
         {/* header */}
         <DrawerHeader className='flex items-center justify-between space-y-4 px-4 py-0'>
           <DrawerTitle className='text-xl font-bold'>
-            Quotation : {quotation.quotationID}
+            Quotation {quotation.quotationID}
           </DrawerTitle>
 
           {quotation.status === 'Pending' && windowState !== 'edit' && (
