@@ -8,7 +8,7 @@ export interface Package {
   price: number
 }
 
-export const getPackage = async ({
+export const getQueryPackages = async ({
   name,
   minPrice,
   maxPrice,

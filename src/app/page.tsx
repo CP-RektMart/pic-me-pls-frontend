@@ -1,5 +1,5 @@
 import { getCategories } from '@/actions/get-categories'
-import { getPackage } from '@/actions/get-package'
+import { getQueryPackages } from '@/actions/get-query-packages'
 import { client } from '@/api/client'
 import { Package } from '@/types/package'
 
@@ -12,7 +12,7 @@ export default async function Home() {
   const categoriesResponse = await getCategories()
   const categories = categoriesResponse?.result?.data ?? []
 
-  const packagesResponse = await getPackage({
+  const packagesResponse = await getQueryPackages({
     name: '',
     minPrice: 0,
     maxPrice: 0,
