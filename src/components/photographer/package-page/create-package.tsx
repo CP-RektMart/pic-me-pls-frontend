@@ -31,7 +31,7 @@ export const createpackageFormSchema = z.object({
     .string()
     .transform((val) => parseFloat(val))
     .refine((val) => val > 0, 'Price must be a positive number'),
-  category: z.string(),
+  category: z.string().refine((val) => val !== '', 'Category is required'),
 })
 
 export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
