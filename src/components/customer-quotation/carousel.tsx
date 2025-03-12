@@ -57,8 +57,8 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className='-left-1' variant='ghost' />
-        <CarouselNext className='-right-1' variant='ghost' />
+        <CarouselPrevious variant='ghost' />
+        <CarouselNext variant='ghost' />
       </Carousel>
       <div className='absolute -bottom-4 left-0 right-0 flex justify-center gap-2'>
         {images.map((_, index) => (
