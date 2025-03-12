@@ -9,9 +9,7 @@ export default function PackageGrid({ packagecards }: PackageGridProps) {
   return (
     <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
       {packagecards.map((pkg, index) => (
-        <div key={index} className='flex w-full justify-center'>
-          <PackageCard {...pkg} />
-        </div>
+        <PackageCard key={index} {...pkg} />
       ))}
     </div>
   )
