@@ -7,14 +7,20 @@ export default function SearchInput({
   searchType,
   filters,
   handleFilter,
+  onSearchClick,
 }: {
   searchType: 'Package' | 'Photographer' | ''
   filters: FilterState
   handleFilter: React.Dispatch<Action>
+  onSearchClick: () => void
 }) {
   return (
     <div className='relative flex w-full items-center'>
-      <Icon icon='lucide:search' className='absolute left-3 size-4' />
+      <Icon
+        icon='lucide:search'
+        className='absolute left-3 size-4'
+        onClick={onSearchClick}
+      />
       <Input
         type='text'
         placeholder={

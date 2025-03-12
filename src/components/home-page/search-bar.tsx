@@ -9,12 +9,14 @@ interface SearchBarProps {
   categories: Category[]
   filters: FilterState
   handleFilter: React.Dispatch<Action>
+  onSearchClick: () => void
 }
 
 export default function SearchBar({
   categories,
   filters,
   handleFilter,
+  onSearchClick,
 }: SearchBarProps) {
   return (
     <div className='item-center flex w-full gap-3'>
@@ -22,6 +24,7 @@ export default function SearchBar({
         searchType='Package'
         filters={filters}
         handleFilter={handleFilter}
+        onSearchClick={onSearchClick}
       />
       <PackageFilterButton
         categories={categories}

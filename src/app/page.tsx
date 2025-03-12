@@ -21,10 +21,26 @@ export default async function Home() {
   const packages = packagesResponse?.data ?? []
   console.log(packages)
 
+  const handleOnSearchClick = () => {
+    console.log('search clicked')
+  }
+
   if (!profile || !profile.result) {
-    return <HomePageComponent userProfile={undefined} categories={categories} />
+    return (
+      <HomePageComponent
+        userProfile={undefined}
+        categories={categories}
+        onSearchClick={handleOnSearchClick}
+      />
+    )
   }
   const userProfile = profile.result
 
-  return <HomePageComponent userProfile={userProfile} categories={categories} />
+  return (
+    <HomePageComponent
+      userProfile={userProfile}
+      categories={categories}
+      onSearchClick={handleOnSearchClick}
+    />
+  )
 }

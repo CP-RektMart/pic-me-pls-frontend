@@ -11,9 +11,11 @@ import SearchBar from './search-bar'
 export default function HomePageComponent({
   userProfile,
   categories,
+  onSearchClick,
 }: {
   userProfile?: User
   categories: Category[]
+  onSearchClick: () => void
 }) {
   const [filters, dispatch] = useReducer(handleFilter, {
     sort: '',
@@ -34,8 +36,8 @@ export default function HomePageComponent({
           categories={categories}
           filters={filters}
           handleFilter={dispatch}
+          onSearchClick={onSearchClick}
         />
-        <div>{filters.searchText}</div>
       </div>
     </div>
   )
