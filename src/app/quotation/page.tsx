@@ -1,4 +1,4 @@
-import { getQuotations } from '@/actions/get-quotations'
+import { getQuotations } from '@/actions/quotation/get-quotations'
 
 import QuotationList from '@/components/customer-quotation/list'
 

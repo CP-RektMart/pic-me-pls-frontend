@@ -1,4 +1,4 @@
-import { Quotation } from '@/actions/get-quotations'
+import { Quotation } from '@/actions/quotation/get-quotations'
 import { calculateDurationFromDate, formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 import Link from 'next/link'
