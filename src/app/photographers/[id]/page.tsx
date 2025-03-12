@@ -2,29 +2,24 @@
 
 import { mockPackages } from '@/data/packagecards'
 import { mockPhotographer } from '@/data/photographer'
-import { User } from '@/types/user'
 import { useParams } from 'next/navigation'
 
 import ProfileHeader from '@/components/customer-quotation/profile-header'
 import PackageGrid from '@/components/home-page/package-grid'
 import SearchInput from '@/components/home-page/search-input'
 
-export default function HomePageComponent({
-  userProfile,
-}: {
-  userProfile?: User
-}) {
+export default function Page() {
   // TODO: Get real photographer data
-  userProfile = mockPhotographer
 
   const params = useParams()
-  const photographerId = params.id
+  const photographerId = params?.id ?? 'unknown'
+  const profile = mockPhotographer
 
   const packageNums = mockPackages.length || 0
-  const imageUrl = userProfile.profilePictureUrl || '/image.png'
-  const userName = userProfile.name || 'Default Name'
+  const imageUrl = profile.profilePictureUrl || '/image.png'
+  const userName = profile.name || 'Default Name'
 
-  console.log(userProfile.profilePictureUrl)
+  console.log(profile.profilePictureUrl)
   console.log(photographerId)
 
   return (
