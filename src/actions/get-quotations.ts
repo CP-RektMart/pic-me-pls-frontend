@@ -13,7 +13,7 @@ export interface Quotation {
   from: Date
   to: Date
   description: string
-  pricePerHour: number
+  price: number
 }
 
 export async function getQuotations(): Promise<Quotation[]> {
@@ -36,7 +36,7 @@ export async function getQuotations(): Promise<Quotation[]> {
       from: new Date(quotation.fromDate || new Date()),
       to: new Date(quotation.toDate || new Date()),
       description: quotation.description || '',
-      pricePerHour: quotation.price || 0,
+      price: quotation.price || 0,
     })
   )
 }

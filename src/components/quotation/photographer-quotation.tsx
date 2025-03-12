@@ -66,7 +66,7 @@ export default function PhotographerQuotation({
     setWindowstate('edit')
   }
 
-  const onSubmit = async (data: CreateQuotationProps) => {
+  const onSubmit = async (data: CreateQuotationForm) => {
     try {
       await createQuotationAction(data)
       toast.success('Your quotation has been successfully created.')
@@ -78,7 +78,7 @@ export default function PhotographerQuotation({
     setCurrentQuotation(null)
   }
 
-  const onSaveEditing = async (data: CreateQuotationProps) => {
+  const onSaveEditing = async (data: CreateQuotationForm) => {
     try {
       if (currentQuotation?.quotationID !== undefined) {
         await updateQuotationAction(currentQuotation.quotationID, data)
@@ -165,12 +165,7 @@ export default function PhotographerQuotation({
                         quotation.from,
                         quotation.to
                       )}
-                      totalPrice={
-                        quotation.pricePerHour *
-                        ((new Date(quotation.to).getTime() -
-                          new Date(quotation.from).getTime()) /
-                          (1000 * 60 * 60))
-                      }
+                      totalPrice={quotation.price}
                       onClickEvent={() => {
                         setCurrentQuotation(quotation)
                         setWindowstate(null)
@@ -235,12 +230,7 @@ export default function PhotographerQuotation({
                       currentQuotation.from,
                       currentQuotation.to
                     )}
-                    totalPrice={
-                      currentQuotation.pricePerHour *
-                      ((new Date(currentQuotation.to).getTime() -
-                        new Date(currentQuotation.from).getTime()) /
-                        (1000 * 60 * 60))
-                    }
+                    totalPrice={currentQuotation.price}
                   />
                 </div>
               )

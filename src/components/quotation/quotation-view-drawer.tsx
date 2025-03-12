@@ -69,12 +69,7 @@ export default function QuotationViewDrawer({
           to={formatDateToString(quotation.to).toString()}
           description={quotation.description}
           duration={calculateDurationFromDate(quotation.from, quotation.to)}
-          totalPrice={
-            quotation.pricePerHour *
-            ((new Date(quotation.to).getTime() -
-              new Date(quotation.from).getTime()) /
-              (1000 * 60 * 60))
-          }
+          totalPrice={quotation.price}
           onClickEvent={() => {
             setWindowstate(null)
             setCurrentQuotation(quotation)
@@ -124,12 +119,7 @@ export default function QuotationViewDrawer({
             to={formatDateToString(quotation.to)}
             description={quotation.description}
             duration={calculateDurationFromDate(quotation.from, quotation.to)}
-            totalPrice={
-              quotation.pricePerHour *
-              ((new Date(quotation.to).getTime() -
-                new Date(quotation.from).getTime()) /
-                (1000 * 60 * 60))
-            }
+            totalPrice={quotation.price}
           />
         )}
       </DrawerContent>
