@@ -1,28 +1,25 @@
 'use client'
 
-import { useReducer } from 'react'
-
 import { mockPackages } from '@/data/packagecards'
-import { Category, User } from '@/types/user'
+import { mockUser } from '@/data/user'
+import { User } from '@/types/user'
+import { useParams } from 'next/navigation'
 
-import { handleFilter } from '@/components/home-page/filterReducer'
 import Greeting from '@/components/home-page/greeting'
 import PackageGrid from '@/components/home-page/package-grid'
-import SearchBar from '@/components/home-page/search-bar'
 
 export default function HomePageComponent({
   userProfile,
-  categories,
 }: {
   userProfile?: User
-  categories: Category[]
 }) {
-  const [filters, dispatch] = useReducer(handleFilter, {
-    sort: '',
-    minPrice: '',
-    maxPrice: '',
-    categories: [],
-  })
+  const params = useParams()
+  const photographerId = params.id
+  console.log(photographerId)
+
+  userProfile = mockUser
+
+  console.log(userProfile.profilePictureUrl)
 
   return (
     <div className='max-w-screen flex w-full flex-col px-4 pt-4 md:px-32'>
@@ -30,11 +27,6 @@ export default function HomePageComponent({
         <Greeting
           userName={userProfile?.name}
           userProfilePictureUrl={userProfile?.profilePictureUrl}
-        />
-        <SearchBar
-          categories={categories}
-          filters={filters}
-          handleFilter={dispatch}
         />
       </div>
       <div className='my-6'>
