@@ -47,7 +47,13 @@ export default function Navbar() {
   return (
     <nav className='sticky flex w-full flex-row items-center justify-between bg-base-primary px-6 py-4 text-white'>
       <Link href='/' className='flex items-center'>
-        <Image src={LogoTrans} alt='Logo' width={24} height={24} />
+        <Image
+          src={LogoTrans}
+          className='aspect-square object-cover'
+          alt='Logo'
+          width={24}
+          height={24}
+        />
       </Link>
       <div className='hidden flex-row gap-6 lg:flex'>
         {navItems.slice(0, 5).map((item, index) => (
