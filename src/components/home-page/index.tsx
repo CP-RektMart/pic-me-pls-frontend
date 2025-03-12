@@ -3,7 +3,9 @@
 import { useEffect, useReducer, useState } from 'react'
 
 import { getPackages } from '@/actions/get-packages'
-import { Category, Package, User } from '@/types/user'
+import { Category } from '@/types/category'
+import { Package } from '@/types/package'
+import { User } from '@/types/user'
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 
 import { handleFilter } from '@/components/home-page/filterReducer'
@@ -15,11 +17,13 @@ import SearchBar from '@/components/home-page/search-bar'
 export default function HomePageComponent({
   userProfile,
   categories,
+  initialPackages,
 }: {
   userProfile?: User
   categories: Category[]
+  initialPackages: PackageProps[]
 }) {
-  const [packages, setPackages] = useState<PackageProps[]>([])
+  const [packages, setPackages] = useState<PackageProps[]>(initialPackages)
   const [filters, dispatch] = useReducer(handleFilter, {
     sort: 'ASC',
     minPrice: '',
@@ -56,10 +60,6 @@ export default function HomePageComponent({
     }))
     setPackages(sortPackages(packageProps, filters.sort))
   }
-
-  useEffect(() => {
-    onSearchClick()
-  }, [])
 
   useEffect(() => {
     setPackages((prevPackages) => sortPackages(prevPackages, filters.sort))

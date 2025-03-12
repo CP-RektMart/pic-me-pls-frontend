@@ -28,7 +28,6 @@ const tmpPackages: Package[] = [
 
 export default function QuotationPage() {
   const quotations = getQuotations()
-  // const packages = getPackages()
 
   return (
     <PhotographerQuotation quotations={quotations} packages={tmpPackages} />

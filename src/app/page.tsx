@@ -1,7 +1,10 @@
 import { getCategories } from '@/actions/get-categories'
+import { getPackages } from '@/actions/get-packages'
 import { client } from '@/api/client'
+import { Package } from '@/types/package'
 
 import HomePageComponent from '@/components/home-page'
+import { PackageProps } from '@/components/home-page/package-card'
 
 export default async function Home() {
   const { data: profile } = await client.GET('/api/v1/me')
@@ -9,10 +12,42 @@ export default async function Home() {
   const categoriesResponse = await getCategories()
   const categories = categoriesResponse?.result?.data ?? []
 
+  const packagesResponse = await getPackages({
+    name: '',
+    minPrice: 0,
+    maxPrice: 0,
+    categoryIds: [],
+    page: 1,
+    pageSize: 10,
+  })
+  const packagesData = packagesResponse?.data ?? []
+  const packageProps: PackageProps[] = packagesData.map((pkg: Package) => ({
+    title: pkg.name ?? 'Unknown title',
+    photographer: pkg.photographer?.name ?? 'Annonymous',
+    category: pkg.category?.name ?? 'Unknown category',
+    price: pkg.price ? `${pkg.price}` : 'Price not available',
+    imageUrl: pkg.media?.[0]?.pictureUrl ?? '/profile-mock-image.png',
+  }))
+  const sortedPackages = [...packageProps].sort(
+    (a, b) => Number(a.price) - Number(b.price)
+  )
+
   if (!profile || !profile.result) {
-    return <HomePageComponent userProfile={undefined} categories={categories} />
+    return (
+      <HomePageComponent
+        userProfile={undefined}
+        categories={categories}
+        initialPackages={sortedPackages}
+      />
+    )
   }
   const userProfile = profile.result
 
-  return <HomePageComponent userProfile={userProfile} categories={categories} />
+  return (
+    <HomePageComponent
+      userProfile={userProfile}
+      categories={categories}
+      initialPackages={sortedPackages}
+    />
+  )
 }

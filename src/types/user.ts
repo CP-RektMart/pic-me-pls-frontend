@@ -6,10 +6,6 @@ export type UserRole = 'CUSTOMER' | 'PHOTOGRAPHER' | 'ADMIN'
 
 export type User = components['schemas']['dto.UserResponse']
 
-export type Category = components['schemas']['dto.CategoryResponse']
-
-export type Package = components['schemas']['dto.PackageResponse']
-
 export type UserProfile = {
   id?: number
   name: string
