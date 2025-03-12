@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 
 import CreatePackageAction from '@/actions/package/create-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
-import { Category } from '@/types/user'
+import { Category } from '@/types/category'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useRouter } from 'next/navigation'
