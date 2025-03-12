@@ -5,20 +5,20 @@ import { Badge } from '@/components/ui/badge'
 interface ProfileHeaderProps {
   imageUrl: string
   name: string
-  galleriesNumber: number
+  packageNumber: number
 }
 
 export default function ProfileHeader({
   imageUrl,
   name,
-  galleriesNumber,
+  packageNumber,
 }: ProfileHeaderProps) {
   return (
     <div className='flex flex-row items-center gap-6'>
       <Image
         src={imageUrl || '/image.png'}
         alt='image profile'
-        className='size-16 rounded-full lg:size-28'
+        className='size-16 rounded-full object-cover lg:size-28'
         width={112}
         height={112}
       />
@@ -34,7 +34,7 @@ export default function ProfileHeader({
             Photographer
           </Badge>
           <p className='text-center text-sm font-medium text-gray-500 lg:mt-1'>
-            {galleriesNumber} Galleries
+            {packageNumber} Packages
           </p>
         </div>
       </div>
