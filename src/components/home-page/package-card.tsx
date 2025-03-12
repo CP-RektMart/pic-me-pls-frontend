@@ -31,7 +31,7 @@ export default function PackageCard({
         <h1 className='text-gray text-base font-bold'>{title}</h1>
         <div className='flex items-center justify-between'>
           <p className='text-xs'>{photographer}</p>
-          <p className='font-bold'>{price}</p>
+          <p className='font-bold'>${price}</p>
         </div>
       </div>
     </div>

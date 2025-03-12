@@ -1,6 +1,6 @@
 'use client'
 
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 
 import { getPackages } from '@/actions/get-packages'
 import { Category, Package, User } from '@/types/user'
@@ -21,12 +21,20 @@ export default function HomePageComponent({
 }) {
   const [packages, setPackages] = useState<PackageProps[]>([])
   const [filters, dispatch] = useReducer(handleFilter, {
-    sort: '',
+    sort: 'ASC',
     minPrice: '',
     maxPrice: '',
     categories: [],
     searchText: '',
   })
+
+  const sortPackages = (packagesData: PackageProps[], sortType: string) => {
+    return [...packagesData].sort((a, b) =>
+      sortType === 'ASC'
+        ? Number(a.price) - Number(b.price)
+        : Number(b.price) - Number(a.price)
+    )
+  }
 
   const onSearchClick = async () => {
     const packagesResponse = await getPackages({
@@ -37,15 +45,21 @@ export default function HomePageComponent({
       page: 1,
       pageSize: 10,
     })
+
     const packagesData = packagesResponse?.data ?? []
-    const parsedPackages: PackageProps[] = packagesData.map((pkg: Package) => ({
+    const packageProps: PackageProps[] = packagesData.map((pkg: Package) => ({
       title: pkg.name ?? 'Unknown title',
       photographer: pkg.photographer?.name ?? 'Annonymous',
-      price: pkg.price ? `$${pkg.price}` : 'Price not available',
-      imageUrl: pkg.photographer?.profilePictureUrl ?? ProfileMockImage.src,
+      price: pkg.price ? `${pkg.price}` : 'Price not available',
+      imageUrl: pkg.media?.[0]?.pictureUrl ?? ProfileMockImage.src,
     }))
-    setPackages(parsedPackages)
+
+    setPackages(sortPackages(packageProps, filters.sort))
   }
+
+  useEffect(() => {
+    setPackages((prevPackages) => sortPackages(prevPackages, filters.sort))
+  }, [filters.sort])
 
   return (
     <div className='max-w-screen flex w-full flex-col px-4 pt-4 md:px-32'>

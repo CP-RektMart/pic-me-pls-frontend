@@ -1,9 +1,9 @@
 import { Category } from '@/types/user'
 
-import FilterButton from '@/components/home-page/filter-button'
 import { Action, FilterState } from '@/components/home-page/filterReducer'
 import PackageFilterButton from '@/components/home-page/package-filter-button'
 import SearchInput from '@/components/home-page/search-input'
+import SortFilterButton from '@/components/home-page/sort-filter-button'
 
 interface SearchBarProps {
   categories: Category[]
@@ -30,10 +30,7 @@ export default function SearchBar({
         filters={filters}
         handleFilter={handleFilter}
       />
-      <FilterButton
-        OptionType='Sort'
-        onClick={() => handleFilter({ type: 'sort', payload: 'ASC' })}
-      />
+      <SortFilterButton filters={filters} handleFilter={handleFilter} />
     </div>
   )
 }
