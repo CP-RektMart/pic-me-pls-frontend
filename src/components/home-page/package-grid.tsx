@@ -6,6 +6,14 @@ interface PackageGridProps {
 }
 
 export default function PackageGrid({ packagecards }: PackageGridProps) {
+  if (packagecards.length === 0) {
+    return (
+      <div className='mt-40 flex items-center justify-center text-lg font-medium'>
+        No Package Found
+      </div>
+    )
+  }
+
   return (
     <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
       {packagecards.map((pkg, index) => (

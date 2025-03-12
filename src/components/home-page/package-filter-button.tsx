@@ -3,11 +3,11 @@
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
-import { Category } from '@/types/user'
+import { Category } from '@/types/category'
 
-import FilterButton from './filter-button'
-import FilterPopover from './filter-popover'
-import { Action, FilterState } from './filterReducer'
+import FilterButton from '@/components/home-page/filter-button'
+import FilterPopover from '@/components/home-page/filter-popover'
+import { Action, FilterState } from '@/components/home-page/filterReducer'
 
 interface PackageFilterButtonProps {
   categories: Category[]
