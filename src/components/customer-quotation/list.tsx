@@ -14,13 +14,14 @@ export default function QuotationList({
   return (
     <Container className='py-6'>
       <h1 className='mb-6 text-2xl font-bold'>My Quotation</h1>
-      <div className='flex flex-wrap gap-6'>
+      <div className='flex flex-col gap-6 md:flex-row md:flex-wrap'>
         {quotations.map((quotation) => (
           <Link
             key={quotation.quotationID}
             href={`/quotation/${quotation.quotationID}`}
           >
             <QuotationCard
+              className='min-h-44 md:min-w-96'
               quotationId={quotation.quotationID}
               quotationStatus={quotation.status as QuotationStatus}
               packageName={quotation.packageName}
