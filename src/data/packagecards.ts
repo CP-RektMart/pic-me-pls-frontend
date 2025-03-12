@@ -7,6 +7,7 @@ export const mockPackages: PackageProps[] = Array.from(
     location: 'Hatyai, Songkhla',
     photographer: 'Chanatpakorn Sirintronsopon',
     price: '$1,200',
+    category: 'Beach',
     imageUrl:
       'https://thedaily.case.edu/wp-content/uploads/2023/06/underwater-view.jpg',
   })
