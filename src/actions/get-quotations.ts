@@ -19,18 +19,18 @@ export interface Quotation {
 export async function getQuotations(): Promise<Quotation[]> {
   const { data: quotations } = await client.GET('/api/v1/quotations')
 
-  return (
-    quotations?.result?.data?.map(
-      (q: {
-        id: string
-        status: string
-        package: { name: string; id: string; price: number }
-        photographer: { name: string; id: string }
-        customer: { name: string; id: string }
-        fromDate: string
-        toDate: string
-        description: string
-      }): Quotation => ({
+  return quotations?.data?.map(
+    (q: {
+      id: string
+      status: string
+      package: { name: string; id: string; price: number }
+      photographer: { name: string; id: string }
+      customer: { name: string; id: string }
+      fromDate: string
+      toDate: string
+      description: string
+    }): Quotation =>
+      ({
         quotationID: parseInt(q.id),
         status: q.status,
         packageName: q.package.name,
@@ -43,7 +43,6 @@ export async function getQuotations(): Promise<Quotation[]> {
         to: new Date(q.toDate),
         description: q.description,
         pricePerHour: q.package.price,
-      })
-    ) || []
+      }) || []
   )
 }
