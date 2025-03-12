@@ -3,6 +3,7 @@ export type FilterState = {
   minPrice: string
   maxPrice: string
   categories: string[]
+  searchText: string
 }
 
 export type Action =
@@ -10,6 +11,7 @@ export type Action =
   | { type: 'minPrice'; payload: string }
   | { type: 'maxPrice'; payload: string }
   | { type: 'category'; payload: string | string[] }
+  | { type: 'searchText'; payload: string }
 
 export const handleFilter = (
   state: FilterState,
@@ -29,6 +31,8 @@ export const handleFilter = (
           ? state.categories.filter((cat) => cat !== action.payload)
           : [...state.categories, action.payload]
       return { ...state, categories: newCategories }
+    case 'searchText':
+      return { ...state, searchText: action.payload }
     default:
       return state
   }

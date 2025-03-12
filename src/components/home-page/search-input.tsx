@@ -1,11 +1,16 @@
 import { Icon } from '@iconify/react'
 
 import { Input } from '../ui/input'
+import { Action, FilterState } from './filterReducer'
 
 export default function SearchInput({
   searchType,
+  filters,
+  handleFilter,
 }: {
   searchType: 'Package' | 'Photographer' | ''
+  filters: FilterState
+  handleFilter: React.Dispatch<Action>
 }) {
   return (
     <div className='relative flex w-full items-center'>
@@ -20,6 +25,10 @@ export default function SearchInput({
               : ''
         }
         className='rounded-full pl-8'
+        value={filters.searchText}
+        onChange={(e) =>
+          handleFilter({ type: 'searchText', payload: e.target.value })
+        }
       />
     </div>
   )

@@ -20,6 +20,7 @@ export default function HomePageComponent({
     minPrice: '',
     maxPrice: '',
     categories: [],
+    searchText: '',
   })
 
   return (
@@ -34,6 +35,7 @@ export default function HomePageComponent({
           filters={filters}
           handleFilter={dispatch}
         />
+        <div>{filters.searchText}</div>
       </div>
     </div>
   )
