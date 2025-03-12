@@ -10,20 +10,20 @@ export default function FilterMultiSelect({
   setSelectedCategories,
 }: {
   categories: Category[]
-  selectedCategories: string[]
-  setSelectedCategories: (value: string[]) => void
+  selectedCategories: number[]
+  setSelectedCategories: (value: number[]) => void
 }) {
-  const categoriesList = categories.map(({ name }) => ({
+  const categoriesList = categories.map(({ id, name }) => ({
     label: name ?? 'Unknown',
-    value: name?.toLowerCase() ?? 'unknown',
+    value: id!.toString() ?? 'unknown',
   }))
 
   return (
     <div className='w-full'>
       <MultiSelect
         options={categoriesList}
-        onValueChange={setSelectedCategories}
-        value={selectedCategories}
+        onValueChange={(values) => setSelectedCategories(values.map(Number))}
+        value={selectedCategories.map(String)}
         placeholder='Select Category'
         variant='inverted'
         animation={0}

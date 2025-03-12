@@ -2,6 +2,7 @@
 
 import { useReducer } from 'react'
 
+import { getPackages } from '@/actions/get-packages'
 import { Category, User } from '@/types/user'
 
 import { handleFilter } from './filterReducer'
@@ -11,11 +12,9 @@ import SearchBar from './search-bar'
 export default function HomePageComponent({
   userProfile,
   categories,
-  onSearchClick,
 }: {
   userProfile?: User
   categories: Category[]
-  onSearchClick: () => void
 }) {
   const [filters, dispatch] = useReducer(handleFilter, {
     sort: '',
@@ -24,6 +23,19 @@ export default function HomePageComponent({
     categories: [],
     searchText: '',
   })
+
+  const onSearchClick = async () => {
+    const packagesResponse = await getPackages({
+      name: filters.searchText,
+      minPrice: Number(filters.minPrice),
+      maxPrice: Number(filters.maxPrice),
+      categoryIds: filters.categories,
+      page: 1,
+      pageSize: 10,
+    })
+    const packages = packagesResponse?.data ?? []
+    console.log(packages)
+  }
 
   return (
     <div className='max-w-screen flex w-full flex-col px-4 pt-4 md:px-32'>

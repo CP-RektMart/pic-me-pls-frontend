@@ -17,8 +17,8 @@ export default function FilterPopover({
   setMinPrice: (value: string) => void
   maxPrice: string
   setMaxPrice: (value: string) => void
-  selectedCategories: string[]
-  setSelectedCategories: (value: string[]) => void
+  selectedCategories: number[]
+  setSelectedCategories: (value: number[]) => void
 }) {
   return (
     <div className='absolute -right-16 top-10 flex justify-center md:-right-12'>

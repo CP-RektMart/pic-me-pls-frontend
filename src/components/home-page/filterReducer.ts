@@ -2,7 +2,7 @@ export type FilterState = {
   sort: string
   minPrice: string
   maxPrice: string
-  categories: string[]
+  categories: number[]
   searchText: string
 }
 
@@ -10,7 +10,7 @@ export type Action =
   | { type: 'sort'; payload: string }
   | { type: 'minPrice'; payload: string }
   | { type: 'maxPrice'; payload: string }
-  | { type: 'category'; payload: string | string[] }
+  | { type: 'category'; payload: number | number[] }
   | { type: 'searchText'; payload: string }
 
 export const handleFilter = (
