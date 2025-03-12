@@ -8,6 +8,7 @@ import PhotographerPage from '@/components/photographer/photographer-page'
 export default function Page() {
   // TODO: Get real photographer data
 
+  // const photographerId = params?.id ?? 'unknown'
   const profile = mockPhotographer
 
   const packageNums = mockPackages.length || 0
