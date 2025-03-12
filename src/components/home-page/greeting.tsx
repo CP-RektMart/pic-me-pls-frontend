@@ -10,13 +10,12 @@ export default function Greeting({
   return (
     <div className='flex items-center gap-2'>
       {userProfilePictureUrl ? (
-        <div className='size-12 min-w-12 rounded-full'>
+        <div className='relative size-12 rounded-full'>
           <Image
             src={userProfilePictureUrl || '/image.png'}
             alt='userImage'
-            width={48}
-            height={48}
-            className='rounded-full'
+            fill
+            className='rounded-full object-cover'
           />
         </div>
       ) : (
