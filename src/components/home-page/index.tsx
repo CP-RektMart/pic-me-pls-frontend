@@ -1,9 +1,9 @@
 'use client'
 
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 
 import { getPackages } from '@/actions/get-packages'
-import { Category, User } from '@/types/user'
+import { Category, Package, User } from '@/types/user'
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 
 import { handleFilter } from '@/components/home-page/filterReducer'
@@ -12,14 +12,6 @@ import { PackageProps } from '@/components/home-page/package-card'
 import PackageGrid from '@/components/home-page/package-grid'
 import SearchBar from '@/components/home-page/search-bar'
 
-const mockPackages: PackageProps[] = Array.from({ length: 12 }, (_, index) => ({
-  title: `Pre-wedding Outdoor ${index + 1}`,
-  location: 'Hatyai, Songkhla',
-  photographer: 'Chanatpakorn Sirintronsopon',
-  price: '$1,200',
-  imageUrl: ProfileMockImage.src,
-}))
-
 export default function HomePageComponent({
   userProfile,
   categories,
@@ -27,6 +19,7 @@ export default function HomePageComponent({
   userProfile?: User
   categories: Category[]
 }) {
+  const [packages, setPackages] = useState<PackageProps[]>([])
   const [filters, dispatch] = useReducer(handleFilter, {
     sort: '',
     minPrice: '',
@@ -44,8 +37,14 @@ export default function HomePageComponent({
       page: 1,
       pageSize: 10,
     })
-    const packages = packagesResponse?.data ?? []
-    console.log(packages)
+    const packagesData = packagesResponse?.data ?? []
+    const parsedPackages: PackageProps[] = packagesData.map((pkg: Package) => ({
+      title: pkg.name ?? 'Unknown title',
+      photographer: pkg.photographer?.name ?? 'Annonymous',
+      price: pkg.price ? `$${pkg.price}` : 'Price not available',
+      imageUrl: pkg.photographer?.profilePictureUrl ?? ProfileMockImage.src,
+    }))
+    setPackages(parsedPackages)
   }
 
   return (
@@ -63,7 +62,7 @@ export default function HomePageComponent({
         />
       </div>
       <div className='my-6'>
-        <PackageGrid packagecards={mockPackages} />
+        <PackageGrid packagecards={packages} />
       </div>
     </div>
   )
