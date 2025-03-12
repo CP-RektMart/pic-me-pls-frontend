@@ -20,8 +20,13 @@ interface PackageProps {
   onClick?: () => void
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const photographerId = params?.id ?? 'unknown'
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const resolvedParams = await params
+  const photographerId = resolvedParams?.id ?? 'unknown'
 
   const packagesResponse = await getPhotograhperPackages({
     photographerId: Number(photographerId),
