@@ -1,5 +1,5 @@
 import { getCategories } from '@/actions/get-categories'
-import { getQueryPackages } from '@/actions/get-query-packages'
+import { getQueryPackages } from '@/actions/package/get-query-packages'
 import { client } from '@/api/client'
 import { Package } from '@/types/package'
 import ProfileMockImage from '@public/images/profile-mock-image.png'

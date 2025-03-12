@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { Package } from '@/actions/get-packages'
-import { Quotation } from '@/actions/get-quotations'
+import { Package } from '@/actions/package/get-packages'
+import { Quotation } from '@/actions/quotation/get-quotations'
 import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'

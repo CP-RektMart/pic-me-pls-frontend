@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 
-import cancelQuotation from '@/actions/customer-quotation/cancel-quotation'
-import confirmQuotation from '@/actions/customer-quotation/confirm-quotation'
+import cancelQuotation from '@/actions/quotation/cancel-quotation'
+import confirmQuotation from '@/actions/quotation/confirm-quotation'
 import {
   type CustomerQuotationProps,
   type QuotationStatus,

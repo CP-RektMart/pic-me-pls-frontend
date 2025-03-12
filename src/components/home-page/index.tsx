@@ -2,7 +2,7 @@
 
 import { useEffect, useReducer, useState } from 'react'
 
-import { getQueryPackages } from '@/actions/get-query-packages'
+import { getQueryPackages } from '@/actions/package/get-query-packages'
 import { Category } from '@/types/category'
 import { Package } from '@/types/package'
 import { User } from '@/types/user'
