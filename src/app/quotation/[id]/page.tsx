@@ -1,5 +1,5 @@
 import { client } from '@/api/client'
-import { calculateDuration, formatDateToString } from '@/lib/utils'
+import { calculateDurationFromString, formatDateToString } from '@/lib/utils'
 import { type QuotationStatus } from '@/types/quotation'
 
 import CustomerQuotation from '@/components/customer-quotation/index'
@@ -39,7 +39,10 @@ export default async function Page({
     name: media.description || '',
   }))
 
-  const duration = calculateDuration(quotation.fromDate, quotation.toDate)
+  const duration = calculateDurationFromString(
+    quotation.fromDate,
+    quotation.toDate
+  )
 
   return (
     <CustomerQuotation
