@@ -31,8 +31,8 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
@@ -1189,8 +1189,8 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
@@ -1394,8 +1394,8 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
@@ -1517,14 +1517,12 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
-          content: {
-            'application/json': components['schemas']['dto.HttpResponse-dto_QuotationResponse']
-          }
+          content?: never
         }
         /** @description Bad Request */
         400: {
@@ -1582,12 +1580,12 @@ export interface paths {
       /** @description Quotation update details */
       requestBody: {
         content: {
-          'application/json': components['schemas']['dto.CreateQuotationRequest']
+          'application/json': components['schemas']['dto.UpdateQuotationRequest']
         }
       }
       responses: {
-        /** @description OK */
-        200: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
@@ -2054,6 +2052,15 @@ export interface components {
       id: number
       name?: string
       price?: number
+    }
+    'dto.UpdateQuotationRequest': {
+      customerId: number
+      description?: string
+      fromDate: string
+      packageId: number
+      price: number
+      quotationID: string
+      toDate: string
     }
     'dto.UserResponse': {
       accountNo?: string
