@@ -74,7 +74,6 @@ export default function PhotographerQuotation({
     try {
       await createQuotationAction(data)
       toast.success('Your quotation has been successfully created.')
-      window.location.reload()
     } catch {
       toast.error('An error occurred while create your quotation')
     }
@@ -175,7 +174,7 @@ export default function PhotographerQuotation({
                         setCurrentQuotation(quotation)
                         setWindowstate(null)
                       }}
-                      className='hidden w-full lg:block'
+                      className='hidden lg:block'
                     />
                   </div>
                 ))}
@@ -211,7 +210,7 @@ export default function PhotographerQuotation({
                     packages={packages}
                     onSubmit={onSaveEditing}
                     setSelectedPackageId={setSelectedPackageId}
-                    selectedPackageId={selectedPackageId}
+                    selectedPackageId={currentQuotation.packageId.toString()}
                     fromDate={currentQuotation.from}
                     toDate={currentQuotation.to}
                     description={currentQuotation.description}

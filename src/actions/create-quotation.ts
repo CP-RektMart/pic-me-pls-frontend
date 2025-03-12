@@ -1,6 +1,7 @@
 'use server'
 
 import { client } from '@/api/client'
+import { revalidatePath } from 'next/cache'
 
 export interface QuotationAction {
   packageId: string
@@ -22,4 +23,6 @@ export default async function createQuotationAction(payload: QuotationAction) {
       toDate: payload.to.toISOString(),
     },
   })
+
+  revalidatePath('/photographer/quotations')
 }
