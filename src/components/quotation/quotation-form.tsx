@@ -42,6 +42,10 @@ interface QuotationProps {
   packages: Package[]
   setSelectedPackageId: (value: string) => void
   selectedPackageId: string
+  fromDate?: Date
+  toDate?: Date
+  description?: string
+  customerId?: string
 }
 
 export default function QuotationForm({
@@ -50,13 +54,19 @@ export default function QuotationForm({
   packages,
   setSelectedPackageId,
   selectedPackageId,
+  fromDate,
+  toDate,
+  description,
+  customerId,
 }: QuotationProps) {
   const form = useForm<CreateQuotationForm>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
       packageId: '',
-      customerId: '',
-      description: '',
+      customerId: customerId,
+      from: fromDate,
+      to: toDate,
+      description: description,
       price: 0,
     },
   })
@@ -179,7 +189,7 @@ export default function QuotationForm({
         />
       </div>
 
-      <hr className='border-[0.5px] border-zinc-400' />
+      <hr className='mx-4 border-[0.5px] border-zinc-400' />
 
       <QuotationSummary
         packages={packages}

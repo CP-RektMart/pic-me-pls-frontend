@@ -66,10 +66,15 @@ export default function PhotographerQuotation({
     setWindowstate('edit')
   }
 
+  const onClose = () => {
+    setWindowstate(null)
+  }
+
   const onSubmit = async (data: CreateQuotationForm) => {
     try {
       await createQuotationAction(data)
       toast.success('Your quotation has been successfully created.')
+      window.location.reload()
     } catch {
       toast.error('An error occurred while create your quotation')
     }
@@ -196,7 +201,10 @@ export default function PhotographerQuotation({
               windowState === 'edit' &&
               currentQuotation.status === 'PENDING' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                  <div>Quotation {currentQuotation.quotationID}</div>
+                  <div className='flex flex-row justify-between'>
+                    <div>Quotation {currentQuotation.quotationID}</div>
+                    <Button onClick={onClose}>Close</Button>
+                  </div>
 
                   <QuotationForm
                     transactionType='Edit'
@@ -204,15 +212,19 @@ export default function PhotographerQuotation({
                     onSubmit={onSaveEditing}
                     setSelectedPackageId={setSelectedPackageId}
                     selectedPackageId={selectedPackageId}
+                    fromDate={currentQuotation.from}
+                    toDate={currentQuotation.to}
+                    description={currentQuotation.description}
+                    customerId={currentQuotation.customerId.toString()}
                   />
                 </div>
               ) : (
                 <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
                   <div className='flex w-full flex-row justify-between font-bold'>
-                    <div>Quotation : {currentQuotation.quotationID}</div>
-                    {currentQuotation.status == 'PENDING' ? (
+                    <div>Quotation {currentQuotation.quotationID}</div>
+                    {currentQuotation.status == 'PENDING' && (
                       <Button onClick={onEditButtonClicked}>Edit</Button>
-                    ) : null}
+                    )}
                   </div>
 
                   <QuotationDetails

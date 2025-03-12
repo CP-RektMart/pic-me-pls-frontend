@@ -23,7 +23,10 @@ export default function PackageCard({
   alt = 'package photo',
 }: PackageProps) {
   return (
-    <div className='relative h-72 w-full overflow-hidden rounded-3xl shadow-lg'>
+    <div
+      className='relative h-72 w-full overflow-hidden rounded-3xl shadow-lg'
+      data-testid='package-card'
+    >
       <Image
         src={imageUrl || MockPhotoCard}
         alt={alt}
@@ -33,9 +36,16 @@ export default function PackageCard({
         priority
       />
       <div className='absolute bottom-2 left-2 right-2 z-10 rounded-2xl bg-white px-4 py-2'>
-        <h1 className='text-gray text-base font-bold'>{title}</h1>
+        <h1
+          className='text-gray text-base font-bold'
+          data-testid={`package-title-${title}`}
+        >
+          {title}
+        </h1>
         <div className='mb-3 flex items-center gap-2 text-xs'>
-          <span>📌{category}</span>
+          <span data-testid={`package-category-${category}`}>
+            📌 {category}
+          </span>
         </div>
         <div className='flex items-center justify-between'>
           <Link

@@ -28,6 +28,7 @@ export default function FilterMultiSelect({
         variant='inverted'
         animation={0}
         maxCount={1}
+        data-testid='category-filter'
       />
     </div>
   )

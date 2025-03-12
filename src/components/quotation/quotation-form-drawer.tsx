@@ -44,6 +44,10 @@ interface QuotationProps {
   setSelectedPackageId: (value: string) => void
   selectedPackageId: string
   setIsOpen: (isOpen: boolean) => void
+  fromDate?: Date
+  toDate?: Date
+  description?: string
+  customerId?: string
 }
 
 export default function QuotationFormDrawer({
@@ -53,13 +57,19 @@ export default function QuotationFormDrawer({
   setSelectedPackageId,
   selectedPackageId,
   setIsOpen,
+  fromDate,
+  toDate,
+  description,
+  customerId,
 }: QuotationProps) {
   const form = useForm<CreateQuotationForm>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
       packageId: '',
-      customerId: '',
-      description: '',
+      customerId: customerId,
+      from: fromDate,
+      to: toDate,
+      description: description,
     },
   })
 
