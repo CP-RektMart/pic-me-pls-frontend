@@ -67,7 +67,7 @@ export default function CreatePackage({ categories }: CreatePackageProps) {
   const onSubmit = async (data: CreatePackageForm) => {
     try {
       const photoList = photoCards.map((photo) => photo)
-      const formData = {
+      const payload = {
         name: data.name,
         packageDescription: data.packageDescription,
         price: data.price,
@@ -75,7 +75,7 @@ export default function CreatePackage({ categories }: CreatePackageProps) {
         photoCards: photoList,
       }
 
-      await CreatePackageAction(formData)
+      await CreatePackageAction(payload)
       toast.success('Your package has been successfully created')
       router.push('/photographer/packages')
     } catch (err) {
