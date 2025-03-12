@@ -1,8 +1,7 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
-import getCategoriesAction from '@/actions/get-package-categories'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -34,19 +33,12 @@ export const editpackageFormSchema = z.object({
 
 export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
-export default function EditPackage() {
-  const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
-  const [categories, setCategories] = useState<Category[]>([])
+interface EditPackageProps {
+  categories: Category[]
+}
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const categories = await getCategoriesAction()
-      if (categories) {
-        setCategories(categories)
-      }
-    }
-    fetchCategories()
-  }, [])
+export default function EditPackage({ categories }: EditPackageProps) {
+  const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>

@@ -24,8 +24,6 @@ export default async function CreatePackageAction(
     return
   }
 
-  console.log('Creating package', payload)
-
   const photoCardObject = await Promise.all(
     payload.photoCards.map(async (photoCard) => {
       const { url } = await uploadObject({

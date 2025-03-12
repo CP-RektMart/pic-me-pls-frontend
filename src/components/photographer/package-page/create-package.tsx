@@ -1,8 +1,7 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
-import getCategoriesAction from '@/actions/get-package-categories'
 import CreatePackageAction from '@/actions/package/create-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/user'
@@ -37,20 +36,13 @@ export const createpackageFormSchema = z.object({
 
 export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 
-export default function CreatePackage() {
-  const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
-  const [categories, setCategories] = useState<Category[]>([])
-  const router = useRouter()
+export interface CreatePackageProps {
+  categories: Category[]
+}
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const categories = await getCategoriesAction()
-      if (categories) {
-        setCategories(categories)
-      }
-    }
-    fetchCategories()
-  }, [])
+export default function CreatePackage({ categories }: CreatePackageProps) {
+  const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
+  const router = useRouter()
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
