@@ -24,6 +24,7 @@ export default async function Home() {
   const packageProps: PackageProps[] = packagesData.map((pkg: Package) => ({
     title: pkg.name ?? 'Unknown title',
     photographer: pkg.photographer?.name ?? 'Annonymous',
+    photographerId: Number(pkg.photographer?.id) ?? 'Unknown photographer',
     category: pkg.category?.name ?? 'Unknown category',
     price: pkg.price ? `${pkg.price}` : 'Price not available',
     imageUrl: pkg.media?.[0]?.pictureUrl ?? '/profile-mock-image.png',

@@ -1,5 +1,6 @@
 import MockPhotoCard from '@public/images/mock-photo-card.svg'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export interface PackageProps {
   title: string
@@ -7,6 +8,7 @@ export interface PackageProps {
   price: string
   category: string
   imageUrl: string
+  photographerId?: number
   alt?: string
   onClick?: () => void
 }
@@ -17,6 +19,7 @@ export default function PackageCard({
   price,
   category,
   imageUrl,
+  photographerId,
   alt = 'package photo',
 }: PackageProps) {
   return (
@@ -35,7 +38,12 @@ export default function PackageCard({
           <span>📌{category}</span>
         </div>
         <div className='flex items-center justify-between'>
-          <p className='text-xs'>{photographer}</p>
+          <Link
+            href={photographerId ? `/photographers/${photographerId}` : '#'}
+            className='text-xs text-blue-600 hover:underline'
+          >
+            {photographer}
+          </Link>
           <p className='font-bold'>{price} BAHT</p>
         </div>
       </div>
