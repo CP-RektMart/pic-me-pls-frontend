@@ -8,24 +8,15 @@ export interface Package {
   price: number
 }
 
-export const getPhotographerPackages = async ({
+export const getPhotograhperPackages = async ({
   photographerId,
-  name,
-  page,
-  pageSize,
 }: {
   photographerId: number
-  name?: string
-  page?: number
-  pageSize?: number
 }) => {
   const { data } = await client.GET('/api/v1/packages', {
     params: {
       query: {
         photographerId: photographerId,
-        name: name,
-        page: page,
-        pageSize: pageSize,
       },
     },
   })

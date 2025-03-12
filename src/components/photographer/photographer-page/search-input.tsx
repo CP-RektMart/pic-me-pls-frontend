@@ -18,9 +18,6 @@ export default function SearchInput({
         type='text'
         placeholder={'Search Package'}
         className='rounded-full pl-8'
-        //   onChange={(e) =>
-        //     handleFilter({ type: 'searchText', payload: e.target.value })
-        //   }
       />
     </div>
   )
