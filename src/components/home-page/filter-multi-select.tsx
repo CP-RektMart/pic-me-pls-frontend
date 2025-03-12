@@ -1,6 +1,6 @@
 'use client'
 
-import { Category } from '@/types/user'
+import { Category } from '@/types/category'
 
 import { MultiSelect } from '@/components/ui/multi-select'
 

@@ -1,4 +1,4 @@
-import { Category } from '@/types/user'
+import { Category } from '@/types/category'
 
 import FilterMultiSelect from '@/components/home-page/filter-multi-select'
 import FilterPrice from '@/components/home-page/filter-price'

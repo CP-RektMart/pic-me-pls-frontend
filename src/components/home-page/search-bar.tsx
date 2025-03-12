@@ -1,4 +1,4 @@
-import { Category } from '@/types/user'
+import { Category } from '@/types/category'
 
 import { Action, FilterState } from '@/components/home-page/filterReducer'
 import PackageFilterButton from '@/components/home-page/package-filter-button'
