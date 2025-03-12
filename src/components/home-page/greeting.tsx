@@ -28,7 +28,7 @@ export default function Greeting({
         <div className='text-xs text-slate-400 md:whitespace-nowrap'>
           Good to see you 👋
         </div>
-        <div className='text-2xl font-medium md:whitespace-nowrap'>
+        <div className='text-xl font-medium md:whitespace-nowrap'>
           {userName ? userName : 'Guest'}
         </div>
       </div>

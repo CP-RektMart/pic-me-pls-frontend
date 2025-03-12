@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 export interface PackageProps {
   title: string
-  location: string
   photographer: string
   price: string
+  category: string
   imageUrl: string
   alt?: string
   onClick?: () => void
@@ -13,9 +13,9 @@ export interface PackageProps {
 
 export default function PackageCard({
   title,
-  location,
   photographer,
   price,
+  category,
   imageUrl,
   alt = 'package photo',
 }: PackageProps) {
@@ -32,11 +32,11 @@ export default function PackageCard({
       <div className='absolute bottom-2 left-2 right-2 z-10 rounded-2xl bg-white px-4 py-2'>
         <h1 className='text-gray text-base font-bold'>{title}</h1>
         <div className='mb-3 flex items-center gap-2 text-xs'>
-          <span>📍{location}</span>
+          <span>📌{category}</span>
         </div>
         <div className='flex items-center justify-between'>
           <p className='text-xs'>{photographer}</p>
-          <p className='font-bold'>{price}</p>
+          <p className='font-bold'>{price} BAHT</p>
         </div>
       </div>
     </div>
