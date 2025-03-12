@@ -10,13 +10,16 @@ export interface Package {
 
 export const getPhotograhperPackages = async ({
   photographerId,
+  name,
 }: {
   photographerId: number
+  name: string
 }) => {
   const { data } = await client.GET('/api/v1/packages', {
     params: {
       query: {
         photographerId: photographerId,
+        name: name,
       },
     },
   })

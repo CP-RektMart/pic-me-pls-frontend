@@ -7,6 +7,7 @@ interface PhotographerProfileProps {
   imageUrl: string
   name: string
   packageNumber: number
+  photographerId: number
 }
 
 interface PackageProps {
@@ -24,6 +25,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const packagesResponse = await getPhotograhperPackages({
     photographerId: Number(photographerId),
+    name: '',
   })
 
   const packagesData = packagesResponse?.data ?? []
@@ -38,6 +40,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     imageUrl: photographer.profilePictureUrl ?? '/image.png',
     name: photographer.name ?? 'Anonymous',
     packageNumber: packagesData.length,
+    photographerId: Number(photographer.id),
   }
 
   const packageProps: PackageProps[] = packagesData.map((pkg: Package) => ({
@@ -51,7 +54,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <PhotographerPage
       photographerProfile={profileProps}
-      photographerPackages={packageProps}
+      initialPhotographerPackages={packageProps}
     />
   )
 }

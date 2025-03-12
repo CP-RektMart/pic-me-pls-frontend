@@ -2,11 +2,17 @@ import { Icon } from '@iconify/react'
 
 import { Input } from '@/components/ui/input'
 
-export default function SearchInput({
-  onSearchClick,
-}: {
+interface SearchInputProps {
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onSearchClick: () => void
-}) {
+}
+
+export default function SearchInput({
+  value,
+  onChange,
+  onSearchClick,
+}: SearchInputProps) {
   return (
     <div className='relative flex w-full items-center'>
       <Icon
@@ -16,6 +22,8 @@ export default function SearchInput({
       />
       <Input
         type='text'
+        value={value}
+        onChange={onChange}
         placeholder={'Search Package'}
         className='rounded-full pl-8'
       />
