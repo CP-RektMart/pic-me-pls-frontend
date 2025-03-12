@@ -3,6 +3,7 @@
 import { useReducer } from 'react'
 
 import { Category, User } from '@/types/user'
+import ProfileMockImage from '@public/images/profile-mock-image.png'
 
 import { handleFilter } from '@/components/home-page/filterReducer'
 import Greeting from '@/components/home-page/greeting'
@@ -15,7 +16,7 @@ const mockPackages: PackageProps[] = Array.from({ length: 12 }, (_, index) => ({
   location: 'Hatyai, Songkhla',
   photographer: 'Chanatpakorn Sirintronsopon',
   price: '$1,200',
-  imageUrl: 'image.png',
+  imageUrl: ProfileMockImage.src,
 }))
 
 export default function HomePageComponent({

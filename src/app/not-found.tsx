@@ -1,4 +1,4 @@
-import RickAshely from '@public/rick-roll-rick-ashley.gif'
+import RickAshely from '@public/images/rick-roll-rick-ashley.gif'
 import Image from 'next/image'
 
 import Container from '@/components/container'
@@ -17,7 +17,7 @@ export default function NotFound() {
           <p>
             The requested URL was not found.
             <br />
-            That’s all we know.
+            {"That's all we know."}
           </p>
         </div>
       </Container>

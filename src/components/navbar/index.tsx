@@ -9,7 +9,7 @@ import {
   photographerItems,
 } from '@/data/nav-items'
 import { Icon } from '@iconify/react'
-import LogoTrans from '@public/logo-trans.svg'
+import LogoTrans from '@public/icons/logo-trans.svg'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
