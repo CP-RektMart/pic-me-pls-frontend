@@ -8,8 +8,10 @@ import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import { useRouter } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import PackageDetailSection from '@/components/photographer/package-page/package-detail'
@@ -38,6 +40,7 @@ export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 export default function CreatePackage() {
   const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
   const [categories, setCategories] = useState<Category[]>([])
+  const router = useRouter()
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -65,22 +68,27 @@ export default function CreatePackage() {
       name: '',
       packageDescription: '',
       price: 0,
-      category: 1,
+      category: '',
     },
   })
 
   const onSubmit = async (data: CreatePackageForm) => {
-    const photoList = photoCards.map((photo) => photo)
+    try {
+      const photoList = photoCards.map((photo) => photo)
+      const formData = {
+        name: data.name,
+        packageDescription: data.packageDescription,
+        price: data.price,
+        category: data.category,
+        photoCards: photoList,
+      }
 
-    const formData = {
-      name: data.name,
-      packageDescription: data.packageDescription,
-      price: data.price,
-      category: data.category,
-      photoCards: photoList,
+      await CreatePackageAction(formData)
+      toast.success('Your package has been successfully created')
+      router.push('/photographer/packages')
+    } catch (err) {
+      toast.error(`An error occurred while creating your package${err}`)
     }
-
-    await CreatePackageAction(formData)
   }
 
   const onDrop = useCallback((acceptedFiles: File[]) => {

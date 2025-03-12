@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
-import { getCategories } from '@/actions/get-package-categories'
+import getCategories from '@/actions/get-package-categories'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
