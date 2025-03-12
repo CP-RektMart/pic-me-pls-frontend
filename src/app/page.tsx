@@ -2,6 +2,7 @@ import { getCategories } from '@/actions/get-categories'
 import { getQueryPackages } from '@/actions/get-query-packages'
 import { client } from '@/api/client'
 import { Package } from '@/types/package'
+import ProfileMockImage from '@public/images/profile-mock-image.png'
 
 import HomePageComponent from '@/components/home-page'
 import { PackageProps } from '@/components/home-page/package-card'
@@ -26,7 +27,7 @@ export default async function Home() {
     photographer: pkg.photographer?.name ?? 'Annonymous',
     category: pkg.category?.name ?? 'Unknown category',
     price: pkg.price ? `${pkg.price}` : 'Price not available',
-    imageUrl: pkg.media?.[0]?.pictureUrl ?? '/profile-mock-image.png',
+    imageUrl: pkg.media?.[0]?.pictureUrl ?? ProfileMockImage.src,
   }))
   const sortedPackages = [...packageProps].sort(
     (a, b) => Number(a.price) - Number(b.price)
