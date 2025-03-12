@@ -6,7 +6,17 @@ import { Category, User } from '@/types/user'
 
 import { handleFilter } from './filterReducer'
 import Greeting from './greeting'
+import { PackageProps } from './package-card'
+import PackageGrid from './package-grid'
 import SearchBar from './search-bar'
+
+const mockPackages: PackageProps[] = Array.from({ length: 12 }, (_, index) => ({
+  title: `Pre-wedding Outdoor ${index + 1}`,
+  location: 'Hatyai, Songkhla',
+  photographer: 'Chanatpakorn Sirintronsopon',
+  price: '$1,200',
+  imageUrl: 'image.png',
+}))
 
 export default function HomePageComponent({
   userProfile,
@@ -34,6 +44,9 @@ export default function HomePageComponent({
           filters={filters}
           handleFilter={dispatch}
         />
+      </div>
+      <div className='my-6'>
+        <PackageGrid packagecards={mockPackages} />
       </div>
     </div>
   )
