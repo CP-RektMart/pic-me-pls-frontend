@@ -74,6 +74,7 @@ export default function PhotographerQuotation({
     try {
       await createQuotationAction(data)
       toast.success('Your quotation has been successfully created.')
+      window.location.reload()
     } catch {
       toast.error('An error occurred while create your quotation')
     }

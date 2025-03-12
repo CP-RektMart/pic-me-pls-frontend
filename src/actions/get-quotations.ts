@@ -23,20 +23,24 @@ export async function getQuotations(): Promise<Quotation[]> {
     return []
   }
 
-  return quotations.data.map(
-    (quotation: components['schemas']['dto.QuotationResponse']): Quotation => ({
-      quotationID: quotation.id || 0,
-      status: quotation.status || '',
-      packageName: quotation.package?.name || '',
-      packageId: quotation.package?.id || 0,
-      photographerName: quotation.photographer?.name || '',
-      photographerId: quotation.photographer?.id || 0,
-      customerName: quotation.customer?.name || '',
-      customerId: quotation.customer?.id || 0,
-      from: new Date(quotation.fromDate || new Date()),
-      to: new Date(quotation.toDate || new Date()),
-      description: quotation.description || '',
-      price: quotation.price || 0,
-    })
-  )
+  return quotations.data
+    .map(
+      (
+        quotation: components['schemas']['dto.QuotationResponse']
+      ): Quotation => ({
+        quotationID: quotation.id || 0,
+        status: quotation.status || '',
+        packageName: quotation.package?.name || '',
+        packageId: quotation.package?.id || 0,
+        photographerName: quotation.photographer?.name || '',
+        photographerId: quotation.photographer?.id || 0,
+        customerName: quotation.customer?.name || '',
+        customerId: quotation.customer?.id || 0,
+        from: new Date(quotation.fromDate || new Date()),
+        to: new Date(quotation.toDate || new Date()),
+        description: quotation.description || '',
+        price: quotation.price || 0,
+      })
+    )
+    .sort((a, b) => a.quotationID - b.quotationID)
 }
