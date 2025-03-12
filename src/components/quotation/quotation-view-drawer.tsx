@@ -115,6 +115,7 @@ export default function QuotationViewDrawer({
             fromDate={quotation.from}
             toDate={quotation.to}
             description={quotation.description}
+            customerId={quotation.customerId.toString()}
           />
         ) : (
           <QuotationDetails

@@ -214,6 +214,7 @@ export default function PhotographerQuotation({
                     fromDate={currentQuotation.from}
                     toDate={currentQuotation.to}
                     description={currentQuotation.description}
+                    customerId={currentQuotation.customerId.toString()}
                   />
                 </div>
               ) : (

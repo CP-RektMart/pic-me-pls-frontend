@@ -47,6 +47,7 @@ interface QuotationProps {
   fromDate?: Date
   toDate?: Date
   description?: string
+  customerId?: string
 }
 
 export default function QuotationFormDrawer({
@@ -59,12 +60,13 @@ export default function QuotationFormDrawer({
   fromDate,
   toDate,
   description,
+  customerId,
 }: QuotationProps) {
   const form = useForm<CreateQuotationForm>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
       packageId: '',
-      customerId: '',
+      customerId: customerId,
       from: fromDate,
       to: toDate,
       description: description,
