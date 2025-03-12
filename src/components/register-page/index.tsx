@@ -4,6 +4,7 @@ import { Suspense, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { UserType } from '@/types/user'
+import Logo from '@public/images/logo.svg'
 import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -53,7 +54,7 @@ export default function RegisterPageComponent() {
               layout
               className='flex flex-col items-center justify-center space-y-4'
             >
-              <Image alt={''} src='logo.svg' width={64} height={67.75} />
+              <Image alt={''} src={Logo} width={64} height={64} />
               <h1 className='text-base font-medium'>Sign in as</h1>
               <p className='text-xs text-zinc-500'>
                 Sign in to book photographers or showcase your talent.

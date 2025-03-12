@@ -1,4 +1,5 @@
 import { client } from '@/api/client'
+import ProfileMockImage from '@public/images/profile-mock-image.png'
 import { redirect } from 'next/navigation'
 
 import ProfileComponent from '@/components/profile-page'
@@ -25,7 +26,7 @@ export default async function ProfilePage() {
     <ProfileComponent
       isPhotographer={userProfile.role === 'PHOTOGRAPHER'}
       isPhotographerVerified={!!citizenCard}
-      imageUrl={userProfile.profilePictureUrl || '/image.png'}
+      imageUrl={userProfile.profilePictureUrl || ProfileMockImage.src}
       name={userProfile.name || ''}
       email={userProfile.email || ''}
       phone={

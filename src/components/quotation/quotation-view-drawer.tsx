@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Package } from '@/actions/get-packages'
 import { Quotation } from '@/actions/get-quotations'
+import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 
@@ -67,11 +68,7 @@ export default function QuotationViewDrawer({
           from={formatDateToString(quotation.from).toString()}
           to={formatDateToString(quotation.to).toString()}
           description={quotation.description}
-          duration={
-            (new Date(quotation.to).getTime() -
-              new Date(quotation.from).getTime()) /
-            (1000 * 60 * 60)
-          }
+          duration={calculateDurationFromDate(quotation.from, quotation.to)}
           totalPrice={
             quotation.pricePerHour *
             ((new Date(quotation.to).getTime() -
@@ -91,7 +88,7 @@ export default function QuotationViewDrawer({
         {/* header */}
         <DrawerHeader className='flex items-center justify-between space-y-4 px-4 py-0'>
           <DrawerTitle className='text-xl font-bold'>
-            Quotation : {quotation.quotationID}
+            Quotation {quotation.quotationID}
           </DrawerTitle>
 
           {quotation.status === 'Pending' && windowState !== 'edit' && (
@@ -126,11 +123,7 @@ export default function QuotationViewDrawer({
             from={formatDateToString(quotation.from)}
             to={formatDateToString(quotation.to)}
             description={quotation.description}
-            duration={
-              (new Date(quotation.to).getTime() -
-                new Date(quotation.from).getTime()) /
-              (1000 * 60 * 60)
-            }
+            duration={calculateDurationFromDate(quotation.from, quotation.to)}
             totalPrice={
               quotation.pricePerHour *
               ((new Date(quotation.to).getTime() -
