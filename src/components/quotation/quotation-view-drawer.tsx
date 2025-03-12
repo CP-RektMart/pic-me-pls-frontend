@@ -96,6 +96,11 @@ export default function QuotationViewDrawer({
               Edit
             </Button>
           )}
+          {windowState === 'edit' && quotation.status === 'PENDING' && (
+            <Button onClick={onClose} className='!mt-0'>
+              Close
+            </Button>
+          )}
         </DrawerHeader>
 
         {/* body */}
@@ -107,6 +112,10 @@ export default function QuotationViewDrawer({
             setSelectedPackageId={setSelectedPackageId}
             selectedPackageId={selectedPackageId}
             setIsOpen={setIsOpen}
+            fromDate={quotation.from}
+            toDate={quotation.to}
+            description={quotation.description}
+            customerId={quotation.customerId.toString()}
           />
         ) : (
           <QuotationDetails

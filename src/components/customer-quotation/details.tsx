@@ -48,7 +48,12 @@ export default function QuotationDetails({
           <React.Fragment key={i}>
             <div className='flex flex-row justify-between'>
               <p className='text-nowrap text-sm text-zinc-700'>{item.title}</p>
-              <p className={cn('w-[200px] text-end text-sm', item.style)}>
+              <p
+                className={cn(
+                  'max-w-[250px] truncate text-end text-sm',
+                  item.style
+                )}
+              >
                 {item.info}
               </p>
             </div>
