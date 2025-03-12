@@ -2,6 +2,12 @@
 
 import { client } from '@/api/client'
 
+export interface Package {
+  name: string
+  packageDescription: string
+  price: number
+}
+
 export const getPackages = async ({
   name,
   minPrice,
