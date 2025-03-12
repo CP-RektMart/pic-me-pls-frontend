@@ -2,8 +2,8 @@
 
 import { cn } from '@/lib/utils'
 import { UserType } from '@/types/user'
-import CustomerSignInIcon from '@public/CustomerSigninIcon.svg'
-import PhotographerSignInIcon from '@public/PhotographerSigninIcon.svg'
+import CustomerSignInIcon from '@public/icons/customer-sign-in-icon.svg'
+import PhotographerSignInIcon from '@public/icons/photographer-sign-in-icon.svg'
 import Image from 'next/image'
 
 import { Button } from '../ui/button'

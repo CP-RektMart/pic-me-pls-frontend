@@ -1,4 +1,4 @@
-import MockPhotoCard from '@public/mockPhotoCard.svg'
+import MockPhotoCard from '@public/images/mock-photo-card.svg'
 import Image from 'next/image'
 
 export interface PackageProps {
