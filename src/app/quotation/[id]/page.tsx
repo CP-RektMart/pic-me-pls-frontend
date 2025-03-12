@@ -1,5 +1,3 @@
-'use server'
-
 import { client } from '@/api/client'
 import { calculateDuration, formatDateToString } from '@/lib/utils'
 import { type QuotationStatus } from '@/types/quotation'
