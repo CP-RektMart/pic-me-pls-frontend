@@ -4,11 +4,11 @@ import { useReducer } from 'react'
 
 import { Category, User } from '@/types/user'
 
-import { handleFilter } from './filterReducer'
-import Greeting from './greeting'
-import { PackageProps } from './package-card'
-import PackageGrid from './package-grid'
-import SearchBar from './search-bar'
+import { handleFilter } from '@/components/home-page/filterReducer'
+import Greeting from '@/components/home-page/greeting'
+import { PackageProps } from '@/components/home-page/package-card'
+import PackageGrid from '@/components/home-page/package-grid'
+import SearchBar from '@/components/home-page/search-bar'
 
 const mockPackages: PackageProps[] = Array.from({ length: 12 }, (_, index) => ({
   title: `Pre-wedding Outdoor ${index + 1}`,

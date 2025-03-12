@@ -1,5 +1,5 @@
-import PackageCard from './package-card'
-import type { PackageProps } from './package-card'
+import PackageCard from '@/components/home-page/package-card'
+import type { PackageProps } from '@/components/home-page/package-card'
 
 interface PackageGridProps {
   packagecards: PackageProps[]
