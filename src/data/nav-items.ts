@@ -11,7 +11,4 @@ export const customerItems = [
   { icon: 'lucide:user', title: 'Profile', url: '/profile' },
 ]
 
-export const defaultItems = [
-  { icon: 'lucide:home', title: 'Home', url: '/' },
-  { icon: 'lucide:package', title: 'Package', url: '/package' },
-]
+export const defaultItems = [{ icon: 'lucide:home', title: 'Home', url: '/' }]
