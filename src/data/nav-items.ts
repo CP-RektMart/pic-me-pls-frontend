@@ -11,6 +11,11 @@ export const photographerItems = [
 
 export const customerItems = [
   { icon: 'lucide:home', title: 'Home', url: '/' },
+  {
+    icon: 'lucide:file-chart-column',
+    title: 'Quotation',
+    url: '/quotation',
+  },
   { icon: 'lucide:user', title: 'Profile', url: '/profile' },
 ]
 
