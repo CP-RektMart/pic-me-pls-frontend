@@ -923,6 +923,8 @@ export interface paths {
     get: {
       parameters: {
         query?: {
+          /** @description Filter by package name */
+          name?: string
           /** @description Page number */
           page?: number
           /** @description Page size */

@@ -9,8 +9,6 @@ export interface Package {
 
 export async function getPackages(): Promise<Package[]> {
   const { data: packages } = await client.GET('/api/v1/photographer/packages')
-
-  // Ensure the result exists and is properly mapped
   return (
     packages?.result?.map(
       (q: {

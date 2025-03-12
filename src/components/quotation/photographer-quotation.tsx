@@ -66,8 +66,6 @@ export default function PhotographerQuotation({
   }
 
   const onSubmit = async (data: CreateQuotationProps) => {
-    console.log(data)
-
     try {
       await createQuotationAction(data)
       toast.success('Your quotation has been successfully created.')
@@ -86,9 +84,9 @@ export default function PhotographerQuotation({
       } else {
         toast.error('Quotation ID is missing.')
       }
-      toast.success('Your quotation has been successfully created.')
+      toast.success('Your quotation has been successfully updated.')
     } catch {
-      toast.error('An error occurred while create your quotation')
+      toast.error('An error occurred while updated your quotation')
     }
 
     setWindowstate(null)
