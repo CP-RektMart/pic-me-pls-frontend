@@ -12,7 +12,7 @@ const statusVariants = cva(
     variants: {
       variant: {
         PENDING: 'bg-amber-100 text-amber-700',
-        CONFIRM: 'bg-sky-100 text-sky-700',
+        CONFIRMED: 'bg-sky-100 text-sky-700',
         CANCELLED: 'bg-red-100 text-red-700',
         PAID: 'bg-emerald-100 text-emerald-700',
       },

@@ -1,60 +1,42 @@
+import { client } from '@/api/client'
+import { components } from '@/api/schema'
+
 export interface Quotation {
   quotationID: number
   status: string
   packageName: string
+  packageId: number
   photographerName: string
+  photographerId: number
   customerName: string
+  customerId: number
   from: Date
   to: Date
   description: string
-  pricePerHour: number
+  price: number
 }
 
-export function getQuotations() {
-  return [
-    {
-      quotationID: 1,
-      status: 'Pending',
-      packageName: 'Wedding Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Wedding photography package',
-      pricePerHour: 400,
-    },
-    {
-      quotationID: 2,
-      status: 'Confirm',
-      packageName: 'Birthday Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Birthday photography package',
-      pricePerHour: 300,
-    },
-    {
-      quotationID: 3,
-      status: 'Paid',
-      packageName: 'Graduation Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Graduation photography package',
-      pricePerHour: 200,
-    },
-    {
-      quotationID: 4,
-      status: 'Cancelled',
-      packageName: 'Wedding Package',
-      photographerName: 'John Doe',
-      customerName: 'Jane Doe',
-      from: new Date('2022-01-01 08:00'),
-      to: new Date('2022-01-02 08:00'),
-      description: 'Wedding photography package',
-      pricePerHour: 400,
-    },
-  ]
+export async function getQuotations(): Promise<Quotation[]> {
+  const { data: quotations } = await client.GET('/api/v1/quotations')
+
+  if (!quotations || !quotations.data) {
+    return []
+  }
+
+  return quotations.data.map(
+    (quotation: components['schemas']['dto.QuotationResponse']): Quotation => ({
+      quotationID: quotation.id || 0,
+      status: quotation.status || '',
+      packageName: quotation.package?.name || '',
+      packageId: quotation.package?.id || 0,
+      photographerName: quotation.photographer?.name || '',
+      photographerId: quotation.photographer?.id || 0,
+      customerName: quotation.customer?.name || '',
+      customerId: quotation.customer?.id || 0,
+      from: new Date(quotation.fromDate || new Date()),
+      to: new Date(quotation.toDate || new Date()),
+      description: quotation.description || '',
+      price: quotation.price || 0,
+    })
+  )
 }
