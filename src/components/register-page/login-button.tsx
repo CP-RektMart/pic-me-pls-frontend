@@ -2,6 +2,8 @@
 
 import { cn } from '@/lib/utils'
 import { UserType } from '@/types/user'
+import CustomerSignInIcon from '@public/icons/customer-sign-in-icon.svg'
+import PhotographerSignInIcon from '@public/icons/photographer-sign-in-icon.svg'
 import Image from 'next/image'
 
 import { Button } from '../ui/button'
@@ -25,8 +27,8 @@ export default function LoginButton({
       <Image
         src={
           userType === 'Photographer'
-            ? '/PhotographerLoginIcon.svg'
-            : '/CustomerLoginIcon.svg'
+            ? PhotographerSignInIcon
+            : CustomerSignInIcon
         }
         alt={`${userType} Icon`}
         width={106}

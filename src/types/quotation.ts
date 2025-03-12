@@ -1,4 +1,4 @@
-export type QuotationStatus = 'Pending' | 'Confirm' | 'Paid' | 'Cancelled'
+export type QuotationStatus = 'PENDING' | 'CONFIRM' | 'PAID' | 'CANCELLED'
 
 export interface QuotationDetailsProps {
   quotationId: number
@@ -9,13 +9,13 @@ export interface QuotationDetailsProps {
   from: string
   to: string
   description: string
-  duration: number
+  duration: string
   totalPrice: number
 }
 
 export interface CustomerQuotationProps extends QuotationDetailsProps {
   photographerImageUrl: string
-  packagesNumber: number
+  packageNumber: number
   quotationImages: { url: string; name: string }[]
 }
 
