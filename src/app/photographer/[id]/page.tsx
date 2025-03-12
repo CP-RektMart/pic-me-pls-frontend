@@ -33,7 +33,7 @@ export default function HomePageComponent({
         <ProfileHeader
           imageUrl={imageUrl}
           name={userName}
-          packagesNumber={packageNums}
+          packageNumber={packageNums}
         />
       </div>
       <div className='mt-6'>
