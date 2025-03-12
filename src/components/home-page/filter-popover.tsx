@@ -1,7 +1,7 @@
 import { Category } from '@/types/user'
 
-import FilterMultiSelect from './filter-multi-select'
-import FilterPrice from './filter-price'
+import FilterMultiSelect from '@/components/home-page/filter-multi-select'
+import FilterPrice from '@/components/home-page/filter-price'
 
 export default function FilterPopover({
   categories,

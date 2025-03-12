@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 
-import { Input } from '../ui/input'
-import { Action, FilterState } from './filterReducer'
+import { Action, FilterState } from '@/components/home-page/filterReducer'
+import { Input } from '@/components/ui/input'
 
 export default function SearchInput({
   searchType,
