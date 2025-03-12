@@ -1,6 +1,7 @@
 'use server'
 
 import { client } from '@/api/client'
+import { calculateDuration, formatDateToString } from '@/lib/utils'
 import { type QuotationStatus } from '@/types/quotation'
 
 import CustomerQuotation from '@/components/customer-quotation/index'
@@ -35,34 +36,12 @@ export default async function Page({
     return <p>Internal server error</p>
   }
 
-  const formatDate = (date: string) => {
-    if (!date) {
-      return ''
-    }
-    return new Date(date)
-      .toLocaleString('en-GB', {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      })
-      .replace(/,/g, '')
-  }
-
-  const calculateDuration = (fromDate: string, toDate: string): number => {
-    const from = new Date(fromDate)
-    const to = new Date(toDate)
-    const durationInHours = (to.getTime() - from.getTime()) / (1000 * 60 * 60)
-    return parseFloat(durationInHours.toFixed(1))
-  }
-
-  const duration = calculateDuration(quotation.fromDate, quotation.toDate)
-
   const images = quotation.package?.media?.map((media) => ({
     url: media.pictureUrl || '',
     name: media.description || '',
   }))
+
+  const duration = calculateDuration(quotation.fromDate, quotation.toDate)
 
   return (
     <CustomerQuotation
@@ -71,8 +50,8 @@ export default async function Page({
       packageName={quotation.package?.name || 'Package'}
       photographerName={quotation.photographer?.name || 'Photographer'}
       customerName={quotation.customer?.name || 'Customer'}
-      from={formatDate(quotation.fromDate)}
-      to={formatDate(quotation.toDate)}
+      from={formatDateToString(new Date(quotation.fromDate))}
+      to={formatDateToString(new Date(quotation.toDate))}
       description={quotation.description || ''}
       duration={duration}
       totalPrice={quotation.price || 0}

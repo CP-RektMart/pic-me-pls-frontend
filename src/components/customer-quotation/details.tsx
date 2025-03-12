@@ -37,7 +37,7 @@ export default function QuotationDetails({
     { title: 'From', info: from },
     { title: 'To', info: to },
     { title: 'Description', info: description },
-    { title: 'Duration', info: `${duration} Hour${duration > 1 ? 's' : ''}` },
+    { title: 'Duration', info: duration },
     { title: 'Total Price', info: `${totalPrice} Baht` },
   ]
 
