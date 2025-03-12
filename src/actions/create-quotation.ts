@@ -22,6 +22,4 @@ export default async function createQuotationAction(payload: QuotationAction) {
       toDate: payload.to.toISOString(),
     },
   })
-
-  return
 }

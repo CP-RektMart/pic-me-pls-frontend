@@ -15,7 +15,7 @@ export default async function updateQuotationAction(
   quotationId: number,
   payload: QuotationAction
 ) {
-  await client.PATCH(`/api/v1/photographer/quotations/{id}`, {
+  await client.PATCH('/api/v1/photographer/quotations/{id}', {
     params: { path: { id: quotationId } },
     body: {
       customerId: parseInt(payload.customerId),
