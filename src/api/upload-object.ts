@@ -2,7 +2,7 @@ import { auth } from '@/auth'
 import { z } from 'zod'
 
 export const uploadObjectRequest = z.object({
-  file: z.any().refine((val) => val.length > 0, 'File is required'),
+  file: z.instanceof(File),
   folder: z.enum(['PACKAGE', 'VERIFY_CITIZENCARD', 'PROFILE_IMAGE']),
 })
 
