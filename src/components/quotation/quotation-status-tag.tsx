@@ -28,5 +28,9 @@ const statusVariants = cva(
 )
 
 export function QuotationStatusTag({ variant }: QuotationStatusTagProps) {
+  if (!variant) {
+    variant = 'PENDING'
+  }
+
   return <div className={cn(statusVariants({ variant }))}>{variant}</div>
 }

@@ -25,13 +25,13 @@ export default function Page({
   duration,
   totalPrice,
   photographerImageUrl,
-  galleriesNumber,
+  packageNumber,
   quotationImages,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
 
   const handlePayment = () => {
-    setStatus('Paid')
+    setStatus('PAID')
     // TODO: handle payment
   }
 
@@ -43,7 +43,7 @@ export default function Page({
           <ProfileHeader
             imageUrl={photographerImageUrl}
             name={photographerName}
-            galleriesNumber={galleriesNumber}
+            packageNumber={packageNumber}
           />
 
           {/* package details */}
@@ -70,10 +70,10 @@ export default function Page({
           <QuotationButton
             status={status}
             onCancel={() => {
-              setStatus('Cancelled')
+              setStatus('CANCELLED')
             }}
             onConfirm={() => {
-              setStatus('Confirm')
+              setStatus('CONFIRM')
             }}
             onPay={handlePayment}
           />

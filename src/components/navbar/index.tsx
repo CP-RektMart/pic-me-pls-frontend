@@ -3,19 +3,19 @@
 import { useMemo } from 'react'
 
 import { logout } from '@/actions/logout'
-import { Icon } from '@iconify/react'
-import LogoTrans from '@public/logo-trans.svg'
-import { signOut, useSession } from 'next-auth/react'
-import Image from 'next/image'
-
-import { NavButton } from '@/components/navbar/nav-button'
-
 import {
   customerItems,
   defaultItems,
   photographerItems,
-} from '../../data/nav-items'
-import Sidebar from '../sidebar'
+} from '@/data/nav-items'
+import { Icon } from '@iconify/react'
+import LogoTrans from '@public/icons/logo-trans.svg'
+import { signOut, useSession } from 'next-auth/react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { NavButton } from '@/components/navbar/nav-button'
+import Sidebar from '@/components/sidebar/index'
 
 export default function Navbar() {
   const { data: session, status } = useSession()
@@ -46,9 +46,15 @@ export default function Navbar() {
 
   return (
     <nav className='sticky flex w-full flex-row items-center justify-between bg-base-primary px-6 py-4 text-white'>
-      <div className='flex items-center'>
-        <Image src={LogoTrans} alt='Logo' width={24} height={24} />
-      </div>
+      <Link href='/' className='flex items-center'>
+        <Image
+          src={LogoTrans}
+          className='aspect-square object-fill'
+          alt='Logo'
+          width={24}
+          height={24}
+        />
+      </Link>
       <div className='hidden flex-row gap-6 lg:flex'>
         {navItems.slice(0, 5).map((item, index) => (
           <NavButton

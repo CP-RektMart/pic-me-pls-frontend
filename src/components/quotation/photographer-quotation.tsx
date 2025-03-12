@@ -6,6 +6,7 @@ import createQuotationAction from '@/actions/create-quotation'
 import { Package } from '@/actions/get-packages'
 import { Quotation } from '@/actions/get-quotations'
 import updateQuotationAction from '@/actions/update-quotation'
+import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
@@ -160,11 +161,10 @@ export default function PhotographerQuotation({
                       from={formatDateToString(quotation.from)}
                       to={formatDateToString(quotation.to)}
                       description={quotation.description}
-                      duration={
-                        (new Date(quotation.to).getTime() -
-                          new Date(quotation.from).getTime()) /
-                        (1000 * 60 * 60)
-                      }
+                      duration={calculateDurationFromDate(
+                        quotation.from,
+                        quotation.to
+                      )}
                       totalPrice={
                         quotation.pricePerHour *
                         ((new Date(quotation.to).getTime() -
@@ -201,7 +201,7 @@ export default function PhotographerQuotation({
               windowState === 'edit' &&
               currentQuotation.status === 'PENDING' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                  <div>Quotation : {currentQuotation.quotationID}</div>
+                  <div>Quotation {currentQuotation.quotationID}</div>
 
                   <QuotationForm
                     transactionType='Edit'
@@ -231,11 +231,10 @@ export default function PhotographerQuotation({
                     from={formatDateToString(currentQuotation.from)}
                     to={formatDateToString(currentQuotation.to)}
                     description={currentQuotation.description}
-                    duration={
-                      (new Date(currentQuotation.to).getTime() -
-                        new Date(currentQuotation.from).getTime()) /
-                      (1000 * 60 * 60)
-                    }
+                    duration={calculateDurationFromDate(
+                      currentQuotation.from,
+                      currentQuotation.to
+                    )}
                     totalPrice={
                       currentQuotation.pricePerHour *
                       ((new Date(currentQuotation.to).getTime() -

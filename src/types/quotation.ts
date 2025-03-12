@@ -9,13 +9,13 @@ export interface QuotationDetailsProps {
   from: string
   to: string
   description: string
-  duration: number
+  duration: string
   totalPrice: number
 }
 
 export interface CustomerQuotationProps extends QuotationDetailsProps {
   photographerImageUrl: string
-  galleriesNumber: number
+  packageNumber: number
   quotationImages: { url: string; name: string }[]
 }
 

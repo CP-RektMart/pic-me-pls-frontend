@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang='en'>
       <head>
         <title>PicMePls</title>
-        <link rel='icon' href='/logo.svg' />
+        <link rel='icon' href='/images/logo.svg' />
       </head>
       <body
         className={`${poppins.variable} flex min-h-dvh flex-col justify-between antialiased`}

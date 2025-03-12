@@ -3,6 +3,8 @@
 import { setRole } from '@/actions/set-cookie'
 import { UserType } from '@/types/user'
 import { Icon } from '@iconify/react'
+import CustomerSignInIcon from '@public/icons/customer-sign-in-icon.svg'
+import PhotographerSignInIcon from '@public/icons/photographer-sign-in-icon.svg'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 
@@ -42,10 +44,8 @@ export default function SignInContent({ userType }: { userType?: UserType }) {
           <Image
             src={
               userType === 'Photographer'
-                ? 'PhotographerSigninIcon.svg'
-                : userType === 'Customer'
-                  ? 'CustomerSigninIcon.svg'
-                  : 'SignIn.svg'
+                ? PhotographerSignInIcon
+                : CustomerSignInIcon
             }
             alt=''
             width={224}
