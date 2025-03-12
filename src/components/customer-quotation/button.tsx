@@ -25,7 +25,7 @@ export default function QuotationButton({
           </Button>
         </>
       )}
-      {status === 'CONFIRM' && (
+      {status === 'CONFIRMED' && (
         <Button className='w-full' onClick={onPay}>
           <p>Pay</p>
         </Button>
