@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
+import { getCategories } from '@/actions/get-package-categories'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
@@ -27,6 +28,7 @@ export const createpackageFormSchema = z.object({
     .string()
     .transform((val) => parseFloat(val))
     .refine((val) => val > 0, 'Price must be a positive number'),
+  category: z.string(),
 })
 
 export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
@@ -50,6 +52,7 @@ export default function CreatePackage() {
       name: '',
       packageDescription: '',
       price: 0,
+      category: '',
     },
   })
 
@@ -73,6 +76,8 @@ export default function CreatePackage() {
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
 
+  const categories = getCategories()
+
   return (
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
@@ -84,6 +89,7 @@ export default function CreatePackage() {
           onSubmit={onSubmit}
           form={form}
           onDrop={onDrop}
+          categories={categories}
         />
         <div className='flex-1'>
           {photoCards.length === 0 ? (

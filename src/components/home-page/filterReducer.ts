@@ -1,0 +1,35 @@
+export type FilterState = {
+  sort: string
+  minPrice: string
+  maxPrice: string
+  categories: string[]
+}
+
+export type Action =
+  | { type: 'sort'; payload: string }
+  | { type: 'minPrice'; payload: string }
+  | { type: 'maxPrice'; payload: string }
+  | { type: 'category'; payload: string | string[] }
+
+export const handleFilter = (
+  state: FilterState,
+  action: Action
+): FilterState => {
+  switch (action.type) {
+    case 'sort':
+      return { ...state, sort: action.payload }
+    case 'minPrice':
+      return { ...state, minPrice: action.payload }
+    case 'maxPrice':
+      return { ...state, maxPrice: action.payload }
+    case 'category':
+      const newCategories = Array.isArray(action.payload)
+        ? action.payload
+        : state.categories.includes(action.payload)
+          ? state.categories.filter((cat) => cat !== action.payload)
+          : [...state.categories, action.payload]
+      return { ...state, categories: newCategories }
+    default:
+      return state
+  }
+}

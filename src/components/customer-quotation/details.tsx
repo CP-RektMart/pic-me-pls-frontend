@@ -42,7 +42,7 @@ export default function QuotationDetails({
   ]
 
   return (
-    <div className='flex justify-center p-4'>
+    <div className='flex justify-center px-4'>
       <div className='flex w-full flex-col'>
         {detailItems.map((item, i) => (
           <React.Fragment key={i}>
