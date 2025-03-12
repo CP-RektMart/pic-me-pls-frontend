@@ -18,7 +18,7 @@ export default function ProfileHeader({
       <Image
         src={imageUrl || '/image.png'}
         alt='image profile'
-        className='size-16 rounded-full lg:size-28'
+        className='size-16 rounded-full object-cover lg:size-28'
         width={112}
         height={112}
       />
