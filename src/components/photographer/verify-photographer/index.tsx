@@ -5,6 +5,7 @@ import { useState } from 'react'
 import verifyCitizenCardAction from '@/actions/verify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
+import PhotographerVerifyIcon from '@public/photographer-verify.svg'
 import { format } from 'date-fns'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -90,7 +91,7 @@ export default function VerifyPhotographer() {
         >
           <div className='hidden w-full items-center justify-center lg:flex'>
             <Image
-              src={'/photographer-verify.svg'}
+              src={PhotographerVerifyIcon}
               alt='pic'
               width={380}
               height={200}

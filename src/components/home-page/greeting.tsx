@@ -1,3 +1,4 @@
+import ProfileMockImage from '@public/images/profile-mock-image.png'
 import Image from 'next/image'
 
 export default function Greeting({
@@ -12,7 +13,7 @@ export default function Greeting({
       {userProfilePictureUrl ? (
         <div className='relative size-12 rounded-full'>
           <Image
-            src={userProfilePictureUrl || '/image.png'}
+            src={userProfilePictureUrl || ProfileMockImage}
             alt='userImage'
             fill
             className='rounded-full object-cover'

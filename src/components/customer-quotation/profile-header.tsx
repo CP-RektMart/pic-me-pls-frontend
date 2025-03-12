@@ -1,3 +1,4 @@
+import ProfileMockImage from '@public/images/profile-mock-image.png'
 import Image from 'next/image'
 
 import { Badge } from '@/components/ui/badge'
@@ -16,7 +17,7 @@ export default function ProfileHeader({
   return (
     <div className='flex flex-row items-center gap-6'>
       <Image
-        src={imageUrl || '/image.png'}
+        src={imageUrl || ProfileMockImage}
         alt='image profile'
         className='size-16 rounded-full lg:size-28'
         width={112}

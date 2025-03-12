@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { QuotationDetailsProps } from '@/types/quotation'
+import ProfileMockImage from '@public/images/profile-mock-image.png'
 import Image from 'next/image'
 
 import { QuotationStatusTag } from '@/components/quotation/quotation-status-tag'
@@ -13,7 +14,7 @@ export interface QuotationCardProps extends QuotationDetailsProps {
 
 export default function QuotationCard({
   quotationId,
-  photographerImageUrl = '/image.png',
+  photographerImageUrl = ProfileMockImage.src,
   photographerName,
   from,
   to,

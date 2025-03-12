@@ -1,3 +1,4 @@
+import MockPhotoCard from '@public/mockPhotoCard.svg'
 import Image from 'next/image'
 
 export interface PackageProps {
@@ -21,7 +22,7 @@ export default function PackageCard({
   return (
     <div className='relative h-72 w-full overflow-hidden rounded-3xl shadow-lg'>
       <Image
-        src={imageUrl || '/mockPhotoCard.svg'}
+        src={imageUrl || MockPhotoCard}
         alt={alt}
         width={360}
         height={290}

@@ -5,7 +5,6 @@ import { UserType } from '@/types/user'
 import { Icon } from '@iconify/react'
 import CustomerSignInIcon from '@public/CustomerSigninIcon.svg'
 import PhotographerSignInIcon from '@public/PhotographerSigninIcon.svg'
-import SignInIcon from '@public/SignIn.svg'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 
@@ -46,9 +45,7 @@ export default function SignInContent({ userType }: { userType?: UserType }) {
             src={
               userType === 'Photographer'
                 ? PhotographerSignInIcon
-                : userType === 'Customer'
-                  ? CustomerSignInIcon
-                  : SignInIcon
+                : CustomerSignInIcon
             }
             alt=''
             width={224}
