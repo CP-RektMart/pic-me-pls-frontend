@@ -49,7 +49,7 @@ export default function Navbar() {
       <Link href='/' className='flex items-center'>
         <Image
           src={LogoTrans}
-          className='aspect-square object-cover'
+          className='aspect-square object-fill'
           alt='Logo'
           width={24}
           height={24}
