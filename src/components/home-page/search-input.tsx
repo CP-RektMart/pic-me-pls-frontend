@@ -4,12 +4,10 @@ import { Action, FilterState } from '@/components/home-page/filterReducer'
 import { Input } from '@/components/ui/input'
 
 export default function SearchInput({
-  searchType,
   filters,
   handleFilter,
   onSearchClick,
 }: {
-  searchType: 'Package' | 'Photographer' | ''
   filters: FilterState
   handleFilter: React.Dispatch<Action>
   onSearchClick: () => void
@@ -23,13 +21,7 @@ export default function SearchInput({
       />
       <Input
         type='text'
-        placeholder={
-          searchType === 'Package'
-            ? 'Search Package'
-            : searchType === 'Photographer'
-              ? 'Search Photographer'
-              : ''
-        }
+        placeholder={'Search Package'}
         className='rounded-full pl-8'
         value={filters.searchText}
         onChange={(e) =>

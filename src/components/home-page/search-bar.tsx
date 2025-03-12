@@ -21,7 +21,6 @@ export default function SearchBar({
   return (
     <div className='item-center flex w-full gap-3'>
       <SearchInput
-        searchType='Package'
         filters={filters}
         handleFilter={handleFilter}
         onSearchClick={onSearchClick}
