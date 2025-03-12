@@ -2,12 +2,15 @@
 
 import { useState } from 'react'
 
+import createQuotationAction from '@/actions/create-quotation'
 import { Package } from '@/actions/get-packages'
 import { Quotation } from '@/actions/get-quotations'
+import updateQuotationAction from '@/actions/update-quotation'
 import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import QuotationDetails from '@/components/customer-quotation/details'
@@ -24,12 +27,22 @@ export interface PhotographerQuotationProps {
   packages: Package[]
 }
 
+export interface CreateQuotationProps {
+  packageId: string
+  customerId: string
+  price: number
+  from: Date
+  to: Date
+  description: string
+}
+
 export const createQuotationFormSchema = z.object({
-  package: z.string().min(2, 'Gallery must be at least 2 characters'),
-  customer: z.string().min(2, 'Customer must be at least 2 characters'),
+  packageId: z.string(),
+  customerId: z.string(),
   from: z.date(),
   to: z.date(),
   description: z.string().min(2, 'Description must be at least 2 characters'),
+  price: z.number(),
 })
 
 export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
@@ -38,7 +51,7 @@ export default function PhotographerQuotation({
   quotations,
   packages,
 }: PhotographerQuotationProps) {
-  const [selectedPackage, setSelectedPackage] = useState<string>('')
+  const [selectedPackageId, setSelectedPackageId] = useState<string>('')
 
   const [windowState, setWindowstate] = useState<WindowState>(null)
   const [currentQuotation, setCurrentQuotation] = useState<Quotation | null>(
@@ -54,15 +67,31 @@ export default function PhotographerQuotation({
   }
 
   const onSubmit = async (data: CreateQuotationForm) => {
+    try {
+      await createQuotationAction(data)
+      toast.success('Your quotation has been successfully created.')
+    } catch {
+      toast.error('An error occurred while create your quotation')
+    }
+
     setWindowstate(null)
     setCurrentQuotation(null)
-    console.log(data)
   }
 
   const onSaveEditing = async (data: CreateQuotationForm) => {
+    try {
+      if (currentQuotation?.quotationID !== undefined) {
+        await updateQuotationAction(currentQuotation.quotationID, data)
+      } else {
+        toast.error('Quotation ID is missing.')
+      }
+      toast.success('Your quotation has been successfully updated.')
+    } catch {
+      toast.error('An error occurred while updated your quotation')
+    }
+
     setWindowstate(null)
     setCurrentQuotation(null)
-    console.log(data)
   }
 
   return (
@@ -84,8 +113,8 @@ export default function PhotographerQuotation({
           setCurrentQuotation={setCurrentQuotation}
           onSubmit={onSubmit}
           packages={packages}
-          selectedPackage={selectedPackage}
-          setSelectedPackage={setSelectedPackage}
+          selectedPackageId={selectedPackageId}
+          setSelectedPackageId={setSelectedPackageId}
         />
       </div>
 
@@ -114,8 +143,8 @@ export default function PhotographerQuotation({
                       setWindowstate={setWindowstate}
                       setCurrentQuotation={setCurrentQuotation}
                       quotation={quotation}
-                      setSelectedPackage={setSelectedPackage}
-                      selectedPackage={selectedPackage}
+                      setSelectedPackageId={setSelectedPackageId}
+                      selectedPackageId={selectedPackageId}
                       onEditButtonClicked={onEditButtonClicked}
                       onSaveEditing={onSaveEditing}
                       packages={packages}
@@ -136,12 +165,7 @@ export default function PhotographerQuotation({
                         quotation.from,
                         quotation.to
                       )}
-                      totalPrice={
-                        quotation.pricePerHour *
-                        ((new Date(quotation.to).getTime() -
-                          new Date(quotation.from).getTime()) /
-                          (1000 * 60 * 60))
-                      }
+                      totalPrice={quotation.price}
                       onClickEvent={() => {
                         setCurrentQuotation(quotation)
                         setWindowstate(null)
@@ -164,13 +188,13 @@ export default function PhotographerQuotation({
                   transactionType='create'
                   packages={packages}
                   onSubmit={onSubmit}
-                  setSelectedPackage={setSelectedPackage}
-                  selectedPackage={selectedPackage}
+                  setSelectedPackageId={setSelectedPackageId}
+                  selectedPackageId={selectedPackageId}
                 />
               </div>
             ) : currentQuotation != null ? (
               windowState === 'edit' &&
-              currentQuotation.status === 'Pending' ? (
+              currentQuotation.status === 'PENDING' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
                   <div>Quotation {currentQuotation.quotationID}</div>
 
@@ -178,15 +202,15 @@ export default function PhotographerQuotation({
                     transactionType='Edit'
                     packages={packages}
                     onSubmit={onSaveEditing}
-                    setSelectedPackage={setSelectedPackage}
-                    selectedPackage={selectedPackage}
+                    setSelectedPackageId={setSelectedPackageId}
+                    selectedPackageId={selectedPackageId}
                   />
                 </div>
               ) : (
                 <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
                   <div className='flex w-full flex-row justify-between font-bold'>
-                    <div>Quotation {currentQuotation.quotationID}</div>
-                    {currentQuotation.status == 'Pending' ? (
+                    <div>Quotation : {currentQuotation.quotationID}</div>
+                    {currentQuotation.status == 'PENDING' ? (
                       <Button onClick={onEditButtonClicked}>Edit</Button>
                     ) : null}
                   </div>
@@ -206,12 +230,7 @@ export default function PhotographerQuotation({
                       currentQuotation.from,
                       currentQuotation.to
                     )}
-                    totalPrice={
-                      currentQuotation.pricePerHour *
-                      ((new Date(currentQuotation.to).getTime() -
-                        new Date(currentQuotation.from).getTime()) /
-                        (1000 * 60 * 60))
-                    }
+                    totalPrice={currentQuotation.price}
                   />
                 </div>
               )

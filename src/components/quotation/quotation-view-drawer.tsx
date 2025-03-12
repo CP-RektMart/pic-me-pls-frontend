@@ -22,8 +22,8 @@ import QuotationFormDrawer from './quotation-form-drawer'
 
 interface QuotationViewDrawerProps {
   setCurrentQuotation: (currentQuotation: Quotation | null) => void
-  setSelectedPackage: (selectedPackage: string) => void
-  selectedPackage: string
+  setSelectedPackageId: (selectedPackageId: string) => void
+  selectedPackageId: string
   quotation: Quotation
   onEditButtonClicked: () => void
   onSaveEditing: (data: CreateQuotationForm) => void
@@ -38,8 +38,8 @@ export default function QuotationViewDrawer({
   onEditButtonClicked,
   onSaveEditing,
   packages,
-  setSelectedPackage,
-  selectedPackage,
+  setSelectedPackageId,
+  selectedPackageId,
   setWindowstate,
   windowState,
 }: QuotationViewDrawerProps) {
@@ -69,12 +69,7 @@ export default function QuotationViewDrawer({
           to={formatDateToString(quotation.to).toString()}
           description={quotation.description}
           duration={calculateDurationFromDate(quotation.from, quotation.to)}
-          totalPrice={
-            quotation.pricePerHour *
-            ((new Date(quotation.to).getTime() -
-              new Date(quotation.from).getTime()) /
-              (1000 * 60 * 60))
-          }
+          totalPrice={quotation.price}
           onClickEvent={() => {
             setWindowstate(null)
             setCurrentQuotation(quotation)
@@ -91,7 +86,7 @@ export default function QuotationViewDrawer({
             Quotation {quotation.quotationID}
           </DrawerTitle>
 
-          {quotation.status === 'Pending' && windowState !== 'edit' && (
+          {quotation.status === 'PENDING' && windowState !== 'edit' && (
             <Button
               onClick={() => {
                 onEditButtonClicked()
@@ -104,13 +99,13 @@ export default function QuotationViewDrawer({
         </DrawerHeader>
 
         {/* body */}
-        {windowState === 'edit' && quotation.status === 'Pending' ? (
+        {windowState === 'edit' && quotation.status === 'PENDING' ? (
           <QuotationFormDrawer
             transactionType='edit'
             onSubmit={onSaveEditing}
             packages={packages}
-            setSelectedPackage={setSelectedPackage}
-            selectedPackage={selectedPackage}
+            setSelectedPackageId={setSelectedPackageId}
+            selectedPackageId={selectedPackageId}
             setIsOpen={setIsOpen}
           />
         ) : (
@@ -124,12 +119,7 @@ export default function QuotationViewDrawer({
             to={formatDateToString(quotation.to)}
             description={quotation.description}
             duration={calculateDurationFromDate(quotation.from, quotation.to)}
-            totalPrice={
-              quotation.pricePerHour *
-              ((new Date(quotation.to).getTime() -
-                new Date(quotation.from).getTime()) /
-                (1000 * 60 * 60))
-            }
+            totalPrice={quotation.price}
           />
         )}
       </DrawerContent>

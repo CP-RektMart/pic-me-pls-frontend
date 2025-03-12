@@ -2,7 +2,7 @@
 
 import { useEffect, useReducer, useState } from 'react'
 
-import { getPackages } from '@/actions/get-packages'
+import { getPackage } from '@/actions/get-package'
 import { Category } from '@/types/category'
 import { Package } from '@/types/package'
 import { User } from '@/types/user'
@@ -41,7 +41,7 @@ export default function HomePageComponent({
   }
 
   const onSearchClick = async () => {
-    const packagesResponse = await getPackages({
+    const packagesResponse = await getPackage({
       name: filters.searchText,
       minPrice: Number(filters.minPrice),
       maxPrice: Number(filters.maxPrice),

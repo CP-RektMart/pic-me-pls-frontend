@@ -14,7 +14,7 @@ export default function QuotationButton({
   onPay: () => void
 }) {
   return (
-    <div className='flex flex-row justify-between gap-2'>
+    <div className='mt-8 flex flex-row justify-between gap-2 px-4 lg:mt-4'>
       {status === 'PENDING' && (
         <>
           <Button variant='destructive' className='w-full' onClick={onCancel}>
@@ -25,7 +25,7 @@ export default function QuotationButton({
           </Button>
         </>
       )}
-      {status === 'CONFIRM' && (
+      {status === 'CONFIRMED' && (
         <Button className='w-full' onClick={onPay}>
           <p>Pay</p>
         </Button>

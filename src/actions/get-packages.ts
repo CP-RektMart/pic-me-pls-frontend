@@ -1,41 +1,28 @@
-'use server'
-
 import { client } from '@/api/client'
+import { components } from '@/api/schema'
 
 export interface Package {
+  id: number
   name: string
   packageDescription: string
   price: number
 }
 
-export const getPackages = async ({
-  name,
-  minPrice,
-  maxPrice,
-  categoryIds,
-  page,
-  pageSize,
-}: {
-  name?: string
-  minPrice?: number
-  maxPrice?: number
-  categoryIds?: number[]
-  page?: number
-  pageSize?: number
-}) => {
-  const categoryIdsString = categoryIds?.join(',')
+export async function getPackages(): Promise<Package[]> {
+  const { data: packages } = await client.GET('/api/v1/photographer/packages')
 
-  const { data } = await client.GET('/api/v1/packages', {
-    params: {
-      query: {
-        name: name,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        categoryIds: categoryIdsString,
-        page: page,
-        pageSize: pageSize,
-      },
-    },
-  })
-  return data
+  if (!packages || !packages.result) {
+    return []
+  }
+
+  return (
+    packages.result.map(
+      (q: components['schemas']['dto.PackageResponse']): Package => ({
+        id: q.id || 0,
+        name: q.name || '',
+        packageDescription: q.description || '',
+        price: q.price || 0,
+      })
+    ) || []
+  )
 }
