@@ -2,8 +2,8 @@
 
 import { useCallback, useState } from 'react'
 
-import { getCategories } from '@/actions/get-package-categories'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
+import { Category } from '@/types/category'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useDropzone } from 'react-dropzone'
@@ -33,7 +33,11 @@ export const editpackageFormSchema = z.object({
 
 export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
-export default function EditPackage() {
+interface EditPackageProps {
+  categories: Category[]
+}
+
+export default function EditPackage({ categories }: EditPackageProps) {
   const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
 
   const handleDescriptionChange = (index: number, description: string) => {
@@ -75,8 +79,6 @@ export default function EditPackage() {
       maxSize: MAX_FILE_SIZE,
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
-
-  const categories = getCategories()
 
   return (
     <FormProvider {...form}>

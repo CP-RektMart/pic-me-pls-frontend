@@ -2,12 +2,15 @@
 
 import { useCallback, useState } from 'react'
 
-import { getCategories } from '@/actions/get-package-categories'
+import CreatePackageAction from '@/actions/package/create-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
+import { Category } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import { useRouter } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import PackageDetailSection from '@/components/photographer/package-page/package-detail'
@@ -28,13 +31,18 @@ export const createpackageFormSchema = z.object({
     .string()
     .transform((val) => parseFloat(val))
     .refine((val) => val > 0, 'Price must be a positive number'),
-  category: z.string(),
+  category: z.string().refine((val) => val !== '', 'Category is required'),
 })
 
 export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 
-export default function CreatePackage() {
+export interface CreatePackageProps {
+  categories: Category[]
+}
+
+export default function CreatePackage({ categories }: CreatePackageProps) {
   const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
+  const router = useRouter()
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -57,8 +65,22 @@ export default function CreatePackage() {
   })
 
   const onSubmit = async (data: CreatePackageForm) => {
-    console.log(data)
-    console.log(photoCards)
+    try {
+      const photoList = photoCards.map((photo) => photo)
+      const payload = {
+        name: data.name,
+        packageDescription: data.packageDescription,
+        price: data.price,
+        category: data.category,
+        photoCards: photoList,
+      }
+
+      await CreatePackageAction(payload)
+      toast.success('Your package has been successfully created')
+      router.push('/photographer/packages')
+    } catch (err) {
+      toast.error(`An error occurred while creating your package${err}`)
+    }
   }
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -75,8 +97,6 @@ export default function CreatePackage() {
       maxSize: MAX_FILE_SIZE,
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
-
-  const categories = getCategories()
 
   return (
     <FormProvider {...form}>
