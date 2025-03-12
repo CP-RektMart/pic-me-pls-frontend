@@ -14,7 +14,7 @@ When('I select {string} from the category filter', async (category: string) => {
   console.log('category:', category)
   await page.getByTestId('filter-button').click()
   await page.getByTestId('category-filter').click()
-  await page.click(`[data-value="${category}"]`)
+  await page.getByRole('option', { name: category }).click()
 })
 
 When('I click the search button for filter', async () => {
@@ -24,25 +24,26 @@ When('I click the search button for filter', async () => {
 When(
   'there are no packages available in {string} category',
   async (category: string) => {
-    const packageCatergory = await page.getByTestId('package-category').all()
-    packageCatergory.forEach(async (element) => {
-      const text = await element.textContent()
-      console.log('text:', text)
-
-      await expect(text).not.toContain(category)
-    })
+    const packageCategories = await page
+      .getByTestId(`package-category-${category}`)
+      .all()
+    expect(packageCategories.length).toBe(0)
   }
 )
 
 Then(
   'I should see only packages related to {string}',
   async (category: string) => {
-    const packageCatergory = await page.getByTestId('package-category').all()
-    packageCatergory.forEach(async (element) => {
+    const packageCategories = await page
+      .getByTestId(`package-category-${category}`)
+      .all()
+    expect(packageCategories.length).toBeGreaterThan(0)
+
+    for (const element of packageCategories) {
       const text = await element.textContent()
       console.log('text:', text)
       await expect(text).toContain(category)
-    })
+    }
   }
 )
 

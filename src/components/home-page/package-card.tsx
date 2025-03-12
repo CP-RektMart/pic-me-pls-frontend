@@ -40,7 +40,9 @@ export default function PackageCard({
           {title}
         </h1>
         <div className='mb-3 flex items-center gap-2 text-xs'>
-          <span data-testid='package-category'>📌{category}</span>
+          <span data-testid={`package-category-${category}`}>
+            📌 {category}
+          </span>
         </div>
         <div className='flex items-center justify-between'>
           <p className='text-xs'>{photographer}</p>

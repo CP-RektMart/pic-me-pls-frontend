@@ -5,15 +5,15 @@ Feature: Filter packages on the homepage
 
     Scenario: Successfully filter packages by category
         Given I am on the homepage for filter
-        When I select "Event" from the category filter
+        When I select "<category>" from the category filter
         And I click the search button for filter
-        Then I should see only packages related to "Event"
+        Then I should see only packages related to "<category>"
 
-    # Examples:
-    #     | category |
-    #     | Portrait |
-    #     | Wedding  |
-    #     | Event    |
+        Examples:
+            | category |
+            | Portrait |
+            | Wedding  |
+            | Event    |
 
     Scenario: Filter packages with no matching results
         Given I am on the homepage for filter
