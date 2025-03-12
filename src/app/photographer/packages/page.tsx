@@ -1,4 +1,4 @@
-import { PhotographerPackages } from '@/components/photographer/photographer-packages'
+import { PhotographerPackages } from '@/components/photographer/packages'
 
 export default async function Page() {
   return <PhotographerPackages />
