@@ -31,8 +31,8 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
@@ -1189,8 +1189,8 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
@@ -1394,8 +1394,8 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
