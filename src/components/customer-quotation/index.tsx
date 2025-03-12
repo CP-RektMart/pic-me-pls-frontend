@@ -2,10 +2,13 @@
 
 import { useState } from 'react'
 
+import cancelQuotation from '@/actions/customer-quotation/cancel-quotation'
+import confirmQuotation from '@/actions/customer-quotation/confirm-quotation'
 import {
   type CustomerQuotationProps,
   type QuotationStatus,
 } from '@/types/quotation'
+import { toast } from 'sonner'
 
 import Container from '@/components/container'
 import QuotationButton from '@/components/customer-quotation/button'
@@ -33,6 +36,18 @@ export default function Page({
   const handlePayment = () => {
     setStatus('PAID')
     // TODO: handle payment
+  }
+
+  const handleCancel = async () => {
+    await cancelQuotation(quotationId)
+    toast.success('Quotation cancelled')
+    setStatus('CANCELLED')
+  }
+
+  const handleConfirm = async () => {
+    await confirmQuotation(quotationId)
+    toast.success('Quotation confirmed')
+    setStatus('CONFIRMED')
   }
 
   return (
@@ -69,12 +84,8 @@ export default function Page({
           />
           <QuotationButton
             status={status}
-            onCancel={() => {
-              setStatus('CANCELLED')
-            }}
-            onConfirm={() => {
-              setStatus('CONFIRMED')
-            }}
+            onCancel={handleCancel}
+            onConfirm={handleConfirm}
             onPay={handlePayment}
           />
         </div>
