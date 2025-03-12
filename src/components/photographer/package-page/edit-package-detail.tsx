@@ -105,7 +105,10 @@ export default function EditPackageDetailSection({
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((category) => (
-                    <SelectItem key={category.id} value={category.name}>
+                    <SelectItem
+                      key={category.name!}
+                      value={category.id!.toString()}
+                    >
                       {category.name}
                     </SelectItem>
                   ))}

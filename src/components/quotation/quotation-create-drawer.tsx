@@ -22,16 +22,16 @@ interface CreateQuotationDrawerProps {
   setCurrentQuotation: (currentQuotation: Quotation | null) => void
   onSubmit: (data: CreateQuotationForm) => void
   packages: Package[]
-  setSelectedPackage: (selectedPackage: string) => void
-  selectedPackage: string
+  setSelectedPackageId: (selectedPackageId: string) => void
+  selectedPackageId: string
 }
 
 export default function CreateQuotationDrawer({
   setCurrentQuotation,
   onSubmit,
   packages,
-  setSelectedPackage,
-  selectedPackage,
+  setSelectedPackageId,
+  selectedPackageId,
   setWindowstate,
 }: CreateQuotationDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
@@ -78,8 +78,8 @@ export default function CreateQuotationDrawer({
           transactionType='create'
           onSubmit={onSubmit}
           packages={packages}
-          setSelectedPackage={setSelectedPackage}
-          selectedPackage={selectedPackage}
+          setSelectedPackageId={setSelectedPackageId}
+          selectedPackageId={selectedPackageId}
           setIsOpen={setIsOpen}
         />
       </DrawerContent>

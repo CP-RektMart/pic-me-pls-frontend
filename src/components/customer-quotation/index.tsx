@@ -73,7 +73,7 @@ export default function Page({
               setStatus('CANCELLED')
             }}
             onConfirm={() => {
-              setStatus('CONFIRM')
+              setStatus('CONFIRMED')
             }}
             onPay={handlePayment}
           />
