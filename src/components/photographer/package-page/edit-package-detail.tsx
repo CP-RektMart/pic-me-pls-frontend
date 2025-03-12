@@ -47,12 +47,12 @@ export default function EditPackageDetailSection({
 }: EditPackageDetailSectionProps) {
   const { packageID } = useParams()
 
-  const handleDeleteGallery = async () => {
-    console.log(`Gallery ${packageID} Deleted`)
+  const handleDeletePackage = async () => {
+    console.log(`Package ${packageID} Deleted`)
   }
 
-  const handleArchiveGallery = async () => {
-    console.log(`Gallery ${packageID} Archived`)
+  const handleArchivePackage = async () => {
+    console.log(`Package ${packageID} Archived`)
   }
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
@@ -168,14 +168,14 @@ export default function EditPackageDetailSection({
         <div className='grid h-full grid-cols-2 gap-4 align-top lg:grid-cols-1'>
           <Button
             className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'
-            onClick={handleDeleteGallery}
+            onClick={handleDeletePackage}
           >
             <Icon icon='lucide:trash-2' />
             Delete Package
           </Button>
           <Button
             className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'
-            onClick={handleArchiveGallery}
+            onClick={handleArchivePackage}
           >
             <Icon icon='lucide:archive-restore' />
             Archive Package

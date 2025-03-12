@@ -54,7 +54,7 @@ export default async function Page({
       quotationId={quotationId}
       quotationStatus={mockData.status as QuotationStatus}
       photographerImageUrl={mockData.photographer.imageUrl}
-      galleriesNumber={5}
+      packagesNumber={5}
       {...mockData}
     />
   )

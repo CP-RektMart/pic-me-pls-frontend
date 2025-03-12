@@ -24,7 +24,7 @@ export interface PhotographerQuotationProps {
 }
 
 export const createQuotationFormSchema = z.object({
-  package: z.string().min(2, 'Gallery must be at least 2 characters'),
+  package: z.string().min(2, 'Package must be at least 2 characters'),
   customer: z.string().min(2, 'Customer must be at least 2 characters'),
   from: z.date(),
   to: z.date(),

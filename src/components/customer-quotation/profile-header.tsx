@@ -5,13 +5,13 @@ import { Badge } from '@/components/ui/badge'
 interface ProfileHeaderProps {
   imageUrl: string
   name: string
-  galleriesNumber: number
+  packagesNumber: number
 }
 
 export default function ProfileHeader({
   imageUrl,
   name,
-  galleriesNumber,
+  packagesNumber,
 }: ProfileHeaderProps) {
   return (
     <div className='flex flex-row items-center gap-6'>
@@ -34,7 +34,7 @@ export default function ProfileHeader({
             Photographer
           </Badge>
           <p className='text-center text-sm font-medium text-gray-500 lg:mt-1'>
-            {galleriesNumber} Galleries
+            {packagesNumber} Packages
           </p>
         </div>
       </div>

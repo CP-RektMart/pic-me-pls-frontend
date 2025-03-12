@@ -15,7 +15,7 @@ export interface QuotationDetailsProps {
 
 export interface CustomerQuotationProps extends QuotationDetailsProps {
   photographerImageUrl: string
-  galleriesNumber: number
+  packagesNumber: number
   quotationImages: { url: string; name: string }[]
 }
 
