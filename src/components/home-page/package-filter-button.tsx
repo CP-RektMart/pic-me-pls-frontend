@@ -23,7 +23,7 @@ export default function PackageFilterButton({
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className='relative'>
+    <div className='relative' data-testid='filter-button'>
       <FilterButton
         OptionType='Filter'
         onClick={() => setIsOpen((prev) => !prev)}
