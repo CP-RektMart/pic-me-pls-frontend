@@ -3,7 +3,8 @@ import { mockPackages } from '@/data/packagecards'
 import ProfileHeader from '@/components/customer-quotation/profile-header'
 import { PackageProps } from '@/components/home-page/package-card'
 import PackageGrid from '@/components/home-page/package-grid'
-import SearchInput from '@/components/home-page/search-input'
+
+// import SearchInput from '@/components/home-page/search-input'
 
 interface PhotographerPageProps {
   imageUrl: string
@@ -27,9 +28,7 @@ export default function PhotographerPage({
           packageNumber={packageNums}
         />
       </div>
-      <div className='mt-6'>
-        <SearchInput searchType='Package' />
-      </div>
+      <div className='mt-6'>{/* <SearchInput searchType='Package' /> */}</div>
       <div className='my-6'>
         <PackageGrid packagecards={packagecards} />
       </div>
