@@ -1,19 +1,40 @@
-import { PackageProps } from './package-card'
-import PackageGrid from './package-grid'
+'use client'
 
-// 10 of mock
-const mockPackages: PackageProps[] = Array.from({ length: 6 }, (_, index) => ({
-  title: `Pre-wedding Outdoor ${index + 1}`,
-  location: 'Hatyai, Songkhla',
-  photographer: 'Chanatpakorn Sirintronsopon',
-  price: '$1,200',
-  imageUrl: 'image.png',
-}))
+import { useReducer } from 'react'
 
-export default function HomePageComponent() {
+import { Category, User } from '@/types/user'
+
+import { handleFilter } from './filterReducer'
+import Greeting from './greeting'
+import SearchBar from './search-bar'
+
+export default function HomePageComponent({
+  userProfile,
+  categories,
+}: {
+  userProfile?: User
+  categories: Category[]
+}) {
+  const [filters, dispatch] = useReducer(handleFilter, {
+    sort: '',
+    minPrice: '',
+    maxPrice: '',
+    categories: [],
+  })
+
   return (
-    <div className='mx-8 my-6 flex justify-center px-4'>
-      <PackageGrid packagecards={mockPackages} />
+    <div className='max-w-screen flex w-full flex-col px-4 pt-4 md:px-32'>
+      <div className='flex flex-col gap-4 md:flex-row md:items-center'>
+        <Greeting
+          userName={userProfile?.name}
+          userProfilePictureUrl={userProfile?.profilePictureUrl}
+        />
+        <SearchBar
+          categories={categories}
+          filters={filters}
+          handleFilter={dispatch}
+        />
+      </div>
     </div>
   )
 }
