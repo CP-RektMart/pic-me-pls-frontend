@@ -923,6 +923,8 @@ export interface paths {
     get: {
       parameters: {
         query?: {
+          /** @description Filter by package name */
+          name?: string
           /** @description Page number */
           page?: number
           /** @description Page size */
@@ -1331,7 +1333,48 @@ export interface paths {
       path?: never
       cookie?: never
     }
-    get?: never
+    /**
+     * List Photographer's packages
+     * @description List Photographer's packages
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpListResponse-dto_SmallPackageResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
     put?: never
     /**
      * Create Package
@@ -1474,14 +1517,12 @@ export interface paths {
         }
       }
       responses: {
-        /** @description Created */
-        201: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
-          content: {
-            'application/json': components['schemas']['dto.HttpResponse-dto_QuotationResponse']
-          }
+          content?: never
         }
         /** @description Bad Request */
         400: {
@@ -1539,12 +1580,12 @@ export interface paths {
       /** @description Quotation update details */
       requestBody: {
         content: {
-          'application/json': components['schemas']['dto.CreateQuotationRequest']
+          'application/json': components['schemas']['dto.UpdateQuotationRequest']
         }
       }
       responses: {
-        /** @description OK */
-        200: {
+        /** @description No Content */
+        204: {
           headers: {
             [name: string]: unknown
           }
@@ -1842,6 +1883,9 @@ export interface components {
     'dto.HttpError': {
       error?: string
     }
+    'dto.HttpListResponse-dto_SmallPackageResponse': {
+      result?: components['schemas']['dto.SmallPackageResponse'][]
+    }
     'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
       result?: components['schemas']['dto.PaginationResponse-dto_CategoryResponse']
     }
@@ -1977,9 +2021,11 @@ export interface components {
       rating?: number
     }
     'dto.SmallPackageResponse': {
+      category?: components['schemas']['dto.CategoryResponse']
       description?: string
       id?: number
       name?: string
+      price?: number
     }
     'dto.TagResponse': {
       id?: number
@@ -2006,6 +2052,15 @@ export interface components {
       id: number
       name?: string
       price?: number
+    }
+    'dto.UpdateQuotationRequest': {
+      customerId: number
+      description?: string
+      fromDate: string
+      packageId: number
+      price: number
+      quotationID: string
+      toDate: string
     }
     'dto.UserResponse': {
       accountNo?: string

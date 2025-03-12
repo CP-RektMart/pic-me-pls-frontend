@@ -1,4 +1,3 @@
-export interface Category {
-  id: string
-  name: string
-}
+import { components } from '@/api/schema'
+
+export type Category = components['schemas']['dto.CategoryResponse']

@@ -1,9 +1,11 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
-import { getCategories } from '@/actions/get-package-categories'
+import getCategoriesAction from '@/actions/get-package-categories'
+import CreatePackageAction from '@/actions/package/create-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
+import { Category } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useDropzone } from 'react-dropzone'
@@ -35,6 +37,17 @@ export type CreatePackageForm = z.infer<typeof createpackageFormSchema>
 
 export default function CreatePackage() {
   const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categories = await getCategoriesAction()
+      if (categories) {
+        setCategories(categories)
+      }
+    }
+    fetchCategories()
+  }, [])
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -52,13 +65,22 @@ export default function CreatePackage() {
       name: '',
       packageDescription: '',
       price: 0,
-      category: '',
+      category: 1,
     },
   })
 
   const onSubmit = async (data: CreatePackageForm) => {
-    console.log(data)
-    console.log(photoCards)
+    const photoList = photoCards.map((photo) => photo)
+
+    const formData = {
+      name: data.name,
+      packageDescription: data.packageDescription,
+      price: data.price,
+      category: data.category,
+      photoCards: photoList,
+    }
+
+    await CreatePackageAction(formData)
   }
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -75,8 +97,6 @@ export default function CreatePackage() {
       maxSize: MAX_FILE_SIZE,
       accept: { 'image/png': [], 'image/jpg': [], 'image/jpeg': [] },
     })
-
-  const categories = getCategories()
 
   return (
     <FormProvider {...form}>
