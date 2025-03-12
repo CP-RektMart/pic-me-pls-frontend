@@ -981,6 +981,66 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/api/v1/packages/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * get package by id
+     * @description Show package detail
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description package id */
+          id: string
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_PackageResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/api/v1/photographer/citizen-card': {
     parameters: {
       query?: never
@@ -1900,6 +1960,9 @@ export interface components {
     }
     'dto.HttpResponse-dto_ObjectUploadResponse': {
       result?: components['schemas']['dto.ObjectUploadResponse']
+    }
+    'dto.HttpResponse-dto_PackageResponse': {
+      result?: components['schemas']['dto.PackageResponse']
     }
     'dto.HttpResponse-dto_QuotationResponse': {
       result?: components['schemas']['dto.QuotationResponse']

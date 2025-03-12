@@ -4,8 +4,10 @@ import { useCallback, useState } from 'react'
 
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
+import { Package } from '@/types/package'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import MockPhotoCard from '@public/images/mock-photo-card.svg'
 import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -13,11 +15,6 @@ import { z } from 'zod'
 import EditPackageDetailSection from '@/components/photographer/package-page/edit-package-detail'
 import PhotoCard from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
-
-export type EditPhotoCardForm = {
-  description: string
-  image: File
-}
 
 export const editpackageFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -35,10 +32,14 @@ export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
 interface EditPackageProps {
   categories: Category[]
+  initialPackage: Package
 }
 
-export default function EditPackage({ categories }: EditPackageProps) {
-  const [photoCards, setPhotoCards] = useState<EditPhotoCardForm[]>([])
+export default function EditPackage({
+  categories,
+  initialPackage,
+}: EditPackageProps) {
+  const [photoCards, setPhotoCards] = useState(initialPackage.media ?? [])
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -53,10 +54,10 @@ export default function EditPackage({ categories }: EditPackageProps) {
   const form = useForm<EditPackageForm>({
     resolver: zodResolver(editpackageFormSchema),
     defaultValues: {
-      name: '',
-      packageDescription: '',
-      price: 0,
-      category: '',
+      name: initialPackage.name,
+      packageDescription: initialPackage.description,
+      price: initialPackage.price,
+      category: initialPackage.category?.id?.toString(),
     },
   })
 
@@ -125,7 +126,7 @@ export default function EditPackage({ categories }: EditPackageProps) {
                     <PhotoCard
                       key={i}
                       description={photo.description || ''}
-                      imageUrl={URL.createObjectURL(photo.image)}
+                      imageUrl={photo.pictureUrl || MockPhotoCard.src}
                       handleDescriptionChange={handleDescriptionChange}
                       index={i}
                       handleDeletePhotoCard={handleDeletePhotoCard}
