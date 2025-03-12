@@ -36,7 +36,7 @@ export default function PackageCard({
         </div>
         <div className='flex items-center justify-between'>
           <p className='text-xs'>{photographer}</p>
-          <p className='font-bold'>${price}</p>
+          <p className='font-bold'>{price} BAHT</p>
         </div>
       </div>
     </div>
