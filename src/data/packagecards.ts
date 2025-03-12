@@ -4,7 +4,7 @@ export const mockPackages: PackageProps[] = Array.from(
   { length: 12 },
   (_, index) => ({
     title: `ทะเลหาดใหย่ ${index + 1}`,
-    location: 'Hatyai, Songkhla',
+    category: 'Beach',
     photographer: 'Chanatpakorn Sirintronsopon',
     price: '$1,200',
     imageUrl:
