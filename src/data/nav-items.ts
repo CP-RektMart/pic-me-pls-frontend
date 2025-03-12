@@ -3,9 +3,9 @@ export const photographerItems = [
   {
     icon: 'lucide:file-chart-column',
     title: 'Quotation',
-    url: '/photographer/quotation',
+    url: '/photographer/quotations',
   },
-  { icon: 'lucide:package', title: 'Package', url: '/photographer/package' },
+  { icon: 'lucide:package', title: 'Package', url: '/photographer/packages' },
   { icon: 'lucide:user', title: 'Profile', url: '/profile' },
 ]
 
