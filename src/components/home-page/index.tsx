@@ -4,7 +4,7 @@ import { useEffect, useReducer, useState } from 'react'
 
 import { getQueryPackages } from '@/actions/package/get-query-packages'
 import { Category } from '@/types/category'
-import { Package } from '@/types/package'
+import { PackageVerbose } from '@/types/package'
 import { User } from '@/types/user'
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 
@@ -51,14 +51,16 @@ export default function HomePageComponent({
     })
 
     const packagesData = packagesResponse?.data ?? []
-    const packageProps: PackageProps[] = packagesData.map((pkg: Package) => ({
-      title: pkg.name ?? 'Unknown title',
-      photographer: pkg.photographer?.name ?? 'Annonymous',
-      photographerId: Number(pkg.photographer?.id) ?? 'Unknown photographer',
-      category: pkg.category?.name ?? 'Unknown category',
-      price: pkg.price ? `${pkg.price}` : 'Price not available',
-      imageUrl: pkg.media?.[0]?.pictureUrl ?? ProfileMockImage.src,
-    }))
+    const packageProps: PackageProps[] = packagesData.map(
+      (pkg: PackageVerbose) => ({
+        title: pkg.name ?? 'Unknown title',
+        photographer: pkg.photographer?.name ?? 'Annonymous',
+        photographerId: Number(pkg.photographer?.id) ?? 'Unknown photographer',
+        category: pkg.category?.name ?? 'Unknown category',
+        price: pkg.price ? `${pkg.price}` : 'Price not available',
+        imageUrl: pkg.media?.[0]?.pictureUrl ?? ProfileMockImage.src,
+      })
+    )
     setPackages(sortPackages(packageProps, filters.sort))
   }
 

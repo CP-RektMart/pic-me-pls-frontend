@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
-import { Package } from '@/types/package'
+import { PackageVerbose } from '@/types/package'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import MockPhotoCard from '@public/images/mock-photo-card.svg'
@@ -32,7 +32,7 @@ export type EditPackageForm = z.infer<typeof editpackageFormSchema>
 
 interface EditPackageProps {
   categories: Category[]
-  initialPackage: Package
+  initialPackage: PackageVerbose
 }
 
 export default function EditPackage({

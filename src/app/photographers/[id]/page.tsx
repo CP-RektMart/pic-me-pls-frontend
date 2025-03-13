@@ -1,5 +1,5 @@
 import { getPhotograhperPackages } from '@/actions/get-photographer-packages'
-import { Package } from '@/types/package'
+import { PackageVerbose } from '@/types/package'
 
 import PhotographerPage from '@/components/photographer/photographer-page'
 
@@ -48,13 +48,15 @@ export default async function Page({
     photographerId: Number(photographer.id),
   }
 
-  const packageProps: PackageProps[] = packagesData.map((pkg: Package) => ({
-    title: pkg.name ?? 'Unknown title',
-    photographer: pkg.photographer?.name ?? 'Annonymous',
-    category: pkg.category?.name ?? 'Unknown category',
-    price: pkg.price ? `${pkg.price}` : 'Price not available',
-    imageUrl: pkg.media?.[0]?.pictureUrl ?? '/profile-mock-image.png',
-  }))
+  const packageProps: PackageProps[] = packagesData.map(
+    (pkg: PackageVerbose) => ({
+      title: pkg.name ?? 'Unknown title',
+      photographer: pkg.photographer?.name ?? 'Annonymous',
+      category: pkg.category?.name ?? 'Unknown category',
+      price: pkg.price ? `${pkg.price}` : 'Price not available',
+      imageUrl: pkg.media?.[0]?.pictureUrl || '',
+    })
+  )
 
   return (
     <PhotographerPage

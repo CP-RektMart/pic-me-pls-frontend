@@ -90,7 +90,7 @@ export default function QuotationForm({
     )
     const calculatedPrice = totalHours * (selectedPackage?.price || 0)
     form.setValue('price', calculatedPrice)
-  }, [totalHours, selectedPackageId, packages])
+  }, [totalHours, selectedPackageId, packages, form])
 
   return (
     <FormProvider {...form}>
