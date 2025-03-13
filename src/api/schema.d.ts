@@ -1746,6 +1746,75 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  '/api/v1/photographers/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * get photographer by id
+     * @description get photographer by id
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description photographer id */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_PhotographerResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/api/v1/quotations': {
     parameters: {
       query?: never
@@ -1963,6 +2032,9 @@ export interface components {
     }
     'dto.HttpResponse-dto_PackageResponse': {
       result?: components['schemas']['dto.PackageResponse']
+    }
+    'dto.HttpResponse-dto_PhotographerResponse': {
+      result?: components['schemas']['dto.PhotographerResponse']
     }
     'dto.HttpResponse-dto_QuotationResponse': {
       result?: components['schemas']['dto.QuotationResponse']
