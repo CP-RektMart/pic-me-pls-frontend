@@ -23,6 +23,11 @@ export default function ChatCard({
         <h2 className='text-base font-medium'>
           {isPhotographer ? chat.customer : chat.photographer}
         </h2>
+        {chat.conversation.length > 0 && (
+          <p className='text-xs font-medium text-gray-500'>
+            {chat.conversation?.[chat.conversation.length - 1]?.message}
+          </p>
+        )}
       </div>
     </div>
   )

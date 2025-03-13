@@ -26,7 +26,7 @@ export const mockChats: Chat[] = [
       },
       {
         id: '2',
-        message: 'Hi',
+        message: 'Hi 1',
         chatId: '1',
         sender: 'customer',
       },
@@ -45,7 +45,7 @@ export const mockChats: Chat[] = [
       },
       {
         id: '2',
-        message: 'Hi',
+        message: 'Hi 2',
         chatId: '2',
         sender: 'customer',
       },
