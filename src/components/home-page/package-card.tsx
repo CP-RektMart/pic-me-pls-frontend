@@ -50,7 +50,7 @@ export default function PackageCard({
         <div className='flex items-center justify-between'>
           <Link
             href={photographerId ? `/photographers/${photographerId}` : '#'}
-            className='text-xs text-blue-600 hover:underline'
+            className='text-xs text-base-quaternary hover:underline'
           >
             {photographer}
           </Link>
