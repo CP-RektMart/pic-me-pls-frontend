@@ -1,4 +1,4 @@
-import MockPhotoCard from '@public/images/mock-photo-card.svg'
+import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import Image from 'next/image'
 import Link from 'next/link'
 
