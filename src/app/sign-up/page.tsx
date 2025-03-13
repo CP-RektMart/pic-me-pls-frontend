@@ -1,4 +1,4 @@
-import RegisterPageComponent from '@/components/register-page'
+import RegisterPageComponent from '@/components/register'
 
 export default async function RegisterPage() {
   return <RegisterPageComponent />

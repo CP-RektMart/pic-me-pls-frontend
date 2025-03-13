@@ -3,7 +3,7 @@
 import { motion } from 'motion/react'
 import Link from 'next/link'
 
-import SignInContent from '../register-page/sign-in-content'
+import SignInContent from '../register/sign-in-content'
 
 export default function LoginPageComponent() {
   return (
