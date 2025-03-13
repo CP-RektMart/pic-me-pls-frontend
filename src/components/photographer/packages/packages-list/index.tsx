@@ -1,6 +1,5 @@
 import { PackageVerbose } from '@/types/package'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import Link from 'next/link'
 
 import PackageCard from '@/components/home-page/package-card'
@@ -37,7 +36,7 @@ export function PhotographerPackages(props: PhotographerPackagesProps) {
                 photographer={`${pkg.photographer ? pkg.photographer.name : ''}`}
                 price={`${pkg.price}`}
                 category={`${pkg.category ? pkg.category.name : ''}`}
-                imageUrl={MockPhotoCard.src}
+                imageUrl={pkg.media?.[0]?.pictureUrl || ''}
               />
             </Link>
           ))}
