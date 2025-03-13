@@ -1,5 +1,5 @@
 import { getCategories } from '@/actions/get-categories'
-import { getQueryPackages } from '@/actions/package/get-query-packages'
+import { getQueryPackages } from '@/actions/photographer/package/get-query-packages'
 import { client } from '@/api/client'
 import { PackageVerbose } from '@/types/package'
 

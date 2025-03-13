@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
-import { updatePackage } from '@/actions/package/update-package'
+import { updatePackage } from '@/actions/photographer/package/update-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { PackageVerbose } from '@/types/package'

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Package } from '@/actions/package/get-packages'
+import { Package } from '@/actions/photographer/package/get-packages'
 import { Quotation } from '@/actions/quotation/get-quotations'
 import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'

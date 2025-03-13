@@ -1,4 +1,4 @@
-import { Package } from '@/actions/package/get-packages'
+import { Package } from '@/actions/photographer/package/get-packages'
 
 interface QuotationSummaryProps {
   totalHours: number

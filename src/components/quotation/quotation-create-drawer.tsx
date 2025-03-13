@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Package } from '@/actions/package/get-packages'
+import { Package } from '@/actions/photographer/package/get-packages'
 import { Quotation } from '@/actions/quotation/get-quotations'
 import { WindowState } from '@/types/quotation'
 import { Icon } from '@iconify/react'

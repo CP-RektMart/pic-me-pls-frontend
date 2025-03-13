@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { Package } from '@/actions/package/get-packages'
+import { Package } from '@/actions/photographer/package/get-packages'
 import createQuotationAction from '@/actions/quotation/create-quotation'
 import { Quotation } from '@/actions/quotation/get-quotations'
 import updateQuotationAction from '@/actions/quotation/update-quotation'

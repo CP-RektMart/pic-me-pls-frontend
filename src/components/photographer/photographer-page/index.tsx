@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { getPhotograhperPackages } from '@/actions/get-photographer-packages'
+import { getPhotograhperPackages } from '@/actions/photographers/get-photographer-packages'
 import { Pagination } from '@/types'
 import { PackageVerbose } from '@/types/package'
 import { Photographer } from '@/types/photographer'

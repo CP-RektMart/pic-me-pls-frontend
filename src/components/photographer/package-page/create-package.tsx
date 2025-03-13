@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 
-import CreatePackageAction from '@/actions/package/create-package'
+import CreatePackageAction from '@/actions/photographer/package/create-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { zodResolver } from '@hookform/resolvers/zod'
