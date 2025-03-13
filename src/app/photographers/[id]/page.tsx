@@ -5,13 +5,11 @@ import { notFound } from 'next/navigation'
 import PhotographerPage from '@/components/photographers/photographer'
 
 interface PageProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export default async function Page({ params }: PageProps) {
-  const photographerId = params.id
+  const photographerId = (await params).id
 
   const photographer = await getPhotographer(Number(photographerId))
 

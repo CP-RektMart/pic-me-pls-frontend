@@ -2,7 +2,7 @@
 
 import { client } from '@/api/client'
 
-import { EditPackageForm } from '@/components/photographer/package-page/edit-package'
+import { EditPackageForm } from '@/components/photographer/packages/edit/edit-package'
 
 export async function updatePackage(payload: EditPackageForm) {
   await client.PATCH('/api/v1/photographer/packages/{id}', {
