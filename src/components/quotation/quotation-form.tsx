@@ -134,7 +134,7 @@ export default function QuotationForm({
               <FormLabel className='text-sm font-medium'>Customer Id</FormLabel>
               <FormControl>
                 <Input
-                  className='font-medium'
+                  className='font-normal'
                   placeholder='Customer Id'
                   {...field}
                 />
@@ -178,8 +178,8 @@ export default function QuotationForm({
               <FormLabel className='text-sm font-medium'>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  className='font-medium'
                   placeholder='Quotation Remarks'
+                  className='font-normal'
                   {...field}
                 />
               </FormControl>
