@@ -2,14 +2,17 @@
 
 import { useCallback, useState } from 'react'
 
+import { updatePackage } from '@/actions/package/update-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { PackageVerbose } from '@/types/package'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import MockPhotoCard from '@public/images/mock-photo-card.jpg'
+import { useRouter } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import EditPackageDetailSection from '@/components/photographer/package-page/edit-package-detail'
@@ -17,6 +20,7 @@ import PhotoCard from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
 export const editpackageFormSchema = z.object({
+  id: z.number(),
   name: z.string().min(2, 'Name must be at least 2 characters'),
   packageDescription: z
     .string()
@@ -40,6 +44,7 @@ export default function EditPackage({
   initialPackage,
 }: EditPackageProps) {
   const [photoCards, setPhotoCards] = useState(initialPackage.media ?? [])
+  const router = useRouter()
 
   const handleDescriptionChange = (index: number, description: string) => {
     setPhotoCards((prev) =>
@@ -54,6 +59,7 @@ export default function EditPackage({
   const form = useForm<EditPackageForm>({
     resolver: zodResolver(editpackageFormSchema),
     defaultValues: {
+      id: initialPackage.id,
       name: initialPackage.name,
       packageDescription: initialPackage.description,
       price: initialPackage.price,
@@ -62,8 +68,27 @@ export default function EditPackage({
   })
 
   const onSubmit = async (data: EditPackageForm) => {
-    console.log(data)
-    console.log(photoCards)
+    try {
+      const photoList = photoCards.map((photo) => photo)
+      const payload = {
+        id: data.id,
+        name: data.name,
+        packageDescription: data.packageDescription,
+        price: data.price,
+        category: data.category,
+        photoCards: photoList,
+      }
+
+      console.log(payload)
+
+      await updatePackage(payload)
+      toast.success('Your package has been successfully updated')
+      router.push('/photographer/packages')
+    } catch {
+      toast.error(
+        `An error occurred while updating your package, Please try again later`
+      )
+    }
   }
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
