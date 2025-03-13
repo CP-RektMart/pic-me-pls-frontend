@@ -2,6 +2,7 @@
 
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
+import { Media } from '@/types/package'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -26,14 +27,14 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/text-area'
 
-import { EditPackageForm, EditPhotoCardForm } from './edit-package'
+import { EditPackageForm } from './edit-package'
 
 interface EditPackageDetailSectionProps {
   name: string
   description: string
   price: number
   categories: Category[]
-  photoCards: EditPhotoCardForm[]
+  photoCards: Media[]
   onSubmit: (data: EditPackageForm) => Promise<void>
   form: ReturnType<typeof useForm<EditPackageForm>>
   onDrop: (acceptedFiles: File[]) => void

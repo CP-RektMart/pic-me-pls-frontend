@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import reverifyCitizenCardAction from '@/actions/reverify-citizen-card'
+import reverifyCitizenCardAction from '@/actions/citizen-card/reverify-citizen-card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import PhotographerVerifyIcon from '@public/icons/photographer-verify.svg'

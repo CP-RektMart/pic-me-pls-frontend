@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 
-import createQuotationAction from '@/actions/create-quotation'
-import { Package } from '@/actions/get-packages'
-import { Quotation } from '@/actions/get-quotations'
-import updateQuotationAction from '@/actions/update-quotation'
+import { Package } from '@/actions/package/get-packages'
+import createQuotationAction from '@/actions/quotation/create-quotation'
+import { Quotation } from '@/actions/quotation/get-quotations'
+import updateQuotationAction from '@/actions/quotation/update-quotation'
 import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
@@ -74,7 +74,6 @@ export default function PhotographerQuotation({
     try {
       await createQuotationAction(data)
       toast.success('Your quotation has been successfully created.')
-      window.location.reload()
     } catch {
       toast.error('An error occurred while create your quotation')
     }
@@ -175,7 +174,7 @@ export default function PhotographerQuotation({
                         setCurrentQuotation(quotation)
                         setWindowstate(null)
                       }}
-                      className='hidden w-full lg:block'
+                      className='hidden lg:block'
                     />
                   </div>
                 ))}
@@ -211,7 +210,7 @@ export default function PhotographerQuotation({
                     packages={packages}
                     onSubmit={onSaveEditing}
                     setSelectedPackageId={setSelectedPackageId}
-                    selectedPackageId={selectedPackageId}
+                    selectedPackageId={currentQuotation.packageId.toString()}
                     fromDate={currentQuotation.from}
                     toDate={currentQuotation.to}
                     description={currentQuotation.description}

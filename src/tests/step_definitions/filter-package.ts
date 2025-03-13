@@ -11,7 +11,6 @@ Given('I am on the homepage for filter', async () => {
 })
 
 When('I select {string} from the category filter', async (category: string) => {
-  console.log('category:', category)
   await page.getByTestId('filter-button').click()
   await page.getByTestId('category-filter').click()
   await page.getByRole('option', { name: category }).click()
@@ -41,7 +40,6 @@ Then(
 
     for (const element of packageCategories) {
       const text = await element.textContent()
-      console.log('text:', text)
       await expect(text).toContain(category)
     }
   }

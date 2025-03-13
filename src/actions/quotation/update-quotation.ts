@@ -1,6 +1,7 @@
 'use server'
 
 import { client } from '@/api/client'
+import { revalidatePath } from 'next/cache'
 
 export interface QuotationAction {
   packageId: string
@@ -11,9 +12,14 @@ export interface QuotationAction {
   description: string
 }
 
-export default async function createQuotationAction(payload: QuotationAction) {
-  await client.POST('/api/v1/photographer/quotations', {
+export default async function updateQuotationAction(
+  quotationId: number,
+  payload: QuotationAction
+) {
+  await client.PATCH('/api/v1/photographer/quotations/{id}', {
+    params: { path: { id: quotationId } },
     body: {
+      quotationID: String(quotationId),
       customerId: parseInt(payload.customerId),
       packageId: parseInt(payload.packageId),
       price: payload.price,
@@ -22,4 +28,6 @@ export default async function createQuotationAction(payload: QuotationAction) {
       toDate: payload.to.toISOString(),
     },
   })
+
+  revalidatePath('/photographer/quotations')
 }

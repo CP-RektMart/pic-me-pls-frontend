@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { Package } from '@/actions/get-packages'
+import { Package } from '@/actions/package/get-packages'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 

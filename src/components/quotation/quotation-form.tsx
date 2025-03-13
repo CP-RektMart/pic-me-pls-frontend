@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 
-import { Package } from '@/actions/get-packages'
+import { Package } from '@/actions/package/get-packages'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -62,7 +62,7 @@ export default function QuotationForm({
   const form = useForm<CreateQuotationForm>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
-      packageId: '',
+      packageId: selectedPackageId,
       customerId: customerId,
       from: fromDate,
       to: toDate,

@@ -2,8 +2,6 @@ module.exports = {
   default: {
     paths: ['src/tests/features/**/*.feature'],
     format: [
-      'progress-bar',
-      'summary',
       'json:reports/cucumber-report.json',
       'html:reports/cucumber-report.html',
     ],
