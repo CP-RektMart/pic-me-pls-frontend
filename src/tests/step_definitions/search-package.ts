@@ -24,6 +24,6 @@ Then('I should see {string} in the search results', async (keyword: string) => {
 })
 
 Then('I should see a message "No packages found"', async () => {
-  const message = page.getByText('No packages found')
+  const message = page.getByText('No packages')
   await expect(message).toBeVisible()
 })

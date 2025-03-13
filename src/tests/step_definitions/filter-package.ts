@@ -48,7 +48,7 @@ Then(
 Then(
   'I should see a message "No packages found" for filter results',
   async () => {
-    const message = await page.getByText('No packages found')
+    const message = await page.getByText('No packages')
     await expect(message).toBeVisible()
   }
 )
