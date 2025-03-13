@@ -6,12 +6,12 @@ import { getQueryPackages } from '@/actions/package/get-query-packages'
 import { Category } from '@/types/category'
 import { PackageVerbose } from '@/types/package'
 import { User } from '@/types/user'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 
 import { handleFilter } from '@/components/home-page/filterReducer'
 import Greeting from '@/components/home-page/greeting'
-import { PackageProps } from '@/components/home-page/package-card'
-import PackageGrid from '@/components/home-page/package-grid'
+import PackageCard, { PackageProps } from '@/components/home-page/package-card'
 import SearchBar from '@/components/home-page/search-bar'
 
 export default function HomePageComponent({
@@ -82,9 +82,25 @@ export default function HomePageComponent({
           onSearchClick={onSearchClick}
         />
       </div>
-      <div className='my-6'>
-        <PackageGrid packagecards={packages} />
-      </div>
+      {packages.length === 0 ? (
+        <div className='flex min-h-[50vh] flex-col items-center justify-center gap-2'>
+          <Icon icon='lucide:package' className='text-6xl text-gray-400' />
+          <p className='font-medium text-gray-600'>No packages</p>
+        </div>
+      ) : (
+        <div className='my-6 flex flex-wrap gap-4'>
+          {packages.map((pkg, index) => (
+            <PackageCard
+              key={index}
+              title={pkg.title}
+              photographer={pkg.photographer}
+              price={pkg.price}
+              category={pkg.category}
+              imageUrl={pkg.imageUrl}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
