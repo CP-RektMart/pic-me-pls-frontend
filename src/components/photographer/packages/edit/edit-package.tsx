@@ -16,7 +16,7 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { EditPackageDetailSection } from '@/components/photographer/package-page/edit-package-detail'
-import { PhotoCard } from '@/components/photographer/package-page/photoCard'
+import { PhotoCard } from '@/components/photographer/packages/photoCard'
 import { Input } from '@/components/ui/input'
 
 export const editpackageFormSchema = z.object({

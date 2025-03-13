@@ -13,7 +13,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { PhotoCard } from '@/components/photographer/package-page/photoCard'
+import { PhotoCard } from '@/components/photographer/packages/photoCard'
 import { Input } from '@/components/ui/input'
 
 import { CreatePackageDetailSection } from './create-package-detail'
