@@ -1412,7 +1412,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpListResponse-dto_SmallPackageResponse']
+            'application/json': components['schemas']['dto.HttpListResponse-dto_PackageResponse']
           }
         }
         /** @description Bad Request */
@@ -1943,8 +1943,8 @@ export interface components {
     'dto.HttpError': {
       error?: string
     }
-    'dto.HttpListResponse-dto_SmallPackageResponse': {
-      result?: components['schemas']['dto.SmallPackageResponse'][]
+    'dto.HttpListResponse-dto_PackageResponse': {
+      result?: components['schemas']['dto.PackageResponse'][]
     }
     'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
       result?: components['schemas']['dto.PaginationResponse-dto_CategoryResponse']
