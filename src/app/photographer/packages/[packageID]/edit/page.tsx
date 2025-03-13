@@ -17,8 +17,6 @@ export default async function EditPackagePage({
     params: { path: { id: packageID } },
   })
 
-  console.log({ packageID, initialPackage })
-
   if (!initialPackage || !initialPackage.result) {
     return <div>Package not found</div>
   }

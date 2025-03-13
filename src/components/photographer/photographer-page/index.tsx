@@ -39,7 +39,6 @@ export default function PhotographerPage({
   const [searchText, setSearchText] = useState('')
 
   const onSearchClick = async () => {
-    console.log('searching for:', searchText)
     const packagesResponse = await getPhotograhperPackages({
       photographerId: photographerProfile.photographerId,
       name: searchText,

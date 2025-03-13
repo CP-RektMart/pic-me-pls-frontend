@@ -37,7 +37,6 @@ export default async function Page({
 
   const packagesData = packagesResponse?.data ?? []
   const photographer = packagesData[0]?.photographer
-  console.log(photographer)
 
   if (!photographer) {
     return (

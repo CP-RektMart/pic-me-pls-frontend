@@ -76,8 +76,6 @@ export default function EditPackage({
         photoCards: photoList,
       }
 
-      console.log(payload)
-
       await updatePackage(payload)
       toast.success('Your package has been successfully updated')
       router.push('/photographer/packages')
