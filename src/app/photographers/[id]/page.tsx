@@ -35,7 +35,7 @@ export default async function Page({
 
   const packagesData = packagesResponse?.data ?? []
   const photographer = packagesData[0]?.photographer
-  console.log(packagesData)
+  console.log(photographer)
 
   if (!photographer) {
     return <div>Photographer not found</div>
