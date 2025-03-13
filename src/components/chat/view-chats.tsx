@@ -1,6 +1,7 @@
 import { getChats } from '@/actions/chat/get-chat'
 import ProfilePic from '@public/images/profile-mock-image.png'
-import Image from 'next/image'
+
+import ChatCard from './chat-card'
 
 export default function ViewChats() {
   const chats = getChats()
@@ -14,20 +15,11 @@ export default function ViewChats() {
       <div className='space-y-2'>
         {chats.map((chat) => (
           <div key={chat.id} className='p-2'>
-            <div className='grid grid-cols-5 space-x-3'>
-              <Image
-                className='h-12 w-12 rounded-full'
-                src={ProfilePic}
-                alt='Profile photo'
-                width={48}
-                height={48}
-              />
-              <div className='col-span-4 flex flex-col'>
-                <h2 className='text-base font-medium'>
-                  {isPhotographer ? chat.customer : chat.photographer}
-                </h2>
-              </div>
-            </div>
+            <ChatCard
+              chat={chat}
+              isPhotographer={isPhotographer}
+              profilePic={ProfilePic.src}
+            />
           </div>
         ))}
       </div>
