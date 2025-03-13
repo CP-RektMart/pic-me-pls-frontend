@@ -24,14 +24,16 @@ export function PhotographerPackages(props: PhotographerPackagesProps) {
       </div>
       <div className='my-6 flex flex-wrap gap-4'>
         {packages.map((pkg, index) => (
-          <PackageCard
-            key={index}
-            title={`${pkg.name}`}
-            photographer={''}
-            price={`${pkg.price}`}
-            category={`${pkg.category ? pkg.category.name : ''}`}
-            imageUrl={MockPhotoCard.src}
-          />
+          <Link key={index} href={`/photographer/packages/${pkg.id}/edit`}>
+            <PackageCard
+              key={index}
+              title={`${pkg.name}`}
+              photographer={''}
+              price={`${pkg.price}`}
+              category={`${pkg.category ? pkg.category.name : ''}`}
+              imageUrl={MockPhotoCard.src}
+            />
+          </Link>
         ))}
       </div>
     </Container>
