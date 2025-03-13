@@ -6,7 +6,7 @@ import EditPackage from '@/components/photographer/package-page/edit-package'
 export default async function EditPackagePage({
   params,
 }: {
-  params: { packageID: string }
+  params: Promise<{ packageID: string }>
 }) {
   const categoriesResponse = await getCategories()
   const categories = categoriesResponse?.result?.data ?? []

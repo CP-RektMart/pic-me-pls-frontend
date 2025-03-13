@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 
 const statusColor: { [key: string]: string } = {
   PENDING: 'text-amber-600',
-  CONFIRM: 'text-sky-600',
+  CONFIRMED: 'text-sky-600',
   PAID: 'text-emerald-600',
   CANCELLED: 'text-red-600',
 }

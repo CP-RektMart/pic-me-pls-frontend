@@ -25,10 +25,7 @@ export const editpackageFormSchema = z.object({
   packageDescription: z
     .string()
     .min(2, 'Description must be at least 2 characters'),
-  price: z
-    .string()
-    .transform((val) => parseFloat(val))
-    .refine((val) => val > 0, 'Price must be a positive number'),
+  price: z.number().refine((val) => val > 0, 'Price must be a positive number'),
   category: z.string().refine((val) => val !== '', 'Category is required'),
 })
 
