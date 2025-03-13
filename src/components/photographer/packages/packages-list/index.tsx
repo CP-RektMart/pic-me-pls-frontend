@@ -33,7 +33,8 @@ export function PhotographerPackages(props: PhotographerPackagesProps) {
             <Link href={`/photographer/packages/${pkg.id}/edit`} key={index}>
               <PackageCard
                 title={`${pkg.name}`}
-                photographer={`${pkg.photographer ? pkg.photographer.name : ''}`}
+                photographer={`${pkg.photographer?.name || 'Anonymous'}`}
+                photographerId={pkg.photographer?.id}
                 price={`${pkg.price}`}
                 category={`${pkg.category ? pkg.category.name : ''}`}
                 imageUrl={pkg.media?.[0]?.pictureUrl || ''}
