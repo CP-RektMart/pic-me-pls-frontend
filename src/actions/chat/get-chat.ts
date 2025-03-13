@@ -51,6 +51,12 @@ export const mockChats: Chat[] = [
       },
     ],
   },
+  {
+    id: '3',
+    photographer: 'Photographer 3',
+    customer: 'Customer 3',
+    conversation: [],
+  },
 ]
 
 export function getChats(): Chat[] {
