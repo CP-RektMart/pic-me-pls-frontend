@@ -3,14 +3,14 @@ import { calculateDurationFromDate, formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
 import Link from 'next/link'
 
-import Container from '@/components/container'
+import { Container } from '@/components/container'
 import QuotationCard from '@/components/quotation/quotation-card'
 
-export default function QuotationList({
-  quotations,
-}: {
+interface QuotationListProps {
   quotations: Quotation[]
-}) {
+}
+
+export function QuotationList({ quotations }: QuotationListProps) {
   return (
     <Container className='py-6'>
       <h1 className='mb-6 text-2xl font-bold'>My Quotation</h1>

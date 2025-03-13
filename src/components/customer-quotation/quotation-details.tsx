@@ -12,7 +12,7 @@ const statusColor: { [key: string]: string } = {
   CANCELLED: 'text-red-600',
 }
 
-export default function QuotationDetails({
+export function QuotationDetails({
   quotationId,
   quotationStatus,
   packageName,

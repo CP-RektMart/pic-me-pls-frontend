@@ -10,9 +10,9 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 
-import ProfileHeader from '@/components/customer-quotation/profile-header'
 import PackageCard from '@/components/home-page/package-card'
 import SearchInput from '@/components/photographers/photographer/search-input'
+import { ProfileHeader } from '@/components/profile-header'
 
 interface PhotographerPageProps {
   photographer: Photographer

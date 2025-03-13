@@ -9,7 +9,7 @@ interface ProfileHeaderProps {
   packageNumber: number
 }
 
-export default function ProfileHeader({
+export function ProfileHeader({
   imageUrl,
   name,
   packageNumber,

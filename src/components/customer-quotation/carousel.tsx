@@ -21,7 +21,7 @@ interface ImageCarouselProps {
   }[]
 }
 
-export default function ImageCarousel({ images }: ImageCarouselProps) {
+export function ImageCarousel({ images }: ImageCarouselProps) {
   const [api, setApi] = useState<CarouselApi | null>(null)
   const [current, setCurrent] = useState<number>(0)
 

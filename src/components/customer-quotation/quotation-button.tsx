@@ -2,7 +2,7 @@ import { type QuotationStatus } from '@/types/quotation'
 
 import { Button } from '@/components/ui/button'
 
-export default function QuotationButton({
+export function QuotationButton({
   status,
   onCancel,
   onConfirm,

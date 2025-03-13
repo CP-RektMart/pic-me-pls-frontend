@@ -10,11 +10,11 @@ import {
 } from '@/types/quotation'
 import { toast } from 'sonner'
 
-import Container from '@/components/container'
-import QuotationButton from '@/components/customer-quotation/button'
-import QuotationCarousel from '@/components/customer-quotation/carousel'
-import QuotationDetails from '@/components/customer-quotation/details'
-import ProfileHeader from '@/components/customer-quotation/profile-header'
+import { Container } from '@/components/container'
+import { ImageCarousel } from '@/components/customer-quotation/carousel'
+import { QuotationButton } from '@/components/customer-quotation/quotation-button'
+import { QuotationDetails } from '@/components/customer-quotation/quotation-details'
+import { ProfileHeader } from '@/components/profile-header'
 
 export default function Page({
   quotationId,
@@ -65,7 +65,7 @@ export default function Page({
           <div className='hidden lg:block'>
             <h2 className='text-xl font-bold'>{packageName}</h2>
             <p className='mt-2 max-w-96 text-sm'>{description}</p>
-            <QuotationCarousel images={quotationImages} />
+            <ImageCarousel images={quotationImages} />
           </div>
         </div>
 

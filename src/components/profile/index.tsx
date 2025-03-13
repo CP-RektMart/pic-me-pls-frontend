@@ -29,7 +29,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import Container from '../container'
+import { Container } from '../container'
 import { Badge } from '../ui/badge'
 
 const profileSchema = z.object({
