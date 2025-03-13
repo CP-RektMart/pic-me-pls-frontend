@@ -1,6 +1,8 @@
 import { getPhotograhperPackages } from '@/actions/get-photographer-packages'
 import { PackageVerbose } from '@/types/package'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
+import Container from '@/components/container'
 import PhotographerPage from '@/components/photographer/photographer-page'
 
 interface PhotographerProfileProps {
@@ -38,7 +40,14 @@ export default async function Page({
   console.log(photographer)
 
   if (!photographer) {
-    return <div>Photographer not found</div>
+    return (
+      <Container className='py-6'>
+        <div className='flex min-h-[50vh] flex-col items-center justify-center gap-2'>
+          <Icon icon='lucide:package' className='text-6xl text-gray-400' />
+          <p className='font-medium text-gray-600'>No packages</p>
+        </div>
+      </Container>
+    )
   }
 
   const profileProps: PhotographerProfileProps = {
