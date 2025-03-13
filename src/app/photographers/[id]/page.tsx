@@ -2,7 +2,7 @@ import { getPhotographer } from '@/actions/photographers/get-photographer'
 import { getPhotograhperPackages } from '@/actions/photographers/get-photographer-packages'
 import { notFound } from 'next/navigation'
 
-import PhotographerPage from '@/components/photographer/photographer-page'
+import PhotographerPage from '@/components/photographers/photographer'
 
 interface PageProps {
   params: {

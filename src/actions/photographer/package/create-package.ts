@@ -3,7 +3,7 @@
 import { client } from '@/api/client'
 import { uploadObject } from '@/api/upload-object'
 
-import { CreatePackageForm } from '@/components/photographer/package-page/create-package'
+import { CreatePackageForm } from '@/components/photographer/packages/create/create-package'
 
 export interface CreatePackageAction extends CreatePackageForm {
   photoCards: {

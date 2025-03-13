@@ -12,7 +12,7 @@ import ProfileMockImage from '@public/images/profile-mock-image.png'
 
 import ProfileHeader from '@/components/customer-quotation/profile-header'
 import PackageCard from '@/components/home-page/package-card'
-import SearchInput from '@/components/photographer/photographer-page/search-input'
+import SearchInput from '@/components/photographers/photographer/search-input'
 
 interface PhotographerPageProps {
   photographer: Photographer

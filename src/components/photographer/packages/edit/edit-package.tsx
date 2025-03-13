@@ -15,9 +15,10 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { EditPackageDetailSection } from '@/components/photographer/package-page/edit-package-detail'
 import { PhotoCard } from '@/components/photographer/packages/photoCard'
 import { Input } from '@/components/ui/input'
+
+import { EditPackageDetailSection } from './edit-package-detail'
 
 export const editpackageFormSchema = z.object({
   id: z.number(),
