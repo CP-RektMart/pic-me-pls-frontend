@@ -1,5 +1,5 @@
 import { Package } from '@/types/package'
-import MockPhotoCard from '@public/images/mock-photo-card.svg'
+import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import Link from 'next/link'
 
 import PackageCard from '@/components/home-page/package-card'
