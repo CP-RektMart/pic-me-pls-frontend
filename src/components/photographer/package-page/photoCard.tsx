@@ -16,7 +16,7 @@ interface photoCardFormProps {
   handleDeletePhotoCard: (index: number) => void
 }
 
-export default function PhotoCard({
+export function PhotoCard({
   description,
   imageUrl,
   handleDescriptionChange,

@@ -40,7 +40,7 @@ interface EditPackageDetailSectionProps {
   onDrop: (acceptedFiles: File[]) => void
 }
 
-export default function EditPackageDetailSection({
+export function EditPackageDetailSection({
   onSubmit,
   form,
   onDrop,

@@ -15,8 +15,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import EditPackageDetailSection from '@/components/photographer/package-page/edit-package-detail'
-import PhotoCard from '@/components/photographer/package-page/photoCard'
+import { EditPackageDetailSection } from '@/components/photographer/package-page/edit-package-detail'
+import { PhotoCard } from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
 export const editpackageFormSchema = z.object({
@@ -36,10 +36,7 @@ interface EditPackageProps {
   initialPackage: PackageVerbose
 }
 
-export default function EditPackage({
-  categories,
-  initialPackage,
-}: EditPackageProps) {
+export function EditPackage({ categories, initialPackage }: EditPackageProps) {
   const [photoCards, setPhotoCards] = useState(initialPackage.media ?? [])
   const router = useRouter()
 

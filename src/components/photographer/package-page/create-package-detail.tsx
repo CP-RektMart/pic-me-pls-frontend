@@ -25,20 +25,20 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/text-area'
 
-import { CreatePackageForm, CreatePhotoCardForm } from './create-package'
+import { CreatePackageForm, PhotoCardForm } from './create-package'
 
 interface packageDetailSectionProps {
   name: string
   description: string
   price: number
-  photoCards: CreatePhotoCardForm[]
+  photoCards: PhotoCardForm[]
   onSubmit: (data: CreatePackageForm) => Promise<void>
   form: ReturnType<typeof useForm<CreatePackageForm>>
   onDrop: (acceptedFiles: File[]) => void
   categories: Category[]
 }
 
-export default function PackageDetailSection({
+export function CreatePackageDetailSection({
   onSubmit,
   form,
   onDrop,

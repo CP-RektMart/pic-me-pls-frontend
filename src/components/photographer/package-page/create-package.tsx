@@ -13,11 +13,12 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import PackageDetailSection from '@/components/photographer/package-page/package-detail'
-import PhotoCard from '@/components/photographer/package-page/photoCard'
+import { PhotoCard } from '@/components/photographer/package-page/photoCard'
 import { Input } from '@/components/ui/input'
 
-export type CreatePhotoCardForm = {
+import { CreatePackageDetailSection } from './create-package-detail'
+
+export type PhotoCardForm = {
   description: string
   image: File
 }
@@ -41,7 +42,7 @@ export interface CreatePackageProps {
 }
 
 export default function CreatePackage({ categories }: CreatePackageProps) {
-  const [photoCards, setPhotoCards] = useState<CreatePhotoCardForm[]>([])
+  const [photoCards, setPhotoCards] = useState<PhotoCardForm[]>([])
   const router = useRouter()
 
   const handleDescriptionChange = (index: number, description: string) => {
@@ -101,7 +102,7 @@ export default function CreatePackage({ categories }: CreatePackageProps) {
   return (
     <FormProvider {...form}>
       <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
-        <PackageDetailSection
+        <CreatePackageDetailSection
           name=''
           description=''
           price={0}
