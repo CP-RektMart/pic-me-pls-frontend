@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import Link from 'next/link'
 
-import PackageCard from '@/components/home-page/package-card'
+import PackageCard from './package-card'
 
 interface PackageGridProps {
   packages: PackageVerbose[]

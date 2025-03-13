@@ -1,7 +1,7 @@
 'use client'
 
-import FilterButton from '@/components/home-page/filter-button'
-import { Action, FilterState } from '@/components/home-page/filterReducer'
+import FilterButton from '@/components/home/filter-button'
+import { Action, FilterState } from '@/components/home/filterReducer'
 
 export default function SortFilterButton({
   filters,

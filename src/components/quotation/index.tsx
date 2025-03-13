@@ -11,10 +11,10 @@ import {
 import { toast } from 'sonner'
 
 import { Container } from '@/components/container'
-import { ImageCarousel } from '@/components/customer-quotation/carousel'
-import { QuotationButton } from '@/components/customer-quotation/quotation-button'
-import { QuotationDetails } from '@/components/customer-quotation/quotation-details'
 import { ProfileHeader } from '@/components/profile-header'
+import { ImageCarousel } from '@/components/quotation/carousel'
+import { QuotationButton } from '@/components/quotation/quotation-button'
+import { QuotationDetails } from '@/components/quotation/quotation-details'
 
 export default function Page({
   quotationId,

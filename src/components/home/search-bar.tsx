@@ -1,9 +1,9 @@
 import { Category } from '@/types/category'
 
-import { Action, FilterState } from '@/components/home-page/filterReducer'
-import PackageFilterButton from '@/components/home-page/package-filter-button'
-import SearchInput from '@/components/home-page/search-input'
-import SortFilterButton from '@/components/home-page/sort-filter-button'
+import { Action, FilterState } from '@/components/home/filterReducer'
+import PackageFilterButton from '@/components/home/package-filter-button'
+import SearchInput from '@/components/home/search-input'
+import SortFilterButton from '@/components/home/sort-filter-button'
 
 interface SearchBarProps {
   categories: Category[]

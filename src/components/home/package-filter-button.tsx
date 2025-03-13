@@ -5,9 +5,9 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { Category } from '@/types/category'
 
-import FilterButton from '@/components/home-page/filter-button'
-import FilterPopover from '@/components/home-page/filter-popover'
-import { Action, FilterState } from '@/components/home-page/filterReducer'
+import FilterButton from '@/components/home/filter-button'
+import FilterPopover from '@/components/home/filter-popover'
+import { Action, FilterState } from '@/components/home/filterReducer'
 
 interface PackageFilterButtonProps {
   categories: Category[]

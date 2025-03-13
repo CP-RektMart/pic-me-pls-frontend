@@ -1,6 +1,6 @@
 import { getQuotations } from '@/actions/quotation/get-quotations'
 
-import { QuotationList } from '@/components/customer-quotation/quotation-list'
+import { QuotationList } from '@/components/quotation/quotation-list'
 
 export default async function Page() {
   const quotations = await getQuotations()

@@ -1,10 +1,9 @@
 import { PackageVerbose } from '@/types/package'
 import Link from 'next/link'
 
-import PackageGrid from '@/components/home-page/package-grid'
+import { Container } from '@/components/container'
+import PackageGrid from '@/components/home/package-grid'
 import { Button } from '@/components/ui/button'
-
-import Container from '../../../container'
 
 interface PhotographerPackagesProps {
   packages: PackageVerbose[]

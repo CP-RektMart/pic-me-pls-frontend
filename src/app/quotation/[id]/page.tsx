@@ -2,7 +2,7 @@ import { client } from '@/api/client'
 import { calculateDurationFromString, formatDateToString } from '@/lib/utils'
 import { type QuotationStatus } from '@/types/quotation'
 
-import CustomerQuotation from '@/components/customer-quotation/index'
+import CustomerQuotation from '@/components/quotation/index'
 
 interface PageProps {
   params: Promise<{ id: number }>

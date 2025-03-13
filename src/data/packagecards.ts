@@ -1,4 +1,4 @@
-import { PackageProps } from '@/components/home-page/package-card'
+import { PackageProps } from '@/components/home/package-card'
 
 export const mockPackages: PackageProps[] = Array.from(
   { length: 12 },

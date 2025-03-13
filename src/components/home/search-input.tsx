@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react'
 
-import { Action, FilterState } from '@/components/home-page/filterReducer'
+import { Action, FilterState } from '@/components/home/filterReducer'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 

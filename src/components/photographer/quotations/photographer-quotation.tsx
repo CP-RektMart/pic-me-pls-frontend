@@ -13,7 +13,7 @@ import { Icon } from '@iconify/react'
 import { toast } from 'sonner'
 import z from 'zod'
 
-import { QuotationDetails } from '@/components/customer-quotation/quotation-details'
+import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
 
 import { Container } from '../../container'

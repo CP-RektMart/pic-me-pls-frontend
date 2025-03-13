@@ -10,7 +10,7 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 
-import PackageCard from '@/components/home-page/package-card'
+import PackageCard from '@/components/home/package-card'
 import SearchInput from '@/components/photographers/photographer/search-input'
 import { ProfileHeader } from '@/components/profile-header'
 

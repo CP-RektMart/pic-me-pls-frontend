@@ -8,9 +8,9 @@ import { Category } from '@/types/category'
 import { PackageVerbose } from '@/types/package'
 import { User } from '@/types/user'
 
-import { handleFilter } from '@/components/home-page/filterReducer'
-import Greeting from '@/components/home-page/greeting'
-import SearchBar from '@/components/home-page/search-bar'
+import { handleFilter } from '@/components/home/filterReducer'
+import Greeting from '@/components/home/greeting'
+import SearchBar from '@/components/home/search-bar'
 
 import PackageGrid from './package-grid'
 

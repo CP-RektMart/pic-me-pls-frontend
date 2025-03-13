@@ -16,7 +16,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 
-import { QuotationDetails } from '../../customer-quotation/quotation-details'
+import { QuotationDetails } from '../../quotation/quotation-details'
 import { CreateQuotationForm } from './photographer-quotation'
 import QuotationFormDrawer from './quotation-form-drawer'
 
