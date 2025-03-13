@@ -1,6 +1,7 @@
 import { Package } from '@/types/package'
 import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 import PackageCard from '@/components/home-page/package-card'
 import { Button } from '@/components/ui/button'
@@ -24,16 +25,15 @@ export function PhotographerPackages(props: PhotographerPackagesProps) {
       </div>
       <div className='my-6 flex flex-wrap gap-4'>
         {packages.map((pkg, index) => (
-          <Link key={index} href={`/photographer/packages/${pkg.id}/edit`}>
-            <PackageCard
-              key={index}
-              title={`${pkg.name}`}
-              photographer={''}
-              price={`${pkg.price}`}
-              category={`${pkg.category ? pkg.category.name : ''}`}
-              imageUrl={MockPhotoCard.src}
-            />
-          </Link>
+          <PackageCard
+            key={index}
+            title={`${pkg.name}`}
+            photographer={''}
+            price={`${pkg.price}`}
+            category={`${pkg.category ? pkg.category.name : ''}`}
+            imageUrl={MockPhotoCard.src}
+            onClick={() => redirect(`/photographer/packages/${pkg.id}/edit`)}
+          />
         ))}
       </div>
     </Container>
