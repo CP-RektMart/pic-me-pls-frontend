@@ -1,6 +1,7 @@
 export interface Chat {
   id: string
-  description: string
+  photographer: string
+  customer: string
   conversation: TextMessage[]
 }
 
@@ -14,7 +15,8 @@ export interface TextMessage {
 export const mockChats: Chat[] = [
   {
     id: '1',
-    description: 'Chat 1',
+    photographer: 'Photographer 1',
+    customer: 'Customer 1',
     conversation: [
       {
         id: '1',
@@ -32,7 +34,8 @@ export const mockChats: Chat[] = [
   },
   {
     id: '2',
-    description: 'Chat 2',
+    photographer: 'Photographer 2',
+    customer: 'Customer 2',
     conversation: [
       {
         id: '1',
