@@ -9,7 +9,7 @@ export default function ViewChats() {
   const isPhotographer = true
 
   return (
-    <div className='w-full space-y-4 px-5 py-4 lg:w-1/4'>
+    <div className='min-h-full w-full space-y-4 px-5 py-4 lg:w-1/4'>
       <h1 className='text-xl font-bold'>Chats</h1>
 
       <div className='space-y-2'>
