@@ -1,6 +1,6 @@
 import { auth } from '@/auth'
 
-import Container from '@/components/container'
+import { Container } from '@/components/container'
 import { Box } from '@/components/developer/box'
 
 export default async function DeveloperPage() {

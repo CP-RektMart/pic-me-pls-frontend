@@ -2,13 +2,13 @@ import { client } from '@/api/client'
 import { calculateDurationFromString, formatDateToString } from '@/lib/utils'
 import { type QuotationStatus } from '@/types/quotation'
 
-import CustomerQuotation from '@/components/customer-quotation/index'
+import CustomerQuotation from '@/components/quotation/index'
 
-export default async function Page({
-  params,
-}: {
+interface PageProps {
   params: Promise<{ id: number }>
-}) {
+}
+
+export default async function Page({ params }: PageProps) {
   const quotationId = (await params).id
 
   const { response, data } = await client.GET('/api/v1/quotations/{id}', {

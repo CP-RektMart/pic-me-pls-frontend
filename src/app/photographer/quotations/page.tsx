@@ -1,7 +1,7 @@
-import { getPackages } from '@/actions/package/get-packages'
+import { getPackages } from '@/actions/photographer/package/get-packages'
 import { getQuotations } from '@/actions/quotation/get-quotations'
 
-import PhotographerQuotation from '@/components/quotation/photographer-quotation'
+import PhotographerQuotation from '@/components/photographer/quotations/photographer-quotation'
 
 export default async function QuotationPage() {
   const quotations = await getQuotations()

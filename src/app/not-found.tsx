@@ -1,7 +1,7 @@
 import RickAshely from '@public/images/rick-roll-rick-ashley.gif'
 import Image from 'next/image'
 
-import Container from '@/components/container'
+import { Container } from '@/components/container'
 
 export default function NotFound() {
   return (

@@ -2,7 +2,7 @@ import { client } from '@/api/client'
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 import { redirect } from 'next/navigation'
 
-import ProfileComponent from '@/components/profile-page'
+import ProfileComponent from '@/components/profile'
 
 export default async function ProfilePage() {
   const { response: profileResponse, data: profile } =
