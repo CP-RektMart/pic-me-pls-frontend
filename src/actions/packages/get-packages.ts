@@ -1,6 +1,8 @@
 'use server'
 
 import { client } from '@/api/client'
+import { Pagination } from '@/types'
+import { PackageVerbose } from '@/types/package'
 
 export interface Package {
   name: string
@@ -8,7 +10,7 @@ export interface Package {
   price: number
 }
 
-export const getQueryPackages = async ({
+export const getPackages = async ({
   name,
   minPrice,
   maxPrice,
@@ -37,5 +39,16 @@ export const getQueryPackages = async ({
       },
     },
   })
-  return data
+
+  const packages: PackageVerbose[] =
+    data?.data?.sort(
+      (a: PackageVerbose, b: PackageVerbose) => (a.id ?? 0) - (b.id ?? 0)
+    ) || []
+  const res: Pagination<PackageVerbose> = {
+    data: packages,
+    page: data?.page || 0,
+    pageSize: data?.pageSize || 0,
+    totalPage: data?.totalPage || 0,
+  }
+  return res
 }
