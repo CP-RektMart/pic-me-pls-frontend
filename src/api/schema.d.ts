@@ -1300,7 +1300,10 @@ export interface paths {
       parameters: {
         query?: never
         header?: never
-        path?: never
+        path: {
+          /** @description media id */
+          mediaId: string
+        }
         cookie?: never
       }
       /** @description Media details */
