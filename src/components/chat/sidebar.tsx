@@ -12,14 +12,20 @@ export default function SidebarProfile({
   opponentProfilePic,
 }: SidebarProfileProps) {
   return (
-    <div className='hidden space-x-3 lg:block lg:w-1/4'>
-      <Image
-        className='h-12 w-12 rounded-full'
-        src={opponentProfilePic}
-        alt='Profile photo'
-        width={112}
-        height={112}
-      />
+    <div className='hidden space-x-3 space-y-4 px-5 py-4 lg:flex lg:w-1/4 lg:flex-col'>
+      <h1 className='text-xl font-bold'>
+        Your {isPhotographer ? 'Customer' : 'Photographer'}
+      </h1>
+      <div className='flex w-full justify-center'>
+        <Image
+          className='rounded-full'
+          src={opponentProfilePic}
+          alt='Profile photo'
+          width={112}
+          height={112}
+        />
+      </div>
+
       <div className='col-span-4 flex flex-col'>
         <h2 className='text-base font-medium'>
           {isPhotographer ? opponentName : 'You'}
