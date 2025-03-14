@@ -11,7 +11,8 @@ import SidebarProfile from '@/components/chat/sidebar'
 import ViewChats from '@/components/chat/view-chats'
 
 export default function ChatPage() {
-  const isPhotographer = true
+  const userRole = 'photographer'
+  const isPhotographer = userRole === 'photographer'
   const chats = getChats()
 
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null)
