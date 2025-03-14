@@ -13,7 +13,7 @@ export default function ChatMessage({
   userRole,
 }: ChatMessageProps) {
   return (
-    <div className='space-x-2.5 rounded-2xl bg-white px-3 py-2'>
+    <div className='flex flex-row space-x-2.5 px-3 py-2'>
       {sender === userRole ? null : (
         <div>
           <Image
@@ -25,7 +25,9 @@ export default function ChatMessage({
           />
         </div>
       )}
-      <p className='text-base font-medium'>{message}</p>
+      <p className='rounded-2xl bg-white px-3 py-2 text-base font-medium'>
+        {message}
+      </p>
     </div>
   )
 }

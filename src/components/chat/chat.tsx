@@ -16,7 +16,9 @@ export default function ChatTab({ chat, userRole }: ChatTabProps) {
         return (
           <div
             key={index}
-            className='space-x-2.5 rounded-2xl bg-white px-3 py-2'
+            className={`${
+              message.sender === userRole ? 'self-end' : 'self-start'
+            }`}
           >
             <ChatMessage
               message={message.message}
