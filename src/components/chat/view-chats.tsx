@@ -1,15 +1,14 @@
-import { getChats } from '@/actions/chat/get-chat'
+import { Chat } from '@/actions/chat/get-chat'
 import ProfilePic from '@public/images/profile-mock-image.png'
 
 import ChatCard from './chat-card'
 
-export default function ViewChats({
-  isPhotographer,
-}: {
+interface ViewChatsProps {
   isPhotographer: boolean
-}) {
-  const chats = getChats()
+  chats: Chat[]
+}
 
+export default function ViewChats({ isPhotographer, chats }: ViewChatsProps) {
   return (
     <div className='min-h-full w-full space-y-4 px-5 py-4 lg:w-1/4'>
       <h1 className='text-xl font-bold'>Chats</h1>
