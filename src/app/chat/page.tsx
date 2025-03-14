@@ -6,6 +6,7 @@ import { getChats } from '@/actions/chat/get-chat'
 import { Chat } from '@/actions/chat/get-chat'
 import ProfilePic from '@public/images/profile-mock-image.png'
 
+import ChatTab from '@/components/chat/chat'
 import SidebarProfile from '@/components/chat/sidebar'
 import ViewChats from '@/components/chat/view-chats'
 
@@ -23,6 +24,7 @@ export default function ChatPage() {
         setSelectedChat={setSelectedChat}
         selectedChat={selectedChat}
       />
+      <ChatTab />
       <SidebarProfile
         isPhotographer={isPhotographer}
         opponentName={selectedChat?.customer || null}
