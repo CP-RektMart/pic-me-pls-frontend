@@ -1,17 +1,23 @@
 import { Chat } from '@/actions/chat/get-chat'
 import Image from 'next/image'
 
+interface ChatCardProps {
+  chat: Chat
+  isPhotographer: boolean
+  profilePic: string
+  isSelected: boolean
+}
+
 export default function ChatCard({
   chat,
   isPhotographer,
   profilePic,
-}: {
-  chat: Chat
-  isPhotographer: boolean
-  profilePic: string
-}) {
+  isSelected,
+}: ChatCardProps) {
   return (
-    <div className='grid grid-cols-5 space-x-3'>
+    <div
+      className={`${isSelected ? 'bg-slate-100' : ''} grid grid-cols-5 space-x-3 rounded-xl p-2`}
+    >
       <Image
         className='h-12 w-12 rounded-full'
         src={profilePic}
