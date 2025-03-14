@@ -12,7 +12,7 @@ export default function SidebarProfile({
   opponentProfilePic,
 }: SidebarProfileProps) {
   return (
-    <div className='hidden space-x-3 lg:block'>
+    <div className='hidden space-x-3 lg:block lg:w-1/4'>
       <Image
         className='h-12 w-12 rounded-full'
         src={opponentProfilePic}
