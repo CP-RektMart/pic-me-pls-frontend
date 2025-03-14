@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import { Badge } from '@/components/ui/badge'
+
 export interface SidebarProfileProps {
   isPhotographer: boolean
   opponentName: string | null
@@ -26,6 +28,9 @@ export default function SidebarProfile({
           width={112}
           height={112}
         />
+        <Badge className='w-20 bg-orange-100 text-base-primary shadow-none'>
+          {isPhotographer ? 'Customer' : 'Photographer'}
+        </Badge>
       </div>
       <h2 className='w-full text-center font-bold'>{opponentName}</h2>
     </div>
