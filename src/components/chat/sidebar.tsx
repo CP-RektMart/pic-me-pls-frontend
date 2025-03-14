@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export interface SidebarProfileProps {
   isPhotographer: boolean
-  opponentName: string
+  opponentName: string | null
   opponentProfilePic: string
 }
 
@@ -12,11 +12,13 @@ export default function SidebarProfile({
   opponentProfilePic,
 }: SidebarProfileProps) {
   return (
-    <div className='hidden space-x-3 space-y-4 px-5 py-4 lg:flex lg:w-1/4 lg:flex-col'>
+    <div
+      className={`hidden space-x-3 space-y-4 px-5 py-4 lg:flex lg:w-1/4 lg:flex-col ${opponentName === null ? 'lg:hidden' : ''}`}
+    >
       <h1 className='text-xl font-bold'>
         Your {isPhotographer ? 'Customer' : 'Photographer'}
       </h1>
-      <div className='flex w-full justify-center'>
+      <div className='flex w-full flex-col items-center space-y-2'>
         <Image
           className='rounded-full'
           src={opponentProfilePic}
@@ -25,12 +27,7 @@ export default function SidebarProfile({
           height={112}
         />
       </div>
-
-      <div className='col-span-4 flex flex-col'>
-        <h2 className='text-base font-medium'>
-          {isPhotographer ? opponentName : 'You'}
-        </h2>
-      </div>
+      <h2 className='w-full text-center font-bold'>{opponentName}</h2>
     </div>
   )
 }

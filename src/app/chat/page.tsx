@@ -25,7 +25,7 @@ export default function ChatPage() {
       />
       <SidebarProfile
         isPhotographer={isPhotographer}
-        opponentName={selectedChat?.customer || ''}
+        opponentName={selectedChat?.customer || null}
         opponentProfilePic={ProfilePic.src}
       />
     </div>
