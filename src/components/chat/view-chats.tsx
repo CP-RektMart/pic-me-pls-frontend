@@ -3,10 +3,12 @@ import ProfilePic from '@public/images/profile-mock-image.png'
 
 import ChatCard from './chat-card'
 
-export default function ViewChats() {
+export default function ViewChats({
+  isPhotographer,
+}: {
+  isPhotographer: boolean
+}) {
   const chats = getChats()
-
-  const isPhotographer = true
 
   return (
     <div className='min-h-full w-full space-y-4 px-5 py-4 lg:w-1/4'>
