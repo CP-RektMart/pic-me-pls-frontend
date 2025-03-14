@@ -32,11 +32,11 @@ export default function RootLayout({
         <link rel='icon' href='/images/logo.svg' />
       </head>
       <body
-        className={`${poppins.variable} flex min-h-dvh flex-col justify-between antialiased`}
+        className={`${poppins.variable} flex max-h-screen min-h-dvh flex-col justify-between antialiased`}
       >
         <SessionProvider>
           <Navbar />
-          <main className='flex flex-1'>{children}</main>
+          <main className='flex flex-1 overflow-y-auto'>{children}</main>
           <Footer />
         </SessionProvider>
         <Toaster />
