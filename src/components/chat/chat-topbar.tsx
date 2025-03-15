@@ -33,6 +33,7 @@ export default function ChatTopBar({
           width={48}
           height={48}
         />
+
         <div className='flex flex-col space-y-2'>
           <h2 className='text-base font-medium'>{opponentName}</h2>
           <Badge
@@ -41,6 +42,13 @@ export default function ChatTopBar({
             {opponentRole === 'customer' ? 'Customer' : 'Photographer'}
           </Badge>
         </div>
+      </div>
+
+      <div
+        className='rounded-md bg-zinc-50 p-4 hover:bg-zinc-100'
+        onClick={() => console.log('Create Quotation')}
+      >
+        <Icon icon='lucide:clipboard-plus' className='size-4' />
       </div>
     </div>
   )
