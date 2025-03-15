@@ -25,9 +25,7 @@ export default function ChatMessage({
           />
         </div>
       )}
-      <p className='rounded-2xl bg-white px-3 py-2 text-base font-medium'>
-        {message}
-      </p>
+      <p className='rounded-2xl bg-white px-3 py-2 text-base'>{message}</p>
     </div>
   )
 }
