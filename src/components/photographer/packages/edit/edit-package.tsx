@@ -6,6 +6,7 @@ import { updatePackage } from '@/actions/photographer/package/update-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { PackageVerbose } from '@/types/package'
+import { Media } from '@/types/package'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import MockPhotoCard from '@public/images/mock-photo-card.jpg'
@@ -31,6 +32,9 @@ export const editpackageFormSchema = z.object({
 })
 
 export type EditPackageForm = z.infer<typeof editpackageFormSchema>
+export interface PhotoCard extends Media {
+  image?: File
+}
 
 interface EditPackageProps {
   categories: Category[]
@@ -38,7 +42,10 @@ interface EditPackageProps {
 }
 
 export function EditPackage({ categories, initialPackage }: EditPackageProps) {
-  const [photoCards, setPhotoCards] = useState(initialPackage.media ?? [])
+  const [photoCards, setPhotoCards] = useState<PhotoCard[]>(
+    initialPackage.media ?? []
+  )
+  const [delPhotoCardsId, setDelPhotoCardsId] = useState<number[]>([])
   const router = useRouter()
 
   const handleDescriptionChange = (index: number, description: string) => {
@@ -49,6 +56,13 @@ export function EditPackage({ categories, initialPackage }: EditPackageProps) {
 
   const handleDeletePhotoCard = (index: number) => {
     setPhotoCards((prev) => prev.filter((_, i) => i !== index))
+    setDelPhotoCardsId((prev) => {
+      if (!photoCards || !photoCards[index] || !photoCards[index].id) {
+        return [...prev]
+      }
+
+      return [...prev, photoCards[index].id]
+    })
   }
 
   const form = useForm<EditPackageForm>({
@@ -72,6 +86,7 @@ export function EditPackage({ categories, initialPackage }: EditPackageProps) {
         price: data.price,
         category: data.category,
         photoCards: photoList,
+        deletePhotoIds: delPhotoCardsId,
       }
 
       await updatePackage(payload)
@@ -141,14 +156,29 @@ export function EditPackage({ categories, initialPackage }: EditPackageProps) {
               <div className='grid h-full grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
                 {photoCards.map((photo, i) => (
                   <div className='flex' key={i}>
-                    <PhotoCard
-                      key={i}
-                      description={photo.description || ''}
-                      imageUrl={photo.pictureUrl || MockPhotoCard.src}
-                      handleDescriptionChange={handleDescriptionChange}
-                      index={i}
-                      handleDeletePhotoCard={handleDeletePhotoCard}
-                    />
+                    {photo.pictureUrl ? (
+                      <PhotoCard
+                        key={i}
+                        description={photo.description || ''}
+                        imageUrl={photo.pictureUrl || MockPhotoCard.src}
+                        handleDescriptionChange={handleDescriptionChange}
+                        index={i}
+                        handleDeletePhotoCard={handleDeletePhotoCard}
+                      />
+                    ) : (
+                      <PhotoCard
+                        key={i}
+                        description={photo.description || ''}
+                        imageUrl={
+                          photo.image
+                            ? URL.createObjectURL(photo.image)
+                            : MockPhotoCard.src
+                        }
+                        handleDescriptionChange={handleDescriptionChange}
+                        index={i}
+                        handleDeletePhotoCard={handleDeletePhotoCard}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
