@@ -23,7 +23,8 @@ export default function ChatTab({ chat, userRole }: ChatTabProps) {
         opponentRole={opponentRole}
         opponentProfilePic={ProfilePic.src}
       />
-      <div className='flex h-full flex-col overflow-y-auto px-5 py-4'>
+
+      <div className='flex h-full flex-col overflow-y-auto px-5 lg:py-4'>
         {chat?.conversation.map((message, index) => {
           return (
             <div
@@ -41,6 +42,7 @@ export default function ChatTab({ chat, userRole }: ChatTabProps) {
           )
         })}
       </div>
+
       <ChatInputBar />
     </div>
   )

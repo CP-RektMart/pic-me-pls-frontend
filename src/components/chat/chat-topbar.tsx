@@ -14,7 +14,7 @@ export default function ChatTopBar({
   opponentProfilePic,
 }: ChatTopBarProps) {
   return (
-    <div className='flex flex-row items-center justify-between bg-white px-5 py-2.5 lg:hidden'>
+    <div className='flex w-full flex-row items-center justify-between bg-white px-5 py-2.5 lg:hidden'>
       <div className='flex flex-row items-center space-x-3'>
         <Image
           className='rounded-full'
