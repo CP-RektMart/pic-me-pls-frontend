@@ -1,6 +1,8 @@
 import { Chat } from '@/actions/chat/get-chat'
+import ProfilePic from '@public/images/profile-mock-image.png'
 
 import ChatMessage from './chat-message'
+import ChatTopBar from './chat-topbar'
 import ChatInputBar from './input-bar'
 
 interface ChatTabProps {
@@ -9,10 +11,18 @@ interface ChatTabProps {
 }
 
 export default function ChatTab({ chat, userRole }: ChatTabProps) {
+  const opponentRole = userRole === 'photographer' ? 'customer' : 'photographer'
+  const opponentName = chat?.[opponentRole] ?? null
+
   return (
     <div
-      className={`w-1/2 flex-col space-y-2.5 bg-slate-100 lg:flex ${chat ? 'w-full' : 'hidden'} h-full`}
+      className={` ${chat ? 'w-full flex-col space-y-2.5 bg-slate-100 lg:flex lg:w-1/2' : 'hidden'} h-screen lg:h-full`}
     >
+      <ChatTopBar
+        opponentName={opponentName}
+        opponentRole={opponentRole}
+        opponentProfilePic={ProfilePic.src}
+      />
       <div className='flex h-full flex-col overflow-y-auto px-5 py-4'>
         {chat?.conversation.map((message, index) => {
           return (
