@@ -17,7 +17,9 @@ export default function ViewChats({
   selectedChat,
 }: ViewChatsProps) {
   return (
-    <div className='min-h-full w-full space-y-4 px-5 py-4 shadow-md lg:w-1/4'>
+    <div
+      className={`min-h-full w-full space-y-4 px-5 py-4 shadow-md lg:w-1/4 ${selectedChat ? `hidden lg:block` : ''}`}
+    >
       <h1 className='text-xl font-bold'>Chats</h1>
 
       <div className='space-y-2'>

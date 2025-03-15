@@ -11,7 +11,7 @@ interface ChatTabProps {
 export default function ChatTab({ chat, userRole }: ChatTabProps) {
   return (
     <div
-      className={`hidden w-1/2 flex-col space-y-2.5 bg-slate-100 lg:flex ${chat ? 'block' : 'lg:hidden'} h-full`}
+      className={`w-1/2 flex-col space-y-2.5 bg-slate-100 lg:flex ${chat ? 'w-full' : 'hidden'} h-full`}
     >
       <div className='flex h-full flex-col overflow-y-auto px-5 py-4'>
         {chat?.conversation.map((message, index) => {
