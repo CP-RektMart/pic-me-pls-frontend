@@ -1,3 +1,5 @@
+import { Chat } from '@/actions/chat/get-chat'
+import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
 import { Badge } from '../ui/badge'
@@ -6,16 +8,24 @@ interface ChatTopBarProps {
   opponentName: string | null
   opponentRole: 'photographer' | 'customer'
   opponentProfilePic: string
+  setSelectedChat: (chat: Chat | null) => void
 }
 
 export default function ChatTopBar({
   opponentName,
   opponentRole,
   opponentProfilePic,
+  setSelectedChat,
 }: ChatTopBarProps) {
   return (
     <div className='flex w-full flex-row items-center justify-between bg-white px-5 py-2.5 lg:hidden'>
       <div className='flex flex-row items-center space-x-3'>
+        <Icon
+          icon='lucide:chevron-left'
+          className='size-5'
+          onClick={() => setSelectedChat(null)}
+        />
+
         <Image
           className='rounded-full'
           src={opponentProfilePic}

@@ -25,7 +25,11 @@ export default function ChatPage() {
         setSelectedChat={setSelectedChat}
         selectedChat={selectedChat}
       />
-      <ChatTab chat={selectedChat} userRole={userRole} />
+      <ChatTab
+        chat={selectedChat}
+        userRole={userRole}
+        setSelectedChat={setSelectedChat}
+      />
       <SidebarProfile
         isPhotographer={isPhotographer}
         opponentName={selectedChat?.customer || null}

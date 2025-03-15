@@ -8,9 +8,14 @@ import ChatInputBar from './input-bar'
 interface ChatTabProps {
   chat: Chat | null
   userRole: 'photographer' | 'customer'
+  setSelectedChat: (chat: Chat | null) => void
 }
 
-export default function ChatTab({ chat, userRole }: ChatTabProps) {
+export default function ChatTab({
+  chat,
+  userRole,
+  setSelectedChat,
+}: ChatTabProps) {
   const opponentRole = userRole === 'photographer' ? 'customer' : 'photographer'
   const opponentName = chat?.[opponentRole] ?? null
 
@@ -22,6 +27,7 @@ export default function ChatTab({ chat, userRole }: ChatTabProps) {
         opponentName={opponentName}
         opponentRole={opponentRole}
         opponentProfilePic={ProfilePic.src}
+        setSelectedChat={setSelectedChat}
       />
 
       <div className='flex h-full flex-col overflow-y-auto px-5 lg:py-4'>
