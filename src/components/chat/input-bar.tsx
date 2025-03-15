@@ -1,15 +1,31 @@
+'use client'
+
+import { useRef } from 'react'
+
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 
 export default function ChatInputBar() {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleClick = () => {
+    if (inputRef.current) {
+      console.log(inputRef.current.value)
+    }
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
+  }
+
   return (
-    <div className='flex w-full items-center justify-between bg-slate-100 px-5 py-4'>
+    <div className='flex w-full items-center justify-between space-x-2.5 bg-white px-5 py-4'>
       <Input
         type='text'
         placeholder='Aa'
-        className='w-full rounded-md border-none bg-white px-3 py-2'
+        className='w-full rounded-md border-none border-zinc-200 bg-white px-3 py-2'
+        ref={inputRef}
       />
-      <Button>Send</Button>
+      <Button onClick={handleClick}>Send</Button>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { Chat } from '@/actions/chat/get-chat'
 
 import ChatMessage from './chat-message'
+import ChatInputBar from './input-bar'
 
 interface ChatTabProps {
   chat: Chat | null
@@ -10,9 +11,9 @@ interface ChatTabProps {
 export default function ChatTab({ chat, userRole }: ChatTabProps) {
   return (
     <div
-      className={`hidden w-1/2 flex-col space-y-2.5 bg-slate-100 px-5 py-4 lg:flex ${chat ? 'block' : 'lg:hidden'}`}
+      className={`hidden w-1/2 flex-col space-y-2.5 bg-slate-100 lg:flex ${chat ? 'block' : 'lg:hidden'}`}
     >
-      <div className='flex flex-col overflow-y-auto'>
+      <div className='flex flex-col overflow-y-auto px-5 py-4'>
         {chat?.conversation.map((message, index) => {
           return (
             <div
@@ -30,6 +31,7 @@ export default function ChatTab({ chat, userRole }: ChatTabProps) {
           )
         })}
       </div>
+      <ChatInputBar />
     </div>
   )
 }
