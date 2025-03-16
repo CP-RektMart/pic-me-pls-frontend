@@ -22,7 +22,12 @@ export default function ChatTab({
 
   return (
     <div
-      className={` ${chat ? 'w-full flex-col space-y-2.5 bg-slate-100 lg:flex lg:w-1/2' : 'hidden'} h-screen lg:h-full`}
+      className={cn(
+        chat
+          ? 'w-full flex-col space-y-2.5 bg-slate-100 lg:flex lg:w-1/2'
+          : 'hidden',
+        'h-screen lg:h-full'
+      )}
     >
       <ChatTopBar
         opponentName={opponentName}
