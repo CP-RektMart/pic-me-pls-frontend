@@ -27,7 +27,7 @@ export default function SidebarProfile({
       </h1>
       <div className='flex w-full flex-col items-center space-y-2'>
         <Image
-          className='rounded-full'
+          className='rounded-full object-cover'
           src={opponentProfilePic}
           alt='Profile photo'
           width={112}
