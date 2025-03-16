@@ -48,6 +48,13 @@ export function EditPackageDetailSection({
 }: EditPackageDetailSectionProps) {
   const { packageID } = useParams()
 
+  const handlePriceOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    if (!isNaN(Number(value))) {
+      form.setValue('price', Number(value))
+    }
+  }
+
   const handleDeletePackage = async () => {
     console.log(`Package ${packageID} Deleted`)
   }
@@ -144,7 +151,12 @@ export function EditPackageDetailSection({
               Price Per Hour
             </FormLabel>
             <FormControl>
-              <Input type='number' placeholder='&#3647; 200' {...field} />
+              <Input
+                type='number'
+                placeholder='&#3647; 200'
+                {...field}
+                onChange={handlePriceOnChange}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
