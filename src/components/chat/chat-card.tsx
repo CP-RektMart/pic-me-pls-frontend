@@ -1,4 +1,5 @@
 import { Chat } from '@/actions/chat/get-chat'
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 interface ChatCardProps {
@@ -16,7 +17,10 @@ export default function ChatCard({
 }: ChatCardProps) {
   return (
     <div
-      className={`${isSelected ? 'bg-slate-100' : ''} grid grid-cols-5 space-x-3 rounded-xl p-2`}
+      className={cn(
+        isSelected ? 'bg-slate-100' : '',
+        'grid grid-cols-5 space-x-3 rounded-xl p-2'
+      )}
     >
       <Image
         className='rounded-full object-cover'
