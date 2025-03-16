@@ -20,7 +20,7 @@ export default function ViewChats({
   return (
     <div
       className={cn(
-        'min-h-full w-full max-w-sm space-y-4 px-5 py-4 shadow-md lg:w-1/4',
+        'min-h-full w-full space-y-4 px-5 py-4 shadow-md lg:w-1/4',
         selectedChat ? `hidden lg:block` : ''
       )}
     >

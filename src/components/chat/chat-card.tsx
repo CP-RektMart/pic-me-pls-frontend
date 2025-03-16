@@ -19,7 +19,7 @@ export default function ChatCard({
     <div
       className={cn(
         isSelected ? 'bg-slate-100' : '',
-        'grid grid-cols-5 space-x-3 rounded-xl p-2'
+        'flex flex-row space-x-3 rounded-xl p-2'
       )}
     >
       <Image
