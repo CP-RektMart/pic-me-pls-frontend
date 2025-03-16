@@ -19,7 +19,7 @@ export default function ChatCard({
       className={`${isSelected ? 'bg-slate-100' : ''} grid grid-cols-5 space-x-3 rounded-xl p-2`}
     >
       <Image
-        className='h-12 w-12 rounded-full'
+        className='rounded-full object-cover'
         src={profilePic}
         alt='Profile photo'
         width={48}
