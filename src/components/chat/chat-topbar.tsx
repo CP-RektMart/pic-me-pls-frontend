@@ -5,6 +5,8 @@ import Image from 'next/image'
 
 import { Badge } from '@/components/ui/badge'
 
+import { Button } from '../ui/button'
+
 interface ChatTopBarProps {
   opponentName: string | null
   opponentRole: 'photographer' | 'customer'
@@ -50,12 +52,12 @@ export default function ChatTopBar({
         </div>
       </div>
 
-      <div
+      <Button
         className='rounded-md bg-zinc-50 p-4 hover:bg-zinc-100'
         onClick={() => console.log('Create Quotation')}
       >
-        <Icon icon='lucide:clipboard-plus' className='size-4' />
-      </div>
+        <Icon icon='lucide:clipboard-plus' className='size-4 text-black' />
+      </Button>
     </div>
   )
 }
