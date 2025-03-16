@@ -1,4 +1,5 @@
 import { Chat } from '@/actions/chat/get-chat'
+import { cn } from '@/lib/utils'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
@@ -37,7 +38,12 @@ export default function ChatTopBar({
         <div className='flex flex-col space-y-2'>
           <h2 className='text-base font-medium'>{opponentName}</h2>
           <Badge
-            className={`w-20 ${opponentRole === 'customer' ? `bg-orange-100 text-base-primary` : `bg-blue-100 text-blue-700`} shadow-none`}
+            className={cn(
+              'w-20 shadow-none',
+              opponentRole === 'customer'
+                ? 'bg-orange-100 text-base-primary'
+                : 'bg-blue-100 text-blue-700'
+            )}
           >
             {opponentRole === 'customer' ? 'Customer' : 'Photographer'}
           </Badge>
