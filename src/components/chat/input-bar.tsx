@@ -22,7 +22,7 @@ export default function ChatInputBar() {
       <Input
         type='text'
         placeholder='Aa'
-        className='w-full rounded-md border-none border-zinc-200 bg-white px-3 py-2'
+        className='w-full rounded-md border-zinc-200 bg-white px-3 py-2'
         ref={inputRef}
       />
       <Button onClick={handleClick}>Send</Button>
