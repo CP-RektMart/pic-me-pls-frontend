@@ -24,11 +24,7 @@ export default function ViewChats({
 
       <div className='space-y-2'>
         {chats.map((chat) => (
-          <div
-            key={chat.id}
-            className='p-2'
-            onClick={() => setSelectedChat(chat)}
-          >
+          <div key={chat.id} onClick={() => setSelectedChat(chat)}>
             <ChatCard
               chat={chat}
               isPhotographer={isPhotographer}
