@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
-import { Badge } from '../ui/badge'
+import { Badge } from '@/components/ui/badge'
 
 interface ChatTopBarProps {
   opponentName: string | null
