@@ -10,6 +10,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'var(--font-poppins)',
+          'var(--font-ibm-plex-sans-thai)',
+          'sans-serif',
+        ],
+      },
       colors: {
         base: {
           primary: 'hsl(var(--base-primary))',
