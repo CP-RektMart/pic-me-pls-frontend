@@ -17,7 +17,7 @@ export default function ChatMessage({
       {sender === userRole ? null : (
         <div>
           <Image
-            className='h-8 w-8 rounded-full'
+            className='rounded-full object-cover'
             src={ProfilePic.src}
             alt='Profile photo'
             width={32}
