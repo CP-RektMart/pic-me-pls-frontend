@@ -28,7 +28,7 @@ export default function ChatTopBar({
         />
 
         <Image
-          className='rounded-full'
+          className='rounded-full object-cover'
           src={opponentProfilePic}
           alt='Profile photo'
           width={48}
