@@ -1,4 +1,5 @@
 import { Chat } from '@/actions/chat/get-chat'
+import { cn } from '@/lib/utils'
 import ProfilePic from '@public/images/profile-mock-image.png'
 
 import ChatCard from './chat-card'
@@ -18,7 +19,10 @@ export default function ViewChats({
 }: ViewChatsProps) {
   return (
     <div
-      className={`min-h-full w-full space-y-4 px-5 py-4 shadow-md lg:w-1/4 ${selectedChat ? `hidden lg:block` : ''}`}
+      className={cn(
+        'min-h-full w-full max-w-sm space-y-4 px-5 py-4 shadow-md lg:w-1/4',
+        selectedChat ? `hidden lg:block` : ''
+      )}
     >
       <h1 className='text-xl font-bold'>Chats</h1>
 
