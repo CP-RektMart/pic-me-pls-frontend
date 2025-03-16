@@ -20,7 +20,7 @@ export default function SidebarProfile({
   return (
     <div
       className={cn(
-        'hidden space-x-3 space-y-4 px-5 py-4 shadow-md lg:flex lg:w-1/4 lg:flex-col',
+        'hidden max-w-sm space-x-3 space-y-4 px-5 py-4 shadow-md lg:flex lg:w-1/4 lg:flex-col',
         opponentName === null ? 'lg:hidden' : ''
       )}
     >
