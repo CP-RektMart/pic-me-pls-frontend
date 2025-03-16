@@ -1,4 +1,5 @@
 import { Chat } from '@/actions/chat/get-chat'
+import { cn } from '@/lib/utils'
 import ProfilePic from '@public/images/profile-mock-image.png'
 
 import ChatMessage from './chat-message'
@@ -35,9 +36,9 @@ export default function ChatTab({
           return (
             <div
               key={index}
-              className={`${
+              className={cn(
                 message.sender === userRole ? 'self-end' : 'self-start'
-              }`}
+              )}
             >
               <ChatMessage
                 message={message.message}
