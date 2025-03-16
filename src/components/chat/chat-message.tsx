@@ -13,7 +13,7 @@ export default function ChatMessage({
   userRole,
 }: ChatMessageProps) {
   return (
-    <div className='flex flex-row space-x-2.5 px-3 py-2'>
+    <div className='flex flex-row space-x-2.5 py-2'>
       {sender === userRole ? null : (
         <div>
           <Image
