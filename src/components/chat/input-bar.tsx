@@ -8,13 +8,17 @@ import { postChat } from '@/actions/chat/post-chat'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 
+interface ChatInputBarProps {
+  currentChat: Chat | null
+  userRole: 'photographer' | 'customer'
+  setSelectedChat: (chat: Chat | null) => void
+}
+
 export default function ChatInputBar({
   currentChat,
   userRole,
-}: {
-  currentChat: Chat | null
-  userRole: 'photographer' | 'customer'
-}) {
+  setSelectedChat,
+}: ChatInputBarProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
@@ -23,6 +27,10 @@ export default function ChatInputBar({
     if (inputRef.current) {
       console.log(inputRef.current.value)
       postChat(currentChat.id, inputRef.current.value, userRole)
+      setSelectedChat({
+        ...currentChat,
+        conversation: [...currentChat.conversation],
+      })
       inputRef.current.value = ''
     }
   }
