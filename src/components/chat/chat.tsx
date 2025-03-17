@@ -55,7 +55,7 @@ export default function ChatTab({
         })}
       </div>
 
-      <ChatInputBar />
+      <ChatInputBar currentChat={chat} userRole={userRole} />
     </div>
   )
 }
