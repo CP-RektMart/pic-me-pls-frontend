@@ -18,7 +18,8 @@ export default function ChatCard({
   return (
     <div
       className={cn(
-        isSelected ? 'bg-slate-100' : '',
+        isSelected && 'bg-slate-100',
+        '',
         'flex flex-row space-x-3 rounded-xl p-2'
       )}
     >

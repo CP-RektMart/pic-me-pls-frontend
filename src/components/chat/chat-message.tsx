@@ -14,7 +14,7 @@ export default function ChatMessage({
 }: ChatMessageProps) {
   return (
     <div className='flex flex-row space-x-2.5 py-2'>
-      {sender === userRole ? null : (
+      {sender !== userRole && (
         <div>
           <Image
             className='rounded-full object-cover'

@@ -21,7 +21,8 @@ export default function ViewChats({
     <div
       className={cn(
         'min-h-full w-full space-y-4 px-5 py-4 shadow-md lg:w-1/4 lg:max-w-sm',
-        selectedChat ? `hidden lg:block` : ''
+        selectedChat && `hidden lg:block`,
+        ''
       )}
     >
       <h1 className='text-xl font-bold'>Chats</h1>
