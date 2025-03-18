@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 
-import { Chat } from '@/actions/chat/get-chat'
+import { Chat, getChats } from '@/actions/chat/get-chat'
 import { postChat } from '@/actions/chat/post-chat'
 
 import { Button } from '../ui/button'
@@ -22,17 +22,18 @@ export default function ChatInputBar({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
-    if (!currentChat) return
+    if (!currentChat || !inputRef.current) return
 
-    if (inputRef.current) {
-      console.log(inputRef.current.value)
-      postChat(currentChat.id, inputRef.current.value, userRole)
-      setSelectedChat({
-        ...currentChat,
-        conversation: [...currentChat.conversation],
-      })
-      inputRef.current.value = ''
-    }
+    console.log(inputRef.current.value)
+    postChat(currentChat.id, inputRef.current.value, userRole)
+
+    const updatedChat = getChats().find((chat) => chat.id === currentChat.id)
+    if (!updatedChat) return
+    setSelectedChat({
+      ...updatedChat,
+      conversation: updatedChat.conversation,
+    })
+    inputRef.current.value = ''
   }
 
   return (
