@@ -3,6 +3,8 @@ import { BaseMessage } from '@/actions/chat/get-chat'
 import { formatDateToString } from '@/lib/utils'
 import { Icon } from '@iconify/react'
 
+import { Button } from '../ui/button'
+
 interface QuotationMessageProps {
   message: BaseMessage & QuotationMessage
 }
@@ -11,7 +13,7 @@ export default function QuotationMessage({ message }: QuotationMessageProps) {
   const quotation = message.quotation
 
   return (
-    <div className='flex h-64 w-72 flex-col space-y-3 p-4'>
+    <div className='flex flex-col space-y-3 p-4'>
       <div className='flex flex-row text-base font-bold'>
         {message.messageType}
       </div>
@@ -37,6 +39,14 @@ export default function QuotationMessage({ message }: QuotationMessageProps) {
         <Icon icon='lucide:banknote' className='size-5 self-center' />
         <p className='text-base'>{quotation.price} Baht</p>
       </div>
+
+      <Button
+        onClick={() => {
+          console.log('View Quotation ' + quotation.quotationID)
+        }}
+      >
+        View
+      </Button>
     </div>
   )
 }
