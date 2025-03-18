@@ -1,16 +1,44 @@
+import { Quotation } from '@/actions/quotation/get-quotations'
+
 export interface Chat {
   id: string
   photographer: string
   customer: string
-  conversation: TextMessage[]
+  conversation: Message[]
+}
+
+export interface BaseMessage {
+  id: string
+  chatId: string
+  sender: 'photographer' | 'customer'
 }
 
 export interface TextMessage {
-  id: string
+  type: 'text'
   message: string
-  chatId: string
-  sender: 'photographer' | 'customer'
-  type: 'text' | 'quotation'
+}
+
+export interface QuotationMessage {
+  message: '[Quotation]'
+  type: 'quotation'
+  quotation: Quotation
+}
+
+export type Message = BaseMessage & (TextMessage | QuotationMessage)
+
+const mockQuotation: Quotation = {
+  quotationID: 1234,
+  status: 'Cancel',
+  packageName: 'South Side Package',
+  packageId: 4321,
+  photographerName: 'Aungpao',
+  photographerId: 1112,
+  customerName: 'Aung Aung',
+  customerId: 1150,
+  from: new Date(),
+  to: new Date(new Date().setDate(new Date().getDate() + 1)),
+  description: 'Sample quotation description',
+  price: 500,
 }
 
 export const mockChats: Chat[] = [
@@ -172,6 +200,7 @@ export const mockChats: Chat[] = [
         chatId: '2',
         sender: 'photographer',
         type: 'quotation',
+        quotation: mockQuotation,
       },
     ],
   },

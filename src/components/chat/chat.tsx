@@ -45,12 +45,7 @@ export default function ChatTab({
                 message.sender === userRole ? 'self-end' : 'self-start'
               )}
             >
-              <ChatMessage
-                message={message.message}
-                sender={message.sender}
-                userRole={userRole}
-                type={message.type}
-              />
+              <ChatMessage message={message} userRole={userRole} />
             </div>
           )
         })}
