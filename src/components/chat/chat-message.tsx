@@ -2,7 +2,7 @@ import { Message } from '@/actions/chat/get-chat'
 import ProfilePic from '@public/images/profile-mock-image.png'
 import Image from 'next/image'
 
-import QuotationMessage from './quotation-card'
+import QuotationMessage from './quotation-message-card'
 
 interface ChatMessageProps {
   message: Message
@@ -29,7 +29,7 @@ export default function ChatMessage({ message, userRole }: ChatMessageProps) {
         </p>
       ) : (
         <div className='rounded-2xl bg-white px-3 py-2 text-base'>
-          <QuotationMessage quotation={message.quotation} />
+          <QuotationMessage message={message} />
         </div>
       )}
     </div>

@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 
 import { Chat, getChats } from '@/actions/chat/get-chat'
-import { postText } from '@/actions/chat/post-chat'
+import { postTextMessage } from '@/actions/chat/post-chat'
 
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
@@ -25,7 +25,7 @@ export default function ChatInputBar({
     if (!currentChat || !inputRef.current) return
 
     console.log(inputRef.current.value)
-    postText({
+    postTextMessage({
       chatId: currentChat.id,
       message: inputRef.current.value,
       sender: userRole,

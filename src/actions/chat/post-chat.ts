@@ -18,7 +18,12 @@ interface QuotationPostChatProps extends BasePostChatProps {
   quotation: Quotation
 }
 
-export function postText({ chatId, message, sender, type }: TextPostChatProps) {
+export function postTextMessage({
+  chatId,
+  message,
+  sender,
+  type,
+}: TextPostChatProps) {
   const chat = mockChats.find((chat) => chat.id === chatId)
 
   if (chat) {
@@ -32,7 +37,7 @@ export function postText({ chatId, message, sender, type }: TextPostChatProps) {
   }
 }
 
-export function postQuotation({
+export function postQuotationMessage({
   chatId,
   message,
   sender,
@@ -49,6 +54,7 @@ export function postQuotation({
       sender,
       type,
       quotation,
+      messageType: 'New Quotation',
     })
   }
 }

@@ -22,6 +22,7 @@ export interface QuotationMessage {
   message: '[Quotation]'
   type: 'quotation'
   quotation: Quotation
+  messageType: 'New Quotation' | 'Quotation Updated' | 'Quotation Cancelled'
 }
 
 export type Message = BaseMessage & (TextMessage | QuotationMessage)
@@ -201,6 +202,7 @@ export const mockChats: Chat[] = [
         sender: 'photographer',
         type: 'quotation',
         quotation: mockQuotation,
+        messageType: 'New Quotation',
       },
     ],
   },
