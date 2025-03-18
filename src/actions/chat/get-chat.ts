@@ -29,7 +29,7 @@ export type Message = BaseMessage & (TextMessage | QuotationMessage)
 
 const mockQuotation: Quotation = {
   quotationID: 1234,
-  status: 'Cancel',
+  status: 'PENDING',
   packageName: 'South Side Package',
   packageId: 4321,
   photographerName: 'Aungpao',
