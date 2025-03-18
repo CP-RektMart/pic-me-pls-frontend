@@ -5,12 +5,14 @@ interface ChatMessageProps {
   message: string
   sender: 'photographer' | 'customer'
   userRole: 'photographer' | 'customer'
+  type: 'text' | 'quotation'
 }
 
 export default function ChatMessage({
   message,
   sender,
   userRole,
+  type,
 }: ChatMessageProps) {
   return (
     <div className='flex flex-row space-x-2.5 py-2'>
@@ -25,7 +27,13 @@ export default function ChatMessage({
           />
         </div>
       )}
-      <p className='rounded-2xl bg-white px-3 py-2 text-base'>{message}</p>
+      {type === 'text' ? (
+        <p className='rounded-2xl bg-white px-3 py-2 text-base'>{message}</p>
+      ) : (
+        <div className='rounded-2xl bg-white px-3 py-2 text-base'>
+          Quotation
+        </div>
+      )}
     </div>
   )
 }
