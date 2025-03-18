@@ -25,7 +25,12 @@ export default function ChatInputBar({
     if (!currentChat || !inputRef.current) return
 
     console.log(inputRef.current.value)
-    postChat(currentChat.id, inputRef.current.value, userRole)
+    postChat({
+      chatId: currentChat.id,
+      message: inputRef.current.value,
+      sender: userRole,
+      type: 'text',
+    })
 
     const updatedChat = getChats().find((chat) => chat.id === currentChat.id)
     if (!updatedChat) return

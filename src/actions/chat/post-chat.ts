@@ -1,10 +1,13 @@
 import { mockChats } from './get-chat'
 
-export function postChat(
-  chatId: string,
-  message: string,
+interface PostChatProps {
+  chatId: string
+  message: string
   sender: 'photographer' | 'customer'
-) {
+  type: 'text' | 'quotation'
+}
+
+export function postChat({ chatId, message, sender, type }: PostChatProps) {
   const chat = mockChats.find((chat) => chat.id === chatId)
 
   if (chat) {
@@ -13,6 +16,7 @@ export function postChat(
       message,
       chatId,
       sender,
+      type,
     })
   }
 }
