@@ -32,6 +32,11 @@ export default function QuotationMessage({ message }: QuotationMessageProps) {
           {formatDateToString(quotation.to)}
         </p>
       </div>
+
+      <div className='flex flex-row space-x-3'>
+        <Icon icon='lucide:banknote' className='size-5 self-center' />
+        <p className='text-base'>{quotation.price} Baht</p>
+      </div>
     </div>
   )
 }
