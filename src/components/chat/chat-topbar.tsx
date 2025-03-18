@@ -53,7 +53,7 @@ export default function ChatTopBar({
       </div>
 
       <Button
-        className='rounded-md bg-zinc-50 p-4 hover:bg-zinc-100'
+        variant={'secondary'}
         onClick={() => console.log('Create Quotation')}
       >
         <Icon icon='lucide:clipboard-plus' className='size-4 text-black' />

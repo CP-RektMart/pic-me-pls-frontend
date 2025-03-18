@@ -39,7 +39,7 @@ export default function ChatInputBar({
     <div className='flex w-full items-center justify-between space-x-2.5 bg-white px-5 py-4'>
       <Input
         type='text'
-        placeholder='Aa'
+        placeholder='Message'
         className='w-full rounded-md border-zinc-200 bg-white px-3 py-2'
         ref={inputRef}
       />

@@ -41,7 +41,7 @@ export default function SidebarProfile({
       </div>
       <h2 className='w-full text-center font-bold'>{opponentName}</h2>
       <Button
-        className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-black shadow-none'
+        variant={'secondary'}
         onClick={() => console.log('Create Quotation')}
       >
         <Icon icon='lucide:clipboard-plus' className='size-5' />
