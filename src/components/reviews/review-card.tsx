@@ -3,18 +3,21 @@ import Image from 'next/image'
 
 export default function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className='flex items-center space-x-4'>
-      <Image
-        src={review.reviewerProfilePic}
-        alt='Reviewer Profile'
-        className='h-10 w-10 rounded-full'
-        width={32}
-        height={32}
-      />
-      <div className='flex flex-col'>
-        <div className='font-semibold'>{review.reviewer}</div>
-        <div className='text-sm'>{review.comment}</div>
+    <div className='flex w-full flex-col items-center space-y-2.5 rounded-2xl bg-zinc-50 p-2.5'>
+      <div className='flex w-full flex-row justify-between'>
+        <div className='flex flex-row space-x-2'>
+          <Image
+            src={review.reviewerProfilePic}
+            alt='Reviewer Profile'
+            className='rounded-full'
+            width={32}
+            height={32}
+          />
+          <div className='self-center font-semibold'>{review.reviewer}</div>
+        </div>
       </div>
+
+      <div className='self-start text-sm'>{review.comment}</div>
     </div>
   )
 }

@@ -12,7 +12,8 @@ const mockReviews: Review[] = [
   {
     id: 1,
     reviewer: 'John Doe',
-    comment: 'Great product, I love it!',
+    comment:
+      'Great product, I love it! I would recommend it to everyone. Great product, I love it! I would recommend it to everyone. Great product, I love it! I would recommend it to everyone.',
     rating: 5,
     reviewerProfilePic: ProfileMockImage.src,
   },
