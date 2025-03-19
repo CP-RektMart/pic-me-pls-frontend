@@ -204,6 +204,22 @@ export const mockChats: Chat[] = [
         quotation: mockQuotation,
         messageType: 'New Quotation',
       },
+      {
+        id: '4',
+        message:
+          "You can use Tailwind's max-w-3/4 utility along with break-words to ensure that if the text exceeds ¾ of the parent container's width, it wraps to a new line. However, Tailwind does not provide a max-w-3/4 directly, so you need to use max-w-[75%].",
+        chatId: '2',
+        sender: 'customer',
+        type: 'text',
+      },
+      {
+        id: '5',
+        message:
+          "You can use Tailwind's max-w-3/4 utility along with break-words to ensure that if the text exceeds ¾ of the parent container's width, it wraps to a new line. However, Tailwind does not provide a max-w-3/4 directly, so you need to use max-w-[75%].",
+        chatId: '2',
+        sender: 'photographer',
+        type: 'text',
+      },
     ],
   },
   {
