@@ -19,7 +19,6 @@ export default function ChatCard({
     <div
       className={cn(
         isSelected && 'bg-slate-100',
-        '',
         'flex flex-row space-x-3 rounded-xl p-2'
       )}
     >
@@ -30,12 +29,12 @@ export default function ChatCard({
         width={48}
         height={48}
       />
-      <div className='col-span-4 flex flex-col'>
-        <h2 className='text-base font-medium'>
+      <div className='col-span-4 flex w-full flex-col overflow-hidden'>
+        <h2 className='truncate text-base font-medium'>
           {isPhotographer ? chat.customer : chat.photographer}
         </h2>
         {chat.conversation.length > 0 && (
-          <p className='text-xs font-medium text-gray-500'>
+          <p className='truncate text-xs font-medium text-gray-500'>
             {chat.conversation?.[chat.conversation.length - 1]?.message}
           </p>
         )}
