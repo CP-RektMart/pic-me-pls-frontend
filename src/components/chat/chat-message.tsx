@@ -1,4 +1,5 @@
 import { Message } from '@/actions/chat/get-chat'
+import { cn } from '@/lib/utils'
 import ProfilePic from '@public/images/profile-mock-image.png'
 import Image from 'next/image'
 
@@ -11,7 +12,12 @@ interface ChatMessageProps {
 
 export default function ChatMessage({ message, userRole }: ChatMessageProps) {
   return (
-    <div className='flex flex-row space-x-2.5 py-2'>
+    <div
+      className={cn(
+        'flex flex-row space-x-2.5 py-2',
+        message.sender === userRole ? 'justify-end' : 'justify-start'
+      )}
+    >
       {message.sender !== userRole && (
         <div>
           <Image
@@ -24,7 +30,7 @@ export default function ChatMessage({ message, userRole }: ChatMessageProps) {
         </div>
       )}
       {message.type === 'text' ? (
-        <p className='rounded-2xl bg-white px-3 py-2 text-base'>
+        <p className='max-w-[75%] break-words rounded-2xl bg-white px-3 py-2 text-base'>
           {message.message}
         </p>
       ) : (

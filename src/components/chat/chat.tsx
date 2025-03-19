@@ -39,12 +39,7 @@ export default function ChatTab({
       <div className='flex h-full flex-col overflow-y-auto px-5 lg:py-4'>
         {chat?.conversation.map((message, index) => {
           return (
-            <div
-              key={index}
-              className={cn(
-                message.sender === userRole ? 'self-end' : 'self-start'
-              )}
-            >
+            <div key={index} className='w-full'>
               <ChatMessage message={message} userRole={userRole} />
             </div>
           )
