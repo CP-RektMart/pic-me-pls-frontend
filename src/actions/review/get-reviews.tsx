@@ -4,7 +4,7 @@ export interface Review {
   id: number
   reviewer: string
   comment: string
-  rating: number
+  rating: 1 | 2 | 3 | 4 | 5
   reviewerProfilePic: string
 }
 
@@ -21,7 +21,7 @@ const mockReviews: Review[] = [
     id: 2,
     reviewer: 'Jane Doe',
     comment: 'I like it, but it could be better',
-    rating: 4,
+    rating: 2,
     reviewerProfilePic: ProfileMockImage.src,
   },
   {
@@ -42,7 +42,7 @@ const mockReviews: Review[] = [
     id: 5,
     reviewer: 'Joe Doe',
     comment: 'Great product, I love it!',
-    rating: 5,
+    rating: 3,
     reviewerProfilePic: ProfileMockImage.src,
   },
 ]
