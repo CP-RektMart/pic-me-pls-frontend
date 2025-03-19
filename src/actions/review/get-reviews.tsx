@@ -1,6 +1,6 @@
 import ProfileMockImage from '@public/images/profile-mock-image.png'
 
-interface Review {
+export interface Review {
   id: number
   reviewer: string
   comment: string
