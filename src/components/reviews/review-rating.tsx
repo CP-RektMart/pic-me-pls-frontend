@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { Icon } from '@iconify/react'
 
 export default function ReviewRating({
@@ -10,9 +11,8 @@ export default function ReviewRating({
       {Array.from({ length: 5 }, (_, index) => (
         <Icon
           key={index}
-          icon='lucide:star'
+          icon={cn(index < rating ? 'mingcute:star-fill' : 'lucide:star')}
           className='size-5'
-          color={index < rating ? 'currentColor' : 'lightgray'}
         />
       ))}
     </div>
