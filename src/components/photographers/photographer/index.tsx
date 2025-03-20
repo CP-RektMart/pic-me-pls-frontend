@@ -71,6 +71,7 @@ export default function PhotographerPage(props: PhotographerPageProps) {
               imageUrl={pkg.media?.[0]?.pictureUrl || MockPhotoCard.src}
               photographerId={photographer.id}
               alt={pkg.name || 'package photo'}
+              link={`/packages/${pkg.id}`}
             />
           ))}
         </div>

@@ -12,7 +12,7 @@ export interface PackageProps {
   imageUrl: string
   photographerId?: number
   alt?: string
-  onClick?: () => void
+  link?: string
 }
 
 export default function PackageCard({
@@ -23,12 +23,28 @@ export default function PackageCard({
   imageUrl,
   photographerId,
   alt = 'package photo',
+  link,
 }: PackageProps) {
   const router = useRouter()
+
+  const handleCardClick = () => {
+    if (link) {
+      router.push(link)
+    }
+  }
+
+  const handlePhotographerClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (photographerId) {
+      router.push(`/photographers/${photographerId}`)
+    }
+  }
+
   return (
     <div
-      className='relative h-72 w-full min-w-[360px] max-w-[380px] overflow-hidden rounded-3xl shadow-lg'
+      className='relative h-72 w-full min-w-[360px] max-w-[380px] cursor-pointer overflow-hidden rounded-3xl shadow-lg' // Add cursor-pointer here
       data-testid='package-card'
+      onClick={handleCardClick}
     >
       <Image
         src={imageUrl || MockPhotoCard}
@@ -55,10 +71,7 @@ export default function PackageCard({
             {photographerId && photographer ? (
               <span
                 className='cursor-pointer text-xs text-base-quaternary hover:underline'
-                onClick={(e) => {
-                  e.stopPropagation()
-                  router.push(`/photographers/${photographerId}`)
-                }}
+                onClick={handlePhotographerClick}
               >
                 {photographer}
               </span>
