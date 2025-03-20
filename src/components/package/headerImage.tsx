@@ -15,7 +15,7 @@ export function HeaderImage({ imageUrl, title }: HeaderImageProps) {
         objectFit='cover'
       />
       <div className='absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-center text-white'>
-        <h1 className='text-3xl font-bold'>{title}</h1>
+        <h1 className='text-4xl font-bold'>{title}</h1>
       </div>
     </div>
   )
