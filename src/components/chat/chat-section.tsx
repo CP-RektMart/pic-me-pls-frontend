@@ -23,10 +23,7 @@ export default function ChatSection({
   return (
     <div
       className={cn(
-        chat
-          ? 'w-full flex-col space-y-2.5 bg-slate-100 lg:flex lg:w-1/2'
-          : 'hidden',
-        'h-screen lg:h-full'
+        chat ? 'flex w-full flex-col bg-slate-100 lg:w-1/2' : 'hidden'
       )}
     >
       <ChatTopBar
@@ -36,7 +33,7 @@ export default function ChatSection({
         setSelectedChat={setSelectedChat}
       />
 
-      <div className='flex flex-col gap-2.5 overflow-y-auto px-5 lg:py-4'>
+      <div className='flex h-full flex-col gap-2.5 overflow-y-auto px-5 py-4'>
         {chat?.conversation.map((message, index) => (
           <ChatMessage key={index} message={message} userRole={userRole} />
         ))}

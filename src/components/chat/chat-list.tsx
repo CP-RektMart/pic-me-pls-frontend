@@ -20,13 +20,13 @@ export default function ChatList({
   return (
     <div
       className={cn(
-        'min-h-full w-full space-y-4 px-5 py-4 shadow-md lg:w-1/4 lg:max-w-sm',
+        'flex w-full flex-col shadow-md lg:w-1/4 lg:max-w-sm',
         selectedChat && `hidden lg:block`
       )}
     >
-      <h1 className='text-xl font-bold'>Chats</h1>
+      <h1 className='px-5 py-4 text-xl font-bold shadow-sm'>Chats</h1>
 
-      <div className='space-y-2'>
+      <div className='h-full space-y-2 overflow-y-auto px-5 py-4'>
         {chats.map((chat) => (
           <ChatCard
             key={chat.id}

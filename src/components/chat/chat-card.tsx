@@ -32,8 +32,8 @@ export default function ChatCard({
         width={48}
         height={48}
       />
-      <div className='col-span-4 flex w-full flex-col overflow-hidden'>
-        <h2 className='truncate text-base font-medium'>
+      <div className='flex flex-col overflow-hidden'>
+        <h2 className='truncate font-medium'>
           {isPhotographer ? chat.customer : chat.photographer}
         </h2>
         {chat.conversation.length > 0 && (

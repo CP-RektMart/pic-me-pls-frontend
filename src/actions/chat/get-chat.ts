@@ -228,6 +228,12 @@ export const mockChats: Chat[] = [
     customer: 'Customer 3',
     conversation: [],
   },
+  ...Array.from({ length: 10 }, (_, i) => ({
+    id: `3-${i + 1}`,
+    photographer: 'Photographer 3',
+    customer: 'Customer 3',
+    conversation: [],
+  })),
 ]
 
 export function getChats(): Chat[] {

@@ -18,7 +18,7 @@ export default function ChatPage() {
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null)
 
   return (
-    <div className='flex w-full flex-row'>
+    <div className='flex h-[calc(100vh-7.5rem)] w-full overflow-hidden'>
       <ChatList
         isPhotographer={isPhotographer}
         chats={chats}
