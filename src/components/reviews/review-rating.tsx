@@ -11,7 +11,15 @@ export default function ReviewRating({
       {Array.from({ length: 5 }, (_, index) => (
         <Icon
           key={index}
-          icon={cn(index < rating ? 'mingcute:star-fill' : 'lucide:star')}
+          icon={cn(
+            index < rating
+              ? cn(
+                  index + 1 > rating
+                    ? 'mingcute:star-half-fill'
+                    : 'mingcute:star-fill'
+                )
+              : 'lucide:star'
+          )}
           className='size-5'
         />
       ))}

@@ -28,7 +28,7 @@ const mockReviews: Review[] = [
     id: 3,
     reviewer: 'Jack Doe',
     comment: 'Great product, I love it!',
-    rating: 5,
+    rating: 4.5,
     reviewerProfilePic: ProfileMockImage.src,
   },
   {
@@ -43,6 +43,13 @@ const mockReviews: Review[] = [
     reviewer: 'Joe Doe',
     comment: 'Great product, I love it!',
     rating: 3,
+    reviewerProfilePic: ProfileMockImage.src,
+  },
+  {
+    id: 6,
+    reviewer: 'Jill Doe',
+    comment: 'I like it, but it could be better',
+    rating: 2.5,
     reviewerProfilePic: ProfileMockImage.src,
   },
 ]
