@@ -6,7 +6,7 @@ export default function ReviewsWindow() {
   const reviews = getReviews()
 
   return (
-    <div className='hidden w-full flex-col space-y-4 rounded-xl border border-zinc-200 p-6 shadow lg:flex lg:w-[448px]'>
+    <div className='flex w-full flex-col space-y-4 border-zinc-200 p-6 lg:w-[448px] lg:rounded-xl lg:border lg:shadow'>
       <div className='w-full font-semibold'>Reviews</div>
       <div className='mt-4 flex flex-col space-y-4'>
         {reviews.map((review) => (
