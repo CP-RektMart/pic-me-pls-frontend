@@ -36,6 +36,7 @@ export function PackagePage({ package: pkg }: PackageProps) {
                   pkg.photographer?.profilePictureUrl || '/default.jpg'
                 }
                 name={pkg.photographer?.name || 'Photographer Name'}
+                isVerified={pkg.photographer?.isVerified || false}
               />
               <ChatButton label='Start Chatting' />
             </div>

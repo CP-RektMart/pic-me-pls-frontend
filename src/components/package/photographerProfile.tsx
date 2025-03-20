@@ -3,11 +3,13 @@ import Image from 'next/image'
 interface PhotographerProfileProps {
   profilePictureUrl: string
   name: string
+  isVerified: boolean
 }
 
 export function PhotographerProfile({
   profilePictureUrl,
   name,
+  isVerified,
 }: PhotographerProfileProps) {
   return (
     <div className='flex flex-col gap-4'>
@@ -24,7 +26,7 @@ export function PhotographerProfile({
           <h3 className='flex items-center gap-2 text-lg font-bold'>
             {name || 'Photographer Name'}
             <span className='rounded-full bg-[#D0FAE5] px-2 py-1 text-sm text-[#007A55]'>
-              Verified
+              {isVerified ? 'Verified' : 'Unverified'}
             </span>
           </h3>
         </div>
