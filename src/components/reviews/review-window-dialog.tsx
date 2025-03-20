@@ -23,7 +23,7 @@ export default function ReviewWindowDialog() {
             See Reviews
           </Button>
         </DialogTrigger>
-        <DialogContent className='max-w-sm overflow-scroll p-0'>
+        <DialogContent className='max-h-[506px] max-w-sm overflow-scroll p-0'>
           <DialogHeader>
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>

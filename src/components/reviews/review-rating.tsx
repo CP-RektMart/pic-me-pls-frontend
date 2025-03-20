@@ -7,7 +7,7 @@ export default function ReviewRating({
   rating: 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 3.5 | 4 | 4.5 | 5
 }) {
   return (
-    <div className='flex flex-row space-x-1 self-center'>
+    <div className='flex flex-row space-x-1 lg:self-center'>
       {Array.from({ length: 5 }, (_, index) => (
         <Icon
           key={index}
