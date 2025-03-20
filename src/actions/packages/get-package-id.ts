@@ -12,5 +12,5 @@ export const getPackage = async (id: string) => {
     return null
   }
 
-  return data as PackageVerbose
+  return data.result as PackageVerbose
 }

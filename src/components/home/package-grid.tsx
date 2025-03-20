@@ -34,7 +34,7 @@ export default function PackageGrid({
             className='w-full'
             href={`/photographer/packages/${pkg.id}/edit`}
           >
-            {/* <PackageCard
+            <PackageCard
               key={index}
               title={pkg.name || 'Unknown title'}
               photographer={pkg.photographer?.name || 'Annonymous'}
@@ -42,7 +42,7 @@ export default function PackageGrid({
               price={pkg.price ? `${pkg.price}` : 'Price not available'}
               imageUrl={pkg.media?.[0]?.pictureUrl || MockPhotoCard.src}
               alt={pkg.name || 'package photo'}
-            /> */}
+            />
           </Link>
         ) : (
           <Link key={index} className='w-full' href={`/packages/${pkg.id}`}>
