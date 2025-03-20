@@ -11,7 +11,7 @@ export default function ReviewCard({ review }: { review: Review }) {
           <Image
             src={review.reviewerProfilePic}
             alt='Reviewer Profile'
-            className='rounded-full'
+            className='rounded-full object-cover'
             width={32}
             height={32}
           />
