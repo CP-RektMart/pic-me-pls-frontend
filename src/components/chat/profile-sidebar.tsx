@@ -3,26 +3,24 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
-import { Button } from '../ui/button'
-
-export interface SidebarProfileProps {
+export interface ProfileSidebarProps {
   isPhotographer: boolean
   opponentName: string | null
   opponentProfilePic: string
 }
 
-export default function SidebarProfile({
+export default function ProfileSidebar({
   isPhotographer,
   opponentName,
   opponentProfilePic,
-}: SidebarProfileProps) {
+}: ProfileSidebarProps) {
   return (
     <div
       className={cn(
         'hidden max-w-sm space-x-3 space-y-4 px-5 py-4 shadow-md lg:flex lg:w-1/4 lg:flex-col',
-        opponentName === null && 'lg:hidden',
-        ''
+        !opponentName && 'lg:hidden'
       )}
     >
       <h1 className='text-xl font-bold'>
@@ -42,7 +40,7 @@ export default function SidebarProfile({
       </div>
       <h2 className='w-full text-center font-bold'>{opponentName}</h2>
       <Button
-        variant={'secondary'}
+        variant='secondary'
         onClick={() => console.log('Create Quotation')}
       >
         <Icon icon='lucide:clipboard-plus' className='size-5' />

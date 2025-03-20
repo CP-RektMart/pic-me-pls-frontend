@@ -14,7 +14,7 @@ export default function ChatMessage({ message, userRole }: ChatMessageProps) {
   return (
     <div
       className={cn(
-        'flex flex-row space-x-2.5 py-2',
+        'flex flex-row space-x-2.5',
         message.sender === userRole ? 'justify-end' : 'justify-start'
       )}
     >
@@ -30,13 +30,11 @@ export default function ChatMessage({ message, userRole }: ChatMessageProps) {
         </div>
       )}
       {message.type === 'text' ? (
-        <p className='max-w-[75%] break-words rounded-2xl bg-white px-3 py-2 text-base'>
+        <p className='max-w-[75%] break-words rounded-2xl bg-white px-3 py-2'>
           {message.message}
         </p>
       ) : (
-        <div className='rounded-2xl bg-white px-3 py-2 text-base'>
-          <QuotationMessage message={message} />
-        </div>
+        <QuotationMessage message={message} />
       )}
     </div>
   )

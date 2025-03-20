@@ -7,6 +7,7 @@ interface ChatCardProps {
   isPhotographer: boolean
   profilePic: string
   isSelected: boolean
+  setSelectedChat: (chat: Chat) => void
 }
 
 export default function ChatCard({
@@ -14,13 +15,15 @@ export default function ChatCard({
   isPhotographer,
   profilePic,
   isSelected,
+  setSelectedChat,
 }: ChatCardProps) {
   return (
     <div
       className={cn(
-        isSelected && 'bg-slate-100',
-        'flex flex-row space-x-3 rounded-xl p-2'
+        'flex flex-row space-x-3 rounded-xl p-2',
+        isSelected && 'bg-slate-100'
       )}
+      onClick={() => setSelectedChat(chat)}
     >
       <Image
         className='rounded-full object-cover'

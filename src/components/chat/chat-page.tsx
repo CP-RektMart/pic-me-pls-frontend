@@ -6,9 +6,9 @@ import { getChats } from '@/actions/chat/get-chat'
 import { Chat } from '@/actions/chat/get-chat'
 import ProfilePic from '@public/images/profile-mock-image.png'
 
-import ChatTab from '@/components/chat/chat'
-import SidebarProfile from '@/components/chat/sidebar'
-import ViewChats from '@/components/chat/view-chats'
+import ChatList from '@/components/chat/chat-list'
+import ChatSection from '@/components/chat/chat-section'
+import ProfileSidebar from '@/components/chat/profile-sidebar'
 
 export default function ChatPage() {
   const userRole = 'photographer'
@@ -19,18 +19,18 @@ export default function ChatPage() {
 
   return (
     <div className='flex w-full flex-row'>
-      <ViewChats
+      <ChatList
         isPhotographer={isPhotographer}
         chats={chats}
         setSelectedChat={setSelectedChat}
         selectedChat={selectedChat}
       />
-      <ChatTab
+      <ChatSection
         chat={selectedChat}
         userRole={userRole}
         setSelectedChat={setSelectedChat}
       />
-      <SidebarProfile
+      <ProfileSidebar
         isPhotographer={isPhotographer}
         opponentName={selectedChat?.customer || null}
         opponentProfilePic={ProfilePic.src}

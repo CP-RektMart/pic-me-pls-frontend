@@ -6,17 +6,17 @@ import ChatMessage from './chat-message'
 import ChatTopBar from './chat-topbar'
 import ChatInputBar from './input-bar'
 
-interface ChatTabProps {
+interface ChatSectionProps {
   chat: Chat | null
   userRole: 'photographer' | 'customer'
   setSelectedChat: (chat: Chat | null) => void
 }
 
-export default function ChatTab({
+export default function ChatSection({
   chat,
   userRole,
   setSelectedChat,
-}: ChatTabProps) {
+}: ChatSectionProps) {
   const opponentRole = userRole === 'photographer' ? 'customer' : 'photographer'
   const opponentName = chat?.[opponentRole] ?? null
 
@@ -36,14 +36,10 @@ export default function ChatTab({
         setSelectedChat={setSelectedChat}
       />
 
-      <div className='flex h-full flex-col overflow-y-auto px-5 lg:py-4'>
-        {chat?.conversation.map((message, index) => {
-          return (
-            <div key={index} className='w-full'>
-              <ChatMessage message={message} userRole={userRole} />
-            </div>
-          )
-        })}
+      <div className='flex flex-col gap-2.5 overflow-y-auto px-5 lg:py-4'>
+        {chat?.conversation.map((message, index) => (
+          <ChatMessage key={index} message={message} userRole={userRole} />
+        ))}
       </div>
 
       <ChatInputBar

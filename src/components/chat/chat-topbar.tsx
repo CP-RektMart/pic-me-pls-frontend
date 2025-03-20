@@ -4,8 +4,7 @@ import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
 import { Badge } from '@/components/ui/badge'
-
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 
 interface ChatTopBarProps {
   opponentName: string | null
@@ -53,7 +52,7 @@ export default function ChatTopBar({
       </div>
 
       <Button
-        variant={'secondary'}
+        variant='secondary'
         onClick={() => console.log('Create Quotation')}
       >
         <Icon icon='lucide:clipboard-plus' className='size-4 text-black' />

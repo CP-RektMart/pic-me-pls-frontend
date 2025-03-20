@@ -4,39 +4,38 @@ import ProfilePic from '@public/images/profile-mock-image.png'
 
 import ChatCard from './chat-card'
 
-interface ViewChatsProps {
+interface ChatListProps {
   isPhotographer: boolean
   chats: Chat[]
   setSelectedChat: (chat: Chat) => void
   selectedChat?: Chat | null
 }
 
-export default function ViewChats({
+export default function ChatList({
   isPhotographer,
   chats,
   setSelectedChat,
   selectedChat,
-}: ViewChatsProps) {
+}: ChatListProps) {
   return (
     <div
       className={cn(
         'min-h-full w-full space-y-4 px-5 py-4 shadow-md lg:w-1/4 lg:max-w-sm',
-        selectedChat && `hidden lg:block`,
-        ''
+        selectedChat && `hidden lg:block`
       )}
     >
       <h1 className='text-xl font-bold'>Chats</h1>
 
       <div className='space-y-2'>
         {chats.map((chat) => (
-          <div key={chat.id} onClick={() => setSelectedChat(chat)}>
-            <ChatCard
-              chat={chat}
-              isPhotographer={isPhotographer}
-              profilePic={ProfilePic.src}
-              isSelected={selectedChat?.id === chat.id}
-            />
-          </div>
+          <ChatCard
+            key={chat.id}
+            chat={chat}
+            isPhotographer={isPhotographer}
+            profilePic={ProfilePic.src}
+            isSelected={selectedChat?.id === chat.id}
+            setSelectedChat={setSelectedChat}
+          />
         ))}
       </div>
     </div>
