@@ -29,7 +29,7 @@ export default function ReviewWindowDialog() {
             <DialogDescription></DialogDescription>
           </DialogHeader>
           <ReviewsWindow />
-          <DialogFooter className='sm:justify-start'></DialogFooter>
+          <DialogFooter></DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
