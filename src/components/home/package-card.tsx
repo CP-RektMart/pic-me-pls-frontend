@@ -24,7 +24,7 @@ export default function PackageCard({
 }: PackageProps) {
   return (
     <div
-      className='relative h-72 w-full min-w-[360px] max-w-[380px] overflow-hidden rounded-3xl shadow-lg'
+      className='relative h-72 w-full max-w-[380px] overflow-hidden rounded-3xl shadow-lg md:min-w-[360px]'
       data-testid='package-card'
     >
       <Image

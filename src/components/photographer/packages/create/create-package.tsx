@@ -101,7 +101,7 @@ export default function CreatePackage({ categories }: CreatePackageProps) {
 
   return (
     <FormProvider {...form}>
-      <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
+      <div className='flex min-h-full w-full flex-col bg-gray-100 lg:flex-row'>
         <CreatePackageDetailSection
           name=''
           description=''
