@@ -8,6 +8,7 @@ import { Category } from '@/types/category'
 import { PackageVerbose } from '@/types/package'
 import { User } from '@/types/user'
 
+import { Container } from '@/components/container'
 import { handleFilter } from '@/components/home/filterReducer'
 import Greeting from '@/components/home/greeting'
 import SearchBar from '@/components/home/search-bar'
@@ -60,7 +61,7 @@ export default function HomePageComponent({
   }, [filters.sort])
 
   return (
-    <div className='max-w-screen flex w-full flex-col px-4 pt-4 md:px-32'>
+    <Container className='py-6'>
       <div className='flex flex-col gap-4 md:flex-row md:items-center'>
         <Greeting
           userName={profile?.name}
@@ -74,6 +75,6 @@ export default function HomePageComponent({
         />
       </div>
       <PackageGrid packages={packages} />
-    </div>
+    </Container>
   )
 }

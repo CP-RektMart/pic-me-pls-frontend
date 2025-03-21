@@ -24,14 +24,10 @@ export default function PackageGrid({
   }
 
   return (
-    <div className='my-6 flex flex-wrap gap-4'>
+    <div className='my-6 flex flex-col gap-4 md:flex-row md:flex-wrap'>
       {packages.map((pkg, index) =>
         isPhotographer ? (
-          <Link
-            key={index}
-            className='w-full'
-            href={`/photographer/packages/${pkg.id}/edit`}
-          >
+          <Link key={index} href={`/photographer/packages/${pkg.id}/edit`}>
             <PackageCard
               key={index}
               title={pkg.name || 'Unknown title'}

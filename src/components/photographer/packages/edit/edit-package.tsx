@@ -116,7 +116,7 @@ export function EditPackage({ categories, initialPackage }: EditPackageProps) {
 
   return (
     <FormProvider {...form}>
-      <div className='flex w-full flex-col bg-gray-100 lg:flex-row'>
+      <div className='flex min-h-full w-full flex-col bg-gray-100 lg:flex-row'>
         <EditPackageDetailSection
           categories={categories}
           name=''

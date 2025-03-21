@@ -40,10 +40,10 @@ export default function RootLayout({
         <title>PicMePls</title>
         <link rel='icon' href='/images/logo.svg' />
       </head>
-      <body className='flex min-h-dvh flex-col justify-between font-sans antialiased'>
+      <body className='flex min-h-dvh flex-col font-sans antialiased'>
         <SessionProvider>
           <Navbar />
-          <main className='flex flex-1'>{children}</main>
+          <main className='flex w-full flex-1'>{children}</main>
           <Footer />
         </SessionProvider>
         <Toaster />
