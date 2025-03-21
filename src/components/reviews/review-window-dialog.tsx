@@ -15,11 +15,11 @@ import ReviewsWindow from './reviews-window'
 
 export default function ReviewWindowDialog() {
   return (
-    <div className='lg:hidden'>
+    <div className='w-full lg:hidden'>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant={'secondary'} className='space-x-2 px-4 py-2'>
-            <Icon icon={'iconamoon:comment'} />
+          <Button variant='secondary' className='w-full space-x-2 px-4 py-2'>
+            <Icon icon='lucide:message-circle' />
             See Reviews
           </Button>
         </DialogTrigger>

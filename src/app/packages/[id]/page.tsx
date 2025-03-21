@@ -3,7 +3,7 @@ import ReviewsWindow from '@/components/reviews/reviews-window'
 
 export default function PackagePage() {
   return (
-    <div className='p-5'>
+    <div className='w-full p-5'>
       <div className='hidden lg:flex'>
         <ReviewsWindow />
       </div>
