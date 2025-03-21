@@ -20,7 +20,7 @@ export default function ReviewRating({
                 )
               : 'lucide:star'
           )}
-          className='size-5'
+          className='size-5 text-yellow-400'
         />
       ))}
     </div>

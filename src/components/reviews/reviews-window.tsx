@@ -18,7 +18,7 @@ export default function ReviewsWindow() {
           ))
         ) : (
           <div className='flex min-h-96 flex-col items-center justify-center space-y-2'>
-            <Icon icon='material-symbols:search' className='size-12' />
+            <Icon icon='lucide:search' className='size-12' />
             No reviews yet
           </div>
         )}
