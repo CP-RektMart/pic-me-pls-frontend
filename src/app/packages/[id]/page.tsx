@@ -1,14 +1,5 @@
-import ReviewWindowDialog from '@/components/reviews/review-window-dialog'
-import ReviewsWindow from '@/components/reviews/reviews-window'
+import ReviewComponent from '@/components/reviews/index'
 
-export default function PackagePage() {
-  return (
-    <div className='w-full p-5'>
-      <div className='hidden lg:flex'>
-        <ReviewsWindow />
-      </div>
-
-      <ReviewWindowDialog />
-    </div>
-  )
+export default function ReviewPage() {
+  return <ReviewComponent />
 }
