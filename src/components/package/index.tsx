@@ -1,12 +1,13 @@
 'use client'
 
 import { PackageVerbose } from '@/types/package'
+import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { Container } from '@/components/container'
+import { Button } from '@/components/ui/button'
 
-import { ChatButton } from './chatButton'
 import { DescriptionSection } from './descriptionSection'
 import GoBackButton from './goBackButton'
 import { HeaderImage } from './headerImage'
@@ -42,14 +43,13 @@ export function PackagePage({ package: pkg }: PackageProps) {
 
           <div className='col-span-1 space-y-4 lg:col-span-4'>
             <div className='flex flex-col gap-4 rounded-lg border p-4'>
-              <Link href={`/photographer/${pkg.photographer?.id}`} passHref>
+              <Link href={`/photographers/${pkg.photographer?.id}`} passHref>
                 <ProfileThumbnail
                   profilePictureUrl={
                     pkg.photographer?.profilePictureUrl || '/default.jpg'
                   }
                   name={pkg.photographer?.name || 'Photographer Name'}
                   haveVerifiedBadge={true}
-                  isVerified={pkg.photographer?.isVerified || false}
                   imageSize={50}
                 />
               </Link>
@@ -60,7 +60,10 @@ export function PackagePage({ package: pkg }: PackageProps) {
                 <span>0 Jobs done</span>
                 {/* TODO: Add real data here from the API */}
               </p>
-              <ChatButton label='Start Chatting' />
+              <Button className='w-full bg-black text-white'>
+                <Icon icon='bx:conversation' className='size-5' /> Start
+                Chatting
+              </Button>
             </div>
             <ReviewsSection reviews={pkg.reviews ?? []} />
           </div>

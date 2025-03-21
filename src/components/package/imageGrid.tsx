@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Media } from '@/types/package'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function ImageGrid({ media }: { media: Media[] }) {
   return (
@@ -25,7 +26,7 @@ function ImageWithLoading({ src, alt }: { src: string; alt: string }) {
       {loading && (
         <div className='absolute inset-0 animate-pulse bg-gray-200'></div>
       )}
-      <a href={src} target='_blank' rel='noopener noreferrer'>
+      <Link href={src} target='_blank' rel='noopener noreferrer'>
         <Image
           src={src}
           alt={alt}
@@ -34,7 +35,7 @@ function ImageWithLoading({ src, alt }: { src: string; alt: string }) {
           className={`rounded-lg transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}
           onLoadingComplete={() => setLoading(false)}
         />
-      </a>
+      </Link>
     </div>
   )
 }

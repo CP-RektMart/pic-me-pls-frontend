@@ -42,7 +42,7 @@ export default function PackageCard({
 
   return (
     <div
-      className='relative h-72 w-full min-w-[360px] max-w-[380px] cursor-pointer overflow-hidden rounded-3xl shadow-lg' // Add cursor-pointer here
+      className='relative h-72 w-full min-w-[360px] max-w-[380px] cursor-pointer overflow-hidden rounded-3xl shadow-lg'
       data-testid='package-card'
       onClick={handleCardClick}
     >

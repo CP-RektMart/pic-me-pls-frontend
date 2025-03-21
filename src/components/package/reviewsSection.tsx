@@ -23,7 +23,6 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
                     }
                     name={review.customer?.name || 'Anonymous'}
                     haveVerifiedBadge={false}
-                    isVerified={false}
                     imageSize={35}
                   />
                   <div className='flex gap-1'>
