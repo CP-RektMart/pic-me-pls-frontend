@@ -4,16 +4,64 @@ import { Media } from '@/types/package'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { Button } from '../ui/button'
+
 export function ImageGrid({ media }: { media: Media[] }) {
+  const imagesPerPage = 6
+  const totalPages = Math.ceil(media.length / imagesPerPage)
+
+  const [currentPage, setCurrentPage] = useState(0)
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage((prevPage) => prevPage + 1)
+    }
+  }
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage((prevPage) => prevPage - 1)
+    }
+  }
+
+  const startIndex = currentPage * imagesPerPage
+  const currentMedia = media.slice(startIndex, startIndex + imagesPerPage)
+
   return (
-    <div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-      {media?.map((mediaItem, index) => (
-        <ImageWithLoading
-          key={index}
-          src={mediaItem.pictureUrl || '/default.jpg'}
-          alt={`Image ${index + 1}`}
-        />
-      ))}
+    <div>
+      <div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        {currentMedia?.map((mediaItem, index) => (
+          <ImageWithLoading
+            key={index}
+            src={mediaItem.pictureUrl || '/default.jpg'}
+            alt={`Image ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {totalPages > 1 && (
+        <div className='mt-4 flex items-center justify-between'>
+          <Button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 0}
+            className='rounded-lg px-4 py-2 text-white disabled:bg-gray-400'
+          >
+            Previous
+          </Button>
+
+          <span className='text-lg'>
+            Page {currentPage + 1} of {totalPages}
+          </span>
+
+          <Button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages - 1}
+            className='rounded-lg px-4 py-2 text-white disabled:bg-gray-400'
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
