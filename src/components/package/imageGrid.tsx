@@ -27,16 +27,28 @@ export function ImageGrid({ media }: { media: Media[] }) {
   const startIndex = currentPage * imagesPerPage
   const currentMedia = media.slice(startIndex, startIndex + imagesPerPage)
 
+  const paddedMedia = [
+    ...currentMedia,
+    ...Array(imagesPerPage - currentMedia.length).fill(null),
+  ]
+
   return (
     <div>
       <div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {currentMedia?.map((mediaItem, index) => (
-          <ImageWithLoading
-            key={index}
-            src={mediaItem.pictureUrl || '/default.jpg'}
-            alt={`Image ${index + 1}`}
-          />
-        ))}
+        {paddedMedia.map((mediaItem, index) =>
+          mediaItem ? (
+            <ImageWithLoading
+              key={index}
+              src={mediaItem.pictureUrl || '/default.jpg'}
+              alt={`Image ${index + 1}`}
+            />
+          ) : (
+            <div
+              key={index}
+              className='relative h-[180px] w-full bg-transparent'
+            ></div>
+          )
+        )}
       </div>
 
       {totalPages > 1 && (
