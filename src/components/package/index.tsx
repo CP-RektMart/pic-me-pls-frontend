@@ -32,6 +32,7 @@ export function PackagePage({ package: pkg }: PackageProps) {
       <HeaderImage
         imageUrl={pkg.media?.[0]?.pictureUrl || '/default.jpg'}
         title={pkg.name || 'Package image'}
+        category={pkg.category?.name || 'Category'}
       />
 
       <Container className='mt-6'>
