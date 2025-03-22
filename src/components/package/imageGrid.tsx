@@ -34,40 +34,55 @@ export function ImageGrid({ media }: { media: Media[] }) {
   const startIndex = currentPage * imagesPerPage
   const currentMedia = media.slice(startIndex, startIndex + imagesPerPage)
 
+  const paddedMedia = [
+    ...currentMedia,
+    ...Array(imagesPerPage - currentMedia.length).fill(null),
+  ]
+
   return (
     <div>
       <div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {currentMedia.map((mediaItem, index) => (
-          <Dialog key={index}>
-            <DialogTrigger asChild>
-              <Button
-                variant='secondary'
-                className='relative h-[180px] w-full'
-                onClick={() => setSelectedMedia(mediaItem)}
-              >
-                <ImageWithLoading
-                  src={mediaItem.pictureUrl || '/default.jpg'}
-                  alt={`Image ${index + 1}`}
-                />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className='max-w-6xl bg-white'>
-              <DialogHeader>
-                <DialogTitle className='text-l px-4 py-1 text-center font-bold text-black'>
-                  {selectedMedia?.description}
-                </DialogTitle>
-              </DialogHeader>
-              <div className='relative flex h-[300px] w-full items-center justify-center md:h-[600px]'>
-                {selectedMedia?.pictureUrl && (
+        {paddedMedia.map((mediaItem, index) =>
+          mediaItem ? (
+            <Dialog key={index}>
+              <DialogTrigger asChild>
+                <Button
+                  variant='secondary'
+                  className='relative h-[180px] w-full'
+                  onClick={() => setSelectedMedia(mediaItem)}
+                >
                   <ImageWithLoading
-                    src={selectedMedia.pictureUrl}
-                    alt='Full size'
+                    src={mediaItem.pictureUrl || '/default.jpg'}
+                    alt={`Image ${index + 1}`}
                   />
-                )}
-              </div>
-            </DialogContent>
-          </Dialog>
-        ))}
+                </Button>
+              </DialogTrigger>
+
+              {selectedMedia && selectedMedia === mediaItem && (
+                <DialogContent className='max-w-sm rounded-lg bg-white md:max-w-6xl'>
+                  <DialogHeader>
+                    <DialogTitle className='text-l px-4 py-1 text-center font-bold text-black'>
+                      {selectedMedia.description}
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className='relative flex h-[300px] w-full items-center justify-center md:h-[600px]'>
+                    {selectedMedia?.pictureUrl && (
+                      <ImageWithLoading
+                        src={selectedMedia.pictureUrl || '/default.jpg'}
+                        alt='Full size'
+                      />
+                    )}
+                  </div>
+                </DialogContent>
+              )}
+            </Dialog>
+          ) : (
+            <div
+              key={index}
+              className='relative w-full bg-transparent md:h-[180px]'
+            ></div>
+          )
+        )}
       </div>
 
       {totalPages > 1 && (
