@@ -37,7 +37,7 @@ export function PackagePage({ package: pkg }: PackageProps) {
       />
 
       <Container className='mt-6'>
-        <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
+        <div className='grid grid-cols-1 gap-8 lg:grid-cols-12 lg:px-6'>
           <div className='col-span-1 lg:col-span-8'>
             <DescriptionSection
               description={pkg.description || 'No description'}
@@ -62,9 +62,9 @@ export function PackagePage({ package: pkg }: PackageProps) {
                 <span>0 Jobs done</span>
                 {/* TODO: Add real data here from the API */}
               </p>
-              <Button className='w-full bg-black text-white'>
-                <Icon icon='bx:conversation' className='size-5' /> Start
-                Chatting
+              <Button className='inline-flex w-full items-center justify-center bg-black text-white'>
+                <Icon icon='lucide:messages-square' className='mr-2 size-5' />
+                <span className='whitespace-nowrap'>Start Chatting</span>
               </Button>
             </div>
             <ReviewComponent reviews={pkg.reviews ?? []} />

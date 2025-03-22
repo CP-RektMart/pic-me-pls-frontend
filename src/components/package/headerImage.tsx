@@ -18,7 +18,7 @@ export function HeaderImage({ imageUrl, title, category }: HeaderImageProps) {
       <div className='absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-center text-white'>
         <h1 className='text-4xl font-bold'>{title}</h1>
         <span className='text-md mt-5 flex items-center gap-2'>
-          📌 {category}
+          🗂️ {category}
         </span>
       </div>
     </div>

@@ -10,9 +10,9 @@ const GoBackButton: React.FC<GoBackButtonProps> = ({ onClick }) => {
   return (
     <Button
       onClick={onClick}
-      className='absolute left-4 top-[80px] z-10 bg-black bg-opacity-40 text-sm font-bold text-white md:top-[70px]'
+      className='absolute left-4 top-20 z-10 bg-black bg-opacity-40 text-sm font-bold text-white'
     >
-      <Icon icon='mdi:arrow-left' className='size-5' />
+      <Icon icon='lucide:arrow-left' className='size-5' />
       Back
     </Button>
   )

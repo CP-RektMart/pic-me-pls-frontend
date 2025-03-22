@@ -26,7 +26,7 @@ export function ProfileThumbnail({
       <div className='flex flex-col items-center gap-2'>
         <h3 className='flex items-center gap-2 text-lg font-bold'>
           {name || 'Name'}
-          {haveVerifiedBadge ? (
+          {haveVerifiedBadge && (
             <Badge
               variant='secondary'
               className='gap-1 bg-green-100 text-green-700'
@@ -34,7 +34,7 @@ export function ProfileThumbnail({
               <Icon icon='lucide:verified' />
               Verified
             </Badge>
-          ) : null}
+          )}
         </h3>
       </div>
     </div>
