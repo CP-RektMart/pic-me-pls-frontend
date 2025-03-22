@@ -37,6 +37,7 @@ export default async function CreatePackageAction(
       }
     })
   )
+  console.log(photoCardObject)
 
   await client.POST('/api/v1/photographer/packages', {
     body: {

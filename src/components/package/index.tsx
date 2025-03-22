@@ -8,11 +8,12 @@ import { useRouter } from 'next/navigation'
 import { Container } from '@/components/container'
 import { Button } from '@/components/ui/button'
 
+// import { ReviewsSection } from './reviewsSection'
+import ReviewComponent from '../reviews'
 import { DescriptionSection } from './descriptionSection'
 import GoBackButton from './goBackButton'
 import { HeaderImage } from './headerImage'
 import { ProfileThumbnail } from './profileThumbnail'
-import { ReviewsSection } from './reviewsSection'
 
 interface PackageProps {
   package: PackageVerbose
@@ -66,7 +67,7 @@ export function PackagePage({ package: pkg }: PackageProps) {
                 Chatting
               </Button>
             </div>
-            <ReviewsSection reviews={pkg.reviews ?? []} />
+            <ReviewComponent reviews={pkg.reviews ?? []} />
           </div>
         </div>
       </Container>
