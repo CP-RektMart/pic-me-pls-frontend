@@ -1,11 +1,9 @@
-import { getReviews } from '@/actions/review/get-reviews'
+import { Review } from '@/types/package'
 import { Icon } from '@iconify/react'
 
 import ReviewCard from './review-card'
 
-export default function ReviewsWindow() {
-  const reviews = getReviews()
-
+export default function ReviewsWindow({ reviews }: { reviews: Review[] }) {
   return (
     <div className='flex w-full flex-col space-y-4 border-zinc-200 px-6 lg:w-[448px] lg:rounded-xl lg:border lg:p-6 lg:shadow'>
       <div className='w-full font-semibold'>Reviews</div>

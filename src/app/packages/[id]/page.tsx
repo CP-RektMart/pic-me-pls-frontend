@@ -1,5 +1,30 @@
-import ReviewComponent from '@/components/reviews/index'
+import { getPackage } from '@/actions/packages/get-package-id'
+import { getPhotograhperPackages } from '@/actions/photographers/get-photographer-packages'
+import { notFound } from 'next/navigation'
 
-export default function PackagePage() {
-  return <ReviewComponent />
+import { PackagePage } from '@/components/package'
+
+interface PageProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function Page({ params }: PageProps) {
+  const packageId = (await params).id
+  let totalPackage = 0
+
+  const packageData = await getPackage(packageId)
+  if (!packageData) notFound()
+  if (packageData.photographer?.id) {
+    const packagesWithPagination = await getPhotograhperPackages({
+      photographerId: packageData.photographer.id,
+    })
+    totalPackage = packagesWithPagination.data.length
+  }
+
+  return (
+    <PackagePage
+      package={packageData}
+      photographerTotalPackage={totalPackage}
+    />
+  )
 }
