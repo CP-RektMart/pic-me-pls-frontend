@@ -1,18 +1,13 @@
 import { getCategories } from '@/actions/get-categories'
-import { getQueryPackages } from '@/actions/get-query-packages'
-import { client } from '@/api/client'
-import { Package } from '@/types/package'
+import { getPackages } from '@/actions/packages/get-packages'
+import { getMyProfile } from '@/actions/profile/get-my-profile'
 
-import HomePageComponent from '@/components/home-page'
-import { PackageProps } from '@/components/home-page/package-card'
+import HomePageComponent from '@/components/home'
 
 export default async function Home() {
-  const { data: profile } = await client.GET('/api/v1/me')
-
-  const categoriesResponse = await getCategories()
-  const categories = categoriesResponse?.result?.data ?? []
-
-  const packagesResponse = await getQueryPackages({
+  const profile = await getMyProfile()
+  const categories = await getCategories()
+  const packages = await getPackages({
     name: '',
     minPrice: 0,
     maxPrice: 0,
@@ -20,34 +15,12 @@ export default async function Home() {
     page: 1,
     pageSize: 10,
   })
-  const packagesData = packagesResponse?.data ?? []
-  const packageProps: PackageProps[] = packagesData.map((pkg: Package) => ({
-    title: pkg.name ?? 'Unknown title',
-    photographer: pkg.photographer?.name ?? 'Annonymous',
-    category: pkg.category?.name ?? 'Unknown category',
-    price: pkg.price ? `${pkg.price}` : 'Price not available',
-    imageUrl: pkg.media?.[0]?.pictureUrl ?? '/profile-mock-image.png',
-  }))
-  const sortedPackages = [...packageProps].sort(
-    (a, b) => Number(a.price) - Number(b.price)
-  )
-
-  if (!profile || !profile.result) {
-    return (
-      <HomePageComponent
-        userProfile={undefined}
-        categories={categories}
-        initialPackages={sortedPackages}
-      />
-    )
-  }
-  const userProfile = profile.result
 
   return (
     <HomePageComponent
-      userProfile={userProfile}
+      profile={profile}
       categories={categories}
-      initialPackages={sortedPackages}
+      initialPackages={packages}
     />
   )
 }

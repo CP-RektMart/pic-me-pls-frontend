@@ -33,12 +33,14 @@
 
 ## Some useful scripts
 
-| Scripts       | Description                                |
-| ------------- | ------------------------------------------ |
-| `pnpm dev`    | To start your local development!           |
-| `pnpm build`  | To building your project up!               |
-| `pnpm format` | To use `prettier` for formatting your code |
-| `pnpm lint`   | To check lint of your codes!               |
+| Scripts         | Description                                |
+| --------------- | ------------------------------------------ |
+| `pnpm dev`      | To start your local development!           |
+| `pnpm build`    | To building your project up!               |
+| `pnpm format`   | To use `prettier` for formatting your code |
+| `pnpm lint`     | To check lint of your codes!               |
+| `pnpm generate` | To generate typescript types!              |
+| `pnpm cucumber` | To run cucumber tests!                     |
 
 ## Commit message formats
 

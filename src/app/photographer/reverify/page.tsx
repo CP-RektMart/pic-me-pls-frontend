@@ -2,7 +2,7 @@ import { client } from '@/api/client'
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 
-import ReverifyPhotographer from '@/components/photographer/reverify-photographer'
+import ReverifyPhotographer from '@/components/photographer/citizencard/reverify'
 
 export default async function Page() {
   const session = await auth()
