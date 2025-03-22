@@ -17,9 +17,13 @@ import { ProfileThumbnail } from './profileThumbnail'
 
 interface PackageProps {
   package: PackageVerbose
+  photographerTotalPackage: number
 }
 
-export function PackagePage({ package: pkg }: PackageProps) {
+export function PackagePage({
+  package: pkg,
+  photographerTotalPackage: totalPackage,
+}: PackageProps) {
   const router = useRouter()
 
   const handleGoBack = () => {
@@ -57,10 +61,7 @@ export function PackagePage({ package: pkg }: PackageProps) {
               </Link>
 
               <p className='flex w-full justify-between text-sm text-gray-500'>
-                <span>0 Packages</span>
-                <span>0 Pending Jobs</span>
-                <span>0 Jobs done</span>
-                {/* TODO: Add real data here from the API */}
+                <span>{totalPackage} Packages</span>
               </p>
               <Button className='inline-flex w-full items-center justify-center bg-black text-white'>
                 <Icon icon='lucide:messages-square' className='mr-2 size-5' />
