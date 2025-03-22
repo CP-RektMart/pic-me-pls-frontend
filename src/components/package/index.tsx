@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation'
 import { Container } from '@/components/container'
 import { Button } from '@/components/ui/button'
 
-// import { ReviewsSection } from './reviewsSection'
 import ReviewComponent from '../reviews'
 import { DescriptionSection } from './descriptionSection'
 import GoBackButton from './goBackButton'
 import { HeaderImage } from './headerImage'
+import { ImageGrid } from './imageGrid'
 import { ProfileThumbnail } from './profileThumbnail'
 
 interface PackageProps {
@@ -38,11 +38,12 @@ export function PackagePage({ package: pkg }: PackageProps) {
 
       <Container className='mt-6'>
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
-          <DescriptionSection
-            description={pkg.description || 'No description'}
-            media={pkg.media ?? []}
-          />
-
+          <div className='col-span-1 lg:col-span-8'>
+            <DescriptionSection
+              description={pkg.description || 'No description'}
+            />
+            <ImageGrid media={pkg.media ?? []} />
+          </div>
           <div className='col-span-1 space-y-4 lg:col-span-4'>
             <div className='flex flex-col gap-4 rounded-lg border p-4'>
               <Link href={`/photographers/${pkg.photographer?.id}`} passHref>
@@ -52,7 +53,6 @@ export function PackagePage({ package: pkg }: PackageProps) {
                   }
                   name={pkg.photographer?.name || 'Photographer Name'}
                   haveVerifiedBadge={true}
-                  imageSize={50}
                 />
               </Link>
 

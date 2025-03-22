@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { cn } from '@/lib/utils'
 import { Media } from '@/types/package'
 import Image from 'next/image'
 
@@ -125,7 +126,10 @@ function ImageWithLoading({ src, alt }: { src: string; alt: string }) {
         alt={alt}
         layout='fill'
         objectFit='cover'
-        className={`rounded-lg transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}
+        className={cn('rounded-lg transition-opacity duration-500', {
+          'opacity-0': loading,
+          'opacity-100': !loading,
+        })}
         onLoadingComplete={() => setLoading(false)}
       />
     </>
