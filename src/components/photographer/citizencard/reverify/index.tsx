@@ -15,7 +15,6 @@ import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
-import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -26,7 +25,6 @@ import {
 } from '@/components/ui/form'
 import ImageUpload from '@/components/ui/imageUpload'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Popover,
   PopoverContent,
@@ -283,32 +281,6 @@ export default function ReverifyPhotographer({
                 />
               </div>
             </div>
-            <FormField
-              control={form.control}
-              name='terms'
-              render={({ field }) => (
-                <FormItem>
-                  <div className='flex space-x-2'>
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        id='terms'
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className='flex flex-col space-y-1.5'>
-                      <Label htmlFor='terms' className='text-sm font-medium'>
-                        Accept terms and conditions
-                      </Label>
-                      <p className='text-sm text-zinc-500'>
-                        You agree to our Terms of Service and Privacy Policy.
-                      </p>
-                      <FormMessage />
-                    </div>
-                  </div>
-                </FormItem>
-              )}
-            />
             <Button type='submit' className='self-end' disabled={isSubmitting}>
               {isSubmitting && (
                 <Icon
