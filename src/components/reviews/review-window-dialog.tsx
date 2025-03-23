@@ -1,3 +1,4 @@
+import { Review } from '@/types/package'
 import { Icon } from '@iconify/react'
 
 import { Button } from '@/components/ui/button'
@@ -13,7 +14,7 @@ import {
 
 import ReviewsWindow from './reviews-window'
 
-export default function ReviewWindowDialog() {
+export default function ReviewWindowDialog({ reviews }: { reviews: Review[] }) {
   return (
     <div className='w-full lg:hidden'>
       <Dialog>
@@ -28,7 +29,7 @@ export default function ReviewWindowDialog() {
             <DialogTitle></DialogTitle>
             <DialogDescription></DialogDescription>
           </DialogHeader>
-          <ReviewsWindow />
+          <ReviewsWindow reviews={reviews} />
           <DialogFooter></DialogFooter>
         </DialogContent>
       </Dialog>

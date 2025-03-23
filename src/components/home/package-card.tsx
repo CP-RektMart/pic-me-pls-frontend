@@ -1,6 +1,8 @@
+'use client'
+
 import MockPhotoCard from '@public/images/mock-photo-card.jpg'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export interface PackageProps {
   title: string
@@ -10,7 +12,7 @@ export interface PackageProps {
   imageUrl: string
   photographerId?: number
   alt?: string
-  onClick?: () => void
+  link?: string
 }
 
 export default function PackageCard({
@@ -21,11 +23,28 @@ export default function PackageCard({
   imageUrl,
   photographerId,
   alt = 'package photo',
+  link,
 }: PackageProps) {
+  const router = useRouter()
+
+  const handleCardClick = () => {
+    if (link) {
+      router.push(link)
+    }
+  }
+
+  const handlePhotographerClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (photographerId) {
+      router.push(`/photographers/${photographerId}`)
+    }
+  }
+
   return (
     <div
-      className='relative h-72 w-full max-w-[380px] overflow-hidden rounded-3xl shadow-lg md:min-w-[360px]'
+      className='relative h-72 w-full min-w-[360px] max-w-[380px] cursor-pointer overflow-hidden rounded-3xl shadow-lg'
       data-testid='package-card'
+      onClick={handleCardClick}
     >
       <Image
         src={imageUrl || MockPhotoCard}
@@ -49,13 +68,15 @@ export default function PackageCard({
         </div>
         <div className='flex items-center justify-between'>
           <div>
-            {photographerId && photographer && (
-              <Link
-                href={photographerId ? `/photographers/${photographerId}` : '#'}
-                className='text-xs text-base-quaternary hover:underline'
+            {photographerId && photographer ? (
+              <span
+                className='cursor-pointer text-xs text-base-quaternary hover:underline'
+                onClick={handlePhotographerClick}
               >
                 {photographer}
-              </Link>
+              </span>
+            ) : (
+              <div></div>
             )}
           </div>
           <p className='font-bold'>{price} BAHT</p>
