@@ -23,10 +23,20 @@ export default async function Page() {
     redirect('/login')
   }
 
+  let citizenId = data?.result?.citizenId || ''
+  if (citizenId !== '') {
+    citizenId = `${citizenId[0]}-${citizenId.slice(1, 5)}-${citizenId.slice(5, 10)}-${citizenId.slice(10, 12)}-${citizenId.slice(12)}`
+  }
+
+  let laserId = data?.result?.laserId || ''
+  if (laserId !== '') {
+    laserId = `${laserId.slice(0, 3)}-${laserId.slice(3, 9)}-${laserId.slice(9, 11)}`
+  }
+
   return (
     <ReverifyPhotographer
-      citizenId={data?.result?.citizenId || ''}
-      laserId={data?.result?.laserId || ''}
+      citizenId={citizenId}
+      laserId={laserId}
       picture={data?.result?.picture || ''}
       expireDate={
         data?.result?.expireDate

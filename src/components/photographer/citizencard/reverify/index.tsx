@@ -9,7 +9,7 @@ import PhotographerVerifyIcon from '@public/icons/photographer-verify.svg'
 import { format } from 'date-fns'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
+import { ControllerRenderProps, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -34,18 +34,22 @@ import {
 } from '@/components/ui/popover'
 
 const formSchema = z.object({
-  cardPicture: z.instanceof(File).optional(),
+  cardPicture: z.any(),
   citizenId: z
     .string()
-    .length(13, 'Citizen ID must be exactly 13 digits')
-    .regex(/^\d+$/, 'Citizen ID must contain only numbers'),
+    .min(17, 'Citizen ID must be in format 1-XXXX-XXXXX-XX-X')
+    .max(17, 'Citizen ID must be in format 1-XXXX-XXXXX-XX-X')
+    .regex(
+      /^\d-\d{4}-\d{5}-\d{2}-\d$/,
+      'Invalid Citizen ID format (1-XXXX-XXXXX-XX-X)'
+    ),
   expireDate: z.date({ required_error: 'Please select a date' }),
   laserId: z
     .string({ required_error: 'Enter your laser number' })
     .nonempty('Enter your laser number')
     .regex(
-      /^[A-Z]{2}\d{10}$/,
-      'Laser number must start with 2 capital letters followed by 10 digits'
+      /^[A-Z]{2}\d{1}-\d{6}-\d{2}$/,
+      'Laser number must be in format MEx-xxxxxx-xx'
     ),
   terms: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
@@ -85,9 +89,9 @@ export default function ReverifyPhotographer({
     try {
       await reverifyCitizenCardAction({
         image: data.cardPicture,
-        citizenId: data.citizenId,
+        citizenId: data.citizenId.replace(/-/g, ''),
         expireDate: data.expireDate,
-        laserId: data.laserId,
+        laserId: data.laserId.replace(/-/g, ''),
       })
 
       toast.success('Your citizen card has been successfully reverified')
@@ -96,6 +100,56 @@ export default function ReverifyPhotographer({
       toast.error('An error occurred while verifying your citizen card')
     }
     setIsSubmitting(false)
+  }
+
+  const formatCitizenId = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: ControllerRenderProps<FormValues, 'citizenId'>
+  ) => {
+    // Remove non-numeric characters
+    let rawValue = e.target.value.replace(/\D/g, '')
+
+    if (rawValue.length > 13) {
+      rawValue = rawValue.slice(0, 13)
+    }
+
+    // Formatting
+    let formattedValue = rawValue
+      .replace(/^(\d{1})(\d{0,4})/, '$1-$2')
+      .replace(/^(\d{1}-\d{4})(\d{0,5})/, '$1-$2')
+      .replace(/^(\d{1}-\d{4}-\d{5})(\d{0,2})/, '$1-$2')
+      .replace(/^(\d{1}-\d{4}-\d{5}-\d{2})(\d{0,1})/, '$1-$2')
+
+    const inputEvent = e.nativeEvent as InputEvent
+    if (inputEvent.inputType === 'deleteContentBackward') {
+      formattedValue = formattedValue.replace(/-$/, '')
+    }
+
+    field.onChange(formattedValue)
+  }
+
+  const formatLaserNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: ControllerRenderProps<FormValues, 'laserId'>
+  ) => {
+    let rawValue = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')
+
+    if (rawValue.length > 12) {
+      rawValue = rawValue.slice(0, 12)
+    }
+
+    // Formatting
+    let formattedValue = rawValue
+      .replace(/^([A-Z]{2}\d{1})([0-9]{0,6})/, '$1-$2')
+      .replace(/^([A-Z]{2}\d{1}-\d{6})(\d{0,2})/, '$1-$2')
+      .replace(/^([A-Z]{2}\d{1}-\d{6}-\d{2}).*/, '$1')
+
+    const inputEvent = e.nativeEvent as InputEvent
+    if (inputEvent.inputType === 'deleteContentBackward') {
+      formattedValue = formattedValue.replace(/-$/, '')
+    }
+
+    field.onChange(formattedValue)
   }
 
   return (
@@ -147,10 +201,10 @@ export default function ReverifyPhotographer({
                     </FormLabel>
                     <FormControl>
                       <Input
-                        type='number'
                         placeholder='1-XXXX-XXXXX-XX-X'
-                        maxLength={13}
-                        {...field}
+                        maxLength={17}
+                        value={field.value}
+                        onChange={(event) => formatCitizenId(event, field)}
                       />
                     </FormControl>
                     <FormMessage />
@@ -216,7 +270,12 @@ export default function ReverifyPhotographer({
                         Laser No.
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder='MEx-xxxxxx-xx' {...field} />
+                        <Input
+                          placeholder='MEx-xxxxxx-xx'
+                          {...field}
+                          value={field.value}
+                          onChange={(event) => formatLaserNumber(event, field)}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
