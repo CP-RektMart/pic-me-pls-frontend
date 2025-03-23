@@ -32,7 +32,7 @@ import {
 } from '@/components/ui/popover'
 
 const formSchema = z.object({
-  cardPicture: z.any(),
+  cardPicture: z.instanceof(File).optional(),
   citizenId: z
     .string()
     .min(17, 'Citizen ID must be in format 1-XXXX-XXXXX-XX-X')
