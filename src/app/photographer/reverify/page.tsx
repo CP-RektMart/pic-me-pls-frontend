@@ -23,15 +23,14 @@ export default async function Page() {
     redirect('/login')
   }
 
-  let citizenId = data?.result?.citizenId || ''
-  if (citizenId !== '') {
-    citizenId = `${citizenId[0]}-${citizenId.slice(1, 5)}-${citizenId.slice(5, 10)}-${citizenId.slice(10, 12)}-${citizenId.slice(12)}`
-  }
+  const citizenId =
+    data?.result?.citizenId?.replace(
+      /(\d{1})(\d{4})(\d{5})(\d{2})(\d{1})/,
+      '$1-$2-$3-$4-$5'
+    ) || ''
 
-  let laserId = data?.result?.laserId || ''
-  if (laserId !== '') {
-    laserId = `${laserId.slice(0, 3)}-${laserId.slice(3, 9)}-${laserId.slice(9, 11)}`
-  }
+  const laserId =
+    data?.result?.laserId?.replace(/(\w{3})(\d{6})(\d{2})/, '$1-$2-$3') || ''
 
   return (
     <ReverifyPhotographer
