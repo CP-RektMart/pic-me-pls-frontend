@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 
+import { createPaymentUrl } from '@/actions/payment/create-payment-url'
 import cancelQuotation from '@/actions/quotation/cancel-quotation'
 import confirmQuotation from '@/actions/quotation/confirm-quotation'
 import {
@@ -33,9 +34,13 @@ export default function Page({
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
 
-  const handlePayment = () => {
-    setStatus('PAID')
-    // TODO: handle payment
+  const handlePayment = async () => {
+    const url = await createPaymentUrl(quotationId)
+    if (url) {
+      window.location.href = url
+    } else {
+      toast.error('Failed to create payment URL')
+    }
   }
 
   const handleCancel = async () => {
