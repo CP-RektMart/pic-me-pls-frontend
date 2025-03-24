@@ -1,15 +1,13 @@
-import { getReviews } from '@/actions/review/get-reviews'
+import { Review } from '@/types/package'
 
 import ReviewWindowDialog from '@/components/reviews/review-window-dialog'
 import ReviewsWindow from '@/components/reviews/reviews-window'
 
 export default async function ReviewComponent({
-  packageID,
+  reviews,
 }: {
-  packageID: number
+  reviews: Review[]
 }) {
-  const reviews = await getReviews(packageID)
-
   return (
     <div className='w-full'>
       <div className='hidden lg:flex'>
