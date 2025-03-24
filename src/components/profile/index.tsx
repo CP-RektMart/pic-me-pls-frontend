@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useForm } from 'react-hook-form'
+import { ControllerRenderProps, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -36,7 +36,7 @@ const profileSchema = z.object({
   image: z.instanceof(File).optional(),
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  phone: z.string().regex(/^0\d{2}-\d{3}-\d{4}$/, 'Invalid phone format'),
+  phone: z.string().regex(/^$|^0\d{2}-\d{3}-\d{4}$/, 'Invalid phone format'),
   facebook: z.string().optional(),
   instagram: z.string().optional(),
   bank: z.string().optional(),
@@ -90,6 +90,44 @@ export default function Profile({
     },
   })
 
+  const setEditing = () => {
+    if (form.getValues('phone') === '-') {
+      form.setValue('phone', '')
+    }
+    if (form.getValues('facebook') === '-') {
+      form.setValue('facebook', '')
+    }
+    if (form.getValues('instagram') === '-') {
+      form.setValue('instagram', '')
+    }
+    setIsEditing(true)
+  }
+
+  const formatPhoneNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: ControllerRenderProps<ProfileFormValues, 'phone'>
+  ) => {
+    // Remove non-numeric characters
+    let rawValue = e.target.value.replace(/\D/g, '')
+
+    if (rawValue.length > 10) {
+      rawValue = rawValue.slice(0, 10)
+    }
+
+    // Formatting
+    let formattedValue = rawValue
+      .replace(/^(\d{3})(\d{0,3})/, '$1-$2')
+      .replace(/^(\d{3}-\d{3})(\d{0,4})/, '$1-$2')
+      .replace(/^(\d{3}-\d{3}-\d{4}).*/, '$1')
+
+    const inputEvent = e.nativeEvent as InputEvent
+    if (inputEvent.inputType === 'deleteContentBackward') {
+      formattedValue = formattedValue.replace(/-$/, '')
+    }
+
+    field.onChange(formattedValue)
+  }
+
   const onSubmit = async (data: ProfileFormValues) => {
     setIsSubmitting(true)
 
@@ -112,11 +150,7 @@ export default function Profile({
             <h1 className='text-2xl font-bold lg:text-3xl'>Edit Profile</h1>
 
             {!isEditing ? (
-              <Button
-                key='edit-form'
-                type='button'
-                onClick={() => setIsEditing(true)}
-              >
+              <Button key='edit-form' type='button' onClick={setEditing}>
                 <Icon icon='lucide:square-pen' className='size-4 text-white' />
               </Button>
             ) : (
@@ -267,9 +301,11 @@ export default function Profile({
                     <FormLabel className='text-sm font-medium'>Phone</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='xxx-xxx-xxxx'
                         disabled={!isEditing}
-                        {...field}
+                        maxLength={12}
+                        value={field.value}
+                        onChange={(event) => formatPhoneNumber(event, field)}
+                        placeholder='xxx-xxx-xxxx'
                       />
                     </FormControl>
                     <FormMessage />
