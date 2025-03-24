@@ -23,10 +23,19 @@ export default async function Page() {
     redirect('/login')
   }
 
+  const citizenId =
+    data?.result?.citizenId?.replace(
+      /(\d{1})(\d{4})(\d{5})(\d{2})(\d{1})/,
+      '$1-$2-$3-$4-$5'
+    ) || ''
+
+  const laserId =
+    data?.result?.laserId?.replace(/(\w{3})(\d{6})(\d{2})/, '$1-$2-$3') || ''
+
   return (
     <ReverifyPhotographer
-      citizenId={data?.result?.citizenId || ''}
-      laserId={data?.result?.laserId || ''}
+      citizenId={citizenId}
+      laserId={laserId}
       picture={data?.result?.picture || ''}
       expireDate={
         data?.result?.expireDate
