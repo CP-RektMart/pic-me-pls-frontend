@@ -165,6 +165,7 @@ export default function PhotographerQuotation({
                       from={formatDateToString(quotation.from)}
                       to={formatDateToString(quotation.to)}
                       description={quotation.description}
+                      photographerImageUrl={quotation.photographerPictureUrl}
                       duration={calculateDurationFromDate(
                         quotation.from,
                         quotation.to
@@ -252,7 +253,10 @@ export default function PhotographerQuotation({
                   />
                   {currentQuotation.status !== 'PENDING' &&
                     currentQuotation.status !== 'CONFIRMED' && (
-                      <PreviewView quotationId={currentQuotation.quotationID} />
+                      <PreviewView
+                        quotationId={currentQuotation.quotationID}
+                        isPhotographer={true}
+                      />
                     )}
                 </div>
               )

@@ -2238,7 +2238,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse-dto_QuotationResponse']
+            'application/json': components['schemas']['dto.HttpResponse-dto_GetQuotationResponse']
           }
         }
         /** @description Bad Request */
@@ -2480,6 +2480,18 @@ export interface components {
     'dto.DeleteMediaRequest': {
       mediaID?: number
     }
+    'dto.GetQuotationResponse': {
+      customer?: components['schemas']['dto.UserResponse']
+      description?: string
+      fromDate?: string
+      id?: number
+      package?: components['schemas']['dto.PackageResponse']
+      photographer?: components['schemas']['dto.PhotographerResponse']
+      previews?: components['schemas']['dto.ListPreviewResponse'][]
+      price?: number
+      status?: components['schemas']['model.QuotationStatus']
+      toDate?: string
+    }
     'dto.HttpError': {
       error?: string
     }
@@ -2501,6 +2513,9 @@ export interface components {
     'dto.HttpResponse-dto_CustomerPublicResponse': {
       result?: components['schemas']['dto.CustomerPublicResponse']
     }
+    'dto.HttpResponse-dto_GetQuotationResponse': {
+      result?: components['schemas']['dto.GetQuotationResponse']
+    }
     'dto.HttpResponse-dto_LoginResponse': {
       result?: components['schemas']['dto.LoginResponse']
     }
@@ -2513,9 +2528,6 @@ export interface components {
     'dto.HttpResponse-dto_PhotographerResponse': {
       result?: components['schemas']['dto.PhotographerResponse']
     }
-    'dto.HttpResponse-dto_QuotationResponse': {
-      result?: components['schemas']['dto.QuotationResponse']
-    }
     'dto.HttpResponse-dto_RegisterResponse': {
       result?: components['schemas']['dto.RegisterResponse']
     }
@@ -2524,6 +2536,11 @@ export interface components {
     }
     'dto.HttpResponse-dto_UserResponse': {
       result?: components['schemas']['dto.UserResponse']
+    }
+    'dto.ListPreviewResponse': {
+      id?: number
+      link?: string
+      quotationId?: number
     }
     'dto.LoginRequest': {
       idToken: string
@@ -2609,7 +2626,7 @@ export interface components {
       package?: components['schemas']['dto.PackageResponse']
       photographer?: components['schemas']['dto.PhotographerResponse']
       price?: number
-      status?: components['schemas']['model.QuotationStatus']
+      status?: string
       toDate?: string
     }
     'dto.ReVerifyCitizenCardRequest': {

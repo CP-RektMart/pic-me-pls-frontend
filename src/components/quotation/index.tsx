@@ -8,6 +8,8 @@ import {
   type CustomerQuotationProps,
   type QuotationStatus,
 } from '@/types/quotation'
+import { Icon } from '@iconify/react'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { Container } from '@/components/container'
@@ -15,6 +17,8 @@ import { ProfileHeader } from '@/components/profile-header'
 import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
+
+import { PreviewView } from '../photographer/quotations/preview-view'
 
 export default function Page({
   quotationId,
@@ -32,6 +36,7 @@ export default function Page({
   quotationImages,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
+  const router = useRouter()
 
   const handlePayment = () => {
     setStatus('PAID')
@@ -70,6 +75,15 @@ export default function Page({
         </div>
 
         <div className='flex-1'>
+          {/* Go Back Button */}
+          <div className='mb-2 flex size-10 cursor-pointer items-center justify-center rounded-full p-2 hover:bg-gray-200'>
+            <Icon
+              icon='lucide:chevron-left'
+              className='text-xl'
+              onClick={() => router.back()}
+            />
+          </div>
+
           <QuotationDetails
             quotationId={quotationId}
             quotationStatus={status as QuotationStatus}
@@ -82,6 +96,11 @@ export default function Page({
             duration={duration}
             totalPrice={totalPrice}
           />
+          {status !== 'PENDING' && status !== 'CONFIRMED' && (
+            <>
+              <PreviewView quotationId={quotationId} isPhotographer={false} />
+            </>
+          )}
           <QuotationButton
             status={status}
             onCancel={handleCancel}

@@ -1,4 +1,13 @@
-export type QuotationStatus = 'PENDING' | 'CONFIRMED' | 'PAID' | 'CANCELLED'
+import { components } from '@/api/schema'
+
+export type QuotationStatus =
+  | 'PENDING'
+  | 'CONFIRMED'
+  | 'PAID'
+  | 'CANCELLED'
+  | 'SUBMITTED'
+
+export type Quotation = components['schemas']['dto.QuotationResponse']
 
 export interface QuotationDetailsProps {
   quotationId: number
@@ -20,3 +29,6 @@ export interface CustomerQuotationProps extends QuotationDetailsProps {
 }
 
 export type WindowState = 'create' | 'edit' | null
+
+export type PreviewList =
+  components['schemas']['dto.GetQuotationResponse']['previews']

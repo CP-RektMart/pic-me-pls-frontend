@@ -72,6 +72,7 @@ export default function QuotationViewDrawer({
           description={quotation.description}
           duration={calculateDurationFromDate(quotation.from, quotation.to)}
           totalPrice={quotation.price}
+          photographerImageUrl={quotation.photographerPictureUrl}
           onClickEvent={() => {
             setWindowstate(null)
             setCurrentQuotation(quotation)
@@ -137,7 +138,10 @@ export default function QuotationViewDrawer({
               quotation.status !== 'CONFIRMED' && (
                 <>
                   {showPreview && (
-                    <PreviewView quotationId={quotation.quotationID} />
+                    <PreviewView
+                      quotationId={quotation.quotationID}
+                      isPhotographer={true}
+                    />
                   )}
                   {/* View More Button */}
                   <Button
