@@ -133,14 +133,21 @@ export default function QuotationViewDrawer({
               duration={calculateDurationFromDate(quotation.from, quotation.to)}
               totalPrice={quotation.price}
             />
-            {showPreview && <PreviewView quotationId={quotation.quotationID} />}
-            {/* View More Button */}
-            <Button
-              onClick={() => setShowPreview(!showPreview)}
-              className='mt-4 text-sm'
-            >
-              {showPreview ? 'View Less' : 'View More'}
-            </Button>
+            {quotation.status !== 'PENDING' &&
+              quotation.status !== 'CONFIRMED' && (
+                <>
+                  {showPreview && (
+                    <PreviewView quotationId={quotation.quotationID} />
+                  )}
+                  {/* View More Button */}
+                  <Button
+                    onClick={() => setShowPreview(!showPreview)}
+                    className='mt-4 text-sm'
+                  >
+                    {showPreview ? 'View Less' : 'View More'}
+                  </Button>
+                </>
+              )}
           </div>
         )}
       </DrawerContent>
