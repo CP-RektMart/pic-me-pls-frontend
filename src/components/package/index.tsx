@@ -68,7 +68,7 @@ export function PackagePage({
                 <span className='whitespace-nowrap'>Start Chatting</span>
               </Button>
             </div>
-            <ReviewComponent reviews={pkg.reviews ?? []} />
+            <ReviewComponent packageID={pkg.id ?? 0} />
           </div>
         </div>
       </Container>
