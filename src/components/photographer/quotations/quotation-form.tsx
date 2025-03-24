@@ -63,7 +63,7 @@ export default function QuotationForm({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
       packageId: selectedPackageId,
-      customerId: customerId,
+      customerId: customerId ?? '',
       from: fromDate,
       to: toDate,
       description: description,
