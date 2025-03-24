@@ -1,3 +1,5 @@
+'use server'
+
 import { client } from '@/api/client'
 
 export const createPaymentUrl = async (quotationId: number) => {
