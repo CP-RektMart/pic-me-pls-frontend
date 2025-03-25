@@ -28,7 +28,7 @@ export default async function Page({ params }: PageProps) {
     <PackagePage
       package={packageData}
       photographerTotalPackage={totalPackage}
-      reviews={reviewsData}
+      reviews={reviewsData || []}
     />
   )
 }
