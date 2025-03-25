@@ -32,10 +32,10 @@ export default async function ProfilePage() {
       phone={
         userProfile.phoneNumber
           ? userProfile.phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
-          : '012-345-6789'
+          : '-'
       }
-      facebook={userProfile.facebook || 'Facebook'}
-      instagram={userProfile.instagram || 'Instagram'}
+      facebook={userProfile.facebook || '-'}
+      instagram={userProfile.instagram || '-'}
       bank={userProfile.bank}
       accountNo={userProfile.accountNo}
       bankBranch={userProfile.bankBranch}
