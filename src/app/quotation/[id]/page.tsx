@@ -46,6 +46,10 @@ export default async function Page({ params, searchParams }: PageProps) {
     quotation.toDate
   )
 
+  if (quotation.status === 'ACCEPTED') {
+    quotation.status = 'COMPLETED'
+  }
+
   return (
     <CustomerQuotation
       quotationId={quotationId}
