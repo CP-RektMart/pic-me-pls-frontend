@@ -22,6 +22,7 @@ export default function ChatInputBar({
   setSelectedChat,
 }: ChatInputBarProps) {
   const inputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const flushInput = () => {
     const updatedChat = getChats().find((chat) => chat.id === currentChat?.id)
@@ -30,7 +31,9 @@ export default function ChatInputBar({
       ...updatedChat,
       conversation: updatedChat.conversation,
     })
+
     if (inputRef.current) inputRef.current.value = ''
+    if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
   const handleClick = () => {
@@ -52,6 +55,7 @@ export default function ChatInputBar({
       <ChatInputImageBar
         currentChat={currentChat}
         userRole={userRole}
+        fileInputRef={fileInputRef}
         flushInput={flushInput}
       />
       <Input

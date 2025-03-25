@@ -1,7 +1,5 @@
 'use client'
 
-import { useRef } from 'react'
-
 import { Chat } from '@/actions/chat/get-chat'
 import { postImageMessage } from '@/actions/chat/post-chat'
 import { postImageChatUpload } from '@/actions/chat/post-image-chat'
@@ -10,16 +8,16 @@ import { Icon } from '@iconify/react'
 interface ChatInputImageBarProps {
   currentChat: Chat | null
   userRole: 'photographer' | 'customer'
+  fileInputRef: React.RefObject<HTMLInputElement | null>
   flushInput: () => void
 }
 
 export default function ChatInputImageBar({
   currentChat,
   userRole,
+  fileInputRef,
   flushInput,
 }: ChatInputImageBarProps) {
-  const fileInputRef = useRef<HTMLInputElement>(null)
-
   const handleButtonClick = () => {
     fileInputRef.current?.click()
   }
@@ -41,7 +39,6 @@ export default function ChatInputImageBar({
       })
 
       flushInput()
-      fileInputRef.current!.value = ''
     } catch (err) {
       console.error('Image upload failed:', err)
     }
