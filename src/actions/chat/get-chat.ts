@@ -19,8 +19,9 @@ export interface TextMessage {
 }
 
 export interface ImageMessage {
+  message: '[Image]'
   type: 'image'
-  message: string
+  imageUrl: string
 }
 
 export interface QuotationMessage {

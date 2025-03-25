@@ -19,7 +19,8 @@ interface QuotationPostChatProps extends BasePostChatProps {
 }
 
 interface ImagePostChatProps extends BasePostChatProps {
-  message: string | undefined
+  message: '[Image]'
+  imageUrl: string
   type: 'image'
 }
 
@@ -67,10 +68,11 @@ export function postQuotationMessage({
 export function postImageMessage({
   chatId,
   message,
+  imageUrl,
   sender,
   type,
 }: ImagePostChatProps) {
-  console.log('posting image message')
+  console.log('posting image message', chatId, message, sender, type)
 
   const chat = mockChats.find((chat) => chat.id === chatId)
 
@@ -78,6 +80,7 @@ export function postImageMessage({
     chat.conversation.push({
       id: String(chat.conversation.length + 1),
       message,
+      imageUrl,
       chatId,
       sender,
       type,

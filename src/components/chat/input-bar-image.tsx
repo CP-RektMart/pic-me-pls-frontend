@@ -4,6 +4,7 @@ import { useRef } from 'react'
 
 import { Chat } from '@/actions/chat/get-chat'
 import { postImageMessage } from '@/actions/chat/post-chat'
+import { postImageChatUpload } from '@/actions/chat/post-image-chat'
 import { Icon } from '@iconify/react'
 
 interface ChatInputImageBarProps {
@@ -24,17 +25,22 @@ export default function ChatInputImageBar({
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // e.preventDefault()
-    if (!e.target.files || !e.target.files[0]) return
+    if (!e.target.files || !e.target.files[0] || !currentChat) return
 
     const file = e.target.files[0]
-    if (!file || !currentChat) return
+    try {
+      const { url: imageUrl } = await postImageChatUpload(file)
 
-    postImageMessage({
-      chatId: currentChat.id,
-      message: file.name,
-      sender: userRole,
-      type: 'image',
-    })
+      await postImageMessage({
+        chatId: currentChat.id,
+        message: '[Image]',
+        imageUrl,
+        sender: userRole,
+        type: 'image',
+      })
+    } catch (err) {
+      console.error('Image upload failed:', err)
+    }
   }
 
   return (
