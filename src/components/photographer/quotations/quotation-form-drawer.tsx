@@ -1,9 +1,11 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { Package } from '@/actions/photographer/package/get-packages'
+import { CustomerPublic } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
+import { ProfileThumbnail } from '@/components/package/profileThumbnail'
 import { Button } from '@/components/ui/button'
 import { DrawerTrigger } from '@/components/ui/drawer'
 import {
@@ -13,7 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -32,14 +33,7 @@ import QuotationSummary from './quotation-summary'
 
 interface QuotationProps {
   transactionType: string
-  onSubmit: (data: {
-    packageId: string
-    customerId: string
-    from: Date
-    to: Date
-    description: string
-    price: number
-  }) => void
+  onSubmit: (data: CreateQuotationForm) => void
   packages: Package[]
   setSelectedPackageId: (value: string) => void
   selectedPackageId: string
@@ -47,7 +41,8 @@ interface QuotationProps {
   fromDate?: Date
   toDate?: Date
   description?: string
-  customerId?: string
+  customerId?: number
+  customerProfile?: CustomerPublic
 }
 
 export default function QuotationFormDrawer({
@@ -61,15 +56,17 @@ export default function QuotationFormDrawer({
   toDate,
   description,
   customerId,
+  customerProfile,
 }: QuotationProps) {
   const form = useForm<CreateQuotationForm>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
-      packageId: '',
-      customerId: customerId,
+      packageId: selectedPackageId,
+      customerId: String(customerId) ?? '',
       from: fromDate,
       to: toDate,
       description: description,
+      price: 0,
     },
   })
 
@@ -86,9 +83,32 @@ export default function QuotationFormDrawer({
     return 0
   }, [watchFrom, watchTo])
 
+  useEffect(() => {
+    form.setValue('packageId', selectedPackageId)
+
+    const selectedPackage = packages.find(
+      (pkg) => String(pkg.id) === selectedPackageId
+    )
+    const calculatedPrice = totalHours * (selectedPackage?.price || 0)
+    form.setValue('price', calculatedPrice)
+  }, [totalHours, selectedPackageId, packages, form])
+
   return (
     <FormProvider {...form}>
       <div className='space-y-2 px-4 pb-4'>
+        <hr className='my-4 border-[0.5px] border-zinc-400' />
+        {customerProfile ? (
+          <ProfileThumbnail
+            haveVerifiedBadge={false}
+            name={customerProfile?.name || ''}
+            profilePictureUrl={customerProfile.profilePictureUrl || ''}
+          />
+        ) : (
+          <div className='text-center text-xl text-gray-500'>
+            No customer data available
+          </div>
+        )}
+
         <FormField
           control={form.control}
           name='packageId'
@@ -104,7 +124,7 @@ export default function QuotationFormDrawer({
                   value={field.value}
                 >
                   <SelectTrigger className='w-full font-normal'>
-                    <SelectValue placeholder='Package' />
+                    <SelectValue placeholder='Select Package' />
                   </SelectTrigger>
                   <SelectContent>
                     {packages.map((pkg) => (
@@ -114,20 +134,6 @@ export default function QuotationFormDrawer({
                     ))}
                   </SelectContent>
                 </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='customerId'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className='text-sm font-medium'>Customer Id</FormLabel>
-              <FormControl>
-                <Input placeholder='Customer Id' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -188,11 +194,11 @@ export default function QuotationFormDrawer({
           <Button
             type='button'
             className='w-full hover:bg-zinc-700'
-            onClick={() => {
-              form.handleSubmit(onSubmit)
+            onClick={form.handleSubmit((data) => {
+              onSubmit(data)
               form.reset()
               setIsOpen(false)
-            }}
+            })}
           >
             {transactionType === 'create' ? 'Create' : 'Save'}
           </Button>

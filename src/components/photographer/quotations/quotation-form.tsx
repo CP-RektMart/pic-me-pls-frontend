@@ -1,9 +1,11 @@
 import { useEffect, useMemo } from 'react'
 
 import { Package } from '@/actions/photographer/package/get-packages'
+import { CustomerPublic } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
+import { ProfileThumbnail } from '@/components/package/profileThumbnail'
 import { Button } from '@/components/ui/button'
 import {
   FormControl,
@@ -12,7 +14,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -31,21 +32,15 @@ import QuotationSummary from './quotation-summary'
 
 interface QuotationProps {
   transactionType: string
-  onSubmit: (data: {
-    packageId: string
-    customerId: string
-    from: Date
-    to: Date
-    description: string
-    price: number
-  }) => void
+  onSubmit: (data: CreateQuotationForm) => void
   packages: Package[]
   setSelectedPackageId: (value: string) => void
   selectedPackageId: string
   fromDate?: Date
   toDate?: Date
   description?: string
-  customerId?: string
+  customerId?: number
+  customerProfile?: CustomerPublic
 }
 
 export default function QuotationForm({
@@ -58,12 +53,13 @@ export default function QuotationForm({
   toDate,
   description,
   customerId,
+  customerProfile,
 }: QuotationProps) {
   const form = useForm<CreateQuotationForm>({
     resolver: zodResolver(createQuotationFormSchema),
     defaultValues: {
       packageId: selectedPackageId,
-      customerId: customerId ?? '',
+      customerId: String(customerId) ?? '',
       from: fromDate,
       to: toDate,
       description: description,
@@ -95,6 +91,18 @@ export default function QuotationForm({
   return (
     <FormProvider {...form}>
       <div className='space-y-4 p-4'>
+        <hr className='my-4 border-[0.5px] border-zinc-400' />
+        {customerProfile ? (
+          <ProfileThumbnail
+            haveVerifiedBadge={false}
+            name={customerProfile?.name || ''}
+            profilePictureUrl={customerProfile.profilePictureUrl || ''}
+          />
+        ) : (
+          <div className='text-center text-xl text-gray-500'>
+            No customer data available
+          </div>
+        )}
         <FormField
           control={form.control}
           name='packageId'
@@ -110,7 +118,7 @@ export default function QuotationForm({
                   value={field.value}
                 >
                   <SelectTrigger className='w-full font-normal'>
-                    <SelectValue placeholder='Package' />
+                    <SelectValue placeholder='Select Package' />
                   </SelectTrigger>
                   <SelectContent>
                     {packages.map((pkg) => (
@@ -120,24 +128,6 @@ export default function QuotationForm({
                     ))}
                   </SelectContent>
                 </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='customerId'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className='text-sm font-medium'>Customer Id</FormLabel>
-              <FormControl>
-                <Input
-                  className='font-normal'
-                  placeholder='Customer Id'
-                  {...field}
-                />
               </FormControl>
               <FormMessage />
             </FormItem>
