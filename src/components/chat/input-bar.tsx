@@ -5,6 +5,8 @@ import { useRef } from 'react'
 import { Chat, getChats } from '@/actions/chat/get-chat'
 import { postTextMessage } from '@/actions/chat/post-chat'
 
+import ChatInputImageBar from '@/components/chat/input-bar-image'
+
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 
@@ -43,6 +45,7 @@ export default function ChatInputBar({
 
   return (
     <div className='flex w-full items-center justify-between space-x-2.5 bg-white px-5 py-4'>
+      <ChatInputImageBar currentChat={currentChat} userRole={userRole} />
       <Input
         type='text'
         placeholder='Message'

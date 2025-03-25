@@ -3,7 +3,12 @@ import { z } from 'zod'
 
 export const uploadObjectRequest = z.object({
   file: z.instanceof(File),
-  folder: z.enum(['PACKAGE', 'VERIFY_CITIZENCARD', 'PROFILE_IMAGE']),
+  folder: z.enum([
+    'PACKAGE',
+    'VERIFY_CITIZENCARD',
+    'PROFILE_IMAGE',
+    'CHAT_IMAGE',
+  ]),
 })
 
 export type UploadObjectRequest = z.infer<typeof uploadObjectRequest>
