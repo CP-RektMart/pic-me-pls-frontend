@@ -2502,6 +2502,8 @@ export interface components {
       result?: components['schemas']['dto.PackageResponse'][]
     }
     'dto.HttpListResponse-dto_ReviewResponse': {
+      data: ReviewResponse[]
+
       result?: components['schemas']['dto.ReviewResponse'][]
     }
     'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
