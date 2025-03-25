@@ -24,7 +24,6 @@ export default function ChatInputBar({
   const handleClick = () => {
     if (!currentChat || !inputRef.current) return
 
-    console.log(inputRef.current.value)
     postTextMessage({
       chatId: currentChat.id,
       message: inputRef.current.value,

@@ -237,5 +237,6 @@ export const mockChats: Chat[] = [
 ]
 
 export function getChats(): Chat[] {
+  // return []
   return mockChats
 }

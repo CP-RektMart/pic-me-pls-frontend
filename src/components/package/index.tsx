@@ -1,9 +1,10 @@
 'use client'
 
+// import getChats from '@/actions/chat/get-chats'
 import { PackageVerbose } from '@/types/package'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
 import { Container } from '@/components/container'
 import { Button } from '@/components/ui/button'
@@ -28,6 +29,10 @@ export function PackagePage({
 
   const handleGoBack = () => {
     router.back()
+  }
+
+  const handleStartChat = () => {
+    redirect('/chat')
   }
 
   return (
@@ -63,7 +68,10 @@ export function PackagePage({
               <p className='flex w-full justify-between text-sm text-gray-500'>
                 <span>{totalPackage} Packages</span>
               </p>
-              <Button className='inline-flex w-full items-center justify-center bg-black text-white'>
+              <Button
+                className='inline-flex w-full items-center justify-center bg-black text-white'
+                onClick={handleStartChat}
+              >
                 <Icon icon='lucide:messages-square' className='mr-2 size-5' />
                 <span className='whitespace-nowrap'>Start Chatting</span>
               </Button>

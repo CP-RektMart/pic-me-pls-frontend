@@ -24,17 +24,29 @@ export function postTextMessage({
   sender,
   type,
 }: TextPostChatProps) {
-  const chat = mockChats.find((chat) => chat.id === chatId)
-
-  if (chat) {
-    chat.conversation.push({
-      id: String(chat.conversation.length + 1),
-      message,
-      chatId,
-      sender,
-      type,
-    })
+  if (message === '' || message === null) {
+    return
   }
+
+  // const chat = mockChats.find((chat) => chat.id === chatId)
+
+  // if (chat) {
+  //   chat.conversation.push({
+  //     id: String(chat.conversation.length + 1),
+  //     message,
+  //     chatId,
+  //     sender,
+  //     type,
+  //   })
+  // }
+
+  console.log(process.env.TEST)
+  console.log('chatId', chatId)
+  console.log('message', message)
+  console.log('sender', sender)
+  console.log('type', type)
+
+  return
 }
 
 export function postQuotationMessage({
