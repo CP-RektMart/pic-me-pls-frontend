@@ -24,8 +24,6 @@ export default async function Page({ params }: PageProps) {
 
   const reviewsData = await getReviews(Number(packageId))
 
-  console.log(reviewsData)
-
   return (
     <PackagePage
       package={packageData}
