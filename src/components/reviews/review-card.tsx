@@ -1,4 +1,5 @@
 import { Review } from '@/types/package'
+import { RatingScore } from '@/types/rating'
 import Image from 'next/image'
 
 import ReviewRating from './review-rating'
@@ -19,21 +20,7 @@ export default function ReviewCard({ review }: { review: Review }) {
             {review.customer?.name}
           </div>
         </div>
-        <ReviewRating
-          rating={
-            (review.rating ?? 0) as
-              | 1
-              | 0.5
-              | 1.5
-              | 2
-              | 2.5
-              | 3
-              | 3.5
-              | 4
-              | 4.5
-              | 5
-          }
-        />
+        <ReviewRating rating={review.rating as RatingScore} />
       </div>
 
       <div className='self-start text-sm'>{review.comment}</div>
