@@ -14,13 +14,12 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { Container } from '@/components/container'
+import { PreviewView } from '@/components/photographer/quotations/preview-view'
 import { ProfileHeader } from '@/components/profile-header'
 import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
 import { QuotationComment } from '@/components/quotation/quotation-comment'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
-
-import { PreviewView } from '../photographer/quotations/preview-view'
 
 export default function Page({
   quotationId,

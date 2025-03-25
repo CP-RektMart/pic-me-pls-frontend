@@ -13,11 +13,11 @@ import { Icon } from '@iconify/react'
 import { toast } from 'sonner'
 import z from 'zod'
 
+import { Container } from '@/components/container'
+import QuotationCard from '@/components/quotation/quotation-card'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
 
-import { Container } from '../../container'
-import QuotationCard from '../../quotation/quotation-card'
 import { PreviewView } from './preview-view'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
@@ -183,7 +183,7 @@ export default function PhotographerQuotation({
             )}
           </div>
 
-          <div className='border-gray-20 hidden gap-2.5 space-y-2.5 rounded-lg border text-2xl font-bold lg:block lg:bg-white lg:px-10 lg:py-6 lg:shadow-lg'>
+          <div className='border-gray-20 hidden gap-2.5 space-y-2.5 rounded-lg border text-2xl lg:block lg:bg-white lg:px-10 lg:py-6 lg:shadow-lg'>
             {windowState === 'create' ? (
               <div className='px-10'>
                 <div className='space-y-4 text-2xl font-bold'>

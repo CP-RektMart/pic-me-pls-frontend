@@ -7,6 +7,7 @@ import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 
 import QuotationCard from '@/components/quotation/quotation-card'
+import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -16,7 +17,6 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 
-import { QuotationDetails } from '../../quotation/quotation-details'
 import { CreateQuotationForm } from './photographer-quotation'
 import { PreviewView } from './preview-view'
 import QuotationFormDrawer from './quotation-form-drawer'
@@ -134,8 +134,8 @@ export default function QuotationViewDrawer({
               duration={calculateDurationFromDate(quotation.from, quotation.to)}
               totalPrice={quotation.price}
             />
-            {quotation.status !== 'PENDING' &&
-              quotation.status !== 'CONFIRMED' && (
+            {quotation.status === 'PAID' ||
+              (quotation.status === 'SUBMITTED' && (
                 <>
                   {showPreview && (
                     <PreviewView
@@ -151,7 +151,7 @@ export default function QuotationViewDrawer({
                     {showPreview ? 'View Less' : 'View More'}
                   </Button>
                 </>
-              )}
+              ))}
           </div>
         )}
       </DrawerContent>
