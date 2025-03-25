@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { createPaymentUrl } from '@/actions/payment/create-payment-url'
 import cancelQuotation from '@/actions/quotation/cancel-quotation'
@@ -32,10 +32,22 @@ export default function Page({
   photographerImageUrl,
   packageNumber,
   quotationImages,
+  paymentStatus,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
   const [ratingScore, setRatingScore] = useState<number>(0.0)
   const [comment, setComment] = useState<string>()
+
+  useEffect(() => {
+    if (!paymentStatus) return
+    setTimeout(() => {
+      if (paymentStatus === 'success') {
+        toast.success('Payment successful')
+      } else if (paymentStatus === 'cancel') {
+        toast.error('Payment failed')
+      }
+    }, 100)
+  }, [paymentStatus])
 
   const handlePayment = async () => {
     const url = await createPaymentUrl(quotationId)
