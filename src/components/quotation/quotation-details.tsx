@@ -10,6 +10,7 @@ const statusColor: { [key: string]: string } = {
   CONFIRMED: 'text-sky-600',
   PAID: 'text-emerald-600',
   CANCELLED: 'text-red-600',
+  SUBMITTED: 'text-emerald-600',
 }
 
 export function QuotationDetails({
@@ -42,7 +43,7 @@ export function QuotationDetails({
   ]
 
   return (
-    <div className='flex justify-center px-4'>
+    <div className='flex flex-col justify-center px-4'>
       <div className='flex w-full flex-col'>
         {detailItems.map((item, i) => (
           <React.Fragment key={i}>

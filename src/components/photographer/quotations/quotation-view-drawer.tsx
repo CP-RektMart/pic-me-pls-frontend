@@ -7,6 +7,7 @@ import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
 
 import QuotationCard from '@/components/quotation/quotation-card'
+import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -16,8 +17,8 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 
-import { QuotationDetails } from '../../quotation/quotation-details'
 import { CreateQuotationForm } from './photographer-quotation'
+import { PreviewView } from './preview-view'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface QuotationViewDrawerProps {
@@ -44,6 +45,7 @@ export default function QuotationViewDrawer({
   windowState,
 }: QuotationViewDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [showPreview, setShowPreview] = useState(false)
 
   const onClose = () => {
     setWindowstate(null)
@@ -70,6 +72,7 @@ export default function QuotationViewDrawer({
           description={quotation.description}
           duration={calculateDurationFromDate(quotation.from, quotation.to)}
           totalPrice={quotation.price}
+          photographerImageUrl={quotation.photographerPictureUrl}
           onClickEvent={() => {
             setWindowstate(null)
             setCurrentQuotation(quotation)
@@ -118,18 +121,38 @@ export default function QuotationViewDrawer({
             customerId={quotation.customerId.toString()}
           />
         ) : (
-          <QuotationDetails
-            quotationId={quotation.quotationID}
-            quotationStatus={quotation?.status as QuotationStatus}
-            packageName={quotation.packageName}
-            photographerName={quotation.photographerName}
-            customerName={quotation.customerName}
-            from={formatDateToString(quotation.from)}
-            to={formatDateToString(quotation.to)}
-            description={quotation.description}
-            duration={calculateDurationFromDate(quotation.from, quotation.to)}
-            totalPrice={quotation.price}
-          />
+          <div>
+            <QuotationDetails
+              quotationId={quotation.quotationID}
+              quotationStatus={quotation?.status as QuotationStatus}
+              packageName={quotation.packageName}
+              photographerName={quotation.photographerName}
+              customerName={quotation.customerName}
+              from={formatDateToString(quotation.from)}
+              to={formatDateToString(quotation.to)}
+              description={quotation.description}
+              duration={calculateDurationFromDate(quotation.from, quotation.to)}
+              totalPrice={quotation.price}
+            />
+            {quotation.status === 'PAID' ||
+              (quotation.status === 'SUBMITTED' && (
+                <>
+                  {showPreview && (
+                    <PreviewView
+                      quotationId={quotation.quotationID}
+                      isPhotographer={true}
+                    />
+                  )}
+                  {/* View More Button */}
+                  <Button
+                    onClick={() => setShowPreview(!showPreview)}
+                    className='mt-4 text-sm'
+                  >
+                    {showPreview ? 'View Less' : 'View More'}
+                  </Button>
+                </>
+              ))}
+          </div>
         )}
       </DrawerContent>
     </Drawer>

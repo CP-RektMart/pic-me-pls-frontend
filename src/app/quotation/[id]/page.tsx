@@ -6,10 +6,12 @@ import CustomerQuotation from '@/components/quotation/index'
 
 interface PageProps {
   params: Promise<{ id: number }>
+  searchParams: Promise<{ payment?: string }>
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
   const quotationId = (await params).id
+  const paymentStatus = (await searchParams).payment
 
   const { response, data } = await client.GET('/api/v1/quotations/{id}', {
     params: { path: { id: quotationId } },
@@ -59,6 +61,7 @@ export default async function Page({ params }: PageProps) {
       photographerImageUrl={quotation.photographer?.profilePictureUrl || ''}
       packageNumber={quotation.photographer?.packages?.length || 0}
       quotationImages={images || []}
+      paymentStatus={paymentStatus || ''}
     />
   )
 }

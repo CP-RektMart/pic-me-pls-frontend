@@ -47,6 +47,7 @@ const mockQuotation: Quotation = {
   to: new Date(new Date().setDate(new Date().getDate() + 1)),
   description: 'Sample quotation description',
   price: 500,
+  photographerPictureUrl: '',
 }
 
 export const mockChats: Chat[] = [
