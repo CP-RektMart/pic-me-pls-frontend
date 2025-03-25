@@ -17,6 +17,7 @@ export interface CustomerQuotationProps extends QuotationDetailsProps {
   photographerImageUrl: string
   packageNumber: number
   quotationImages: { url: string; name: string }[]
+  paymentStatus: string
 }
 
 export type WindowState = 'create' | 'edit' | null
