@@ -6,7 +6,7 @@ import CustomerQuotation from '@/components/quotation/index'
 
 interface PageProps {
   params: Promise<{ id: number }>
-  searchParams: { payment?: string }
+  searchParams: Promise<{ payment?: string }>
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
