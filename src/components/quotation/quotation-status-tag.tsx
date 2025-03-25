@@ -16,6 +16,7 @@ const statusVariants = cva(
         CANCELLED: 'bg-red-100 text-red-700',
         PAID: 'bg-emerald-100 text-emerald-700',
         SUBMITTED: 'bg-emerald-100 text-emerald-700',
+        ACCEPTED: 'bg-violet-100 text-violet-700',
       },
       size: {
         default: 'px-2 py-1',

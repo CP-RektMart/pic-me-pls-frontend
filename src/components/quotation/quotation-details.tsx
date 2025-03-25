@@ -11,6 +11,7 @@ const statusColor: { [key: string]: string } = {
   PAID: 'text-emerald-600',
   CANCELLED: 'text-red-600',
   SUBMITTED: 'text-emerald-600',
+  ACCEPTED: 'text-violet-700',
 }
 
 export function QuotationDetails({

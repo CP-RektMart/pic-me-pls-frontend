@@ -86,7 +86,7 @@ export default function Page({
   }
 
   const handleAcceptWork = () => {
-    setStatus('COMPLETED')
+    setStatus('ACCEPTED')
   }
 
   return (
@@ -143,7 +143,7 @@ export default function Page({
             onConfirm={handleConfirm}
             onPay={handlePayment}
           />
-          {(status === 'COMPLETED' || status === 'CANCELLED') && (
+          {(status === 'ACCEPTED' || status === 'CANCELLED') && (
             <QuotationComment
               ratingScore={ratingScore}
               handleStarOnChange={setRatingScore}
