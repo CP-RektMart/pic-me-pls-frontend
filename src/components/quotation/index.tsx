@@ -15,6 +15,7 @@ import { Container } from '@/components/container'
 import { ProfileHeader } from '@/components/profile-header'
 import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
+import { QuotationComment } from '@/components/quotation/quotation-comment'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 
 export default function Page({
@@ -33,6 +34,8 @@ export default function Page({
   quotationImages,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
+  const [ratingScore, setRatingScore] = useState<number>(0.0)
+  const [comment, setComment] = useState<string>()
 
   const handlePayment = async () => {
     const url = await createPaymentUrl(quotationId)
@@ -53,6 +56,16 @@ export default function Page({
     await confirmQuotation(quotationId)
     toast.success('Quotation confirmed')
     setStatus('CONFIRMED')
+  }
+
+  const handleCommentOnChange = (text: string) => {
+    setComment(text)
+  }
+
+  const handleCommentSubmission = async () => {
+    console.log('Comment sent!')
+    console.log({ ratingScore, comment })
+    // TODO: Integrate comment submission
   }
 
   return (
@@ -93,6 +106,14 @@ export default function Page({
             onConfirm={handleConfirm}
             onPay={handlePayment}
           />
+          {(quotationStatus === 'PAID' || quotationStatus === 'CANCELLED') && (
+            <QuotationComment
+              ratingScore={ratingScore}
+              handleStarOnChange={setRatingScore}
+              handleSendOnClick={handleCommentSubmission}
+              handleCommentOnChange={handleCommentOnChange}
+            />
+          )}
         </div>
       </div>
     </Container>
