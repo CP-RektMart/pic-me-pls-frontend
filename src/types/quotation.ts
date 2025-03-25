@@ -6,6 +6,7 @@ export type QuotationStatus =
   | 'PAID'
   | 'CANCELLED'
   | 'SUBMITTED'
+  | 'COMPLETED'
 
 export type Quotation = components['schemas']['dto.QuotationResponse']
 

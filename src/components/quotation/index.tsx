@@ -16,6 +16,7 @@ import { toast } from 'sonner'
 import { Container } from '@/components/container'
 import { PreviewView } from '@/components/photographer/quotations/preview-view'
 import { ProfileHeader } from '@/components/profile-header'
+import AcceptWorkButton from '@/components/quotation/accept-work-button'
 import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
 import { QuotationComment } from '@/components/quotation/quotation-comment'
@@ -84,6 +85,10 @@ export default function Page({
     // TODO: Integrate comment submission
   }
 
+  const handleAcceptWork = () => {
+    setStatus('COMPLETED')
+  }
+
   return (
     <Container className='py-4 lg:py-6'>
       <h1 className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</h1>
@@ -129,6 +134,7 @@ export default function Page({
             (status === 'SUBMITTED' && (
               <>
                 <PreviewView quotationId={quotationId} isPhotographer={false} />
+                <AcceptWorkButton onClick={handleAcceptWork} />
               </>
             ))}
           <QuotationButton
@@ -137,9 +143,7 @@ export default function Page({
             onConfirm={handleConfirm}
             onPay={handlePayment}
           />
-          {(status === 'PAID' ||
-            status === 'SUBMITTED' ||
-            status === 'CANCELLED') && (
+          {(status === 'COMPLETED' || status === 'CANCELLED') && (
             <QuotationComment
               ratingScore={ratingScore}
               handleStarOnChange={setRatingScore}
