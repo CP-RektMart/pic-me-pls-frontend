@@ -7,7 +7,7 @@ interface ImageMessageProps {
 
 export default function ImageMessage({ message }: ImageMessageProps) {
   return (
-    <div className='max-w-[75%] rounded-2xl bg-white p-2'>
+    <div className='max-w-[100%] rounded-2xl bg-white'>
       <Image
         src={message.imageUrl}
         alt='Image message'
