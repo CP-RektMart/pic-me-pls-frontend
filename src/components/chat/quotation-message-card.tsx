@@ -13,6 +13,8 @@ interface QuotationMessageProps {
 }
 
 export default function QuotationMessage({ message }: QuotationMessageProps) {
+  if (message.type !== 'quotation') return null
+
   const quotation = message.quotation
 
   return (
