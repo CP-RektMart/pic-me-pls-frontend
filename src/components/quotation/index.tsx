@@ -78,7 +78,7 @@ export default function Page({
 
   const handleAcceptWork = async () => {
     await acceptQuotation(quotationId)
-    setStatus('ACCEPTED')
+    setStatus('COMPLETED')
   }
 
   const handleCommentOnChange = (text: string) => {
@@ -145,7 +145,7 @@ export default function Page({
             onConfirm={handleConfirm}
             onPay={handlePayment}
           />
-          {(status === 'ACCEPTED' || status === 'CANCELLED') && (
+          {(status === 'COMPLETED' || status === 'CANCELLED') && (
             <QuotationComment
               ratingScore={ratingScore}
               handleStarOnChange={setRatingScore}
