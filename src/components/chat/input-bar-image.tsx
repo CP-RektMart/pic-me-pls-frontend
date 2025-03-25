@@ -10,16 +10,17 @@ import { Icon } from '@iconify/react'
 interface ChatInputImageBarProps {
   currentChat: Chat | null
   userRole: 'photographer' | 'customer'
+  flushInput: () => void
 }
 
 export default function ChatInputImageBar({
   currentChat,
   userRole,
+  flushInput,
 }: ChatInputImageBarProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleButtonClick = () => {
-    console.log('Go handleButtonClick')
     fileInputRef.current?.click()
   }
 
@@ -38,6 +39,9 @@ export default function ChatInputImageBar({
         sender: userRole,
         type: 'image',
       })
+
+      flushInput()
+      fileInputRef.current!.value = ''
     } catch (err) {
       console.error('Image upload failed:', err)
     }

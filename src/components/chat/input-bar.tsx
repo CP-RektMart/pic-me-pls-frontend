@@ -23,6 +23,16 @@ export default function ChatInputBar({
 }: ChatInputBarProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const flushInput = () => {
+    const updatedChat = getChats().find((chat) => chat.id === currentChat?.id)
+    if (!updatedChat) return
+    setSelectedChat({
+      ...updatedChat,
+      conversation: updatedChat.conversation,
+    })
+    if (inputRef.current) inputRef.current.value = ''
+  }
+
   const handleClick = () => {
     if (!currentChat || !inputRef.current) return
 
@@ -34,18 +44,16 @@ export default function ChatInputBar({
       type: 'text',
     })
 
-    const updatedChat = getChats().find((chat) => chat.id === currentChat.id)
-    if (!updatedChat) return
-    setSelectedChat({
-      ...updatedChat,
-      conversation: updatedChat.conversation,
-    })
-    inputRef.current.value = ''
+    flushInput()
   }
 
   return (
     <div className='flex w-full items-center justify-between space-x-2.5 bg-white px-5 py-4'>
-      <ChatInputImageBar currentChat={currentChat} userRole={userRole} />
+      <ChatInputImageBar
+        currentChat={currentChat}
+        userRole={userRole}
+        flushInput={flushInput}
+      />
       <Input
         type='text'
         placeholder='Message'
