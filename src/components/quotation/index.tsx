@@ -44,7 +44,7 @@ export default function Page({
       if (paymentStatus === 'success') {
         toast.success('Payment successful')
       } else if (paymentStatus === 'cancel') {
-        toast.error('Payment failed')
+        toast.error('Payment cancelled')
       }
     }, 100)
   }, [paymentStatus])
