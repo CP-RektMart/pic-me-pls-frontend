@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { createPaymentUrl } from '@/actions/payment/create-payment-url'
+import acceptQuotation from '@/actions/quotation/accept-quotation'
 import cancelQuotation from '@/actions/quotation/cancel-quotation'
 import confirmQuotation from '@/actions/quotation/confirm-quotation'
 import {
@@ -75,6 +76,11 @@ export default function Page({
     setStatus('CONFIRMED')
   }
 
+  const handleAcceptWork = async () => {
+    await acceptQuotation(quotationId)
+    setStatus('ACCEPTED')
+  }
+
   const handleCommentOnChange = (text: string) => {
     setComment(text)
   }
@@ -83,10 +89,6 @@ export default function Page({
     console.log('Comment sent!')
     console.log({ ratingScore, comment })
     // TODO: Integrate comment submission
-  }
-
-  const handleAcceptWork = () => {
-    setStatus('ACCEPTED')
   }
 
   return (

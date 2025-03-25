@@ -490,67 +490,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-
-  '/api/v1/customer/packages/{packageID}/reviews': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /**
-     * get package reviews by package id
-     * @description Show reviews of a package
-     */
-    get: {
-      parameters: {
-        query?: never
-        header?: never
-        path: {
-          /** @description package id */
-          packageID: number
-        }
-        cookie?: never
-      }
-      requestBody?: never
-      responses: {
-        /** @description OK */
-        200: {
-          headers: {
-            [name: string]: unknown
-          }
-          content: {
-            'application/json': components['schemas']['dto.HttpListResponse-dto_ReviewResponse']
-          }
-        }
-        /** @description Bad Request */
-        400: {
-          headers: {
-            [name: string]: unknown
-          }
-          content: {
-            'application/json': components['schemas']['dto.HttpError']
-          }
-        }
-        /** @description Internal Server Error */
-        500: {
-          headers: {
-            [name: string]: unknown
-          }
-          content: {
-            'application/json': components['schemas']['dto.HttpError']
-          }
-        }
-      }
-    }
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
   '/api/v1/customer/quotations/{id}/accept': {
     parameters: {
       query?: never
@@ -2563,8 +2502,6 @@ export interface components {
       result?: components['schemas']['dto.PackageResponse'][]
     }
     'dto.HttpListResponse-dto_ReviewResponse': {
-      data: ReviewResponse[]
-
       result?: components['schemas']['dto.ReviewResponse'][]
     }
     'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
