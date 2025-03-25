@@ -28,6 +28,7 @@ export function QuotationList({ quotations }: QuotationListProps) {
               photographerName={quotation.photographerName}
               customerName={quotation.customerName}
               from={formatDateToString(quotation.from)}
+              photographerImageUrl={quotation.photographerPictureUrl}
               to={formatDateToString(quotation.to)}
               description={quotation.description}
               duration={calculateDurationFromDate(quotation.from, quotation.to)}

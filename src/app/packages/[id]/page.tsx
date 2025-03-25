@@ -1,5 +1,6 @@
 import { getPackage } from '@/actions/packages/get-package-id'
 import { getPhotograhperPackages } from '@/actions/photographers/get-photographer-packages'
+import { getReviews } from '@/actions/review/get-reviews'
 import { notFound } from 'next/navigation'
 
 import { PackagePage } from '@/components/package'
@@ -21,10 +22,13 @@ export default async function Page({ params }: PageProps) {
     totalPackage = packagesWithPagination.data.length
   }
 
+  const reviewsData = await getReviews(Number(packageId))
+
   return (
     <PackagePage
       package={packageData}
       photographerTotalPackage={totalPackage}
+      reviews={reviewsData}
     />
   )
 }
