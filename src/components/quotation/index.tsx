@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 
+import { createPaymentUrl } from '@/actions/payment/create-payment-url'
 import cancelQuotation from '@/actions/quotation/cancel-quotation'
 import confirmQuotation from '@/actions/quotation/confirm-quotation'
 import {
@@ -16,6 +17,7 @@ import { Container } from '@/components/container'
 import { ProfileHeader } from '@/components/profile-header'
 import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
+import { QuotationComment } from '@/components/quotation/quotation-comment'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 
 import { PreviewView } from '../photographer/quotations/preview-view'
@@ -37,10 +39,16 @@ export default function Page({
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
   const router = useRouter()
+  const [ratingScore, setRatingScore] = useState<number>(0.0)
+  const [comment, setComment] = useState<string>()
 
-  const handlePayment = () => {
-    setStatus('PAID')
-    // TODO: handle payment
+  const handlePayment = async () => {
+    const url = await createPaymentUrl(quotationId)
+    if (url) {
+      window.location.href = url
+    } else {
+      toast.error('Failed to create payment URL')
+    }
   }
 
   const handleCancel = async () => {
@@ -53,6 +61,16 @@ export default function Page({
     await confirmQuotation(quotationId)
     toast.success('Quotation confirmed')
     setStatus('CONFIRMED')
+  }
+
+  const handleCommentOnChange = (text: string) => {
+    setComment(text)
+  }
+
+  const handleCommentSubmission = async () => {
+    console.log('Comment sent!')
+    console.log({ ratingScore, comment })
+    // TODO: Integrate comment submission
   }
 
   return (
@@ -96,17 +114,28 @@ export default function Page({
             duration={duration}
             totalPrice={totalPrice}
           />
-          {status !== 'PENDING' && status !== 'CONFIRMED' && (
-            <>
-              <PreviewView quotationId={quotationId} isPhotographer={false} />
-            </>
-          )}
+          {status === 'PAID' ||
+            (status === 'SUBMITTED' && (
+              <>
+                <PreviewView quotationId={quotationId} isPhotographer={false} />
+              </>
+            ))}
           <QuotationButton
             status={status}
             onCancel={handleCancel}
             onConfirm={handleConfirm}
             onPay={handlePayment}
           />
+          {(status === 'PAID' ||
+            status === 'SUBMITTED' ||
+            status === 'CANCELLED') && (
+            <QuotationComment
+              ratingScore={ratingScore}
+              handleStarOnChange={setRatingScore}
+              handleSendOnClick={handleCommentSubmission}
+              handleCommentOnChange={handleCommentOnChange}
+            />
+          )}
         </div>
       </div>
     </Container>

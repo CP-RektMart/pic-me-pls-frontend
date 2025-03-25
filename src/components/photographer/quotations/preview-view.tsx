@@ -95,7 +95,7 @@ export function PreviewView({ quotationId, isPhotographer }: PreviewViewProps) {
       )}
       {/* File History Section */}
       <div className='text-xl font-bold'>File History</div>
-      <div className='mt-4 max-h-[200px] overflow-y-auto rounded-sm border-l-4 bg-gray-50 pl-3'>
+      <div className='mt-4 max-h-[150px] overflow-y-auto rounded-sm border-l-4 bg-gray-50 pl-3'>
         {versions && versions.length > 0 ? (
           versions.map((version, index) => (
             <div

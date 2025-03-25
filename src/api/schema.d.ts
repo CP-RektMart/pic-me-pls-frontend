@@ -490,7 +490,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  '/api/v1/customer/packages/:packageID/reviews': {
+  '/api/v1/customer/packages/{packageID}/reviews': {
     parameters: {
       query?: never
       header?: never
@@ -776,6 +776,69 @@ export interface paths {
         }
       }
     }
+    trace?: never
+  }
+  '/api/v1/customer/quotations/{id}/review': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create a review
+     * @description Create a review for a quotation.
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description Quotation ID */
+          id: string
+        }
+        cookie?: never
+      }
+      /** @description Review details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateReviewRequest']
+        }
+      }
+      responses: {
+        /** @description Review created successfully */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
     trace?: never
   }
   '/api/v1/customers/{id}': {
@@ -2347,69 +2410,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  '/customer/quotations/{id}/review': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Create a review
-     * @description Create a review for a quotation.
-     */
-    post: {
-      parameters: {
-        query?: never
-        header?: never
-        path: {
-          /** @description Quotation ID */
-          id: string
-        }
-        cookie?: never
-      }
-      /** @description Review details */
-      requestBody: {
-        content: {
-          'application/json': components['schemas']['dto.CreateReviewRequest']
-        }
-      }
-      responses: {
-        /** @description Review created successfully */
-        204: {
-          headers: {
-            [name: string]: unknown
-          }
-          content?: never
-        }
-        /** @description Bad Request */
-        400: {
-          headers: {
-            [name: string]: unknown
-          }
-          content: {
-            'application/json': components['schemas']['dto.HttpError']
-          }
-        }
-        /** @description Internal Server Error */
-        500: {
-          headers: {
-            [name: string]: unknown
-          }
-          content: {
-            'application/json': components['schemas']['dto.HttpError']
-          }
-        }
-      }
-    }
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -2461,9 +2461,9 @@ export interface components {
       toDate: string
     }
     'dto.CreateReviewRequest': {
-      comment: string
+      comment?: string
       id: string
-      rating?: number
+      rating: number
     }
     'dto.CustomerPublicResponse': {
       id?: number
