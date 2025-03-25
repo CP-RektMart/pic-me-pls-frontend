@@ -13,11 +13,12 @@ import { Icon } from '@iconify/react'
 import { toast } from 'sonner'
 import z from 'zod'
 
+import { Container } from '@/components/container'
+import QuotationCard from '@/components/quotation/quotation-card'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
 
-import { Container } from '../../container'
-import QuotationCard from '../../quotation/quotation-card'
+import { PreviewView } from './preview-view'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
 import QuotationViewDrawer from './quotation-view-drawer'
@@ -123,17 +124,17 @@ export default function PhotographerQuotation({
       </div>
 
       {quotations.length == 0 && !windowState ? (
-        <div className='text-medium flex h-[69vh] flex-col place-content-center items-center justify-center gap-3 font-medium text-gray-500'>
+        <div className='text-medium flex flex-col place-content-center items-center justify-center gap-3 font-medium text-gray-500'>
           <Icon icon='lucide:sticky-note' className='h-20 w-12 text-gray-500' />
           <span>You don&apos;t have any quotations yet</span>
         </div>
       ) : (
-        <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
-          <div className='gap-2.5 space-y-2.5 text-2xl font-bold lg:px-10'>
-            <div>Latest Quotations</div>
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='min-h-[400px] gap-2.5 space-y-2 rounded-lg border border-gray-200 bg-white px-4 py-4 text-lg font-bold shadow-md sm:min-h-[500px] sm:px-6 sm:py-5 sm:text-xl md:min-h-[600px] md:text-2xl lg:px-10 lg:py-6 lg:shadow-lg'>
+            <div className='mb-8'>Latest Quotations</div>
 
             {quotations.length == 0 ? (
-              <div className='flex h-full flex-col items-center justify-center gap-3'>
+              <div className='flex flex-col items-center justify-center gap-3'>
                 <Icon icon='lucide:sticky-note' className='size-20' />
                 No Quotations To Show
               </div>
@@ -155,7 +156,6 @@ export default function PhotographerQuotation({
                     />
 
                     {/* Desktop */}
-
                     <QuotationCard
                       quotationId={quotation.quotationID}
                       quotationStatus={quotation.status as QuotationStatus}
@@ -165,6 +165,7 @@ export default function PhotographerQuotation({
                       from={formatDateToString(quotation.from)}
                       to={formatDateToString(quotation.to)}
                       description={quotation.description}
+                      photographerImageUrl={quotation.photographerPictureUrl}
                       duration={calculateDurationFromDate(
                         quotation.from,
                         quotation.to
@@ -182,7 +183,7 @@ export default function PhotographerQuotation({
             )}
           </div>
 
-          <div className='hidden lg:block'>
+          <div className='border-gray-20 hidden gap-2.5 space-y-2.5 rounded-lg border text-2xl lg:block lg:bg-white lg:px-10 lg:py-6 lg:shadow-lg'>
             {windowState === 'create' ? (
               <div className='px-10'>
                 <div className='space-y-4 text-2xl font-bold'>
@@ -202,7 +203,9 @@ export default function PhotographerQuotation({
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
                   <div className='flex flex-row justify-between'>
                     <div>Quotation {currentQuotation.quotationID}</div>
-                    <Button onClick={onClose}>Close</Button>
+                    <Button onClick={onClose} className='h-8 px-3 text-sm'>
+                      Close
+                    </Button>
                   </div>
 
                   <QuotationForm
@@ -219,10 +222,15 @@ export default function PhotographerQuotation({
                 </div>
               ) : (
                 <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
-                  <div className='flex w-full flex-row justify-between font-bold'>
+                  <div className='flex w-full flex-row justify-between text-2xl font-bold'>
                     <div>Quotation {currentQuotation.quotationID}</div>
                     {currentQuotation.status == 'PENDING' && (
-                      <Button onClick={onEditButtonClicked}>Edit</Button>
+                      <Button
+                        onClick={onEditButtonClicked}
+                        className='h-8 px-3 text-sm'
+                      >
+                        Edit
+                      </Button>
                     )}
                   </div>
 
@@ -243,6 +251,13 @@ export default function PhotographerQuotation({
                     )}
                     totalPrice={currentQuotation.price}
                   />
+                  {currentQuotation.status !== 'PENDING' &&
+                    currentQuotation.status !== 'CONFIRMED' && (
+                      <PreviewView
+                        quotationId={currentQuotation.quotationID}
+                        isPhotographer={true}
+                      />
+                    )}
                 </div>
               )
             ) : null}

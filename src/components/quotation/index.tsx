@@ -9,9 +9,12 @@ import {
   type CustomerQuotationProps,
   type QuotationStatus,
 } from '@/types/quotation'
+import { Icon } from '@iconify/react'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { Container } from '@/components/container'
+import { PreviewView } from '@/components/photographer/quotations/preview-view'
 import { ProfileHeader } from '@/components/profile-header'
 import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
@@ -35,6 +38,7 @@ export default function Page({
   paymentStatus,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
+  const router = useRouter()
   const [ratingScore, setRatingScore] = useState<number>(0.0)
   const [comment, setComment] = useState<string>()
 
@@ -100,6 +104,15 @@ export default function Page({
         </div>
 
         <div className='flex-1'>
+          {/* Go Back Button */}
+          <div className='mb-2 flex size-10 cursor-pointer items-center justify-center rounded-full p-2 hover:bg-gray-200'>
+            <Icon
+              icon='lucide:chevron-left'
+              className='text-xl'
+              onClick={() => router.back()}
+            />
+          </div>
+
           <QuotationDetails
             quotationId={quotationId}
             quotationStatus={status as QuotationStatus}
@@ -112,13 +125,21 @@ export default function Page({
             duration={duration}
             totalPrice={totalPrice}
           />
+          {status === 'PAID' ||
+            (status === 'SUBMITTED' && (
+              <>
+                <PreviewView quotationId={quotationId} isPhotographer={false} />
+              </>
+            ))}
           <QuotationButton
             status={status}
             onCancel={handleCancel}
             onConfirm={handleConfirm}
             onPay={handlePayment}
           />
-          {(quotationStatus === 'PAID' || quotationStatus === 'CANCELLED') && (
+          {(status === 'PAID' ||
+            status === 'SUBMITTED' ||
+            status === 'CANCELLED') && (
             <QuotationComment
               ratingScore={ratingScore}
               handleStarOnChange={setRatingScore}

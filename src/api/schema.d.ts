@@ -490,7 +490,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  '/api/v1/customer/packages/:packageID/reviews': {
+  '/api/v1/customer/packages/{packageID}/reviews': {
     parameters: {
       query?: never
       header?: never
@@ -776,6 +776,69 @@ export interface paths {
         }
       }
     }
+    trace?: never
+  }
+  '/api/v1/customer/quotations/{id}/review': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create a review
+     * @description Create a review for a quotation.
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description Quotation ID */
+          id: string
+        }
+        cookie?: never
+      }
+      /** @description Review details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateReviewRequest']
+        }
+      }
+      responses: {
+        /** @description Review created successfully */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
     trace?: never
   }
   '/api/v1/customers/{id}': {
@@ -1942,15 +2005,11 @@ export interface paths {
     }
     get?: never
     put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
     /**
      * submit preview photo
      * @description submit preview photo and set status to submitted
      */
-    patch: {
+    post: {
       parameters: {
         query?: never
         header?: never
@@ -1960,10 +2019,10 @@ export interface paths {
         }
         cookie?: never
       }
-      /** @description link */
+      /** @description preview details */
       requestBody: {
         content: {
-          'text/plain': string
+          'application/json': components['schemas']['dto.CreatePreviewPhotoRequest']
         }
       }
       responses: {
@@ -2012,6 +2071,10 @@ export interface paths {
         }
       }
     }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
     trace?: never
   }
   '/api/v1/photographers': {
@@ -2238,7 +2301,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse-dto_QuotationResponse']
+            'application/json': components['schemas']['dto.HttpResponse-dto_GetQuotationResponse']
           }
         }
         /** @description Bad Request */
@@ -2347,69 +2410,6 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  '/customer/quotations/{id}/review': {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /**
-     * Create a review
-     * @description Create a review for a quotation.
-     */
-    post: {
-      parameters: {
-        query?: never
-        header?: never
-        path: {
-          /** @description Quotation ID */
-          id: string
-        }
-        cookie?: never
-      }
-      /** @description Review details */
-      requestBody: {
-        content: {
-          'application/json': components['schemas']['dto.CreateReviewRequest']
-        }
-      }
-      responses: {
-        /** @description Review created successfully */
-        204: {
-          headers: {
-            [name: string]: unknown
-          }
-          content?: never
-        }
-        /** @description Bad Request */
-        400: {
-          headers: {
-            [name: string]: unknown
-          }
-          content: {
-            'application/json': components['schemas']['dto.HttpError']
-          }
-        }
-        /** @description Internal Server Error */
-        500: {
-          headers: {
-            [name: string]: unknown
-          }
-          content: {
-            'application/json': components['schemas']['dto.HttpError']
-          }
-        }
-      }
-    }
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -2448,6 +2448,10 @@ export interface components {
       name: string
       price: number
     }
+    'dto.CreatePreviewPhotoRequest': {
+      link: string
+      quotationId: number
+    }
     'dto.CreateQuotationRequest': {
       customerId: number
       description?: string
@@ -2457,9 +2461,9 @@ export interface components {
       toDate: string
     }
     'dto.CreateReviewRequest': {
-      comment: string
+      comment?: string
       id: string
-      rating?: number
+      rating: number
     }
     'dto.CustomerPublicResponse': {
       id?: number
@@ -2475,6 +2479,18 @@ export interface components {
     }
     'dto.DeleteMediaRequest': {
       mediaID?: number
+    }
+    'dto.GetQuotationResponse': {
+      customer?: components['schemas']['dto.UserResponse']
+      description?: string
+      fromDate?: string
+      id?: number
+      package?: components['schemas']['dto.PackageResponse']
+      photographer?: components['schemas']['dto.PhotographerResponse']
+      previews?: components['schemas']['dto.ListPreviewResponse'][]
+      price?: number
+      status?: components['schemas']['model.QuotationStatus']
+      toDate?: string
     }
     'dto.HttpError': {
       error?: string
@@ -2497,6 +2513,9 @@ export interface components {
     'dto.HttpResponse-dto_CustomerPublicResponse': {
       result?: components['schemas']['dto.CustomerPublicResponse']
     }
+    'dto.HttpResponse-dto_GetQuotationResponse': {
+      result?: components['schemas']['dto.GetQuotationResponse']
+    }
     'dto.HttpResponse-dto_LoginResponse': {
       result?: components['schemas']['dto.LoginResponse']
     }
@@ -2509,9 +2528,6 @@ export interface components {
     'dto.HttpResponse-dto_PhotographerResponse': {
       result?: components['schemas']['dto.PhotographerResponse']
     }
-    'dto.HttpResponse-dto_QuotationResponse': {
-      result?: components['schemas']['dto.QuotationResponse']
-    }
     'dto.HttpResponse-dto_RegisterResponse': {
       result?: components['schemas']['dto.RegisterResponse']
     }
@@ -2520,6 +2536,11 @@ export interface components {
     }
     'dto.HttpResponse-dto_UserResponse': {
       result?: components['schemas']['dto.UserResponse']
+    }
+    'dto.ListPreviewResponse': {
+      id?: number
+      link?: string
+      quotationId?: number
     }
     'dto.LoginRequest': {
       idToken: string
@@ -2605,7 +2626,7 @@ export interface components {
       package?: components['schemas']['dto.PackageResponse']
       photographer?: components['schemas']['dto.PhotographerResponse']
       price?: number
-      status?: components['schemas']['model.QuotationStatus']
+      status?: string
       toDate?: string
     }
     'dto.ReVerifyCitizenCardRequest': {
