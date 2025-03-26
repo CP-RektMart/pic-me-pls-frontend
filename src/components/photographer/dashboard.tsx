@@ -1,3 +1,5 @@
+import { SidebarProvider } from '@/components/photographer/common/sidebar-provider'
+
 import { ChartAreaInteractive } from '../chart-area-interactive'
 import { DataTable } from '../data-table'
 import { SectionCards } from '../section-cards'
@@ -5,13 +7,13 @@ import data from './data.json'
 
 export const PhotographerDashboard = () => {
   return (
-    <div className='space-y-4 px-8 py-6'>
+    <SidebarProvider>
       <h1 className='text-2xl font-bold'>Overview</h1>
       <div className='flex flex-col gap-4 md:gap-6'>
         <SectionCards />
         <ChartAreaInteractive />
         <DataTable data={data} />
       </div>
-    </div>
+    </SidebarProvider>
   )
 }

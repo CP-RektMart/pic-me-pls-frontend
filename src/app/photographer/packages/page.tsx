@@ -1,6 +1,6 @@
 import { getMyPackages } from '@/actions/photographer/get-my-packages'
 
-import { PhotographerPackages } from '@/components/photographer/packages/packages-list'
+import { PhotographerPackages } from '@/components/photographer/packages'
 
 export default async function Page() {
   const packages = await getMyPackages()

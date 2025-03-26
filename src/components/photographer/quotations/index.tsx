@@ -17,11 +17,11 @@ import { useMediaQuery } from 'react-responsive'
 import { toast } from 'sonner'
 import z from 'zod'
 
-import { Container } from '@/components/container'
 import QuotationCard from '@/components/quotation/quotation-card'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
 
+import { SidebarProvider } from '../common/sidebar-provider'
 import { PreviewView } from './preview-view'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
@@ -137,7 +137,7 @@ export default function PhotographerQuotation({
   }
 
   return (
-    <Container className='space-y-6 py-4 lg:py-6'>
+    <SidebarProvider>
       <div className='flex flex-row justify-between'>
         <div className='text-2xl font-bold'>Quotation Manager</div>
       </div>
@@ -310,6 +310,6 @@ export default function PhotographerQuotation({
           </div>
         </div>
       )}
-    </Container>
+    </SidebarProvider>
   )
 }

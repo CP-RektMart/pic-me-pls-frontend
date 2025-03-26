@@ -23,12 +23,9 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
+import { CreateQuotationForm, createQuotationFormSchema } from '.'
 import { DateTimePicker } from '../../ui/date-time-picker'
 import { Textarea } from '../../ui/text-area'
-import {
-  CreateQuotationForm,
-  createQuotationFormSchema,
-} from './photographer-quotation'
 import QuotationSummary from './quotation-summary'
 
 interface QuotationProps {
