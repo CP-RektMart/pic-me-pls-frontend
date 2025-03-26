@@ -3,6 +3,8 @@ import { cn } from '@/lib/utils'
 import ProfilePic from '@public/images/profile-mock-image.png'
 import Image from 'next/image'
 
+import ImageMessage from '@/components/chat/image-message'
+
 import QuotationMessage from './quotation-message-card'
 
 interface ChatMessageProps {
@@ -33,8 +35,10 @@ export default function ChatMessage({ message, userRole }: ChatMessageProps) {
         <p className='max-w-[75%] break-words rounded-2xl bg-white px-3 py-2'>
           {message.message}
         </p>
-      ) : (
+      ) : message.type === 'quotation' ? (
         <QuotationMessage message={message} />
+      ) : (
+        <ImageMessage message={message} />
       )}
     </div>
   )

@@ -19,6 +19,12 @@ export interface TextMessage {
   message: string
 }
 
+export interface ImageMessage {
+  message: '[Image]'
+  type: 'image'
+  imageUrl: string
+}
+
 export interface QuotationMessage {
   message: '[Quotation]'
   type: 'quotation'
@@ -26,7 +32,8 @@ export interface QuotationMessage {
   messageType: 'New Quotation' | 'Quotation Updated' | 'Quotation Cancelled'
 }
 
-export type Message = BaseMessage & (TextMessage | QuotationMessage)
+export type Message = BaseMessage &
+  (TextMessage | QuotationMessage | ImageMessage)
 
 const mockQuotation: Quotation = {
   quotationID: 1234,
