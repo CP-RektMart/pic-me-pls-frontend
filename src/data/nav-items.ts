@@ -6,6 +6,7 @@ export const photographerItems = [
     url: '/photographer/quotations',
   },
   { icon: 'lucide:package', title: 'Package', url: '/photographer/packages' },
+  { icon: 'lucide:message-square', title: 'Chat', url: '/chat' },
   { icon: 'lucide:user', title: 'Profile', url: '/profile' },
 ]
 
@@ -16,6 +17,7 @@ export const customerItems = [
     title: 'Quotation',
     url: '/quotation',
   },
+  { icon: 'lucide:message-square', title: 'Chat', url: '/chat' },
   { icon: 'lucide:user', title: 'Profile', url: '/profile' },
 ]
 
