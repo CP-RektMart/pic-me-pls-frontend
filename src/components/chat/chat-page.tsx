@@ -2,11 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
-// import { getMessages } from '@/actions/chat/get-chat'
-// import { getChats } from '@/actions/chat/get-chat'
 import { Chat, Message } from '@/types/messages'
-// import { Chat, Message } from '@/types/messages'
-import { UserRole } from '@/types/user'
+import { User, UserRole } from '@/types/user'
 import useWebSocket from 'react-use-websocket'
 
 import ChatList from '@/components/chat/chat-list'
@@ -16,18 +13,21 @@ import ProfileSidebar from '@/components/chat/profile-sidebar'
 interface Props {
   accessToken: string
   messages: Chat[]
+  user: User
   userId: number
 }
 
-export default function ChatPage({ accessToken, messages, userId }: Props) {
-  // const chats = getChats()
-
-  // const [chats, setChats] = useState<Chat[]>([])
+export default function ChatPage({
+  accessToken,
+  messages,
+  user,
+  userId,
+}: Props) {
   const [chats, setChats] = useState(messages)
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null)
 
   const { sendMessage, lastMessage } = useWebSocket(
-    `ws://localhost:8000/api/v1/messages/ws?accessToken=${accessToken}`,
+    `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/api/v1/messages/ws?accessToken=${accessToken}`,
     {
       onOpen: () => console.log('open'),
       onError: (event) => console.log('error', event),
@@ -58,8 +58,11 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
 
     const message = convertMessage(String(lastMessage.data))
     const talkerId =
-      message?.senderId == userId ? message.receiverId : message?.senderId
-    const idx = chats.findIndex((chats) => chats.user.id == talkerId)
+      message?.senderId == userId ? message?.receiverId : message?.senderId
+    const idx = chats.findIndex((chat) => chat.user.id == talkerId)
+
+    console.log('talkerId', talkerId)
+    console.log('chats', chats)
 
     if (idx != -1 && !!message) {
       setChats((prev) => {
@@ -90,7 +93,7 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
         sendMessage={sendMessage}
       />
       <ProfileSidebar
-        role={selectedChat?.user.role?.toLowerCase() as UserRole}
+        role={user.role as UserRole}
         opponentName={selectedChat?.user.name || null}
         opponentProfilePic={selectedChat?.user.profilePictureUrl || ''}
         opponentId={selectedChat?.user.id || 0}
