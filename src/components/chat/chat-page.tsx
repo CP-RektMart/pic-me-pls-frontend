@@ -93,6 +93,7 @@ export default function ChatPage({
         sendMessage={sendMessage}
       />
       <ProfileSidebar
+        opponentRole={selectedChat?.user.role as UserRole}
         role={user.role as UserRole}
         opponentName={selectedChat?.user.name || null}
         opponentProfilePic={selectedChat?.user.profilePictureUrl || ''}

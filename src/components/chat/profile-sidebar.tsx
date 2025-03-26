@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 
 export interface ProfileSidebarProps {
   role: UserRole
+  opponentRole: UserRole
   opponentName: string | null
   opponentId: number
   opponentProfilePic: string
@@ -17,6 +18,7 @@ export interface ProfileSidebarProps {
 export default function ProfileSidebar({
   role,
   opponentName,
+  opponentRole,
   opponentProfilePic,
   opponentId,
 }: ProfileSidebarProps) {
@@ -44,10 +46,10 @@ export default function ProfileSidebar({
             height={112}
           />
         )}
-        {role && (
+        {opponentRole && (
           <Badge
             variant={
-              role.toLowerCase() as
+              opponentRole.toLowerCase() as
                 | 'default'
                 | 'destructive'
                 | 'outline'
@@ -58,7 +60,7 @@ export default function ProfileSidebar({
                 | undefined
             }
           >
-            {role[0]?.toUpperCase() + role.slice(1)}
+            {opponentRole[0]?.toUpperCase() + opponentRole.slice(1)}
           </Badge>
         )}
       </div>
