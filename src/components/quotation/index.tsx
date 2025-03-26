@@ -46,6 +46,12 @@ export default function Page({
   const [comment, setComment] = useState<string>()
 
   useEffect(() => {
+    if (quotationStatus === 'ACCEPTED') {
+      setStatus('COMPLETED')
+    }
+  }, [quotationStatus])
+
+  useEffect(() => {
     if (!paymentStatus) return
     setTimeout(() => {
       if (paymentStatus === 'success') {

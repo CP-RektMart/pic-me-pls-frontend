@@ -26,9 +26,6 @@ export function QuotationDetails({
   duration,
   totalPrice,
 }: QuotationDetailsProps) {
-  if (quotationStatus === 'ACCEPTED') {
-    quotationStatus = 'COMPLETED'
-  }
   const detailItems = [
     { title: 'Quotation ID', info: quotationId },
     {
