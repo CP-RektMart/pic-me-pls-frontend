@@ -1,9 +1,9 @@
 'use client'
 
 import { logout } from '@/actions/logout'
-import { signOut } from '@/auth'
 import { photographerItems } from '@/data/nav-items'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
