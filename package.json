@@ -55,6 +55,7 @@
     "react-responsive": "^10.0.1",
     "react-select": "link:@radix/ui/react-select",
     "recharts": "^2.15.1",
+    "react-use-websocket": "3.0.0",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",

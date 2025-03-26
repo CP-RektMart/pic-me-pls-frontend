@@ -1,44 +1,44 @@
-import { Message } from '@/actions/chat/get-chat'
 import { cn } from '@/lib/utils'
-import ProfilePic from '@public/images/profile-mock-image.png'
+import { Message } from '@/types/messages'
 import Image from 'next/image'
-
-import ImageMessage from '@/components/chat/image-message'
 
 import QuotationMessage from './quotation-message-card'
 
 interface ChatMessageProps {
   message: Message
-  userRole: 'photographer' | 'customer'
+  profilePictureUrl: string
+  userId: number
 }
 
-export default function ChatMessage({ message, userRole }: ChatMessageProps) {
+export default function ChatMessage({
+  message,
+  profilePictureUrl,
+  userId,
+}: ChatMessageProps) {
   return (
     <div
       className={cn(
         'flex flex-row space-x-2.5',
-        message.sender === userRole ? 'justify-end' : 'justify-start'
+        message.receiverId === userId ? 'justify-end' : 'justify-start'
       )}
     >
-      {message.sender !== userRole && (
+      {message.senderId === userId && (
         <div>
           <Image
             className='rounded-full object-cover'
-            src={ProfilePic.src}
+            src={profilePictureUrl}
             alt='Profile photo'
             width={32}
             height={32}
           />
         </div>
       )}
-      {message.type === 'text' ? (
+      {message.type == 'TEXT' ? (
         <p className='max-w-[75%] break-words rounded-2xl bg-white px-3 py-2'>
-          {message.message}
+          {message.content}
         </p>
-      ) : message.type === 'quotation' ? (
-        <QuotationMessage message={message} />
       ) : (
-        <ImageMessage message={message} />
+        <QuotationMessage message={message} />
       )}
     </div>
   )

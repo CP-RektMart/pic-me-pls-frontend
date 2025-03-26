@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 
 interface ChatTopBarProps {
   opponentName: string | null
-  opponentRole: 'photographer' | 'customer'
+  opponentRole: string
   opponentProfilePic: string
   opponentId: number
   setSelectedChat: (chat: Chat | null) => void
@@ -37,13 +37,15 @@ export default function ChatTopBar({
           onClick={() => setSelectedChat(null)}
         />
 
-        <Image
-          className='rounded-full object-cover'
-          src={opponentProfilePic}
-          alt='Profile photo'
-          width={48}
-          height={48}
-        />
+        {opponentProfilePic && (
+          <Image
+            className='rounded-full object-cover'
+            src={opponentProfilePic}
+            alt='Profile photo'
+            width={48}
+            height={48}
+          />
+        )}
 
         <div className='flex flex-col space-y-2'>
           <h2 className='text-base font-medium'>{opponentName}</h2>

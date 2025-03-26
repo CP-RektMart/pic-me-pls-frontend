@@ -1,5 +1,6 @@
 'use client'
 
+// import getChats from '@/actions/chat/get-chats'
 import { PackageVerbose, Review } from '@/types/package'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
@@ -30,6 +31,10 @@ export function PackagePage({
 
   const handleGoBack = () => {
     router.back()
+  }
+
+  const handleStartChat = () => {
+    router.push(`/chat?photographerId=${pkg.photographer?.id}`)
   }
 
   return (
@@ -65,7 +70,10 @@ export function PackagePage({
               <p className='flex w-full justify-between text-sm text-gray-500'>
                 <span>{totalPackage} Packages</span>
               </p>
-              <Button className='inline-flex w-full items-center justify-center bg-black text-white'>
+              <Button
+                className='inline-flex w-full items-center justify-center bg-black text-white'
+                onClick={handleStartChat}
+              >
                 <Icon icon='lucide:messages-square' className='mr-2 size-5' />
                 <span className='whitespace-nowrap'>Start Chatting</span>
               </Button>

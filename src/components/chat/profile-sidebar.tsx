@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { UserRole } from '@/types/user'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -7,15 +8,17 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
 export interface ProfileSidebarProps {
-  isPhotographer: boolean
+  role: UserRole
+  opponentRole: UserRole
   opponentName: string | null
   opponentId: number
   opponentProfilePic: string
 }
 
 export default function ProfileSidebar({
-  isPhotographer,
+  role,
   opponentName,
+  opponentRole,
   opponentProfilePic,
   opponentId,
 }: ProfileSidebarProps) {
@@ -32,23 +35,37 @@ export default function ProfileSidebar({
         !opponentName && 'lg:hidden'
       )}
     >
-      <h1 className='text-xl font-bold'>
-        Your {isPhotographer ? 'Customer' : 'Photographer'}
-      </h1>
+      <h1 className='text-xl font-bold'>Your {role}</h1>
       <div className='flex w-full flex-col items-center space-y-2'>
-        <Image
-          className='rounded-full object-cover'
-          src={opponentProfilePic}
-          alt='Profile photo'
-          width={112}
-          height={112}
-        />
-        <Badge className='w-20 bg-orange-100 text-base-primary shadow-none'>
-          {isPhotographer ? 'Customer' : 'Photographer'}
-        </Badge>
+        {opponentProfilePic && (
+          <Image
+            className='rounded-full object-cover'
+            src={opponentProfilePic}
+            alt='Profile photo'
+            width={112}
+            height={112}
+          />
+        )}
+        {opponentRole && (
+          <Badge
+            variant={
+              opponentRole.toLowerCase() as
+                | 'default'
+                | 'destructive'
+                | 'outline'
+                | 'secondary'
+                | 'photographer'
+                | 'customer'
+                | null
+                | undefined
+            }
+          >
+            {opponentRole[0]?.toUpperCase() + opponentRole.slice(1)}
+          </Badge>
+        )}
       </div>
       <h2 className='w-full text-center font-bold'>{opponentName}</h2>
-      {isPhotographer && (
+      {role == 'PHOTOGRAPHER' && (
         <Button variant='secondary' onClick={handleCreateQuotation}>
           <Icon icon='lucide:clipboard-plus' className='size-5' />
           Create Quotation

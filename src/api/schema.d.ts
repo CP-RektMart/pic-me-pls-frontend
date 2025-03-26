@@ -2611,6 +2611,9 @@ export interface components {
     'dto.HttpListResponse-dto_PackageResponse': {
       result?: components['schemas']['dto.PackageResponse'][]
     }
+    'dto.HttpListResponse-dto_ReviewResponse': {
+      result?: components['schemas']['dto.ReviewResponse'][]
+    }
     'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
       result?: components['schemas']['dto.PaginationResponse-dto_CategoryResponse']
     }
