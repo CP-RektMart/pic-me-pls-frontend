@@ -2,6 +2,8 @@ import { cn } from '@/lib/utils'
 import { Message } from '@/types/messages'
 import Image from 'next/image'
 
+import QuotationMessage from './quotation-message-card'
+
 interface ChatMessageProps {
   message: Message
   profilePictureUrl: string
@@ -31,13 +33,13 @@ export default function ChatMessage({
           />
         </div>
       )}
-      {/* {message.type === 'text' ? ( */}
-      <p className='max-w-[75%] break-words rounded-2xl bg-white px-3 py-2'>
-        {message.content}
-      </p>
-      {/* ) : ( */}
-      {/* <QuotationMessage message={message} /> */}
-      {/* )} */}
+      {message.type == 'TEXT' ? (
+        <p className='max-w-[75%] break-words rounded-2xl bg-white px-3 py-2'>
+          {message.content}
+        </p>
+      ) : (
+        <QuotationMessage message={message} />
+      )}
     </div>
   )
 }
