@@ -4,7 +4,7 @@
 import { PackageVerbose, Review } from '@/types/package'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { Container } from '@/components/container'
 import { Button } from '@/components/ui/button'
@@ -34,7 +34,7 @@ export function PackagePage({
   }
 
   const handleStartChat = () => {
-    redirect('/chat')
+    router.push(`/chat?photographerId=${pkg.photographer?.id}`)
   }
 
   return (
