@@ -512,7 +512,7 @@ export interface paths {
         query?: never
         header?: never
         path: {
-          /** @description quotaion id */
+          /** @description quotation id */
           id: number
         }
         cookie?: never
@@ -581,14 +581,14 @@ export interface paths {
     head?: never
     /**
      * cancelled quotation
-     * @description cancelled quotaion
+     * @description cancelled quotation
      */
     patch: {
       parameters: {
         query?: never
         header?: never
         path: {
-          /** @description quotaion id */
+          /** @description quotation id */
           id: number
         }
         cookie?: never
@@ -657,14 +657,14 @@ export interface paths {
     head?: never
     /**
      * confirm quotation
-     * @description confirm quotaion
+     * @description confirm quotation
      */
     patch: {
       parameters: {
         query?: never
         header?: never
         path: {
-          /** @description quotaion id */
+          /** @description quotation id */
           id: number
         }
         cookie?: never
@@ -718,7 +718,7 @@ export interface paths {
     }
     trace?: never
   }
-  '/api/v1/customer/quotations/{id}/review': {
+  '/api/v1/customer/quotations/{quotationId}/review': {
     parameters: {
       query?: never
       header?: never
@@ -737,7 +737,7 @@ export interface paths {
         header?: never
         path: {
           /** @description Quotation ID */
-          id: string
+          quotationId: number
         }
         cookie?: never
       }
@@ -779,6 +779,115 @@ export interface paths {
     options?: never
     head?: never
     patch?: never
+    trace?: never
+  }
+  '/api/v1/customer/quotations/{quotationId}/review/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    /**
+     * Delete a review
+     * @description Delete a review from a quotation.
+     */
+    delete: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description Quotation ID */
+          quotationId: number
+          /** @description ID */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description Review Deleted successfully */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    options?: never
+    head?: never
+    /**
+     * Update a review
+     * @description Update a review for a quotation.
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description Quotation ID */
+          quotationId: number
+          /** @description ID */
+          id: number
+        }
+        cookie?: never
+      }
+      /** @description Review details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.UpdateReviewRequest']
+        }
+      }
+      responses: {
+        /** @description Review Updated successfully */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
     trace?: never
   }
   '/api/v1/customers/{id}': {
@@ -2014,7 +2123,7 @@ export interface paths {
         query?: never
         header?: never
         path: {
-          /** @description quotaion id */
+          /** @description quotation id */
           id: number
         }
         cookie?: never
@@ -2288,7 +2397,7 @@ export interface paths {
         query?: never
         header?: never
         path: {
-          /** @description quotaion id */
+          /** @description quotation id */
           id: number
         }
         cookie?: never
@@ -2462,7 +2571,7 @@ export interface components {
     }
     'dto.CreateReviewRequest': {
       comment?: string
-      id: string
+      quotationID: number
       rating: number
     }
     'dto.CustomerPublicResponse': {
@@ -2489,6 +2598,7 @@ export interface components {
       photographer?: components['schemas']['dto.PhotographerResponse']
       previews?: components['schemas']['dto.ListPreviewResponse'][]
       price?: number
+      review?: components['schemas']['dto.ReviewResponse']
       status?: components['schemas']['model.QuotationStatus']
       toDate?: string
     }
@@ -2666,6 +2776,7 @@ export interface components {
       comment?: string
       customer?: components['schemas']['dto.CustomerResponse']
       id?: number
+      isEdited?: boolean
       rating?: number
     }
     'dto.SmallPackageResponse': {
@@ -2709,6 +2820,12 @@ export interface components {
       price: number
       quotationID: string
       toDate: string
+    }
+    'dto.UpdateReviewRequest': {
+      comment?: string
+      id: number
+      quotationID: number
+      rating?: number
     }
     'dto.UserResponse': {
       accountNo?: string

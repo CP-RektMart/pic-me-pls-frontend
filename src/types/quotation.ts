@@ -29,6 +29,13 @@ export interface CustomerQuotationProps extends QuotationDetailsProps {
   packageNumber: number
   quotationImages: { url: string; name: string }[]
   paymentStatus: string
+  review?: {
+    comment?: string
+    customer?: components['schemas']['dto.CustomerResponse']
+    id?: number
+    isEdited?: boolean
+    rating?: number
+  }
 }
 
 export type WindowState = 'create' | 'edit' | null
