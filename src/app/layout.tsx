@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import { IBM_Plex_Sans_Thai, Poppins } from 'next/font/google'
 
-import Footer from '@/components/footer'
-import Navbar from '@/components/navbar'
 import { Toaster } from '@/components/ui/sonner'
 
 import './globals.css'
@@ -41,11 +39,7 @@ export default function RootLayout({
         <link rel='icon' href='/images/logo.svg' />
       </head>
       <body className='flex min-h-dvh flex-col font-sans antialiased'>
-        <SessionProvider>
-          <Navbar />
-          <main className='flex w-full flex-1'>{children}</main>
-          <Footer />
-        </SessionProvider>
+        <SessionProvider>{children}</SessionProvider>
         <Toaster />
       </body>
     </html>
