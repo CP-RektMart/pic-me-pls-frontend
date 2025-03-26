@@ -11,14 +11,12 @@ interface ChatSectionProps {
   chat: Chat | null
   setSelectedChat: (chat: Chat | null) => void
   sendMessage: (message: string) => void
-  userId: number
 }
 
 export default function ChatSection({
   chat,
   setSelectedChat,
   sendMessage,
-  userId,
 }: ChatSectionProps) {
   const chatRef = useRef<HTMLDivElement | null>(null)
 
@@ -62,7 +60,6 @@ export default function ChatSection({
       <ChatInputBar
         currentChat={chat}
         sendMessage={sendMessage}
-        senderId={userId}
         receiverId={chat?.user.id || 0}
       />
     </div>
