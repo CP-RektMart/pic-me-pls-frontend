@@ -6,7 +6,5 @@ export async function getMessages() {
     return null
   }
 
-  console.log('data', data.result)
-
   return data.result
 }

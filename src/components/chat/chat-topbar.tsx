@@ -1,5 +1,6 @@
-import { Chat } from '@/actions/chat/get-chat'
 import { cn } from '@/lib/utils'
+import { Chat } from '@/types/messages'
+import { UserRole } from '@/types/user'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -9,7 +10,7 @@ import { Button } from '@/components/ui/button'
 
 interface ChatTopBarProps {
   opponentName: string | null
-  opponentRole: string
+  opponentRole: UserRole
   opponentProfilePic: string
   opponentId: number
   setSelectedChat: (chat: Chat | null) => void
@@ -52,12 +53,12 @@ export default function ChatTopBar({
           <Badge
             className={cn(
               'w-20 shadow-none',
-              opponentRole === 'customer'
+              opponentRole === 'CUSTOMER'
                 ? 'bg-orange-100 text-base-primary'
                 : 'bg-blue-100 text-blue-700'
             )}
           >
-            {opponentRole === 'customer' ? 'Customer' : 'Photographer'}
+            {opponentRole === 'CUSTOMER' ? 'Customer' : 'Photographer'}
           </Badge>
         </div>
       </div>
