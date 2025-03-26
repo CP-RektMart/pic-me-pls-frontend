@@ -63,7 +63,7 @@ export default function ProfileSidebar({
         )}
       </div>
       <h2 className='w-full text-center font-bold'>{opponentName}</h2>
-      {isPhotographer && (
+      {role == 'PHOTOGRAPHER' && (
         <Button variant='secondary' onClick={handleCreateQuotation}>
           <Icon icon='lucide:clipboard-plus' className='size-5' />
           Create Quotation
