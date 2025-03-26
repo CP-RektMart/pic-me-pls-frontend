@@ -7,7 +7,7 @@ export const photographerItems = [
   },
   { icon: 'lucide:package', title: 'Package', url: '/photographer/packages' },
   { icon: 'lucide:message-square', title: 'Chat', url: '/chat' },
-  { icon: 'lucide:user', title: 'Profile', url: '/profile' },
+  { icon: 'lucide:user', title: 'Profile', url: '/photographer/profile' },
 ]
 
 export const customerItems = [

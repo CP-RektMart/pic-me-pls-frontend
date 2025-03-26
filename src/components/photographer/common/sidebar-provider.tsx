@@ -7,11 +7,11 @@ export const SidebarProvider = (props: SidebarProviderProps) => {
   const { children } = props
 
   return (
-    <main className='flex w-full flex-1'>
+    <div className='flex flex-1 overflow-hidden bg-purple-400'>
       <Sidebar />
-      <div className='flex-1 space-y-6 bg-gray-100 px-8 py-4 lg:py-6'>
+      <div className='flex-1 space-y-6 overflow-y-auto bg-gray-100 p-6'>
         {children}
       </div>
-    </main>
+    </div>
   )
 }

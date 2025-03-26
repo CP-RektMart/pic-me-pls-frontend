@@ -38,7 +38,7 @@ export default function RootLayout({
         <title>PicMePls</title>
         <link rel='icon' href='/images/logo.svg' />
       </head>
-      <body className='flex min-h-dvh flex-col font-sans antialiased'>
+      <body className='font-sans antialiased'>
         <SessionProvider>{children}</SessionProvider>
         <Toaster />
       </body>

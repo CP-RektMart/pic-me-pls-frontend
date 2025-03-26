@@ -31,6 +31,8 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
+import { SidebarProvider } from '../../common/sidebar-provider'
+
 const formSchema = z.object({
   cardPicture: z.instanceof(File).optional(),
   citizenId: z
@@ -151,152 +153,162 @@ export default function ReverifyPhotographer({
   }
 
   return (
-    <div className='mx-auto min-h-screen max-w-7xl p-4 lg:px-8 lg:py-6'>
-      <p className='mb-4 font-bold lg:text-2xl'>Re-Verify your account</p>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='flex flex-row justify-between gap-8'
-        >
-          <div className='hidden w-full items-center justify-center lg:flex'>
-            <Image
-              src={PhotographerVerifyIcon}
-              alt='pic'
-              width={380}
-              height={200}
-            />
-          </div>
-          <div className='flex w-full flex-col gap-8'>
-            <FormField
-              control={form.control}
-              name='cardPicture'
-              defaultValue={undefined}
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <ImageUpload
-                      value={
-                        form.getValues('cardPicture')
-                          ? URL.createObjectURL(
-                              form.getValues('cardPicture') as File
-                            )
-                          : picture
-                      }
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className='flex flex-col gap-2'>
-              <FormField
-                control={form.control}
-                name='citizenId'
-                defaultValue=''
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-sm font-medium'>
-                      Citizen ID
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='1-XXXX-XXXXX-XX-X'
-                        maxLength={17}
-                        value={field.value}
-                        onChange={(event) => formatCitizenId(event, field)}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className='flex flex-row justify-between gap-2'>
+    <SidebarProvider>
+      <div>
+        <h1 className='mb-4 font-bold lg:text-2xl'>Re-Verify your account</h1>
+        <div className='min-h-[60dvh] rounded-xl bg-white p-6'>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className='flex flex-row justify-between gap-8'
+            >
+              <div className='hidden w-full items-center justify-center lg:flex'>
+                <Image
+                  src={PhotographerVerifyIcon}
+                  alt='pic'
+                  width={380}
+                  height={200}
+                />
+              </div>
+              <div className='flex w-full flex-col gap-8'>
                 <FormField
                   control={form.control}
-                  name='expireDate'
+                  name='cardPicture'
                   defaultValue={undefined}
                   render={({ field }) => (
-                    <FormItem className='flex-1'>
-                      <FormLabel className='text-sm font-medium'>
-                        Expire Date
-                      </FormLabel>
+                    <FormItem>
                       <FormControl>
-                        <Popover
-                          open={openCalendar}
-                          onOpenChange={setOpenCalendar}
-                        >
-                          <PopoverTrigger
-                            className='flex flex-row justify-between'
-                            asChild
-                          >
-                            <Button
-                              variant='outline'
-                              onClick={() => setOpenCalendar(true)}
-                              className='w-full'
-                            >
-                              <p className='text-zinc-500'>
-                                {field.value
-                                  ? format(field.value, 'PP')
-                                  : 'Select a date'}
-                              </p>
-                              <Icon
-                                icon='lucide:calendar'
-                                className='size-6 text-zinc-500'
-                              />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className='ml-2 w-auto p-0'>
-                            <Calendar
-                              mode='single'
-                              selected={field.value}
-                              onSelect={(date) => {
-                                field.onChange(date)
-                                setOpenCalendar(false)
-                              }}
-                            />
-                          </PopoverContent>
-                        </Popover>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='laserId'
-                  defaultValue=''
-                  render={({ field }) => (
-                    <FormItem className='flex-1'>
-                      <FormLabel className='text-sm font-medium'>
-                        Laser No.
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder='MEx-xxxxxx-xx'
-                          {...field}
-                          value={field.value}
-                          onChange={(event) => formatLaserNumber(event, field)}
+                        <ImageUpload
+                          value={
+                            form.getValues('cardPicture')
+                              ? URL.createObjectURL(
+                                  form.getValues('cardPicture') as File
+                                )
+                              : picture
+                          }
+                          onChange={field.onChange}
                         />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+                <div className='flex flex-col gap-2'>
+                  <FormField
+                    control={form.control}
+                    name='citizenId'
+                    defaultValue=''
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-sm font-medium'>
+                          Citizen ID
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='1-XXXX-XXXXX-XX-X'
+                            maxLength={17}
+                            value={field.value}
+                            onChange={(event) => formatCitizenId(event, field)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className='flex flex-row justify-between gap-2'>
+                    <FormField
+                      control={form.control}
+                      name='expireDate'
+                      defaultValue={undefined}
+                      render={({ field }) => (
+                        <FormItem className='flex-1'>
+                          <FormLabel className='text-sm font-medium'>
+                            Expire Date
+                          </FormLabel>
+                          <FormControl>
+                            <Popover
+                              open={openCalendar}
+                              onOpenChange={setOpenCalendar}
+                            >
+                              <PopoverTrigger
+                                className='flex flex-row justify-between'
+                                asChild
+                              >
+                                <Button
+                                  variant='outline'
+                                  onClick={() => setOpenCalendar(true)}
+                                  className='w-full'
+                                >
+                                  <p className='text-zinc-500'>
+                                    {field.value
+                                      ? format(field.value, 'PP')
+                                      : 'Select a date'}
+                                  </p>
+                                  <Icon
+                                    icon='lucide:calendar'
+                                    className='size-6 text-zinc-500'
+                                  />
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent className='ml-2 w-auto p-0'>
+                                <Calendar
+                                  mode='single'
+                                  selected={field.value}
+                                  onSelect={(date) => {
+                                    field.onChange(date)
+                                    setOpenCalendar(false)
+                                  }}
+                                />
+                              </PopoverContent>
+                            </Popover>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name='laserId'
+                      defaultValue=''
+                      render={({ field }) => (
+                        <FormItem className='flex-1'>
+                          <FormLabel className='text-sm font-medium'>
+                            Laser No.
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder='MEx-xxxxxx-xx'
+                              {...field}
+                              value={field.value}
+                              onChange={(event) =>
+                                formatLaserNumber(event, field)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <Button
+                  type='submit'
+                  className='self-end'
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting && (
+                    <Icon
+                      icon='lucide:loader-circle'
+                      className='size-4 animate-spin'
+                    />
+                  )}
+                  Submit
+                </Button>
               </div>
-            </div>
-            <Button type='submit' className='self-end' disabled={isSubmitting}>
-              {isSubmitting && (
-                <Icon
-                  icon='lucide:loader-circle'
-                  className='size-4 animate-spin'
-                />
-              )}
-              Submit
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
+            </form>
+          </Form>
+        </div>
+      </div>
+    </SidebarProvider>
   )
 }

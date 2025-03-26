@@ -139,7 +139,7 @@ export default function PhotographerQuotation({
   return (
     <SidebarProvider>
       <div className='flex flex-row justify-between'>
-        <div className='text-2xl font-bold'>Quotation Manager</div>
+        <div className='text-2xl font-bold'>Quotations</div>
       </div>
 
       {quotations.length == 0 && !windowState ? (
