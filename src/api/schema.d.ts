@@ -1321,7 +1321,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpListResponse-dto_ReviewResponse']
+            'application/json': components['schemas']['dto.PaginationResponse-dto_ReviewResponse']
           }
         }
         /** @description Bad Request */
@@ -2501,11 +2501,6 @@ export interface components {
     'dto.HttpListResponse-dto_PackageResponse': {
       result?: components['schemas']['dto.PackageResponse'][]
     }
-    'dto.HttpListResponse-dto_ReviewResponse': {
-      data: ReviewResponse[]
-
-      result?: components['schemas']['dto.ReviewResponse'][]
-    }
     'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
       result?: components['schemas']['dto.PaginationResponse-dto_CategoryResponse']
     }
@@ -2598,6 +2593,12 @@ export interface components {
     }
     'dto.PaginationResponse-dto_PhotographerResponse': {
       data?: components['schemas']['dto.PhotographerResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PaginationResponse-dto_ReviewResponse': {
+      data?: components['schemas']['dto.ReviewResponse'][]
       page?: number
       pageSize?: number
       totalPage?: number
