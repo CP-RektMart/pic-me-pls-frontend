@@ -5,6 +5,7 @@ import { Quotation } from '@/actions/quotation/get-quotations'
 import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
+import { CustomerPublic } from '@/types/user'
 
 import QuotationCard from '@/components/quotation/quotation-card'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
@@ -26,6 +27,8 @@ interface QuotationViewDrawerProps {
   setSelectedPackageId: (selectedPackageId: string) => void
   selectedPackageId: string
   quotation: Quotation
+  customerId?: number
+  customerProfile?: CustomerPublic
   onEditButtonClicked: () => void
   onSaveEditing: (data: CreateQuotationForm) => void
   packages: Package[]
@@ -39,6 +42,8 @@ export default function QuotationViewDrawer({
   onEditButtonClicked,
   onSaveEditing,
   packages,
+  customerId,
+  customerProfile,
   setSelectedPackageId,
   selectedPackageId,
   setWindowstate,
@@ -46,7 +51,6 @@ export default function QuotationViewDrawer({
 }: QuotationViewDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
-
   const onClose = () => {
     setWindowstate(null)
     setCurrentQuotation(null)
@@ -118,7 +122,8 @@ export default function QuotationViewDrawer({
             fromDate={quotation.from}
             toDate={quotation.to}
             description={quotation.description}
-            customerId={quotation.customerId.toString()}
+            customerId={customerId}
+            customerProfile={customerProfile}
           />
         ) : (
           <div>

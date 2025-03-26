@@ -4,6 +4,7 @@ export interface Chat {
   id: string
   photographer: string
   customer: string
+  customerId: number
   conversation: Message[]
 }
 
@@ -48,6 +49,7 @@ export const mockChats: Chat[] = [
     id: '1',
     photographer: 'Photographer 1',
     customer: 'Customer 1',
+    customerId: 1,
     conversation: [
       {
         id: '1',
@@ -181,6 +183,7 @@ export const mockChats: Chat[] = [
     id: '2',
     photographer: 'Photographer 2',
     customer: 'Customer 2',
+    customerId: 2,
     conversation: [
       {
         id: '1',
@@ -227,12 +230,14 @@ export const mockChats: Chat[] = [
     id: '3',
     photographer: 'Photographer 3',
     customer: 'Customer 3',
+    customerId: 3,
     conversation: [],
   },
   ...Array.from({ length: 10 }, (_, i) => ({
     id: `3-${i + 1}`,
     photographer: 'Photographer 3',
     customer: 'Customer 3',
+    customerId: 4,
     conversation: [],
   })),
 ]

@@ -16,3 +16,5 @@ export type UserProfile = {
   facebook: string
   instagram: string
 }
+
+export type CustomerPublic = components['schemas']['dto.CustomerPublicResponse']

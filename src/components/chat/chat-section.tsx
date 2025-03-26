@@ -30,6 +30,7 @@ export default function ChatSection({
         opponentName={opponentName}
         opponentRole={opponentRole}
         opponentProfilePic={ProfilePic.src}
+        opponentId={chat?.customerId || 0}
         setSelectedChat={setSelectedChat}
       />
 

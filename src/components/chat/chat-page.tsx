@@ -34,6 +34,7 @@ export default function ChatPage() {
         isPhotographer={isPhotographer}
         opponentName={selectedChat?.customer || null}
         opponentProfilePic={ProfilePic.src}
+        opponentId={selectedChat?.customerId || 0}
       />
     </div>
   )

@@ -33,7 +33,6 @@ export function PreviewView({ quotationId, isPhotographer }: PreviewViewProps) {
     const fetchQuotation = async () => {
       try {
         const previews = (await getPreviewById(quotationId)) || []
-        console.log(previews)
         setVersions(previews || [])
       } catch (error) {
         console.error('Error fetching quotation:', error)
