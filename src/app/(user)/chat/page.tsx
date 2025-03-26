@@ -16,7 +16,7 @@ export default async function Chat() {
   return (
     <ChatPage
       accessToken={session.accessToken || ''}
-      uesrId={session.user?.userId || 0}
+      userId={session.user?.userId || 0}
       user={session.user as User}
       messages={messages as Chat[]}
     />
