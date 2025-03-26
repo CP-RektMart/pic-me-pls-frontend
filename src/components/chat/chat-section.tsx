@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
 import { Chat } from '@/types/messages'
+import { UserRole } from '@/types/user'
 
 import ChatMessage from './chat-message'
 import ChatTopBar from './chat-topbar'
@@ -38,7 +39,7 @@ export default function ChatSection({
       <ChatTopBar
         opponentId={chat?.user.id || 0}
         opponentName={chat?.user.name || 'Unknown'}
-        opponentRole={chat?.user.role?.toLowerCase() || ''}
+        opponentRole={chat?.user.role as UserRole}
         opponentProfilePic={chat?.user.profilePictureUrl || ''}
         setSelectedChat={setSelectedChat}
       />
