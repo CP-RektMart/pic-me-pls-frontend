@@ -30,7 +30,6 @@ export default function ChatInputBar({
     }
 
     sendMessage(JSON.stringify(messageData))
-
     inputRef.current.value = ''
   }
 

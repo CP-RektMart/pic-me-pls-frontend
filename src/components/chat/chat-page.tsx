@@ -35,8 +35,14 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
     }
   )
 
+  const splitFirstSpace = (text: string): string[] => {
+    const parts = text.split(' ')
+    if (parts.length < 2) return parts // No space found
+    return [parts[0] as string, parts.slice(1).join(' ')]
+  }
+
   const convertMessage = (raw: string): Message | null => {
-    const [event, message] = raw.split(' ')
+    const [event, message] = splitFirstSpace(raw)
     if (event == 'MESSAGE' && !!message) {
       return JSON.parse(message)
     } else {
