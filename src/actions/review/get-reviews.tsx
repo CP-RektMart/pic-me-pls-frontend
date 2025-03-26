@@ -1,59 +1,27 @@
-import ProfileMockImage from '@public/images/profile-mock-image.png'
+'use server'
 
-export interface Review {
-  id: number
-  reviewer: string
-  comment: string
-  rating: 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 3.5 | 4 | 4.5 | 5
-  reviewerProfilePic: string
-}
+import { client } from '@/api/client'
 
-const mockReviews: Review[] = [
-  {
-    id: 1,
-    reviewer: 'John Doe',
-    comment:
-      'Great product, I love it! I would recommend it to everyone. Great product, I love it! I would recommend it to everyone. Great product, I love it! I would recommend it to everyone.',
-    rating: 5,
-    reviewerProfilePic: ProfileMockImage.src,
-  },
-  {
-    id: 2,
-    reviewer: 'Jane Doe',
-    comment: 'I like it, but it could be better',
-    rating: 2,
-    reviewerProfilePic: ProfileMockImage.src,
-  },
-  {
-    id: 3,
-    reviewer: 'Jack Doe',
-    comment: 'Great product, I love it!',
-    rating: 4.5,
-    reviewerProfilePic: ProfileMockImage.src,
-  },
-  {
-    id: 4,
-    reviewer: 'James Doe',
-    comment: 'I like it, but it could be better',
-    rating: 4,
-    reviewerProfilePic: ProfileMockImage.src,
-  },
-  {
-    id: 5,
-    reviewer: 'Joe Doe',
-    comment: 'Great product, I love it!',
-    rating: 3,
-    reviewerProfilePic: ProfileMockImage.src,
-  },
-  {
-    id: 6,
-    reviewer: 'Jill Doe',
-    comment: 'I like it, but it could be better',
-    rating: 2.5,
-    reviewerProfilePic: ProfileMockImage.src,
-  },
-]
+export async function getReviews(packageID: number) {
+  let data
+  try {
+    data = await client.GET('/api/v1/packages/{packageID}/reviews', {
+      params: {
+        path: {
+          packageID: packageID,
+        },
+      },
+    })
+  } catch (error) {
+    console.error('Error fetching reviews:', error)
+    return []
+  }
 
-export function getReviews(): Review[] {
-  return mockReviews
+  if (!data || !data.data) {
+    return []
+  }
+
+  const reviewData = data.data.data
+
+  return reviewData
 }

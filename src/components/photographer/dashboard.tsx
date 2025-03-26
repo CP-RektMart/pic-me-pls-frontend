@@ -1,17 +1,19 @@
-import { Container } from '../container'
+import { SidebarProvider } from '@/components/photographer/common/sidebar-provider'
+
+import { ChartAreaInteractive } from '../chart-area-interactive'
+import { DataTable } from '../data-table'
+import { SectionCards } from '../section-cards'
+import data from './data.json'
 
 export const PhotographerDashboard = () => {
   return (
-    <Container className='space-y-8 py-6'>
+    <SidebarProvider>
       <h1 className='text-2xl font-bold'>Overview</h1>
-      <div className='flex flex-1 flex-col gap-4 p-4 pt-0'>
-        <div className='grid auto-rows-min gap-4 md:grid-cols-3'>
-          <div className='aspect-video rounded-xl bg-muted/50' />
-          <div className='aspect-video rounded-xl bg-muted/50' />
-          <div className='aspect-video rounded-xl bg-muted/50' />
-        </div>
-        <div className='h-[40vh] w-full rounded-xl bg-muted/50' />
+      <div className='flex flex-col gap-4 md:gap-6'>
+        <SectionCards />
+        <ChartAreaInteractive />
+        <DataTable data={data} />
       </div>
-    </Container>
+    </SidebarProvider>
   )
 }

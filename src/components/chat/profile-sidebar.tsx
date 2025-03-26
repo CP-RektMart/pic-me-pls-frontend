@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils'
 import { UserRole } from '@/types/user'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -9,6 +10,7 @@ import { Button } from '@/components/ui/button'
 export interface ProfileSidebarProps {
   role: UserRole | null | undefined
   opponentName: string | null
+  opponentId: number
   opponentProfilePic: string
 }
 
@@ -16,8 +18,13 @@ export default function ProfileSidebar({
   role,
   opponentName,
   opponentProfilePic,
+  opponentId,
 }: ProfileSidebarProps) {
-  if (!opponentName) return null
+  const router = useRouter()
+
+  const handleCreateQuotation = () => {
+    router.push(`/photographer/quotations?create=1&id=${opponentId}`)
+  }
 
   return (
     <div
@@ -56,13 +63,12 @@ export default function ProfileSidebar({
         )}
       </div>
       <h2 className='w-full text-center font-bold'>{opponentName}</h2>
-      <Button
-        variant='secondary'
-        onClick={() => console.log('Create Quotation')}
-      >
-        <Icon icon='lucide:clipboard-plus' className='size-5' />
-        Create Quotation
-      </Button>
+      {isPhotographer && (
+        <Button variant='secondary' onClick={handleCreateQuotation}>
+          <Icon icon='lucide:clipboard-plus' className='size-5' />
+          Create Quotation
+        </Button>
+      )}
     </div>
   )
 }

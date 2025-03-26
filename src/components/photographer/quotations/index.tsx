@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { getCustomer } from '@/actions/customer/get-customer'
 import { Package } from '@/actions/photographer/package/get-packages'
 import createQuotationAction from '@/actions/quotation/create-quotation'
 import { Quotation } from '@/actions/quotation/get-quotations'
@@ -9,15 +10,19 @@ import updateQuotationAction from '@/actions/quotation/update-quotation'
 import { calculateDurationFromDate } from '@/lib/utils'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus, WindowState } from '@/types/quotation'
+import { CustomerPublic } from '@/types/user'
 import { Icon } from '@iconify/react'
+import { useRouter } from 'next/navigation'
+import { useMediaQuery } from 'react-responsive'
 import { toast } from 'sonner'
 import z from 'zod'
 
+import QuotationCard from '@/components/quotation/quotation-card'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
 
-import { Container } from '../../container'
-import QuotationCard from '../../quotation/quotation-card'
+import { SidebarProvider } from '../common/sidebar-provider'
+import { PreviewView } from './preview-view'
 import CreateQuotationDrawer from './quotation-create-drawer'
 import QuotationForm from './quotation-form'
 import QuotationViewDrawer from './quotation-view-drawer'
@@ -25,6 +30,8 @@ import QuotationViewDrawer from './quotation-view-drawer'
 export interface PhotographerQuotationProps {
   quotations: Quotation[]
   packages: Package[]
+  defaultCustomerId?: number
+  defaultWindow: WindowState
 }
 
 export interface CreateQuotationProps {
@@ -37,7 +44,7 @@ export interface CreateQuotationProps {
 }
 
 export const createQuotationFormSchema = z.object({
-  packageId: z.string(),
+  packageId: z.string().min(1, 'Please select packages'),
   customerId: z.string(),
   from: z.date(),
   to: z.date(),
@@ -50,20 +57,51 @@ export type CreateQuotationForm = z.infer<typeof createQuotationFormSchema>
 export default function PhotographerQuotation({
   quotations,
   packages,
+  defaultCustomerId,
+  defaultWindow,
 }: PhotographerQuotationProps) {
+  const router = useRouter()
   const [selectedPackageId, setSelectedPackageId] = useState<string>('')
 
-  const [windowState, setWindowstate] = useState<WindowState>(null)
+  const [customerId, setCustomerId] = useState<number | undefined>(
+    defaultCustomerId
+  )
+  const [customerProfile, setCustomerProfile] = useState<
+    CustomerPublic | undefined
+  >()
+
+  useEffect(() => {
+    async function fetchCustomer() {
+      if (customerId) {
+        const data = await getCustomer(customerId)
+        setCustomerProfile(data)
+      }
+    }
+    fetchCustomer()
+  }, [customerId])
+
+  const [windowState, setWindowstate] = useState<WindowState>(defaultWindow)
   const [currentQuotation, setCurrentQuotation] = useState<Quotation | null>(
     null
   )
+  const [isOpen, setIsOpen] = useState(false)
 
-  const onCreateQuotationButtonClicked = () => {
-    setWindowstate('create')
-  }
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 1023px)' })
+
+  useEffect(() => {
+    if (isSmallScreen) {
+      setIsOpen(true)
+    } else {
+      setIsOpen(false)
+    }
+  }, [isSmallScreen])
 
   const onEditButtonClicked = () => {
     setWindowstate('edit')
+    if (currentQuotation) {
+      setSelectedPackageId(currentQuotation.packageId.toString())
+    }
+    setCustomerId(currentQuotation?.customerId || undefined)
   }
 
   const onClose = () => {
@@ -99,41 +137,23 @@ export default function PhotographerQuotation({
   }
 
   return (
-    <Container className='space-y-6 py-4 lg:py-6'>
+    <SidebarProvider>
       <div className='flex flex-row justify-between'>
-        <div className='text-2xl font-bold'>Quotation Manager</div>
-
-        {/* Desktop */}
-        <Button
-          onClick={onCreateQuotationButtonClicked}
-          className='hidden lg:block'
-        >
-          New Quotation
-        </Button>
-
-        {/* Mobile */}
-        <CreateQuotationDrawer
-          setWindowstate={setWindowstate}
-          setCurrentQuotation={setCurrentQuotation}
-          onSubmit={onSubmit}
-          packages={packages}
-          selectedPackageId={selectedPackageId}
-          setSelectedPackageId={setSelectedPackageId}
-        />
+        <div className='text-2xl font-bold'>Quotations</div>
       </div>
 
       {quotations.length == 0 && !windowState ? (
-        <div className='text-medium flex h-[69vh] flex-col place-content-center items-center justify-center gap-3 font-medium text-gray-500'>
+        <div className='text-medium flex flex-col place-content-center items-center justify-center gap-3 font-medium text-gray-500'>
           <Icon icon='lucide:sticky-note' className='h-20 w-12 text-gray-500' />
           <span>You don&apos;t have any quotations yet</span>
         </div>
       ) : (
-        <div className='grid h-full grid-cols-1 gap-6 lg:grid-cols-2'>
-          <div className='gap-2.5 space-y-2.5 text-2xl font-bold lg:px-10'>
-            <div>Latest Quotations</div>
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='min-h-[400px] gap-2.5 space-y-2 rounded-lg border border-gray-200 bg-white px-4 py-4 text-lg font-bold shadow-md sm:min-h-[500px] sm:px-6 sm:py-5 sm:text-xl md:min-h-[600px] md:text-2xl lg:px-10 lg:py-6 lg:shadow-lg'>
+            <div className='mb-8'>Latest Quotations</div>
 
             {quotations.length == 0 ? (
-              <div className='flex h-full flex-col items-center justify-center gap-3'>
+              <div className='flex flex-col items-center justify-center gap-3'>
                 <Icon icon='lucide:sticky-note' className='size-20' />
                 No Quotations To Show
               </div>
@@ -152,10 +172,11 @@ export default function PhotographerQuotation({
                       onEditButtonClicked={onEditButtonClicked}
                       onSaveEditing={onSaveEditing}
                       packages={packages}
+                      customerId={customerId}
+                      customerProfile={customerProfile}
                     />
 
                     {/* Desktop */}
-
                     <QuotationCard
                       quotationId={quotation.quotationID}
                       quotationStatus={quotation.status as QuotationStatus}
@@ -165,6 +186,7 @@ export default function PhotographerQuotation({
                       from={formatDateToString(quotation.from)}
                       to={formatDateToString(quotation.to)}
                       description={quotation.description}
+                      photographerImageUrl={quotation.photographerPictureUrl}
                       duration={calculateDurationFromDate(
                         quotation.from,
                         quotation.to
@@ -182,27 +204,53 @@ export default function PhotographerQuotation({
             )}
           </div>
 
-          <div className='hidden lg:block'>
+          <div className='border-gray-20 hidden gap-2.5 space-y-2.5 rounded-lg border text-2xl lg:block lg:bg-white lg:px-10 lg:py-6 lg:shadow-lg'>
             {windowState === 'create' ? (
-              <div className='px-10'>
-                <div className='space-y-4 text-2xl font-bold'>
-                  Create Quotation
+              <>
+                <div className='block lg:hidden'>
+                  <CreateQuotationDrawer
+                    setWindowstate={setWindowstate}
+                    setCurrentQuotation={setCurrentQuotation}
+                    onSubmit={onSubmit}
+                    packages={packages}
+                    selectedPackageId={selectedPackageId}
+                    setSelectedPackageId={setSelectedPackageId}
+                    customerId={customerId}
+                    customerProfile={customerProfile}
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                  />
                 </div>
-                <QuotationForm
-                  transactionType='create'
-                  packages={packages}
-                  onSubmit={onSubmit}
-                  setSelectedPackageId={setSelectedPackageId}
-                  selectedPackageId={selectedPackageId}
-                />
-              </div>
+                <div className='px-10'>
+                  <div className='flex items-center space-y-4 text-2xl font-bold'>
+                    <div
+                      className='mr-2 cursor-pointer rounded-full p-2 hover:bg-gray-200'
+                      onClick={() => router.back()}
+                    >
+                      <Icon icon='lucide:chevron-left' className='size-5' />
+                    </div>
+                    Create Quotation
+                  </div>
+                  <QuotationForm
+                    transactionType='create'
+                    packages={packages}
+                    onSubmit={onSubmit}
+                    setSelectedPackageId={setSelectedPackageId}
+                    selectedPackageId={selectedPackageId}
+                    customerId={customerId}
+                    customerProfile={customerProfile}
+                  />
+                </div>
+              </>
             ) : currentQuotation != null ? (
               windowState === 'edit' &&
               currentQuotation.status === 'PENDING' ? (
                 <div className='space-y-4 text-2xl font-bold lg:px-10'>
                   <div className='flex flex-row justify-between'>
                     <div>Quotation {currentQuotation.quotationID}</div>
-                    <Button onClick={onClose}>Close</Button>
+                    <Button onClick={onClose} className='h-8 px-3 text-sm'>
+                      Close
+                    </Button>
                   </div>
 
                   <QuotationForm
@@ -214,15 +262,21 @@ export default function PhotographerQuotation({
                     fromDate={currentQuotation.from}
                     toDate={currentQuotation.to}
                     description={currentQuotation.description}
-                    customerId={currentQuotation.customerId.toString()}
+                    customerId={customerId}
+                    customerProfile={customerProfile}
                   />
                 </div>
               ) : (
                 <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
-                  <div className='flex w-full flex-row justify-between font-bold'>
+                  <div className='flex w-full flex-row justify-between text-2xl font-bold'>
                     <div>Quotation {currentQuotation.quotationID}</div>
                     {currentQuotation.status == 'PENDING' && (
-                      <Button onClick={onEditButtonClicked}>Edit</Button>
+                      <Button
+                        onClick={onEditButtonClicked}
+                        className='h-8 px-3 text-sm'
+                      >
+                        Edit
+                      </Button>
                     )}
                   </div>
 
@@ -243,12 +297,19 @@ export default function PhotographerQuotation({
                     )}
                     totalPrice={currentQuotation.price}
                   />
+                  {currentQuotation.status !== 'PENDING' &&
+                    currentQuotation.status !== 'CONFIRMED' && (
+                      <PreviewView
+                        quotationId={currentQuotation.quotationID}
+                        isPhotographer={true}
+                      />
+                    )}
                 </div>
               )
             ) : null}
           </div>
         </div>
       )}
-    </Container>
+    </SidebarProvider>
   )
 }

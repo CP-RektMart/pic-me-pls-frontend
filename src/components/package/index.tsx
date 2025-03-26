@@ -1,7 +1,7 @@
 'use client'
 
 // import getChats from '@/actions/chat/get-chats'
-import { PackageVerbose } from '@/types/package'
+import { PackageVerbose, Review } from '@/types/package'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { redirect, useRouter } from 'next/navigation'
@@ -19,11 +19,13 @@ import { ProfileThumbnail } from './profileThumbnail'
 interface PackageProps {
   package: PackageVerbose
   photographerTotalPackage: number
+  reviews: Review[]
 }
 
 export function PackagePage({
   package: pkg,
   photographerTotalPackage: totalPackage,
+  reviews,
 }: PackageProps) {
   const router = useRouter()
 
@@ -76,7 +78,7 @@ export function PackagePage({
                 <span className='whitespace-nowrap'>Start Chatting</span>
               </Button>
             </div>
-            <ReviewComponent reviews={pkg.reviews ?? []} />
+            <ReviewComponent reviews={reviews} />
           </div>
         </div>
       </Container>

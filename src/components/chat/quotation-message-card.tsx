@@ -1,4 +1,4 @@
-import type { QuotationMessage } from '@/actions/chat/get-chat'
+import type { ImageMessage, QuotationMessage } from '@/actions/chat/get-chat'
 import { BaseMessage } from '@/actions/chat/get-chat'
 import { formatDateToString } from '@/lib/utils'
 import { QuotationStatus } from '@/types/quotation'
@@ -9,10 +9,12 @@ import { QuotationStatusTag } from '@/components/quotation/quotation-status-tag'
 import { Button } from '../ui/button'
 
 interface QuotationMessageProps {
-  message: BaseMessage & QuotationMessage
+  message: BaseMessage & (QuotationMessage | ImageMessage)
 }
 
 export default function QuotationMessage({ message }: QuotationMessageProps) {
+  if (message.type !== 'quotation') return null
+
   const quotation = message.quotation
 
   return (

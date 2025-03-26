@@ -1,19 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { createPaymentUrl } from '@/actions/payment/create-payment-url'
+import acceptQuotation from '@/actions/quotation/accept-quotation'
 import cancelQuotation from '@/actions/quotation/cancel-quotation'
 import confirmQuotation from '@/actions/quotation/confirm-quotation'
 import {
   type CustomerQuotationProps,
   type QuotationStatus,
 } from '@/types/quotation'
+import { Icon } from '@iconify/react'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { Container } from '@/components/container'
+import { PreviewView } from '@/components/photographer/quotations/preview-view'
 import { ProfileHeader } from '@/components/profile-header'
+import AcceptWorkButton from '@/components/quotation/accept-work-button'
 import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
+import { QuotationComment } from '@/components/quotation/quotation-comment'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 
 export default function Page({
@@ -30,12 +37,31 @@ export default function Page({
   photographerImageUrl,
   packageNumber,
   quotationImages,
+  paymentStatus,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
+  const router = useRouter()
+  const [ratingScore, setRatingScore] = useState<number>(0.0)
+  const [comment, setComment] = useState<string>()
 
-  const handlePayment = () => {
-    setStatus('PAID')
-    // TODO: handle payment
+  useEffect(() => {
+    if (!paymentStatus) return
+    setTimeout(() => {
+      if (paymentStatus === 'success') {
+        toast.success('Payment successful')
+      } else if (paymentStatus === 'cancel') {
+        toast.error('Payment cancelled')
+      }
+    }, 100)
+  }, [paymentStatus])
+
+  const handlePayment = async () => {
+    const url = await createPaymentUrl(quotationId)
+    if (url) {
+      window.location.href = url
+    } else {
+      toast.error('Failed to create payment URL')
+    }
   }
 
   const handleCancel = async () => {
@@ -48,6 +74,21 @@ export default function Page({
     await confirmQuotation(quotationId)
     toast.success('Quotation confirmed')
     setStatus('CONFIRMED')
+  }
+
+  const handleAcceptWork = async () => {
+    await acceptQuotation(quotationId)
+    setStatus('COMPLETED')
+  }
+
+  const handleCommentOnChange = (text: string) => {
+    setComment(text)
+  }
+
+  const handleCommentSubmission = async () => {
+    console.log('Comment sent!')
+    console.log({ ratingScore, comment })
+    // TODO: Integrate comment submission
   }
 
   return (
@@ -70,6 +111,15 @@ export default function Page({
         </div>
 
         <div className='flex-1'>
+          {/* Go Back Button */}
+          <div className='mb-2 flex size-10 cursor-pointer items-center justify-center rounded-full p-2 hover:bg-gray-200'>
+            <Icon
+              icon='lucide:chevron-left'
+              className='text-xl'
+              onClick={() => router.back()}
+            />
+          </div>
+
           <QuotationDetails
             quotationId={quotationId}
             quotationStatus={status as QuotationStatus}
@@ -82,12 +132,27 @@ export default function Page({
             duration={duration}
             totalPrice={totalPrice}
           />
+          {status === 'PAID' ||
+            (status === 'SUBMITTED' && (
+              <>
+                <PreviewView quotationId={quotationId} isPhotographer={false} />
+                <AcceptWorkButton onClick={handleAcceptWork} />
+              </>
+            ))}
           <QuotationButton
             status={status}
             onCancel={handleCancel}
             onConfirm={handleConfirm}
             onPay={handlePayment}
           />
+          {(status === 'COMPLETED' || status === 'CANCELLED') && (
+            <QuotationComment
+              ratingScore={ratingScore}
+              handleStarOnChange={setRatingScore}
+              handleSendOnClick={handleCommentSubmission}
+              handleCommentOnChange={handleCommentOnChange}
+            />
+          )}
         </div>
       </div>
     </Container>

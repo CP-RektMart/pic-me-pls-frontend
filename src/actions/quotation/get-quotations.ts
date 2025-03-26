@@ -14,6 +14,7 @@ export interface Quotation {
   to: Date
   description: string
   price: number
+  photographerPictureUrl: string
 }
 
 export async function getQuotations(): Promise<Quotation[]> {
@@ -40,6 +41,7 @@ export async function getQuotations(): Promise<Quotation[]> {
         to: new Date(quotation.toDate || new Date()),
         description: quotation.description || '',
         price: quotation.price || 0,
+        photographerPictureUrl: quotation.photographer?.profilePictureUrl || '',
       })
     )
     .sort((a, b) => a.quotationID - b.quotationID)
