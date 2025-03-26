@@ -6,6 +6,7 @@ import { createPaymentUrl } from '@/actions/payment/create-payment-url'
 import acceptQuotation from '@/actions/quotation/accept-quotation'
 import cancelQuotation from '@/actions/quotation/cancel-quotation'
 import confirmQuotation from '@/actions/quotation/confirm-quotation'
+import postReview from '@/actions/review/post-review'
 import {
   type CustomerQuotationProps,
   type QuotationStatus,
@@ -86,9 +87,18 @@ export default function Page({
   }
 
   const handleCommentSubmission = async () => {
-    console.log('Comment sent!')
-    console.log({ ratingScore, comment })
-    // TODO: Integrate comment submission
+    const result = await postReview(
+      quotationId.toString(),
+      ratingScore,
+      comment
+    )
+    if (result?.error) {
+      toast.error('Failed to submit review')
+    }
+    toast.success('Review submitted successfully')
+    setStatus('COMPLETED')
+    setRatingScore(0)
+    setComment('')
   }
 
   return (
