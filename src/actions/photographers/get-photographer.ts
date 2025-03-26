@@ -1,3 +1,5 @@
+'use server'
+
 import { client } from '@/api/client'
 import { Photographer } from '@/types/photographer'
 
