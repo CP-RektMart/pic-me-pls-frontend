@@ -5,6 +5,9 @@ import { postImageMessage } from '@/actions/chat/post-chat'
 import { postImageChatUpload } from '@/actions/chat/post-image-chat'
 import { Icon } from '@iconify/react'
 
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+
 interface ChatInputImageBarProps {
   currentChat: Chat | null
   userRole: 'photographer' | 'customer'
@@ -46,14 +49,15 @@ export default function ChatInputImageBar({
 
   return (
     <div>
-      <button
-        type='button'
+      <Button
+        variant='ghost'
+        size='icon'
         onClick={handleButtonClick}
         className='flex justify-center'
       >
         <Icon icon='lucide:image' className='size-6 text-slate-500' />
-      </button>
-      <input
+      </Button>
+      <Input
         type='file'
         accept='image/*'
         ref={fileInputRef}

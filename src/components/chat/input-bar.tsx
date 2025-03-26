@@ -6,9 +6,8 @@ import { Chat, getChats } from '@/actions/chat/get-chat'
 import { postTextMessage } from '@/actions/chat/post-chat'
 
 import ChatInputImageBar from '@/components/chat/input-bar-image'
-
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 interface ChatInputBarProps {
   currentChat: Chat | null
