@@ -15,7 +15,7 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer'
 
-import { CreateQuotationForm } from './photographer-quotation'
+import { CreateQuotationForm } from '.'
 import QuotationFormDrawer from './quotation-form-drawer'
 
 interface CreateQuotationDrawerProps {

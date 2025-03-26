@@ -3,10 +3,10 @@
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { Icon } from '@iconify/react'
-import Link from 'next/link'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 
+import { BackButton } from '@/components/back-button'
 import { Button } from '@/components/ui/button'
 import {
   FormControl,
@@ -55,11 +55,7 @@ export function CreatePackageDetailSection({
   return (
     <div className='shadow-right space-between flex w-full flex-col gap-y-4 bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-96'>
       <div className='flex flex-row items-center gap-4'>
-        <Link href='/photographer/packages'>
-          <div className='rounded-full p-2 hover:bg-gray-200'>
-            <Icon icon='lucide:chevron-left' className='size-5' />
-          </div>
-        </Link>
+        <BackButton href='/photographer/packages' />
         <h1 className='text-xl font-bold'>New Package</h1>
       </div>
       <FormField

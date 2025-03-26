@@ -9,7 +9,8 @@ export const photographerMiddleware: MiddlewareFactory = (next) => {
     const user = session?.user
 
     const isPhotographerPath =
-      request.nextUrl.pathname.startsWith('/photographer/')
+      request.nextUrl.pathname.startsWith('/photographer') &&
+      !request.nextUrl.pathname.startsWith('/photographers')
 
     if (isPhotographerPath) {
       if (!user) {
