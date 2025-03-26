@@ -65,6 +65,7 @@ export function CreatePackageDetailSection({
       <FormField
         control={form.control}
         name='name'
+        defaultValue=''
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Name</FormLabel>
@@ -79,6 +80,7 @@ export function CreatePackageDetailSection({
       <FormField
         control={form.control}
         name='category'
+        defaultValue=''
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Category</FormLabel>
@@ -112,6 +114,7 @@ export function CreatePackageDetailSection({
       <FormField
         control={form.control}
         name='packageDescription'
+        defaultValue=''
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
@@ -126,6 +129,7 @@ export function CreatePackageDetailSection({
       <FormField
         control={form.control}
         name='price'
+        defaultValue={undefined}
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>

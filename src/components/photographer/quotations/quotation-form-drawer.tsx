@@ -112,6 +112,7 @@ export default function QuotationFormDrawer({
         <FormField
           control={form.control}
           name='packageId'
+          defaultValue=''
           render={({ field }) => (
             <FormItem>
               <FormLabel className='text-sm font-medium'>Package</FormLabel>
@@ -144,6 +145,7 @@ export default function QuotationFormDrawer({
           <FormField
             control={form.control}
             name='from'
+            defaultValue={undefined}
             render={({ field }) => (
               <FormItem className='flex flex-col'>
                 <FormLabel>From</FormLabel>
@@ -156,6 +158,7 @@ export default function QuotationFormDrawer({
           <FormField
             control={form.control}
             name='to'
+            defaultValue={undefined}
             render={({ field }) => (
               <FormItem className='flex flex-col'>
                 <FormLabel>To</FormLabel>
@@ -169,6 +172,7 @@ export default function QuotationFormDrawer({
         <FormField
           control={form.control}
           name='description'
+          defaultValue=''
           render={({ field }) => (
             <FormItem>
               <FormLabel className='text-sm font-medium'>Description</FormLabel>
