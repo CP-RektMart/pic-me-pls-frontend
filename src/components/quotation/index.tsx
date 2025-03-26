@@ -39,11 +39,12 @@ export default function Page({
   packageNumber,
   quotationImages,
   paymentStatus,
+  review,
 }: CustomerQuotationProps) {
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
   const router = useRouter()
-  const [ratingScore, setRatingScore] = useState<number>(0.0)
-  const [comment, setComment] = useState<string>()
+  const [ratingScore, setRatingScore] = useState<number>(review?.rating || 0.0)
+  const [comment, setComment] = useState<string>(review?.comment || '')
 
   useEffect(() => {
     if (quotationStatus === 'ACCEPTED') {
@@ -163,6 +164,8 @@ export default function Page({
           />
           {(status === 'COMPLETED' || status === 'CANCELLED') && (
             <QuotationComment
+              hasReview={!!review}
+              comment={comment}
               ratingScore={ratingScore}
               handleStarOnChange={setRatingScore}
               handleSendOnClick={handleCommentSubmission}

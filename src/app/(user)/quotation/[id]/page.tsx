@@ -62,6 +62,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       packageNumber={quotation.photographer?.packages?.length || 0}
       quotationImages={images || []}
       paymentStatus={paymentStatus || ''}
+      review={quotation.review}
     />
   )
 }
