@@ -94,11 +94,7 @@ export default function Page({
   }
 
   const handleCommentSubmission = async () => {
-    const result = await postReview(
-      quotationId.toString(),
-      ratingScore,
-      comment
-    )
+    const result = await postReview(quotationId, ratingScore, comment)
     if (result?.error) {
       toast.error('Failed to submit review')
     }
