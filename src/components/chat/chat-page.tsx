@@ -56,8 +56,8 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
     const idx = chats.findIndex((chats) => chats.user.id == talkerId)
 
     if (idx != -1 && !!message) {
-      setChats((chats) => {
-        const current = [...chats]
+      setChats((prev) => {
+        const current = [...prev]
         const chat = current[idx]
         const isMessageExist =
           chat?.messages.findIndex((InMessage) => InMessage.id == message.id) !=
@@ -82,7 +82,6 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
         chat={selectedChat}
         setSelectedChat={setSelectedChat}
         sendMessage={sendMessage}
-        userId={userId}
       />
       <ProfileSidebar
         role={selectedChat?.user.role?.toLowerCase() as UserRole}
