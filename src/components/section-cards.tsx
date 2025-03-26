@@ -11,7 +11,7 @@ import {
 
 export function SectionCards() {
   return (
-    <div className='grid grid-cols-4 gap-4'>
+    <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
       <Card className='@container/card'>
         <CardHeader className='relative'>
           <CardDescription>Total Revenue</CardDescription>

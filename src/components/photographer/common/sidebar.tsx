@@ -22,7 +22,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <div className='flex h-full w-72 flex-initial flex-col justify-between gap-2 bg-white px-5 py-4 drop-shadow'>
+    <div className='hidden h-full w-72 flex-initial flex-col justify-between gap-2 bg-white px-5 py-4 drop-shadow lg:flex'>
       <div className='flex flex-1 flex-col gap-2'>
         {photographerItems.map((item) => (
           <Link href={item.url} key={item.title}>
