@@ -2,6 +2,7 @@ import { Chat } from '@/actions/chat/get-chat'
 import { cn } from '@/lib/utils'
 import ProfilePic from '@public/images/profile-mock-image.png'
 
+import { BackButton } from '../back-button'
 import ChatCard from './chat-card'
 
 interface ChatListProps {
@@ -20,13 +21,16 @@ export default function ChatList({
   return (
     <div
       className={cn(
-        'flex w-full flex-col shadow-md lg:w-1/4 lg:max-w-sm',
+        'flex w-full flex-col gap-4 px-5 py-4 shadow-md lg:w-1/4 lg:max-w-sm',
         selectedChat && `hidden lg:block`
       )}
     >
-      <h1 className='px-5 py-4 text-xl font-bold shadow-sm'>Chats</h1>
+      <div className='flex flex-row items-center gap-4'>
+        <BackButton />
+        <h1 className='text-xl font-bold'>Chats</h1>
+      </div>
 
-      <div className='h-full space-y-2 overflow-y-auto px-5 py-4'>
+      <div className='h-full space-y-2 overflow-y-auto'>
         {chats.map((chat) => (
           <ChatCard
             key={chat.id}
