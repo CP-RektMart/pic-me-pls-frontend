@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 // import { getMessages } from '@/actions/chat/get-chat'
 // import { getChats } from '@/actions/chat/get-chat'
-import { Chat } from '@/types/messages'
+import { Chat, Message } from '@/types/messages'
 // import { Chat, Message } from '@/types/messages'
 import { UserRole } from '@/types/user'
 import useWebSocket from 'react-use-websocket'
@@ -23,7 +23,7 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
   // const chats = getChats()
 
   // const [chats, setChats] = useState<Chat[]>([])
-  const [chats] = useState(messages)
+  const [chats, setChats] = useState(messages)
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null)
 
   const { sendMessage, lastMessage } = useWebSocket(
@@ -35,11 +35,41 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
     }
   )
 
+  const convertMessage = (raw: string): Message | null => {
+    const [event, message] = raw.split(' ')
+    if (event == 'MESSAGE' && !!message) {
+      return JSON.parse(message)
+    } else {
+      console.error('message error', message)
+    }
+    return null
+  }
+
   useEffect(() => {
-    console.log('lastMessage', lastMessage)
-    console.log('selectedChat', selectedChat)
-    console.log('chats', chats)
-  }, [lastMessage, selectedChat, chats])
+    if (!lastMessage) {
+      return
+    }
+
+    const message = convertMessage(String(lastMessage.data))
+    const talkerId =
+      message?.senderId == userId ? message.receiverId : message?.senderId
+    const idx = chats.findIndex((chats) => chats.user.id == talkerId)
+
+    if (idx != -1 && !!message) {
+      setChats((chats) => {
+        const current = [...chats]
+        const chat = current[idx]
+        const isMessageExist =
+          chat?.messages.findIndex((InMessage) => InMessage.id == message.id) !=
+          -1
+        if (!!chat && !isMessageExist) {
+          chat.messages = [...chat.messages, message]
+          current[idx] = chat
+        }
+        return current
+      })
+    }
+  }, [lastMessage])
 
   return (
     <div className='flex h-[calc(100vh-7.5rem)] w-full overflow-hidden'>
@@ -58,6 +88,7 @@ export default function ChatPage({ accessToken, messages, userId }: Props) {
         role={selectedChat?.user.role?.toLowerCase() as UserRole}
         opponentName={selectedChat?.user.name || null}
         opponentProfilePic={selectedChat?.user.profilePictureUrl || ''}
+        opponentId={selectedChat?.user.id || 0}
       />
     </div>
   )
