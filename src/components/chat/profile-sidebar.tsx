@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { UserRole } from '@/types/user'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 
@@ -6,16 +7,18 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
 export interface ProfileSidebarProps {
-  isPhotographer: boolean
+  role: UserRole | null | undefined
   opponentName: string | null
   opponentProfilePic: string
 }
 
 export default function ProfileSidebar({
-  isPhotographer,
+  role,
   opponentName,
   opponentProfilePic,
 }: ProfileSidebarProps) {
+  if (!opponentName) return null
+
   return (
     <div
       className={cn(
@@ -23,20 +26,34 @@ export default function ProfileSidebar({
         !opponentName && 'lg:hidden'
       )}
     >
-      <h1 className='text-xl font-bold'>
-        Your {isPhotographer ? 'Customer' : 'Photographer'}
-      </h1>
+      <h1 className='text-xl font-bold'>Your {role}</h1>
       <div className='flex w-full flex-col items-center space-y-2'>
-        <Image
-          className='rounded-full object-cover'
-          src={opponentProfilePic}
-          alt='Profile photo'
-          width={112}
-          height={112}
-        />
-        <Badge className='w-20 bg-orange-100 text-base-primary shadow-none'>
-          {isPhotographer ? 'Customer' : 'Photographer'}
-        </Badge>
+        {opponentProfilePic && (
+          <Image
+            className='rounded-full object-cover'
+            src={opponentProfilePic}
+            alt='Profile photo'
+            width={112}
+            height={112}
+          />
+        )}
+        {role && (
+          <Badge
+            variant={
+              role.toLowerCase() as
+                | 'default'
+                | 'destructive'
+                | 'outline'
+                | 'secondary'
+                | 'photographer'
+                | 'customer'
+                | null
+                | undefined
+            }
+          >
+            {role[0]?.toUpperCase() + role.slice(1)}
+          </Badge>
+        )}
       </div>
       <h2 className='w-full text-center font-bold'>{opponentName}</h2>
       <Button

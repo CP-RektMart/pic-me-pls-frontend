@@ -1,18 +1,15 @@
-import { Chat } from '@/actions/chat/get-chat'
 import { cn } from '@/lib/utils'
-import ProfilePic from '@public/images/profile-mock-image.png'
+import { Chat } from '@/types/messages'
 
 import ChatCard from './chat-card'
 
 interface ChatListProps {
-  isPhotographer: boolean
   chats: Chat[]
   setSelectedChat: (chat: Chat) => void
   selectedChat?: Chat | null
 }
 
 export default function ChatList({
-  isPhotographer,
   chats,
   setSelectedChat,
   selectedChat,
@@ -20,20 +17,20 @@ export default function ChatList({
   return (
     <div
       className={cn(
-        'flex w-full flex-col shadow-md lg:w-1/4 lg:max-w-sm',
-        selectedChat && `hidden lg:block`
+        'flex w-full flex-col shadow-md lg:w-1/4 lg:max-w-sm'
+        // selectedChat && 'hidden lg:block'
       )}
     >
       <h1 className='px-5 py-4 text-xl font-bold shadow-sm'>Chats</h1>
 
       <div className='h-full space-y-2 overflow-y-auto px-5 py-4'>
-        {chats.map((chat) => (
+        {chats.map((chat, idx) => (
           <ChatCard
-            key={chat.id}
+            key={idx}
             chat={chat}
-            isPhotographer={isPhotographer}
-            profilePic={ProfilePic.src}
-            isSelected={selectedChat?.id === chat.id}
+            name={chat.user.name || 'Unknown'}
+            profilePic={chat.user.profilePictureUrl || ''}
+            isSelected={selectedChat === chat} // wtf
             setSelectedChat={setSelectedChat}
           />
         ))}

@@ -2,41 +2,39 @@
 
 import { useRef } from 'react'
 
-import { Chat, getChats } from '@/actions/chat/get-chat'
-import { postTextMessage } from '@/actions/chat/post-chat'
+import { Chat, Message } from '@/types/messages'
 
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 interface ChatInputBarProps {
   currentChat: Chat | null
-  userRole: 'photographer' | 'customer'
-  setSelectedChat: (chat: Chat | null) => void
+  sendMessage: (message: string) => void
+  senderId: number
+  receiverId: number
 }
 
 export default function ChatInputBar({
   currentChat,
-  userRole,
-  setSelectedChat,
+  sendMessage,
+  senderId,
+  receiverId,
 }: ChatInputBarProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
     if (!currentChat || !inputRef.current) return
 
-    postTextMessage({
-      chatId: currentChat.id,
-      message: inputRef.current.value,
-      sender: userRole,
-      type: 'text',
-    })
+    const messageData = {
+      senderId: senderId,
+      receiverId: receiverId,
+      content: inputRef.current.value,
+      type: 'TEXT',
+    }
+    console.log('messageData', messageData)
+    sendMessage(JSON.stringify(messageData))
+    currentChat.messages.push(messageData as Message)
 
-    const updatedChat = getChats().find((chat) => chat.id === currentChat.id)
-    if (!updatedChat) return
-    setSelectedChat({
-      ...updatedChat,
-      conversation: updatedChat.conversation,
-    })
     inputRef.current.value = ''
   }
 
