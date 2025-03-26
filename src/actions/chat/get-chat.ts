@@ -10,7 +10,3 @@ export async function getMessages() {
 
   return data.result
 }
-
-export function getChats() {
-  return []
-}
