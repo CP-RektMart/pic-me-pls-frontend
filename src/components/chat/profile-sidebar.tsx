@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
 export interface ProfileSidebarProps {
-  role: UserRole | null | undefined
+  role: UserRole
   opponentName: string | null
   opponentId: number
   opponentProfilePic: string
