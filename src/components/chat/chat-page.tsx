@@ -3,7 +3,9 @@
 import { useEffect, useState } from 'react'
 
 import { getPhotographer } from '@/actions/photographers/get-photographer'
-import { Chat, Message } from '@/types/messages'
+import { envClientSchema } from '@/clientEnvSchema'
+import { convertMessage } from '@/lib/utils'
+import { Chat } from '@/types/messages'
 import { User, UserRole } from '@/types/user'
 import { useSearchParams } from 'next/navigation'
 import useWebSocket from 'react-use-websocket'
@@ -31,7 +33,7 @@ export default function ChatPage({
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null)
 
   const { sendMessage, lastMessage } = useWebSocket(
-    `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/api/v1/messages/ws?accessToken=${accessToken}`,
+    `${envClientSchema.NEXT_PUBLIC_WEBSOCKET_URL}/api/v1/messages/ws?accessToken=${accessToken}`,
     {
       onOpen: () => console.log('open'),
       onError: (event) => console.log('error', event),
@@ -76,22 +78,6 @@ export default function ChatPage({
     }
     fetchAndSetChat()
   }, [photographerId])
-
-  const splitFirstSpace = (text: string): string[] => {
-    const parts = text.split(' ')
-    if (parts.length < 2) return parts // No space found
-    return [parts[0] as string, parts.slice(1).join(' ')]
-  }
-
-  const convertMessage = (raw: string): Message | null => {
-    const [event, message] = splitFirstSpace(raw)
-    if (event == 'MESSAGE' && !!message) {
-      return JSON.parse(message)
-    } else {
-      console.error('message error', message)
-    }
-    return null
-  }
 
   useEffect(() => {
     if (!lastMessage) {

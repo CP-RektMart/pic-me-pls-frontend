@@ -1,3 +1,4 @@
+import { Message } from '@/types/messages'
 import { type ClassValue, clsx } from 'clsx'
 import {
   format,
@@ -44,4 +45,20 @@ export function calculateDurationFromDate(
   return formatDuration(duration, {
     format: ['days', 'hours', 'minutes'],
   })
+}
+
+export const splitFirstSpace = (text: string): string[] => {
+  const parts = text.split(' ')
+  if (parts.length < 2) return parts // No space found
+  return [parts[0] as string, parts.slice(1).join(' ')]
+}
+
+export const convertMessage = (raw: string): Message | null => {
+  const [event, message] = splitFirstSpace(raw)
+  if (event == 'MESSAGE' && !!message) {
+    return JSON.parse(message)
+  } else {
+    console.error('message error', message)
+  }
+  return null
 }
