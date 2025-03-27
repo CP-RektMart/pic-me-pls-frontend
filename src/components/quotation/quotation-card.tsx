@@ -28,7 +28,7 @@ export default function QuotationCard({
       <div className='rounded-3xl border bg-white shadow-sm'>
         <div className='flex items-center justify-between px-5 pb-3 pt-4'>
           <div className='flex items-center gap-4'>
-            <div className='relative h-12 w-12 overflow-hidden rounded-full'>
+            <div className='relative h-12 w-12 shrink-0 overflow-hidden rounded-full'>
               <Image
                 src={photographerImageUrl}
                 alt='Profile picture'
@@ -37,7 +37,9 @@ export default function QuotationCard({
               />
             </div>
             <div>
-              <h2 className='text-base font-medium'>{photographerName}</h2>
+              <h2 className='text-start text-base font-medium xl:line-clamp-1'>
+                {photographerName}
+              </h2>
               <p className='text-start text-xs text-gray-500'>{quotationId}</p>
             </div>
           </div>

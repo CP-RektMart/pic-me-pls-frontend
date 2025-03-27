@@ -63,7 +63,7 @@ export function PackagePage({
                     pkg.photographer?.profilePictureUrl || '/default.jpg'
                   }
                   name={pkg.photographer?.name || 'Photographer Name'}
-                  haveVerifiedBadge={true}
+                  haveVerifiedBadge={pkg.photographer?.isVerified ?? false}
                 />
               </Link>
 
