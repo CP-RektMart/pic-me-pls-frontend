@@ -1,3 +1,5 @@
+import { Review } from '@/types/package'
+
 export type QuotationStatus = 'PENDING' | 'CONFIRMED' | 'PAID' | 'CANCELLED'
 
 export interface QuotationDetailsProps {
@@ -17,6 +19,7 @@ export interface CustomerQuotationProps extends QuotationDetailsProps {
   photographerImageUrl: string
   packageNumber: number
   quotationImages: { url: string; name: string }[]
+  review?: Review
 }
 
 export type WindowState = 'create' | 'edit' | null

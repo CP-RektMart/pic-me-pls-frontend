@@ -36,7 +36,12 @@ export default function ReviewCard({ review }: { review: Review }) {
         />
       </div>
 
-      <div className='self-start text-sm'>{review.comment}</div>
+      <div className='self-start text-sm'>
+        {review.comment}{' '}
+        <span className='text-xs text-gray-400'>
+          {review.isEdited ? '(edited)' : ''}
+        </span>
+      </div>
     </div>
   )
 }

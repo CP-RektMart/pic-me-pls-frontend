@@ -5,10 +5,14 @@ import { useState } from 'react'
 import { createPaymentUrl } from '@/actions/payment/create-payment-url'
 import cancelQuotation from '@/actions/quotation/cancel-quotation'
 import confirmQuotation from '@/actions/quotation/confirm-quotation'
+import { createReview } from '@/actions/review/create-review'
+import { deleteReview } from '@/actions/review/delete-review'
+import { updateReview } from '@/actions/review/update-review'
 import {
   type CustomerQuotationProps,
   type QuotationStatus,
 } from '@/types/quotation'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { Container } from '@/components/container'
@@ -32,10 +36,12 @@ export default function Page({
   photographerImageUrl,
   packageNumber,
   quotationImages,
+  review,
 }: CustomerQuotationProps) {
+  const router = useRouter()
   const [status, setStatus] = useState<QuotationStatus>(quotationStatus)
   const [ratingScore, setRatingScore] = useState<number>(0.0)
-  const [comment, setComment] = useState<string>()
+  const [comment, setComment] = useState<string>(review?.comment ?? '')
 
   const handlePayment = async () => {
     const url = await createPaymentUrl(quotationId)
@@ -63,9 +69,48 @@ export default function Page({
   }
 
   const handleCommentSubmission = async () => {
-    console.log('Comment sent!')
-    console.log({ ratingScore, comment })
-    // TODO: Integrate comment submission
+    try {
+      const payload = {
+        quotationID: quotationId,
+        rating: ratingScore,
+        comment: comment,
+      }
+      toast.success('Review has been sent!')
+      await createReview(payload)
+      router.back()
+    } catch {
+      toast.error('Unknown errors occured. Failed to send reveiw.')
+    }
+  }
+
+  const handleCommentUpdate = async (reviewId: number) => {
+    try {
+      const payload = {
+        id: reviewId,
+        quotationID: quotationId,
+        rating: ratingScore,
+        comment: comment,
+      }
+      toast.success('Review has been updated!')
+      await updateReview(payload)
+      router.back()
+    } catch {
+      toast.error('Unknown errors occured. Failed to update reveiw.')
+    }
+  }
+
+  const handleCommentDeletion = async (reviewId: number) => {
+    try {
+      const payload = {
+        id: reviewId,
+        quotationID: quotationId,
+      }
+      toast.success('Review has been deleted!')
+      await deleteReview(payload)
+      router.back()
+    } catch {
+      toast.error('Unknown errors occured. Failed to delete reveiw.')
+    }
   }
 
   return (
@@ -108,10 +153,14 @@ export default function Page({
           />
           {(quotationStatus === 'PAID' || quotationStatus === 'CANCELLED') && (
             <QuotationComment
-              ratingScore={ratingScore}
-              handleStarOnChange={setRatingScore}
-              handleSendOnClick={handleCommentSubmission}
+              ratingScore={review?.rating ?? ratingScore}
+              review={review}
+              comment={comment}
               handleCommentOnChange={handleCommentOnChange}
+              handleCommentDeletion={handleCommentDeletion}
+              handleSendOnClick={handleCommentSubmission}
+              handleUpdateOnClick={handleCommentUpdate}
+              handleStarOnChange={setRatingScore}
             />
           )}
         </div>

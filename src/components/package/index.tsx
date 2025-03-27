@@ -1,6 +1,6 @@
 'use client'
 
-import { PackageVerbose } from '@/types/package'
+import { PackageVerbose, Review } from '@/types/package'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -68,7 +68,7 @@ export function PackagePage({
                 <span className='whitespace-nowrap'>Start Chatting</span>
               </Button>
             </div>
-            <ReviewComponent reviews={pkg.reviews ?? []} />
+            <ReviewComponent reviews={(pkg.reviews as Review[]) ?? []} />
           </div>
         </div>
       </Container>

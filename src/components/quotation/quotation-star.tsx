@@ -84,10 +84,10 @@ export function QuotationStar({
               <Star
                 className={cn(
                   starSize,
-                  'text-base-primary',
-                  (isActiveFull || isActiveHalf) && 'text-yellow-400'
+                  'text-[#dedceb]',
+                  isActiveFull && 'text-yellow-400'
                 )}
-                fill={isActiveFull ? 'currentColor' : 'none'}
+                fill={isActiveFull ? 'currentColor' : '#dedceb'}
               />
 
               {/* Half star overlay */}
