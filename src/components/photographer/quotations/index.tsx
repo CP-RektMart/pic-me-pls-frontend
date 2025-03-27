@@ -163,7 +163,7 @@ export default function PhotographerQuotation({
                   <p>No quotation here</p>
                 </div>
               ) : (
-                <div className='flex flex-col'>
+                <div className='flex flex-col gap-4'>
                   {quotations.map((quotation) => (
                     <div key={quotation.quotationID}>
                       {/* Mobile */}

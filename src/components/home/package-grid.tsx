@@ -25,7 +25,7 @@ export default function PackageGrid({
   }
 
   return (
-    <div className='flex flex-wrap gap-4'>
+    <div className='my-6 grid grid-cols-1 place-content-center gap-4 md:grid-cols-2 lg:grid-cols-3'>
       {packages.map((pkg, index) => (
         <PackageCard
           key={index}

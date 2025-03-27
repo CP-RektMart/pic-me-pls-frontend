@@ -7,16 +7,18 @@ import ReviewRating from './review-rating'
 export default function ReviewCard({ review }: { review: Review }) {
   return (
     <div className='flex w-full flex-col items-center space-y-2.5 rounded-2xl bg-zinc-50 p-2.5'>
-      <div className='flex w-full flex-col justify-between space-y-2 lg:flex-row'>
+      <div className='flex w-full flex-col justify-between gap-y-2 lg:flex-row'>
         <div className='flex flex-row space-x-2'>
-          <Image
-            src={review.customer?.profilePictureUrl || '/default.jpg'}
-            alt='Reviewer Profile'
-            className='rounded-full object-cover'
-            width={32}
-            height={32}
-          />
-          <div className='self-center font-semibold'>
+          <div className='h-8 w-8 shrink-0'>
+            <Image
+              src={review.customer?.profilePictureUrl || '/default.jpg'}
+              alt='Reviewer Profile'
+              className='rounded-full object-cover'
+              width={32}
+              height={32}
+            />
+          </div>
+          <div className='text-md line-clamp-1 self-center font-semibold'>
             {review.customer?.name}
           </div>
         </div>
