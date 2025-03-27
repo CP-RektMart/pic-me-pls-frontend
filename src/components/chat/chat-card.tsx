@@ -33,7 +33,7 @@ export default function ChatCard({
           fill
         />
       </div>
-      <div className='flex flex-col overflow-hidden'>
+      <div className='flex flex-1 flex-col overflow-hidden'>
         <h2 className='truncate font-medium'>{name}</h2>
         {chat.messages.length > 0 && (
           <p className='truncate text-xs font-medium text-gray-500'>

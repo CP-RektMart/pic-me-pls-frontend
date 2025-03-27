@@ -37,13 +37,14 @@ export default function ProfileSidebar({
     >
       <div className='flex w-full flex-col items-center space-y-2'>
         {opponentProfilePic && (
-          <Image
-            className='rounded-full object-cover'
-            src={opponentProfilePic}
-            alt='Profile photo'
-            width={112}
-            height={112}
-          />
+          <div className='relative size-28'>
+            <Image
+              className='rounded-full object-cover'
+              src={opponentProfilePic}
+              alt='Profile photo'
+              fill
+            />
+          </div>
         )}
         {opponentRole && (
           <Badge
