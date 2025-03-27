@@ -119,7 +119,6 @@ export default function Page({
       }
       toast.success('Review has been updated!')
       await updateReview(payload)
-      router.back()
     } catch {
       toast.error('Unknown errors occured. Failed to update reveiw.')
     }
@@ -133,7 +132,6 @@ export default function Page({
       }
       toast.success('Review has been deleted!')
       await deleteReview(payload)
-      router.back()
     } catch {
       toast.error('Unknown errors occured. Failed to delete reveiw.')
     }
