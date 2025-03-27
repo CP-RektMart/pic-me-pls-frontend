@@ -16,9 +16,10 @@ import {
 import { Textarea } from '@/components/ui/text-area'
 
 export interface QuotationCommentProps {
+  hasReview?: boolean
+  comment: string
   ratingScore: number
   review?: Review
-  comment?: string
   handleCommentOnChange: (comment: string) => void
   handleCommentDeletion: (reviewId: number) => Promise<void>
   handleStarOnChange: (ratingScore: number) => void
@@ -27,9 +28,9 @@ export interface QuotationCommentProps {
 }
 
 export function QuotationComment({
+  comment,
   ratingScore,
   review,
-  comment,
   handleCommentOnChange,
   handleCommentDeletion,
   handleStarOnChange,
@@ -37,7 +38,6 @@ export function QuotationComment({
   handleSendOnClick,
 }: QuotationCommentProps) {
   const hasReview = review !== undefined
-  console.log({ comment, hasReview })
   const [onEdit, setOnEdit] = useState<boolean>(false || !hasReview)
   const originalComment = useState(comment)[0]
 
@@ -67,7 +67,7 @@ export function QuotationComment({
                 >
                   Edit
                 </button>
-                {hasReview && (
+                {hasReview && review && (
                   <button
                     className='w-full rounded-md px-4 py-1 text-end text-sm font-semibold text-red-600 underline hover:bg-accent'
                     onClick={() => {

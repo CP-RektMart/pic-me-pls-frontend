@@ -17,6 +17,14 @@ export const userMiddleware: MiddlewareFactory = (next) => {
       }
     }
 
+    const isPhotographerPath =
+      request.nextUrl.pathname.startsWith('/photographer') &&
+      !request.nextUrl.pathname.startsWith('/photographers')
+
+    if (!isPhotographerPath && user?.role === 'PHOTOGRAPHER') {
+      return NextResponse.redirect(new URL('/photographer/', request.nextUrl))
+    }
+
     return next(request, event)
   }
 }

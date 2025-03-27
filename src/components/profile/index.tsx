@@ -172,6 +172,7 @@ export default function Profile({
               <FormField
                 control={form.control}
                 name='image'
+                defaultValue={undefined}
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -260,6 +261,7 @@ export default function Profile({
               <FormField
                 control={form.control}
                 name='name'
+                defaultValue=''
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='text-sm font-medium'>Name</FormLabel>
@@ -278,6 +280,7 @@ export default function Profile({
               <FormField
                 control={form.control}
                 name='email'
+                defaultValue=''
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='text-sm font-medium'>Email</FormLabel>
@@ -296,6 +299,7 @@ export default function Profile({
               <FormField
                 control={form.control}
                 name='phone'
+                defaultValue=''
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='text-sm font-medium'>Phone</FormLabel>
@@ -316,6 +320,7 @@ export default function Profile({
               <FormField
                 control={form.control}
                 name='facebook'
+                defaultValue=''
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='text-sm font-medium'>
@@ -336,6 +341,7 @@ export default function Profile({
               <FormField
                 control={form.control}
                 name='instagram'
+                defaultValue=''
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='text-sm font-medium'>
@@ -361,6 +367,7 @@ export default function Profile({
                   <FormField
                     control={form.control}
                     name='bank'
+                    defaultValue=''
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className='text-sm font-medium'>
@@ -394,6 +401,7 @@ export default function Profile({
                   <FormField
                     control={form.control}
                     name='accountNo'
+                    defaultValue=''
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className='text-sm font-medium'>
@@ -414,6 +422,7 @@ export default function Profile({
                   <FormField
                     control={form.control}
                     name='bankBranch'
+                    defaultValue=''
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className='text-sm font-medium'>

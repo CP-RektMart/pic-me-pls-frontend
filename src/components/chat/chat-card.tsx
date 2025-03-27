@@ -1,10 +1,10 @@
-import { Chat } from '@/actions/chat/get-chat'
 import { cn } from '@/lib/utils'
+import { Chat } from '@/types/messages'
 import Image from 'next/image'
 
 interface ChatCardProps {
   chat: Chat
-  isPhotographer: boolean
+  name: string
   profilePic: string
   isSelected: boolean
   setSelectedChat: (chat: Chat) => void
@@ -12,7 +12,7 @@ interface ChatCardProps {
 
 export default function ChatCard({
   chat,
-  isPhotographer,
+  name,
   profilePic,
   isSelected,
   setSelectedChat,
@@ -33,12 +33,10 @@ export default function ChatCard({
         height={48}
       />
       <div className='flex flex-col overflow-hidden'>
-        <h2 className='truncate font-medium'>
-          {isPhotographer ? chat.customer : chat.photographer}
-        </h2>
-        {chat.conversation.length > 0 && (
+        <h2 className='truncate font-medium'>{name}</h2>
+        {chat.messages.length > 0 && (
           <p className='truncate text-xs font-medium text-gray-500'>
-            {chat.conversation?.[chat.conversation.length - 1]?.message}
+            {chat?.messages[chat.messages.length - 1]?.content}
           </p>
         )}
       </div>

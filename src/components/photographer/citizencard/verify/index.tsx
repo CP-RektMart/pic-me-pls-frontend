@@ -155,6 +155,7 @@ export default function VerifyPhotographer() {
             <FormField
               control={form.control}
               name='cardPicture'
+              defaultValue={undefined}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -175,6 +176,7 @@ export default function VerifyPhotographer() {
               <FormField
                 control={form.control}
                 name='citizenId'
+                defaultValue=''
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className='text-sm font-medium'>
@@ -197,6 +199,7 @@ export default function VerifyPhotographer() {
                 <FormField
                   control={form.control}
                   name='expireDate'
+                  defaultValue={undefined}
                   render={({ field }) => (
                     <FormItem className='flex-1'>
                       <FormLabel className='text-sm font-medium'>
@@ -246,6 +249,7 @@ export default function VerifyPhotographer() {
                 <FormField
                   control={form.control}
                   name='laserId'
+                  defaultValue=''
                   render={({ field }) => (
                     <FormItem className='flex-1'>
                       <FormLabel className='text-sm font-medium'>
@@ -268,6 +272,7 @@ export default function VerifyPhotographer() {
             <FormField
               control={form.control}
               name='terms'
+              defaultValue={undefined}
               render={({ field }) => (
                 <FormItem>
                   <div className='flex space-x-2'>

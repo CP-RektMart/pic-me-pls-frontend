@@ -1,6 +1,16 @@
+import { components } from '@/api/schema'
 import { Review } from '@/types/package'
 
-export type QuotationStatus = 'PENDING' | 'CONFIRMED' | 'PAID' | 'CANCELLED'
+export type QuotationStatus =
+  | 'PENDING'
+  | 'CONFIRMED'
+  | 'PAID'
+  | 'CANCELLED'
+  | 'SUBMITTED'
+  | 'COMPLETED'
+  | 'ACCEPTED'
+
+export type Quotation = components['schemas']['dto.QuotationResponse']
 
 export interface QuotationDetailsProps {
   quotationId: number
@@ -19,7 +29,11 @@ export interface CustomerQuotationProps extends QuotationDetailsProps {
   photographerImageUrl: string
   packageNumber: number
   quotationImages: { url: string; name: string }[]
+  paymentStatus: string
   review?: Review
 }
 
 export type WindowState = 'create' | 'edit' | null
+
+export type PreviewList =
+  components['schemas']['dto.GetQuotationResponse']['previews']

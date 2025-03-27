@@ -4,11 +4,11 @@ import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { Media } from '@/types/package'
 import { Icon } from '@iconify/react'
-import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 
+import { BackButton } from '@/components/back-button'
 import { Button } from '@/components/ui/button'
 import {
   FormControl,
@@ -74,16 +74,13 @@ export function EditPackageDetailSection({
   return (
     <div className='shadow-right space-between flex w-full flex-col gap-y-4 bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-96'>
       <div className='flex flex-row items-center gap-4'>
-        <Link href='/photographer/packages'>
-          <div className='rounded-full p-2 hover:bg-gray-200'>
-            <Icon icon='lucide:chevron-left' className='size-5' />
-          </div>
-        </Link>
+        <BackButton href='/photographer/packages' />
         <h1 className='text-xl font-bold'>Edit Package</h1>
       </div>
       <FormField
         control={form.control}
         name='name'
+        defaultValue=''
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Name</FormLabel>
@@ -98,6 +95,7 @@ export function EditPackageDetailSection({
       <FormField
         control={form.control}
         name='category'
+        defaultValue=''
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Category</FormLabel>
@@ -131,6 +129,7 @@ export function EditPackageDetailSection({
       <FormField
         control={form.control}
         name='packageDescription'
+        defaultValue=''
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>Description</FormLabel>
@@ -145,6 +144,7 @@ export function EditPackageDetailSection({
       <FormField
         control={form.control}
         name='price'
+        defaultValue={undefined}
         render={({ field }) => (
           <FormItem>
             <FormLabel className='text-sm font-medium'>
