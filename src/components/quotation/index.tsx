@@ -104,7 +104,6 @@ export default function Page({
       }
       toast.success('Review has been sent!')
       await createReview(payload)
-      router.back()
     } catch {
       toast.error('Unknown errors occured. Failed to send reveiw.')
     }
