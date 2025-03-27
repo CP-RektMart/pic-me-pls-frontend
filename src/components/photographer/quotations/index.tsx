@@ -210,7 +210,7 @@ export default function PhotographerQuotation({
             </CardContent>
           </Card>
 
-          <Card className='flex h-full flex-col py-6'>
+          <Card className='hidden h-full flex-col py-6 lg:flex'>
             <CardContent className='flex flex-1 flex-col'>
               {windowState === 'create' ? (
                 <>
