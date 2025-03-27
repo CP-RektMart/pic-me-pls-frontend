@@ -42,7 +42,7 @@ export default function PackageCard({
 
   return (
     <div
-      className='relative h-72 w-full min-w-[360px] max-w-[380px] cursor-pointer overflow-hidden rounded-3xl shadow-lg'
+      className='relative h-72 w-full min-w-[320px] max-w-[500px] cursor-pointer overflow-hidden rounded-3xl shadow-lg'
       data-testid='package-card'
       onClick={handleCardClick}
     >

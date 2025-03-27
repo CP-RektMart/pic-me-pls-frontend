@@ -14,7 +14,7 @@ export function QuotationList({ quotations }: QuotationListProps) {
   return (
     <Container className='py-6'>
       <h1 className='mb-6 text-2xl font-bold'>My Quotation</h1>
-      <div className='flex flex-col gap-6 md:flex-row md:flex-wrap'>
+      <div className='grid grid-cols-1 place-content-center gap-6 md:flex-row md:flex-wrap lg:grid-cols-2 xl:grid-cols-3'>
         {quotations.map((quotation) => (
           <Link
             key={quotation.quotationID}
