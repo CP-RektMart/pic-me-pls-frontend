@@ -20,6 +20,7 @@ import z from 'zod'
 import QuotationCard from '@/components/quotation/quotation-card'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 import { SidebarProvider } from '../common/sidebar-provider'
 import { PreviewView } from './preview-view'
@@ -148,166 +149,173 @@ export default function PhotographerQuotation({
           <span>You don&apos;t have any quotations yet</span>
         </div>
       ) : (
-        <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
-          <div className='min-h-[400px] gap-2.5 space-y-2 rounded-lg border border-gray-200 bg-white px-4 py-4 text-lg font-bold shadow-md sm:min-h-[500px] sm:px-6 sm:py-5 sm:text-xl md:min-h-[600px] md:text-2xl lg:px-10 lg:py-6 lg:shadow-lg'>
-            <div className='mb-8'>Latest Quotations</div>
+        <div className='grid h-full flex-1 grid-cols-1 gap-6 lg:grid-cols-2'>
+          <Card className='flex h-full flex-col'>
+            <CardHeader>
+              <CardTitle className='text-2xl'>Latest Quotations</CardTitle>
+            </CardHeader>
+            <CardContent className='flex flex-1 flex-col'>
+              {quotations.length == 0 ? (
+                <div className='flex flex-1 flex-col items-center justify-center gap-2'>
+                  <div className='size-16'>
+                    <Icon icon='lucide:file' className='size-full' />
+                  </div>
+                  <p>No quotation here</p>
+                </div>
+              ) : (
+                <div className='flex flex-col'>
+                  {quotations.map((quotation) => (
+                    <div key={quotation.quotationID}>
+                      {/* Mobile */}
+                      <QuotationViewDrawer
+                        windowState={windowState}
+                        setWindowstate={setWindowstate}
+                        setCurrentQuotation={setCurrentQuotation}
+                        quotation={quotation}
+                        setSelectedPackageId={setSelectedPackageId}
+                        selectedPackageId={selectedPackageId}
+                        onEditButtonClicked={onEditButtonClicked}
+                        onSaveEditing={onSaveEditing}
+                        packages={packages}
+                        customerId={customerId}
+                        customerProfile={customerProfile}
+                      />
 
-            {quotations.length == 0 ? (
-              <div className='flex flex-col items-center justify-center gap-3'>
-                <Icon icon='lucide:sticky-note' className='size-20' />
-                No Quotations To Show
-              </div>
-            ) : (
-              <div className='flex flex-col gap-4 font-normal'>
-                {quotations.map((quotation) => (
-                  <div key={quotation.quotationID}>
-                    {/* Mobile */}
-                    <QuotationViewDrawer
-                      windowState={windowState}
+                      {/* Desktop */}
+                      <QuotationCard
+                        quotationId={quotation.quotationID}
+                        quotationStatus={quotation.status as QuotationStatus}
+                        packageName={quotation.packageName}
+                        photographerName={quotation.photographerName}
+                        customerName={quotation.customerName}
+                        from={formatDateToString(quotation.from)}
+                        to={formatDateToString(quotation.to)}
+                        description={quotation.description}
+                        photographerImageUrl={quotation.photographerPictureUrl}
+                        duration={calculateDurationFromDate(
+                          quotation.from,
+                          quotation.to
+                        )}
+                        totalPrice={quotation.price}
+                        onClickEvent={() => {
+                          setCurrentQuotation(quotation)
+                          setWindowstate(null)
+                        }}
+                        className='hidden lg:block'
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className='flex h-full flex-col py-6'>
+            <CardContent className='flex flex-1 flex-col'>
+              {windowState === 'create' ? (
+                <>
+                  <div className='block lg:hidden'>
+                    <CreateQuotationDrawer
                       setWindowstate={setWindowstate}
                       setCurrentQuotation={setCurrentQuotation}
-                      quotation={quotation}
+                      onSubmit={onSubmit}
+                      packages={packages}
+                      selectedPackageId={selectedPackageId}
+                      setSelectedPackageId={setSelectedPackageId}
+                      customerId={customerId}
+                      customerProfile={customerProfile}
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                    />
+                  </div>
+                  <div className='px-10'>
+                    <div className='flex items-center space-y-4 text-2xl font-bold'>
+                      <div
+                        className='mr-2 cursor-pointer rounded-full p-2 hover:bg-gray-200'
+                        onClick={() => router.back()}
+                      >
+                        <Icon icon='lucide:chevron-left' className='size-5' />
+                      </div>
+                      Create Quotation
+                    </div>
+                    <QuotationForm
+                      transactionType='create'
+                      packages={packages}
+                      onSubmit={onSubmit}
                       setSelectedPackageId={setSelectedPackageId}
                       selectedPackageId={selectedPackageId}
-                      onEditButtonClicked={onEditButtonClicked}
-                      onSaveEditing={onSaveEditing}
-                      packages={packages}
                       customerId={customerId}
                       customerProfile={customerProfile}
                     />
+                  </div>
+                </>
+              ) : currentQuotation != null ? (
+                windowState === 'edit' &&
+                currentQuotation.status === 'PENDING' ? (
+                  <div className='space-y-4 text-2xl font-bold lg:px-10'>
+                    <div className='flex flex-row justify-between'>
+                      <div>Quotation {currentQuotation.quotationID}</div>
+                      <Button onClick={onClose} className='h-8 px-3 text-sm'>
+                        Close
+                      </Button>
+                    </div>
 
-                    {/* Desktop */}
-                    <QuotationCard
-                      quotationId={quotation.quotationID}
-                      quotationStatus={quotation.status as QuotationStatus}
-                      packageName={quotation.packageName}
-                      photographerName={quotation.photographerName}
-                      customerName={quotation.customerName}
-                      from={formatDateToString(quotation.from)}
-                      to={formatDateToString(quotation.to)}
-                      description={quotation.description}
-                      photographerImageUrl={quotation.photographerPictureUrl}
-                      duration={calculateDurationFromDate(
-                        quotation.from,
-                        quotation.to
-                      )}
-                      totalPrice={quotation.price}
-                      onClickEvent={() => {
-                        setCurrentQuotation(quotation)
-                        setWindowstate(null)
-                      }}
-                      className='hidden lg:block'
+                    <QuotationForm
+                      transactionType='Edit'
+                      packages={packages}
+                      onSubmit={onSaveEditing}
+                      setSelectedPackageId={setSelectedPackageId}
+                      selectedPackageId={currentQuotation.packageId.toString()}
+                      fromDate={currentQuotation.from}
+                      toDate={currentQuotation.to}
+                      description={currentQuotation.description}
+                      customerId={customerId}
+                      customerProfile={customerProfile}
                     />
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className='border-gray-20 hidden gap-2.5 space-y-2.5 rounded-lg border text-2xl lg:block lg:bg-white lg:px-10 lg:py-6 lg:shadow-lg'>
-            {windowState === 'create' ? (
-              <>
-                <div className='block lg:hidden'>
-                  <CreateQuotationDrawer
-                    setWindowstate={setWindowstate}
-                    setCurrentQuotation={setCurrentQuotation}
-                    onSubmit={onSubmit}
-                    packages={packages}
-                    selectedPackageId={selectedPackageId}
-                    setSelectedPackageId={setSelectedPackageId}
-                    customerId={customerId}
-                    customerProfile={customerProfile}
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
-                  />
-                </div>
-                <div className='px-10'>
-                  <div className='flex items-center space-y-4 text-2xl font-bold'>
-                    <div
-                      className='mr-2 cursor-pointer rounded-full p-2 hover:bg-gray-200'
-                      onClick={() => router.back()}
-                    >
-                      <Icon icon='lucide:chevron-left' className='size-5' />
+                ) : (
+                  <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
+                    <div className='flex w-full flex-row justify-between text-2xl font-bold'>
+                      <div>Quotation {currentQuotation.quotationID}</div>
+                      {currentQuotation.status == 'PENDING' && (
+                        <Button
+                          onClick={onEditButtonClicked}
+                          className='h-8 px-3 text-sm'
+                        >
+                          Edit
+                        </Button>
+                      )}
                     </div>
-                    Create Quotation
-                  </div>
-                  <QuotationForm
-                    transactionType='create'
-                    packages={packages}
-                    onSubmit={onSubmit}
-                    setSelectedPackageId={setSelectedPackageId}
-                    selectedPackageId={selectedPackageId}
-                    customerId={customerId}
-                    customerProfile={customerProfile}
-                  />
-                </div>
-              </>
-            ) : currentQuotation != null ? (
-              windowState === 'edit' &&
-              currentQuotation.status === 'PENDING' ? (
-                <div className='space-y-4 text-2xl font-bold lg:px-10'>
-                  <div className='flex flex-row justify-between'>
-                    <div>Quotation {currentQuotation.quotationID}</div>
-                    <Button onClick={onClose} className='h-8 px-3 text-sm'>
-                      Close
-                    </Button>
-                  </div>
 
-                  <QuotationForm
-                    transactionType='Edit'
-                    packages={packages}
-                    onSubmit={onSaveEditing}
-                    setSelectedPackageId={setSelectedPackageId}
-                    selectedPackageId={currentQuotation.packageId.toString()}
-                    fromDate={currentQuotation.from}
-                    toDate={currentQuotation.to}
-                    description={currentQuotation.description}
-                    customerId={customerId}
-                    customerProfile={customerProfile}
-                  />
-                </div>
-              ) : (
-                <div className='flex flex-col gap-4 space-y-4 text-2xl lg:px-10'>
-                  <div className='flex w-full flex-row justify-between text-2xl font-bold'>
-                    <div>Quotation {currentQuotation.quotationID}</div>
-                    {currentQuotation.status == 'PENDING' && (
-                      <Button
-                        onClick={onEditButtonClicked}
-                        className='h-8 px-3 text-sm'
-                      >
-                        Edit
-                      </Button>
-                    )}
+                    <QuotationDetails
+                      quotationId={currentQuotation.quotationID}
+                      quotationStatus={
+                        currentQuotation?.status as QuotationStatus
+                      }
+                      packageName={currentQuotation.packageName}
+                      photographerName={currentQuotation.photographerName}
+                      customerName={currentQuotation.customerName}
+                      from={formatDateToString(currentQuotation.from)}
+                      to={formatDateToString(currentQuotation.to)}
+                      description={currentQuotation.description}
+                      duration={calculateDurationFromDate(
+                        currentQuotation.from,
+                        currentQuotation.to
+                      )}
+                      totalPrice={currentQuotation.price}
+                    />
+                    {currentQuotation.status !== 'PENDING' &&
+                      currentQuotation.status !== 'CONFIRMED' && (
+                        <PreviewView
+                          quotationId={currentQuotation.quotationID}
+                          isPhotographer={true}
+                        />
+                      )}
                   </div>
-
-                  <QuotationDetails
-                    quotationId={currentQuotation.quotationID}
-                    quotationStatus={
-                      currentQuotation?.status as QuotationStatus
-                    }
-                    packageName={currentQuotation.packageName}
-                    photographerName={currentQuotation.photographerName}
-                    customerName={currentQuotation.customerName}
-                    from={formatDateToString(currentQuotation.from)}
-                    to={formatDateToString(currentQuotation.to)}
-                    description={currentQuotation.description}
-                    duration={calculateDurationFromDate(
-                      currentQuotation.from,
-                      currentQuotation.to
-                    )}
-                    totalPrice={currentQuotation.price}
-                  />
-                  {currentQuotation.status !== 'PENDING' &&
-                    currentQuotation.status !== 'CONFIRMED' && (
-                      <PreviewView
-                        quotationId={currentQuotation.quotationID}
-                        isPhotographer={true}
-                      />
-                    )}
-                </div>
-              )
-            ) : null}
-          </div>
+                )
+              ) : null}
+            </CardContent>
+          </Card>
         </div>
       )}
     </SidebarProvider>

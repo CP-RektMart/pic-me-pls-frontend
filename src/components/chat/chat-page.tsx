@@ -115,12 +115,14 @@ export default function ChatPage({
         setSelectedChat={setSelectedChat}
         selectedChat={selectedChat}
       />
+
       <ChatSection
         user={user}
         chat={selectedChat}
         setSelectedChat={setSelectedChat}
         sendMessage={sendMessage}
       />
+
       <ProfileSidebar
         opponentRole={selectedChat?.user.role as UserRole}
         role={user.role as UserRole}
