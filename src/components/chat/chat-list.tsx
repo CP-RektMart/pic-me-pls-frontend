@@ -18,7 +18,11 @@ export default function ChatList({
   return (
     <div
       className={cn(
-        'flex w-72 flex-initial flex-col gap-4 bg-white px-5 py-4 drop-shadow-lg'
+        'w-full flex-initial flex-col gap-4 bg-white px-5 py-4 drop-shadow-lg md:w-72',
+        {
+          'hidden md:flex': !!selectedChat,
+          flex: !selectedChat,
+        }
       )}
     >
       <div className='flex flex-row items-center gap-4'>

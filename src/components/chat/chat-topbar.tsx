@@ -36,7 +36,7 @@ export default function ChatTopBar({
       <div className='flex flex-row items-center space-x-3'>
         <Icon
           icon='lucide:chevron-left'
-          className='size-5'
+          className='size-5 md:hidden'
           onClick={() => setSelectedChat(null)}
         />
 
@@ -51,7 +51,7 @@ export default function ChatTopBar({
           </div>
         )}
 
-        <div className='flex flex-col space-y-2'>
+        <div className='flex flex-col'>
           <h2 className='text-base font-medium'>{opponentName}</h2>
           <Badge
             className={cn(
