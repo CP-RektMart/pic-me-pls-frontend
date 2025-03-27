@@ -30,7 +30,7 @@ export const SidebarMobile = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant='ghost' className='relative size-9'>
+        <Button variant='ghost' className='relative size-9 lg:hidden'>
           <Icon icon='lucide:menu' className='size-4' />
         </Button>
       </SheetTrigger>
