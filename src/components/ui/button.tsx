@@ -31,6 +31,7 @@ const buttonVariants = cva(
         icon: 'h-9 w-9',
         login: 'h-[154px] w-[152px] gap-2.5 p-6',
         filter: 'h-9 w-9',
+        iconButton: 'p-2',
       },
     },
     defaultVariants: {

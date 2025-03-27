@@ -1,4 +1,5 @@
 import { components } from '@/api/schema'
+import { Review } from '@/types/package'
 
 export type QuotationStatus =
   | 'PENDING'
@@ -29,13 +30,7 @@ export interface CustomerQuotationProps extends QuotationDetailsProps {
   packageNumber: number
   quotationImages: { url: string; name: string }[]
   paymentStatus: string
-  review?: {
-    comment?: string
-    customer?: components['schemas']['dto.CustomerResponse']
-    id?: number
-    isEdited?: boolean
-    rating?: number
-  }
+  review?: Review
 }
 
 export type WindowState = 'create' | 'edit' | null

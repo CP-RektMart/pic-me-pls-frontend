@@ -1,16 +1,17 @@
 import { client } from '@/api/client'
 import { calculateDurationFromString, formatDateToString } from '@/lib/utils'
+import { Review } from '@/types/package'
 import { type QuotationStatus } from '@/types/quotation'
 
 import CustomerQuotation from '@/components/quotation/index'
 
 interface PageProps {
-  params: Promise<{ id: number }>
+  params: Promise<{ id: string }>
   searchParams: Promise<{ payment?: string }>
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
-  const quotationId = (await params).id
+  const quotationId = parseInt((await params).id)
   const paymentStatus = (await searchParams).payment
 
   const { response, data } = await client.GET('/api/v1/quotations/{id}', {
@@ -61,8 +62,8 @@ export default async function Page({ params, searchParams }: PageProps) {
       photographerImageUrl={quotation.photographer?.profilePictureUrl || ''}
       packageNumber={quotation.photographer?.packages?.length || 0}
       quotationImages={images || []}
+      review={quotation.review as Review}
       paymentStatus={paymentStatus || ''}
-      review={quotation.review}
     />
   )
 }
