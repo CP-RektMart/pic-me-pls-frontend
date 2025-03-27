@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
 interface ChatTopBarProps {
+  role: UserRole
   opponentName: string | null
   opponentRole: UserRole
   opponentProfilePic: string
@@ -17,6 +18,7 @@ interface ChatTopBarProps {
 }
 
 export default function ChatTopBar({
+  role,
   opponentName,
   opponentRole,
   opponentProfilePic,
@@ -39,20 +41,21 @@ export default function ChatTopBar({
         />
 
         {opponentProfilePic && (
-          <Image
-            className='rounded-full object-cover'
-            src={opponentProfilePic}
-            alt='Profile photo'
-            width={48}
-            height={48}
-          />
+          <div className='relative size-12'>
+            <Image
+              className='rounded-full object-cover'
+              src={opponentProfilePic}
+              alt='Profile photo'
+              fill
+            />
+          </div>
         )}
 
         <div className='flex flex-col space-y-2'>
           <h2 className='text-base font-medium'>{opponentName}</h2>
           <Badge
             className={cn(
-              'w-20 shadow-none',
+              'w-fit shadow-none',
               opponentRole === 'CUSTOMER'
                 ? 'bg-orange-100 text-base-primary'
                 : 'bg-blue-100 text-blue-700'
@@ -63,9 +66,11 @@ export default function ChatTopBar({
         </div>
       </div>
 
-      <Button variant='secondary' onClick={handleCreateQuotation}>
-        <Icon icon='lucide:clipboard-plus' className='size-4 text-black' />
-      </Button>
+      {role === 'PHOTOGRAPHER' && (
+        <Button variant='secondary' onClick={handleCreateQuotation}>
+          <Icon icon='lucide:clipboard-plus' className='size-4 text-black' />
+        </Button>
+      )}
     </div>
   )
 }

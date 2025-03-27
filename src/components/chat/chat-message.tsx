@@ -23,13 +23,12 @@ export default function ChatMessage({
       )}
     >
       {message.senderId === userId && (
-        <div>
+        <div className='relative size-8'>
           <Image
             className='rounded-full object-cover'
             src={profilePictureUrl}
             alt='Profile photo'
-            width={32}
-            height={32}
+            fill
           />
         </div>
       )}

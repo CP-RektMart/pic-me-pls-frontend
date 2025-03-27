@@ -116,6 +116,7 @@ export default function ChatPage({
         selectedChat={selectedChat}
       />
       <ChatSection
+        user={user}
         chat={selectedChat}
         setSelectedChat={setSelectedChat}
         sendMessage={sendMessage}

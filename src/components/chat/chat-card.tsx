@@ -20,18 +20,19 @@ export default function ChatCard({
   return (
     <div
       className={cn(
-        'flex flex-row space-x-3 rounded-xl p-2',
+        'flex cursor-pointer flex-row space-x-3 rounded-xl p-2',
         isSelected && 'bg-slate-100'
       )}
       onClick={() => setSelectedChat(chat)}
     >
-      <Image
-        className='rounded-full object-cover'
-        src={profilePic}
-        alt='Profile photo'
-        width={48}
-        height={48}
-      />
+      <div className='relative size-12'>
+        <Image
+          className='rounded-full object-cover'
+          src={profilePic}
+          alt='Profile photo'
+          fill
+        />
+      </div>
       <div className='flex flex-col overflow-hidden'>
         <h2 className='truncate font-medium'>{name}</h2>
         {chat.messages.length > 0 && (

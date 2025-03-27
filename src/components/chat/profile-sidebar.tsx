@@ -35,7 +35,6 @@ export default function ProfileSidebar({
         !opponentName && 'lg:hidden'
       )}
     >
-      <h1 className='text-xl font-bold'>Your {role}</h1>
       <div className='flex w-full flex-col items-center space-y-2'>
         {opponentProfilePic && (
           <Image

@@ -2,19 +2,21 @@ import { useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
 import { Chat } from '@/types/messages'
-import { UserRole } from '@/types/user'
+import { User, UserRole } from '@/types/user'
 
 import ChatMessage from './chat-message'
 import ChatTopBar from './chat-topbar'
 import ChatInputBar from './input-bar'
 
 interface ChatSectionProps {
+  user: User
   chat: Chat | null
   setSelectedChat: (chat: Chat | null) => void
   sendMessage: (message: string) => void
 }
 
 export default function ChatSection({
+  user,
   chat,
   setSelectedChat,
   sendMessage,
@@ -37,6 +39,7 @@ export default function ChatSection({
       {/* mobile component only */}
       {/* not done */}
       <ChatTopBar
+        role={user.role as UserRole}
         opponentId={chat?.user.id || 0}
         opponentName={chat?.user.name || 'Unknown'}
         opponentRole={chat?.user.role as UserRole}
