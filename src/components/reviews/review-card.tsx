@@ -9,7 +9,7 @@ export default function ReviewCard({ review }: { review: Review }) {
     <div className='flex w-full flex-col items-center space-y-2.5 rounded-2xl bg-zinc-50 p-2.5'>
       <div className='flex w-full flex-col justify-between gap-y-2 lg:flex-row'>
         <div className='flex flex-row space-x-2'>
-          <div className='h-8 w-8 shrink-0'>
+          <div className='size-8 shrink-0 overflow-hidden rounded-full'>
             <Image
               src={review.customer?.profilePictureUrl || '/default.jpg'}
               alt='Reviewer Profile'
