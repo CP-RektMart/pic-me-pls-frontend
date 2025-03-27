@@ -1,4 +1,4 @@
-import { Navbar } from '@/components/photographer/common/navbar'
+import Navbar from '@/components/navbar'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

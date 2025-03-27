@@ -24,7 +24,10 @@ export default function QuotationCard({
   onClickEvent,
 }: QuotationCardProps) {
   return (
-    <button onClick={onClickEvent} className={cn('mx-auto w-full', className)}>
+    <button
+      onClick={onClickEvent}
+      className={cn('mx-auto w-full max-w-[380px]', className)}
+    >
       <div className='rounded-3xl border bg-white shadow-sm'>
         <div className='flex items-center justify-between px-5 pb-3 pt-4'>
           <div className='flex items-center gap-4'>

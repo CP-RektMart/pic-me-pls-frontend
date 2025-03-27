@@ -61,7 +61,7 @@ export default function HomePageComponent({
   }, [filters.sort])
 
   return (
-    <Container className='py-6'>
+    <Container className='space-y-6 py-6'>
       <div className='flex flex-col gap-4 md:flex-row md:items-center'>
         <Greeting
           userName={profile?.name}
