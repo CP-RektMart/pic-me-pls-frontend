@@ -31,7 +31,7 @@ export default function ProfileSidebar({
   return (
     <div
       className={cn(
-        'hidden max-w-sm space-x-3 space-y-4 px-5 py-4 shadow-md lg:flex lg:w-1/4 lg:flex-col',
+        'hidden w-72 flex-initial flex-col space-y-4 bg-white px-5 py-4 shadow-md lg:flex',
         !opponentName && 'lg:hidden'
       )}
     >

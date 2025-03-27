@@ -109,7 +109,7 @@ export default function ChatPage({
   }, [lastMessage])
 
   return (
-    <div className='flex h-[calc(100vh-7.5rem)] w-full overflow-hidden'>
+    <div className='flex h-full w-full bg-gray-100'>
       <ChatList
         chats={chats}
         setSelectedChat={setSelectedChat}

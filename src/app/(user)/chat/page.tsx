@@ -14,11 +14,13 @@ export default async function Chat() {
   }
 
   return (
-    <ChatPage
-      accessToken={session.accessToken || ''}
-      userId={session.user?.userId || 0}
-      user={session.user as User}
-      messages={messages as Chat[]}
-    />
+    <div className='w-full'>
+      <ChatPage
+        accessToken={session.accessToken || ''}
+        userId={session.user?.userId || 0}
+        user={session.user as User}
+        messages={messages as Chat[]}
+      />
+    </div>
   )
 }

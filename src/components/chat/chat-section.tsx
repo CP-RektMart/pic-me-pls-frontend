@@ -31,11 +31,7 @@ export default function ChatSection({
   }, [chat?.messages])
 
   return (
-    <div
-      className={cn(
-        chat ? 'flex w-full flex-col bg-slate-100 lg:w-1/2' : 'hidden'
-      )}
-    >
+    <div className={cn(chat ? 'flex flex-1 flex-col bg-slate-100' : 'hidden')}>
       {/* mobile component only */}
       {/* not done */}
       <ChatTopBar
