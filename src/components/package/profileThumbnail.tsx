@@ -15,14 +15,17 @@ export function ProfileThumbnail({
   haveVerifiedBadge,
 }: ProfileThumbnailProps) {
   return (
-    <div className='flex items-center gap-2'>
-      <Image
-        src={profilePictureUrl || '/default.jpg'}
-        alt={name || 'profile'}
-        className='size-12 rounded-full object-cover'
-        width={32}
-        height={32}
-      />
+    <div className='flex size-8 items-center gap-2'>
+      <div className='overflow-hidden rounded-full'>
+        <Image
+          src={profilePictureUrl || '/default.jpg'}
+          alt={name || 'profile'}
+          className='size-12 rounded-full object-cover'
+          width={32}
+          height={32}
+        />
+      </div>
+
       <div className='flex flex-col items-center gap-2'>
         <h3 className='flex items-center gap-2 text-lg font-bold'>
           {name || 'Name'}
