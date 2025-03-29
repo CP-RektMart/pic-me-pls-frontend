@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import FallBackImage from '@public/images/fallBackProfileImage.png'
 import Image from 'next/image'
 
 import { Badge } from '@/components/ui/badge'
@@ -15,10 +16,10 @@ export function ProfileThumbnail({
   haveVerifiedBadge,
 }: ProfileThumbnailProps) {
   return (
-    <div className='flex size-8 items-center gap-2'>
+    <div className='flex items-center gap-2'>
       <div className='overflow-hidden rounded-full'>
         <Image
-          src={profilePictureUrl || '/default.jpg'}
+          src={profilePictureUrl || FallBackImage}
           alt={name || 'profile'}
           className='size-12 rounded-full object-cover'
           width={32}

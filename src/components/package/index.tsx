@@ -1,8 +1,8 @@
 'use client'
 
-// import getChats from '@/actions/chat/get-chats'
 import { PackageVerbose, Review } from '@/types/package'
 import { Icon } from '@iconify/react'
+import FallBackImage from '@public/images/fallBackProfileImage.png'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -20,12 +20,14 @@ interface PackageProps {
   package: PackageVerbose
   photographerTotalPackage: number
   reviews: Review[]
+  isLogIn: boolean
 }
 
 export function PackagePage({
   package: pkg,
   photographerTotalPackage: totalPackage,
   reviews,
+  isLogIn,
 }: PackageProps) {
   const router = useRouter()
 
@@ -60,7 +62,7 @@ export function PackagePage({
               <Link href={`/photographers/${pkg.photographer?.id}`} passHref>
                 <ProfileThumbnail
                   profilePictureUrl={
-                    pkg.photographer?.profilePictureUrl || '/default.jpg'
+                    pkg.photographer?.profilePictureUrl || FallBackImage.src
                   }
                   name={pkg.photographer?.name || 'Photographer Name'}
                   haveVerifiedBadge={pkg.photographer?.isVerified ?? false}
@@ -70,13 +72,16 @@ export function PackagePage({
               <p className='flex w-full justify-between text-sm text-gray-500'>
                 <span>{totalPackage} Packages</span>
               </p>
-              <Button
-                className='inline-flex w-full items-center justify-center bg-black text-white'
-                onClick={handleStartChat}
-              >
-                <Icon icon='lucide:messages-square' className='mr-2 size-5' />
-                <span className='whitespace-nowrap'>Start Chatting</span>
-              </Button>
+              {isLogIn && (
+                <Button
+                  className='inline-flex w-full items-center justify-center bg-black text-white'
+                  onClick={handleStartChat}
+                >
+                  <Icon icon='lucide:messages-square' className='mr-2 size-5' />
+
+                  <span className='whitespace-nowrap'>Start Chatting</span>
+                </Button>
+              )}
             </div>
             <ReviewComponent reviews={reviews} />
           </div>

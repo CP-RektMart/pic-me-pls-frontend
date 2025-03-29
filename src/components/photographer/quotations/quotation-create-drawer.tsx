@@ -5,9 +5,6 @@ import { CustomerPublic } from '@/types/user'
 import { Icon } from '@iconify/react'
 import { useRouter } from 'next/navigation'
 
-// import { Button } from '@/components/ui/button'
-// import {DrawerTrigger,} from '@/components/ui/drawer'
-
 import {
   Drawer,
   DrawerContent,
@@ -58,18 +55,6 @@ export default function CreateQuotationDrawer({
         if (!open) onClose()
       }}
     >
-      {/* <DrawerTrigger asChild>
-        <Button
-          onClick={() => {
-            setIsOpen(true)
-            onCreateQuotationButtonClicked()
-          }}
-          className='lg:hidden'
-        >
-          <Icon icon='lucide:plus' />
-        </Button>
-      </DrawerTrigger> */}
-
       <DrawerContent className='space-y-4 px-4 pb-10'>
         {/* header */}
         <DrawerHeader className='flex items-center justify-between space-y-4 px-4 py-0'>

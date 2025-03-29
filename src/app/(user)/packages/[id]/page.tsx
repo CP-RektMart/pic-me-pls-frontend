@@ -1,6 +1,7 @@
 import { getPackage } from '@/actions/packages/get-package-id'
 import { getPhotograhperPackages } from '@/actions/photographers/get-photographer-packages'
 import { getReviews } from '@/actions/review/get-reviews'
+import { auth } from '@/auth'
 import { notFound } from 'next/navigation'
 
 import { PackagePage } from '@/components/package'
@@ -23,12 +24,14 @@ export default async function Page({ params }: PageProps) {
   }
 
   const reviewsData = await getReviews(Number(packageId))
+  const session = await auth()
 
   return (
     <PackagePage
       package={packageData}
       photographerTotalPackage={totalPackage}
       reviews={reviewsData || []}
+      isLogIn={!!session?.user?.userId}
     />
   )
 }
