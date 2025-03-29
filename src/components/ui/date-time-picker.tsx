@@ -50,13 +50,12 @@ export function DateTimePicker(props: DateTimePickerProps) {
           </Button>
         </FormControl>
       </PopoverTrigger>
-      <PopoverContent className='w-auto p-0'>
+      <PopoverContent className='mx-4 w-auto p-0 md:mx-0'>
         <div className='lg:flex'>
           <Calendar
             mode='single'
             selected={value ? new Date(value) : undefined}
             onSelect={(day) => day && onChange(formatDateToDate(day))}
-            initialFocus
           />
           <div className='flex flex-col divide-y lg:h-[300px] lg:flex-row lg:divide-x lg:divide-y-0'>
             <ScrollArea className='w-64 lg:w-auto'>
