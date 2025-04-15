@@ -1,10 +1,8 @@
-import { adminItems } from '@/data/nav-items'
+import { adminDashboardItems } from '@/data/dashboard-item'
 import Link from 'next/link'
 
 import { SidebarProvider } from '@/components/admin/common/sidebar-provider'
 
-import { ChartAreaInteractive } from '../chart-area-interactive'
-import { SectionCards } from '../section-cards'
 import {
   Card,
   CardDescription,
@@ -18,7 +16,7 @@ export const AdminDashboard = () => {
     <SidebarProvider>
       <h1 className='text-2xl font-bold'>Management</h1>
       <div className='grid grid-cols-2 gap-4 md:gap-6'>
-        {adminItems.map((item) => (
+        {adminDashboardItems.map((item) => (
           <Card key={item.title} className='@container/card'>
             <CardHeader className='relative'>
               <CardTitle className='@[250px]/card:text-3xl text-2xl font-semibold tabular-nums'>
@@ -40,11 +38,6 @@ export const AdminDashboard = () => {
             </CardFooter>
           </Card>
         ))}
-      </div>
-      <h1 className='text-2xl font-bold'>Overview</h1>
-      <div className='flex flex-col gap-4 md:gap-6'>
-        <SectionCards />
-        <ChartAreaInteractive />
       </div>
     </SidebarProvider>
   )
