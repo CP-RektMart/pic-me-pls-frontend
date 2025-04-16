@@ -1,9 +1,10 @@
 import { SidebarProvider } from '@/components/admin/common/sidebar-provider'
+import AdminPackage from '@/components/admin/package'
 
 export default function AdminPackagePage() {
   return (
     <SidebarProvider>
-      <div>Hello package</div>
+      <AdminPackage />
     </SidebarProvider>
   )
 }
