@@ -23,7 +23,7 @@ export const adminMiddleware: MiddlewareFactory = (next) => {
         case 'CUSTOMER':
           return NextResponse.redirect(new URL('/', request.nextUrl))
         default:
-          return NextResponse.redirect(new URL('/', request.nextUrl))
+          return next(request, event)
       }
     }
 
