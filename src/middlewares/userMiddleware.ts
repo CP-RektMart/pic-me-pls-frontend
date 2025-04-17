@@ -17,6 +17,13 @@ export const userMiddleware: MiddlewareFactory = (next) => {
       }
     }
 
+    if (request.nextUrl.pathname.startsWith('/developer')) {
+      if (!user) {
+        return NextResponse.redirect(new URL('/login', request.nextUrl))
+      }
+      return next(request, event)
+    }
+
     const isAdminPath = request.nextUrl.pathname.startsWith('/admin')
 
     const isPhotographerPath =
