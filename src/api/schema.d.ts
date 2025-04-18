@@ -4,6 +4,498 @@
  */
 
 export interface paths {
+  '/api/admin/quotations/{quotationId}/reports': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get all reports for a specific quotation
+     * @description Get all reports for a specific quotation
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpListResponse-mock_ReportDetail']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/admin/reports/{reportId}/status': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Update the status of a report
+     * @description (e.g., pending → resolved)
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-string']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
+  '/api/admin/users/{userId}/ban': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Ban a user by ID
+     * @description Ban a user by ID
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
+  '/api/admin/users/reports/pending': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get all users
+     * @description Get all users, ordered by the number of their pending reports with their quotationId that is reported
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpListResponse-dto_CustomerPublicResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/quotations/{quotationId}/reports': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /**
+     * Create a new report under a quotation
+     * @description Create a new report under a quotation
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Report details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['mock.CreateReportRequest']
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/reports': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get All own reports
+     * @description Get All own reports
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpListResponse-mock_ReportDetail']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/reports/{reportId}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get a specific report by ID
+     * @description Get a specific report by ID
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-mock_ReportDetail']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    /**
+     * Delete own report
+     * @description Delete own report
+     */
+    delete: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    options?: never
+    head?: never
+    /**
+     * Update an existing own report
+     * @description Update an existing own report
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Report details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['mock.CreateReportRequest']
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
   '/api/v1/admin/categories': {
     parameters: {
       query?: never
@@ -194,6 +686,320 @@ export interface paths {
         }
       }
     }
+    trace?: never
+  }
+  '/api/v1/admin/photographers': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** list photographers */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number for pagination (default: 1) */
+          page?: number
+          /** @description Number of records per page (default: 5, max: 20) */
+          pageSize?: number
+          /** @description Filter by photographer's name (case-insensitive) */
+          name?: string
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/admin/photographers/{photographerID}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** get photographers detail */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description photographer id */
+          photographerID: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_ListPackageResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/admin/users': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get All Users
+     * @description Retrieve a paginated list of users.
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number (default: 1) */
+          page?: number
+          /** @description Page size (default: 5, max: 20) */
+          pageSize?: number
+          /** @description Filter by user's name (case-insensitive) */
+          name?: string
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.PaginationResponse-dto_PublicUserResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/admin/users/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * get user by id
+     * @description get user by id
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description User ID */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_PublicUserResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
     trace?: never
   }
   '/api/v1/auth/login': {
@@ -490,7 +1296,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  '/api/v1/customer/quotations/{id}/accept': {
+  '/api/v1/customer/quotations/{id}/cancel': {
     parameters: {
       query?: never
       header?: never
@@ -504,8 +1310,8 @@ export interface paths {
     options?: never
     head?: never
     /**
-     * accept preview photo
-     * @description accept preview photo
+     * cancelled quotation
+     * @description cancelled quotation
      */
     patch: {
       parameters: {
@@ -566,7 +1372,7 @@ export interface paths {
     }
     trace?: never
   }
-  '/api/v1/customer/quotations/{id}/cancel': {
+  '/api/v1/customer/quotations/{id}/complete': {
     parameters: {
       query?: never
       header?: never
@@ -580,8 +1386,8 @@ export interface paths {
     options?: never
     head?: never
     /**
-     * cancelled quotation
-     * @description cancelled quotation
+     * complete preview photo
+     * @description complete preview photo
      */
     patch: {
       parameters: {
@@ -870,6 +1676,321 @@ export interface paths {
         }
         /** @description Bad Request */
         400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    trace?: never
+  }
+  '/api/v1/customer/reports': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get all reports
+     * @description Get all reports of a user
+     */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number */
+          page?: number
+          /** @description Page size */
+          pageSize?: number
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_PaginationResponse-dto_ReportResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    /**
+     * Create a report
+     * @description Creates a new report for a user
+     */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Report details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.CreateReportRequest']
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/v1/customer/reports/{id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get report by id
+     * @description Get a report of a user by id
+     */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_ReportResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /**
+     * Update a report
+     * @description Updates an existing report
+     */
+    patch: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      /** @description Report details */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['dto.UpdateReportRequest']
+        }
+      }
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
           headers: {
             [name: string]: unknown
           }
@@ -1920,7 +3041,49 @@ export interface paths {
     get?: never
     put?: never
     post?: never
-    delete?: never
+    /**
+     * Delete Package
+     * @description Delete package by photographer
+     */
+    delete: {
+      parameters: {
+        query?: never
+        header?: never
+        path: {
+          /** @description Package ID */
+          id: number
+        }
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown
+          }
+          content?: never
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
     options?: never
     head?: never
     /**
@@ -2569,6 +3732,11 @@ export interface components {
       price: number
       toDate: string
     }
+    'dto.CreateReportRequest': {
+      message: string
+      quotationId: number
+      title: string
+    }
     'dto.CreateReviewRequest': {
       comment?: string
       quotationID: number
@@ -2608,8 +3776,14 @@ export interface components {
     'dto.HttpListResponse-dto_ChatResponse': {
       result?: components['schemas']['dto.ChatResponse'][]
     }
+    'dto.HttpListResponse-dto_CustomerPublicResponse': {
+      result?: components['schemas']['dto.CustomerPublicResponse'][]
+    }
     'dto.HttpListResponse-dto_PackageResponse': {
       result?: components['schemas']['dto.PackageResponse'][]
+    }
+    'dto.HttpListResponse-mock_ReportDetail': {
+      result?: components['schemas']['mock.ReportDetail'][]
     }
     'dto.HttpResponse-PaginationResponse[dto_CategoryResponse]': {
       result?: components['schemas']['dto.PaginationResponse-dto_CategoryResponse']
@@ -2623,6 +3797,9 @@ export interface components {
     'dto.HttpResponse-dto_GetQuotationResponse': {
       result?: components['schemas']['dto.GetQuotationResponse']
     }
+    'dto.HttpResponse-dto_ListPackageResponse': {
+      result?: components['schemas']['dto.ListPackageResponse']
+    }
     'dto.HttpResponse-dto_LoginResponse': {
       result?: components['schemas']['dto.LoginResponse']
     }
@@ -2632,17 +3809,52 @@ export interface components {
     'dto.HttpResponse-dto_PackageResponse': {
       result?: components['schemas']['dto.PackageResponse']
     }
+    'dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse': {
+      result?: components['schemas']['dto.PaginationResponse-ListPhotographerResponse']
+    }
+    'dto.HttpResponse-dto_PaginationResponse-dto_ReportResponse': {
+      result?: components['schemas']['dto.PaginationResponse-dto_ReportResponse']
+    }
     'dto.HttpResponse-dto_PhotographerResponse': {
       result?: components['schemas']['dto.PhotographerResponse']
     }
+    'dto.HttpResponse-dto_PublicUserResponse': {
+      result?: components['schemas']['dto.PublicUserResponse']
+    }
     'dto.HttpResponse-dto_RegisterResponse': {
       result?: components['schemas']['dto.RegisterResponse']
+    }
+    'dto.HttpResponse-dto_ReportResponse': {
+      result?: components['schemas']['dto.ReportResponse']
     }
     'dto.HttpResponse-dto_TokenResponse': {
       result?: components['schemas']['dto.TokenResponse']
     }
     'dto.HttpResponse-dto_UserResponse': {
       result?: components['schemas']['dto.UserResponse']
+    }
+    'dto.HttpResponse-mock_ReportDetail': {
+      result?: components['schemas']['mock.ReportDetail']
+    }
+    'dto.HttpResponse-string': {
+      result?: string
+    }
+    'dto.ListPackageResponse': {
+      category?: components['schemas']['dto.CategoryResponse']
+      description?: string
+      id?: number
+      name?: string
+      price?: number
+      tags?: components['schemas']['dto.TagResponse'][]
+    }
+    'dto.ListPhotographerResponse': {
+      activeStatus?: boolean
+      email?: string
+      id?: number
+      isVerified?: boolean
+      name?: string
+      phoneNumber?: string
+      profilePictureUrl?: string
     }
     'dto.ListPreviewResponse': {
       id?: number
@@ -2683,6 +3895,12 @@ export interface components {
       reviews?: components['schemas']['dto.ReviewResponse'][]
       tags?: components['schemas']['dto.TagResponse'][]
     }
+    'dto.PaginationResponse-ListPhotographerResponse': {
+      data?: components['schemas']['dto.ListPhotographerResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
     'dto.PaginationResponse-QuotationResponse': {
       data?: components['schemas']['dto.QuotationResponse'][]
       page?: number
@@ -2703,6 +3921,18 @@ export interface components {
     }
     'dto.PaginationResponse-dto_PhotographerResponse': {
       data?: components['schemas']['dto.PhotographerResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PaginationResponse-dto_PublicUserResponse': {
+      data?: components['schemas']['dto.PublicUserResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PaginationResponse-dto_ReportResponse': {
+      data?: components['schemas']['dto.ReportResponse'][]
       page?: number
       pageSize?: number
       totalPage?: number
@@ -2729,7 +3959,7 @@ export interface components {
       name?: string
       phoneNumber?: string
       profilePictureUrl?: string
-      role?: string
+      role?: components['schemas']['model.UserRole']
     }
     'dto.QuotationResponse': {
       customer?: components['schemas']['dto.UserResponse']
@@ -2771,6 +4001,14 @@ export interface components {
       exp?: number
       refreshToken?: string
       user?: components['schemas']['dto.UserResponse']
+    }
+    'dto.ReportResponse': {
+      message?: string
+      quotationId?: number
+      reportId?: number
+      reporterId?: number
+      status?: string
+      title?: string
     }
     'dto.ReviewResponse': {
       comment?: string
@@ -2821,6 +4059,11 @@ export interface components {
       quotationID: string
       toDate: string
     }
+    'dto.UpdateReportRequest': {
+      message?: string
+      reportID: number
+      title?: string
+    }
     'dto.UpdateReviewRequest': {
       comment?: string
       id: number
@@ -2838,7 +4081,7 @@ export interface components {
       name?: string
       phoneNumber?: string
       profilePictureUrl?: string
-      role?: components['schemas']['model.UserRole']
+      role?: string
     }
     'dto.UserUpdateRequest': {
       accountNo?: string
@@ -2855,6 +4098,21 @@ export interface components {
       expireDate: string
       imageUrl: string
       laserId: string
+    }
+    'mock.CreateReportRequest': {
+      description?: string
+      quotation_id?: number
+      title?: string
+    }
+    'mock.ReportDetail': {
+      created_at?: string
+      customer_id?: number
+      description?: string
+      id?: number
+      photographer_id?: number
+      quotation_id?: number
+      status?: string
+      title?: string
     }
     'model.MessageType': string
     'model.QuotationStatus': string
