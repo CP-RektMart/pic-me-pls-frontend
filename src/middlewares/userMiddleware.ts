@@ -7,21 +7,25 @@ export const userMiddleware: MiddlewareFactory = (next) => {
   return async (request: NextRequest, event: NextFetchEvent) => {
     const session = await auth()
     const user = session?.user
+    const path = request.nextUrl.pathname
 
-    if (
-      request.nextUrl.pathname === '/login' ||
-      request.nextUrl.pathname === '/sign-up'
-    ) {
+    if (['/login', '/sign-up'].includes(path)) {
       if (user) {
         return NextResponse.redirect(new URL('/', request.nextUrl))
       }
     }
 
-    const isAdminPath = request.nextUrl.pathname.startsWith('/admin')
+    if (request.nextUrl.pathname.startsWith('/developer')) {
+      if (!user) {
+        return NextResponse.redirect(new URL('/login', request.nextUrl))
+      }
+      return next(request, event)
+    }
+
+    const isAdminPath = path.startsWith('/admin')
 
     const isPhotographerPath =
-      request.nextUrl.pathname.startsWith('/photographer') &&
-      !request.nextUrl.pathname.startsWith('/photographers')
+      path.startsWith('/photographer') && !path.startsWith('/photographers')
 
     if (!isAdminPath && user?.role === 'ADMIN') {
       return NextResponse.redirect(new URL('/admin', request.nextUrl))
