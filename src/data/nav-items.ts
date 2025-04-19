@@ -19,6 +19,7 @@ export const customerItems = [
   },
   { icon: 'lucide:message-square', title: 'Chat', url: '/chat' },
   { icon: 'lucide:user', title: 'Profile', url: '/profile' },
+  { icon: 'lucide:activity', title: 'Report', url: '/report' },
 ]
 
 export const adminItems = [
