@@ -688,6 +688,94 @@ export interface paths {
     }
     trace?: never
   }
+  '/api/v1/admin/citizenCards/unverify': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** list unverified citizencard */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Page number for pagination (default: 1) */
+          page?: number
+          /** @description Number of records per page (default: 5, max: 20) */
+          pageSize?: number
+          /** @description Filter by photographer's name (case-insensitive) */
+          name?: string
+        }
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpResponse-dto_PaginationResponse-dto_ListUnverifiedPhotographerResponse']
+          }
+        }
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Unauthorized */
+        401: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Forbidden */
+        403: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Not Found */
+        404: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+        /** @description Internal Server Error */
+        500: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            'application/json': components['schemas']['dto.HttpError']
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
   '/api/v1/admin/photographers': {
     parameters: {
       query?: never
@@ -3701,6 +3789,7 @@ export interface components {
     'dto.CitizenCardResponse': {
       citizenId?: string
       expireDate?: string
+      id?: number
       laserId?: string
       picture?: string
     }
@@ -3812,6 +3901,9 @@ export interface components {
     'dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse': {
       result?: components['schemas']['dto.PaginationResponse-ListPhotographerResponse']
     }
+    'dto.HttpResponse-dto_PaginationResponse-dto_ListUnverifiedPhotographerResponse': {
+      result?: components['schemas']['dto.PaginationResponse-dto_ListUnverifiedPhotographerResponse']
+    }
     'dto.HttpResponse-dto_PaginationResponse-dto_ReportResponse': {
       result?: components['schemas']['dto.PaginationResponse-dto_ReportResponse']
     }
@@ -3861,6 +3953,16 @@ export interface components {
       link?: string
       quotationId?: number
     }
+    'dto.ListUnverifiedPhotographerResponse': {
+      activeStatus?: boolean
+      citizenCard?: components['schemas']['dto.CitizenCardResponse']
+      email?: string
+      id?: number
+      isVerified?: boolean
+      name?: string
+      phoneNumber?: string
+      profilePictureUrl?: string
+    }
     'dto.LoginRequest': {
       idToken: string
       /** @description GOOGLE */
@@ -3909,6 +4011,12 @@ export interface components {
     }
     'dto.PaginationResponse-dto_CategoryResponse': {
       data?: components['schemas']['dto.CategoryResponse'][]
+      page?: number
+      pageSize?: number
+      totalPage?: number
+    }
+    'dto.PaginationResponse-dto_ListUnverifiedPhotographerResponse': {
+      data?: components['schemas']['dto.ListUnverifiedPhotographerResponse'][]
       page?: number
       pageSize?: number
       totalPage?: number

@@ -1,9 +1,10 @@
 import { SidebarProvider } from '@/components/admin/common/sidebar-provider'
+import AdminVerificationPage from '@/components/admin/verification'
 
-export default function AdminVerificationPage() {
+export default function AdminPackagePage() {
   return (
     <SidebarProvider>
-      <div>Hello verification</div>
+      <AdminVerificationPage />
     </SidebarProvider>
   )
 }
