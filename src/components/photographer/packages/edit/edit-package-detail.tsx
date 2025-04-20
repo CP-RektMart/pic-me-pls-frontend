@@ -58,7 +58,7 @@ export function EditPackageDetailSection({
   }
 
   const handleDeletePackage = async () => {
-    deletePackage(Number(packageID))
+    await deletePackage(Number(packageID))
     router.push('/photographer/packages')
   }
 
