@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
-import { getUnverifiedCitizenCards } from '@/actions/citizen-card/get-citizen-card-unverify'
+import getUnverifiedCitizenCards from '@/actions/admin/get-citizen-card-unverify'
+import verifyPhotographer from '@/actions/admin/verify-photographer'
 import { components } from '@/api/schema'
 import FallBackImage from '@public/images/fallBackProfileImage.png'
 import Image from 'next/image'
@@ -69,9 +70,14 @@ export default function AdminVerificationPage() {
     fetchData()
   }
 
-  const handleVerify = async (id?: number) => {
-    console.log('Verifying photographer with ID:', id)
-    // call verify API here
+  const handleVerify = async (id: number) => {
+    try {
+      await verifyPhotographer(id)
+      setPhotographers((items) => items.filter((p) => p.id != id))
+    } catch (err) {
+      setError('Failed verify photographer')
+      console.log('Failed verify photographer: ', err)
+    }
   }
 
   return (
@@ -100,8 +106,10 @@ export default function AdminVerificationPage() {
               {!loading &&
                 photographers.map((p, i) => (
                   <TableRow key={p.id}>
-                    <TableCell>#{(page - 1) * pageSize + i + 1}</TableCell>
-                    <TableCell>
+                    <TableCell className='p-4'>
+                      #{(page - 1) * pageSize + i + 1}
+                    </TableCell>
+                    <TableCell className='p-4'>
                       <Image
                         src={p.profilePictureUrl || FallBackImage}
                         alt='profile'
@@ -110,22 +118,26 @@ export default function AdminVerificationPage() {
                         className='rounded-full object-cover'
                       />
                     </TableCell>
-                    <TableCell>{p.name}</TableCell>
-                    <TableCell>
-                      <div className='flex items-center gap-2'>
+                    <TableCell className='p-4'>
+                      <div className='flex items-center'>
+                        <span>{p.name}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className='p-4'>
+                      <div className='flex items-center'>
                         <Image
                           src={p.citizenCard?.picture || FallBackImage}
                           alt='citizen-card'
-                          width={80}
-                          height={50}
+                          width={40}
+                          height={40}
                           className='rounded'
                         />
                       </div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className='p-4'>
                       <Button
-                        className='p-1'
-                        onClick={() => handleVerify(p.id)}
+                        className='px-4 py-2'
+                        onClick={() => p.id && handleVerify(p.id)}
                       >
                         Verify
                       </Button>

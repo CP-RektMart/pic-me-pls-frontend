@@ -7,7 +7,7 @@ import { Pagination } from '@/types'
 export type UnverifiedPhotographer =
   components['schemas']['dto.ListUnverifiedPhotographerResponse']
 
-export const getUnverifiedCitizenCards = async ({
+export default async function getUnverifiedCitizenCards({
   page,
   pageSize,
   name,
@@ -15,7 +15,7 @@ export const getUnverifiedCitizenCards = async ({
   page?: number
   pageSize?: number
   name?: string
-}): Promise<Pagination<UnverifiedPhotographer>> => {
+}): Promise<Pagination<UnverifiedPhotographer>> {
   const { data } = await client.GET('/api/v1/admin/citizenCards/unverify', {
     params: {
       query: {
