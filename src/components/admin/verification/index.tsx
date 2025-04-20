@@ -72,6 +72,7 @@ export default function AdminVerificationPage() {
 
   const handleVerify = async (id: number) => {
     try {
+      console.log('calling verify:', id)
       await verifyPhotographer(id)
       setPhotographers((items) => items.filter((p) => p.id != id))
     } catch (err) {
