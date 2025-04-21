@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { getPhotographerAdmin } from '@/actions/photographers/get-photographers-admin'
+import { components } from '@/api/schema'
 
 import SearchBar from '@/components/admin/common/search-bar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -18,14 +19,8 @@ import {
 
 import PaginationBar from '../common/pagination-bar'
 
-type Photographer = {
-  id: string
-  profilePictureUrl: string
-  name: string
-  email: string
-  phoneNumber: string
-  isBanned: boolean
-}
+type Photographer =
+  components['schemas']['dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse']
 
 export default function AdminPhotographers() {
   const pageSize = 10
@@ -41,7 +36,7 @@ export default function AdminPhotographers() {
     setError('')
     try {
       const res = await getPhotographerAdmin({ name: search, page, pageSize })
-      setPhotographers(res)
+      setPhotographers(res.data)
       if (res.page === 1) {
         setTotalPage(res.totalPage)
       }

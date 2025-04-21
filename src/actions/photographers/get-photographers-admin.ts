@@ -1,8 +1,8 @@
 'use server'
 
 import { client } from '@/api/client'
-
-// import { PhotographerAdmin } from '@/types/photographer'
+import { Pagination } from '@/types'
+import { PhotographerAdmin } from '@/types/photographer'
 
 export const getPhotographerAdmin = async ({
   page,
@@ -23,5 +23,13 @@ export const getPhotographerAdmin = async ({
     },
   })
 
-  return data?.data
+  const photographers: PhotographerAdmin[] =
+    (data?.data as PhotographerAdmin[]) || []
+  const res: Pagination<PhotographerAdmin> = {
+    data: photographers,
+    page: data?.result?.page || 0,
+    pageSize: data?.result?.pageSize || 0,
+    totalPage: data?.result?.totalPage || 0,
+  }
+  return res
 }
