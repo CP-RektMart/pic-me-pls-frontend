@@ -1,10 +1,11 @@
 'use client'
 
+import deletePackage from '@/actions/packages/delete-package'
 import { MAX_FILES, MAX_FILE_SIZE } from '@/config/index'
 import { Category } from '@/types/category'
 import { Media } from '@/types/package'
 import { Icon } from '@iconify/react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useDropzone } from 'react-dropzone'
 import { useForm } from 'react-hook-form'
 
@@ -47,6 +48,7 @@ export function EditPackageDetailSection({
   categories,
 }: EditPackageDetailSectionProps) {
   const { packageID } = useParams()
+  const router = useRouter()
 
   const handlePriceOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -56,11 +58,8 @@ export function EditPackageDetailSection({
   }
 
   const handleDeletePackage = async () => {
-    console.log(`Package ${packageID} Deleted`)
-  }
-
-  const handleArchivePackage = async () => {
-    console.log(`Package ${packageID} Archived`)
+    await deletePackage(Number(packageID))
+    router.push('/photographer/packages')
   }
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
@@ -180,24 +179,13 @@ export function EditPackageDetailSection({
         )}
       </div>
 
-      <div>
-        <div className='grid h-full grid-cols-2 gap-4 align-top lg:grid-cols-1'>
-          <Button
-            className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'
-            onClick={handleDeletePackage}
-          >
-            <Icon icon='lucide:trash-2' />
-            Delete Package
-          </Button>
-          <Button
-            className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'
-            onClick={handleArchivePackage}
-          >
-            <Icon icon='lucide:archive-restore' />
-            Archive Package
-          </Button>
-        </div>
-      </div>
+      <Button
+        className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2 text-zinc-900 shadow-none hover:bg-zinc-200'
+        onClick={handleDeletePackage}
+      >
+        <Icon icon='lucide:trash-2' />
+        Delete Package
+      </Button>
 
       <div className='mt-auto'>
         <Button

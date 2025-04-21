@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { getAllUsers } from '@/actions/admin/get-all-users'
+import setUserRole from '@/actions/admin/set-user-role'
 import { phoneNumberFormatter } from '@/lib/utils'
 import { PublicUser } from '@/types/user'
 
@@ -62,17 +63,20 @@ export default function AdminUser() {
   }
 
   const updatePublicUser = async (id: number) => {
-    setLoading(true)
     setError('')
     try {
-      // Call the APIs of Updating here
-      // Required the input params for API for arguments of this function
-      console.log(`Public Users updated their role with ID ${id}`)
+      const user = publicUsers.find((p) => p.id === id)
+      if (!user) throw new Error('User not found')
+
+      const newRole = user.role === 'ADMIN' ? 'User' : 'ADMIN'
+      await setUserRole(id, user.role === 'ADMIN')
+
+      setPublicUsers((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, role: newRole } : p))
+      )
     } catch (err) {
+      console.error('Error updating public users:', err)
       setError('Failed to update public user')
-      console.error('Error deleting user:', err)
-    } finally {
-      setLoading(false)
     }
   }
 

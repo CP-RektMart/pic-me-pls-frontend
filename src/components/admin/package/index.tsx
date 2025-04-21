@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
+import deletePackage from '@/actions/admin/delete-package'
 import { getPackages } from '@/actions/packages/get-packages'
 import { PackageVerbose } from '@/types/package'
 import Link from 'next/link'
@@ -59,14 +60,12 @@ export default function AdminPackage() {
     fetchPackages()
   }
 
-  const deletePackage = async (id: number) => {
+  const handleDeletePackage = async (id: number) => {
     setLoading(true)
     setError('')
     try {
-      // Call the delete package API here
-      // await deletePackage(id);
-      // fetchPackages()
-      console.log(`Package with ID ${id} deleted`)
+      await deletePackage(id)
+      fetchPackages()
     } catch (err) {
       setError('Failed to delete package')
       console.error('Error deleting package:', err)
@@ -129,7 +128,7 @@ export default function AdminPackage() {
                         variant='destructive'
                         onClick={() => {
                           if (p?.id) {
-                            deletePackage(p.id)
+                            handleDeletePackage(p.id)
                           }
                         }}
                       >

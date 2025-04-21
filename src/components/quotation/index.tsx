@@ -25,6 +25,13 @@ import { ImageCarousel } from '@/components/quotation/carousel'
 import { QuotationButton } from '@/components/quotation/quotation-button'
 import { QuotationComment } from '@/components/quotation/quotation-comment'
 import { QuotationDetails } from '@/components/quotation/quotation-details'
+import ReportButton from '@/components/report/report-btn'
+import { Button } from '@/components/ui/button'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 
 export default function Page({
   quotationId,
@@ -139,14 +146,44 @@ export default function Page({
 
   return (
     <Container className='py-4 lg:py-6'>
-      <h1 className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</h1>
+      <div className='flex flex-row justify-end lg:justify-between'>
+        <h1 className='mb-6 hidden text-2xl font-bold lg:block'>Quotation</h1>
+        {(status === 'COMPLETED' ||
+          status === 'PAID' ||
+          status === 'CANCELLED') && (
+          <span className='hidden lg:block'>
+            <ReportButton quotationId={quotationId} />
+          </span>
+        )}
+      </div>
       <div className='mx-auto flex flex-col justify-between gap-4 lg:flex-row lg:gap-6'>
         <div className='flex flex-1 flex-col gap-6'>
-          <ProfileHeader
-            imageUrl={photographerImageUrl}
-            name={photographerName}
-            packageNumber={packageNumber}
-          />
+          <div className='flex flex-row items-center justify-between'>
+            <ProfileHeader
+              imageUrl={photographerImageUrl}
+              name={photographerName}
+              packageNumber={packageNumber}
+            />
+            {(status === 'COMPLETED' ||
+              status === 'PAID' ||
+              status === 'CANCELLED') && (
+              <div className='lg:hidden'>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant={'ghost'} size={'iconButton'}>
+                      <Icon icon='lucide:ellipsis-vertical' />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className='w-28 p-0'>
+                    <ReportButton
+                      quotationId={quotationId}
+                      variant={'outline'}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+            )}
+          </div>
 
           {/* package details */}
           <div className='hidden lg:block'>
