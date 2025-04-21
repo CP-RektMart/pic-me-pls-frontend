@@ -2,14 +2,13 @@ import { adminDashboardItems } from '@/data/dashboard-item'
 import Link from 'next/link'
 
 import { SidebarProvider } from '@/components/admin/common/sidebar-provider'
-
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../ui/card'
+} from '@/components/ui/card'
 
 export const AdminDashboard = () => {
   return (
