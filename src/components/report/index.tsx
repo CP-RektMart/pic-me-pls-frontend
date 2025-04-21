@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
+import ReportStatusBadge from './report-status-badge'
 import ReportView from './report-view'
 
 export function ReportPageComponent() {
@@ -65,6 +66,7 @@ export function ReportPageComponent() {
                 <TableHead className='max-w-24 truncate'>Description</TableHead>
                 <TableHead>Created At</TableHead>
                 <TableHead>Updated At</TableHead>
+                <TableHead>Status</TableHead>
                 <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
@@ -81,6 +83,9 @@ export function ReportPageComponent() {
                     </TableCell>
                     <TableCell>{report?.createdAt}</TableCell>
                     <TableCell>{report?.updatedAt}</TableCell>
+                    <TableCell>
+                      <ReportStatusBadge status={report?.status || ''} />
+                    </TableCell>
                     <TableCell>
                       <ReportView
                         title={report?.title || ''}
