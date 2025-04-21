@@ -23,6 +23,7 @@ const buttonVariants = cva(
           'flex flex-col gap-2.5 items-center justify-center rounded-2xl bg-white shadow-[2px_2px_2px_rgba(0,0,0,0.25)]',
         filter:
           'flex items-center justify-center rounded-full bg-slate-100 size-9 hover:bg-slate-200',
+        unban: 'bg-zinc-100 text-black-900 shadow-sm hover:bg-zinc-200',
       },
       size: {
         default: 'h-9 px-4 py-2',
