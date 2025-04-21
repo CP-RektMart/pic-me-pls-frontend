@@ -12,6 +12,13 @@ import PaginationBar from '@/components/admin/common/pagination-bar'
 import SearchBar from '@/components/admin/common/search-bar'
 import { Button } from '@/components/ui/button'
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import {
   Table,
   TableBody,
   TableCell,
@@ -96,11 +103,11 @@ export default function AdminVerification() {
           <Table className='mb-2 font-medium'>
             <TableHeader>
               <TableRow>
-                <TableHead>Id</TableHead>
-                <TableHead>Image</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Citizen Card</TableHead>
-                <TableHead>Action</TableHead>
+                <TableHead className='w-4'>Id</TableHead>
+                <TableHead className='w-4'>Image</TableHead>
+                <TableHead className='w-4'>Name</TableHead>
+                <TableHead className='w-4'>Citizen Card</TableHead>
+                <TableHead className='w-4'>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -116,7 +123,7 @@ export default function AdminVerification() {
                         alt='profile'
                         width={40}
                         height={40}
-                        className='rounded-full object-cover'
+                        className='aspect-square rounded-full object-cover'
                       />
                     </TableCell>
                     <TableCell className='p-4'>
@@ -125,16 +132,34 @@ export default function AdminVerification() {
                       </div>
                     </TableCell>
                     <TableCell className='p-4'>
-                      <div className='flex items-center'>
-                        <Image
-                          src={p.citizenCard?.picture || FallBackImage}
-                          alt='citizen-card'
-                          width={40}
-                          height={40}
-                          className='rounded'
-                        />
-                      </div>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Image
+                            src={p.citizenCard?.picture || FallBackImage}
+                            alt='citizen-card'
+                            width={40}
+                            height={40}
+                            className='cursor-pointer rounded border object-cover'
+                          />
+                        </DialogTrigger>
+                        <DialogContent className='max-w-sm md:max-w-3xl'>
+                          <DialogHeader>
+                            <DialogTitle className='text-center text-lg font-bold'>
+                              Citizen Card of {p.name}
+                            </DialogTitle>
+                          </DialogHeader>
+                          <div className='relative h-[400px] w-full md:h-[600px]'>
+                            <Image
+                              src={p.citizenCard?.picture || FallBackImage}
+                              alt='citizen-card-full'
+                              fill
+                              className='rounded object-contain'
+                            />
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </TableCell>
+
                     <TableCell className='p-4'>
                       <Button
                         className='px-4 py-2'

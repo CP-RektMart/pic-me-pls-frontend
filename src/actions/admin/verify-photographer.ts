@@ -8,7 +8,9 @@ export default async function verifyPhotographer(id: number) {
 
   await client.PATCH('/api/v1/admin/photographers/{photographerID}/verify', {
     params: {
-      path: { id },
+      path: {
+        photographerID: id,
+      },
     },
   })
 
