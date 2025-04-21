@@ -1129,7 +1129,7 @@ export interface paths {
         header?: never
         path: {
           /** @description {Photographer Id} */
-          photographerID: number
+          id: number
         }
         cookie?: never
       }
