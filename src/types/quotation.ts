@@ -27,6 +27,7 @@ export interface QuotationDetailsProps {
 
 export interface CustomerQuotationProps extends QuotationDetailsProps {
   photographerImageUrl: string
+  isPhotographerVerified: boolean
   packageNumber: number
   quotationImages: { url: string; name: string }[]
   paymentStatus: string
