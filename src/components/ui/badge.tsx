@@ -16,6 +16,8 @@ const badgeVariants = cva(
         outline: 'text-foreground',
         photographer: 'bg-blue-100 border-none text-xs text-blue-700',
         customer: 'bg-gray-100 border-none text-xs text-black',
+        admin: 'bg-red-100 border-none text-xs text-red-700',
+        customer_um: 'bg-orange-100 border-none text-xs text-base-primary',
       },
     },
     defaultVariants: {

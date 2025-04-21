@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from 'react'
 
-import { cn } from '@/lib/utils'
-import { User } from '@/types/user'
-import Image from 'next/image'
-import Link from 'next/link'
+import { getAllUsers } from '@/actions/admin/get-all-users'
+import { phoneNumberFormatter } from '@/lib/utils'
+import { PublicUser } from '@/types/user'
 
 import PaginationBar from '@/components/admin/common/pagination-bar'
 import SearchBar from '@/components/admin/common/search-bar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -20,148 +20,34 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-const mockUsers: User[] = [
-  {
-    id: 1,
-    name: 'Alice Johnson',
-    email: 'alice.j@example.com',
-    phoneNumber: '0812345678',
-    bank: 'Bangkok Bank',
-    bankBranch: 'Siam Square',
-    accountNo: '123-456789-0',
-    facebook: 'alice.johnson',
-    instagram: 'alice.j',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'CUSTOMER',
-  },
-  {
-    id: 2,
-    name: 'Bob Smith',
-    email: 'bob.smith@example.com',
-    phoneNumber: '0823456789',
-    bank: 'Kasikorn Bank',
-    bankBranch: 'Central World',
-    accountNo: '234-567890-1',
-    facebook: 'bob.smith',
-    instagram: 'bobby_smith',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'ADMIN',
-  },
-  {
-    id: 3,
-    name: 'Charlie Lee',
-    email: 'charlie.lee@example.com',
-    phoneNumber: '0834567890',
-    bank: 'SCB',
-    bankBranch: 'Chulalongkorn',
-    accountNo: '345-678901-2',
-    facebook: 'charlie.lee',
-    instagram: 'charliel',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'CUSTOMER',
-  },
-  {
-    id: 4,
-    name: 'Dana White',
-    email: 'dana.white@example.com',
-    phoneNumber: '0845678901',
-    bank: 'Krungthai Bank',
-    bankBranch: 'Silom',
-    accountNo: '456-789012-3',
-    facebook: 'dana.white',
-    instagram: 'danawhite',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'PHOTOGRAPHER',
-  },
-  {
-    id: 5,
-    name: 'Ethan Wong',
-    email: 'ethan.w@example.com',
-    phoneNumber: '0856789012',
-    bank: 'TMBThanachart',
-    bankBranch: 'Asoke',
-    accountNo: '567-890123-4',
-    facebook: 'ethan.wong',
-    instagram: 'ethanw',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'PHOTOGRAPHER',
-  },
-  {
-    id: 6,
-    name: 'Ethan Wong',
-    email: 'ethan.w@example.com',
-    phoneNumber: '0856789012',
-    bank: 'TMBThanachart',
-    bankBranch: 'Asoke',
-    accountNo: '567-890123-4',
-    facebook: 'ethan.wong',
-    instagram: 'ethanw',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'PHOTOGRAPHER',
-  },
-  {
-    id: 7,
-    name: 'Ethan Wong',
-    email: 'ethan.w@example.com',
-    phoneNumber: '0856789012',
-    bank: 'TMBThanachart',
-    bankBranch: 'Asoke',
-    accountNo: '567-890123-4',
-    facebook: 'ethan.wong',
-    instagram: 'ethanw',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'PHOTOGRAPHER',
-  },
-  {
-    id: 8,
-    name: 'Ethan Wong',
-    email: 'ethan.w@example.com',
-    phoneNumber: '0856789012',
-    bank: 'TMBThanachart',
-    bankBranch: 'Asoke',
-    accountNo: '567-890123-4',
-    facebook: 'ethan.wong',
-    instagram: 'ethanw',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'PHOTOGRAPHER',
-  },
-  {
-    id: 9,
-    name: 'Ethan Wong',
-    email: 'ethan.w@example.com',
-    phoneNumber: '0856789012',
-    bank: 'TMBThanachart',
-    bankBranch: 'Asoke',
-    accountNo: '567-890123-4',
-    facebook: 'ethan.wong',
-    instagram: 'ethanw',
-    profilePictureUrl: '/images/profile-mock-image.png',
-    role: 'PHOTOGRAPHER',
-  },
-]
-
 export default function AdminUser() {
-  const pageSize = 6
+  const pageSize = 10
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
-  const [users] = useState<User[]>(mockUsers)
-  const [loading] = useState(false)
-  const [error] = useState('')
+  const [publicUsers, setPublicUsers] = useState<PublicUser[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const [search, setSearch] = useState('')
 
-  // const fetchUsers = async () => {
-  //     setLoading(true)
-  //     setError('')
-  //     // TODO:
-  // }
+  const fetchPublicUsers = async () => {
+    setLoading(true)
+    setError('')
+    try {
+      const res = await getAllUsers({ name: search, page, pageSize })
+      setPublicUsers(res.data)
+      if (res.page === 1) {
+        setTotalPage(res.totalPage)
+      }
+    } catch (err) {
+      setError('Failed to fetch public users')
+      console.error('Error fetching public users:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const total = Math.ceil(users.length / pageSize)
-    setTotalPage(total)
-  }, [users])
-
-  useEffect(() => {
-    // TODO: fetch more
+    fetchPublicUsers()
   }, [page])
 
   const handlePageChange = (newPage: number) => {
@@ -172,7 +58,22 @@ export default function AdminUser() {
 
   const handleSearch = () => {
     setPage(1)
-    // TODO: fetch find
+    fetchPublicUsers()
+  }
+
+  const updatePublicUser = async (id: number) => {
+    setLoading(true)
+    setError('')
+    try {
+      // Call the APIs of Updating here
+      // Required the input params for API for arguments of this function
+      console.log(`Public Users updated their role with ID ${id}`)
+    } catch (err) {
+      setError('Failed to update public user')
+      console.error('Error deleting user:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -184,7 +85,7 @@ export default function AdminUser() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onSearch={handleSearch}
-            placeholder='Search Package'
+            placeholder='Search User'
           />
 
           <Table className='mb-2 font-medium'>
@@ -201,52 +102,52 @@ export default function AdminUser() {
             </TableHeader>
             <TableBody>
               {!loading &&
-                users.slice((page - 1) * pageSize, page * pageSize).map((p) => (
-                  <TableRow key={p?.id}>
-                    <TableCell>#{p?.id}</TableCell>
-
+                publicUsers.map((user) => (
+                  <TableRow key={user?.id}>
+                    <TableCell>#{user?.id}</TableCell>
                     <TableCell className='max-w-24 truncate'>
-                      <Link href='/' className='flex items-center'>
-                        <Image
-                          src={p.profilePictureUrl || ''}
-                          alt={p.name || 'profile'}
-                          className='size-12 rounded-full object-cover'
-                          width={18}
-                          height={18}
+                      <Avatar>
+                        <AvatarImage
+                          src={user?.profilePictureUrl}
+                          alt={user?.name}
                         />
-                      </Link>
+                        <AvatarFallback>
+                          {user?.name?.charAt(0)?.toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
                     </TableCell>
                     <TableCell className='max-w-24 truncate'>
-                      {p?.name}
+                      {user?.name}
                     </TableCell>
-                    <TableCell className='max-w-36 truncate'>
-                      {p.email}
+                    <TableCell>{user?.email}</TableCell>
+                    <TableCell>
+                      {user.phoneNumber &&
+                        phoneNumberFormatter(user.phoneNumber)}
                     </TableCell>
-                    <TableCell className='max-w-24 truncate'>
-                      {p.phoneNumber?.replace(
-                        /(\d{3})(\d{3})(\d{4})/,
-                        '$1-$2-$3'
-                      )}
-                    </TableCell>
-                    <TableCell className='max-w-24 truncate'>
+                    <TableCell>
                       <Badge
-                        className={cn(
-                          'w-fit shadow-none',
-                          p.role === 'CUSTOMER'
-                            ? 'bg-orange-100 text-orange-700'
-                            : p.role === 'ADMIN'
-                              ? 'bg-red-200 text-red-800'
-                              : 'bg-blue-100 text-blue-700'
-                        )}
+                        variant={
+                          user?.role === 'ADMIN'
+                            ? 'admin'
+                            : user?.role === 'CUSTOMER'
+                              ? 'customer_um'
+                              : 'photographer'
+                        }
                       >
-                        {p.role &&
-                          p.role.charAt(0).toUpperCase() +
-                            p.role.slice(1).toLowerCase()}
+                        {user?.role?.toLowerCase()}
                       </Badge>
                     </TableCell>
-                    <TableCell className='max-w-24 truncate'>
-                      <Button>
-                        {p.role === 'ADMIN' ? 'Mark as User' : ' Mark as Admin'}
+                    <TableCell>
+                      <Button
+                        onClick={() => {
+                          if (user.id) {
+                            updatePublicUser(user.id)
+                          }
+                        }}
+                      >
+                        {user?.role != 'ADMIN'
+                          ? 'Mark as Admin'
+                          : 'Mark as User'}
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -268,10 +169,10 @@ export default function AdminUser() {
                   </TableCell>
                 </TableRow>
               )}
-              {!loading && users.length === 0 && !error && (
+              {!loading && publicUsers.length === 0 && !error && (
                 <TableRow>
                   <TableCell colSpan={7} className='py-4 text-center'>
-                    No Users found
+                    No users found
                   </TableCell>
                 </TableRow>
               )}

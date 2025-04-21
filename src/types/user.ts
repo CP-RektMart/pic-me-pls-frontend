@@ -4,6 +4,8 @@ export type UserType = 'Customer' | 'Photographer' | ''
 
 export type UserRole = 'CUSTOMER' | 'PHOTOGRAPHER' | 'ADMIN'
 
+export type PublicUser = components['schemas']['dto.PublicUserResponse']
+
 export type User = components['schemas']['dto.UserResponse']
 
 export type UserProfile = {
