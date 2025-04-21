@@ -10,7 +10,10 @@ export const VerifyBadge = (props: VerifyBadgeProps) => {
 
   if (!isVerified) {
     return (
-      <Badge variant='secondary' className='gap-1 bg-red-100 text-red-700'>
+      <Badge
+        variant='secondary'
+        className='gap-1 text-nowrap bg-red-100 text-red-700'
+      >
         <Icon icon='lucide:x-circle' />
         Not Verified
       </Badge>
@@ -18,7 +21,10 @@ export const VerifyBadge = (props: VerifyBadgeProps) => {
   }
 
   return (
-    <Badge variant='secondary' className='gap-1 bg-green-100 text-green-700'>
+    <Badge
+      variant='secondary'
+      className='gap-1 text-nowrap bg-green-100 text-green-700'
+    >
       <Icon icon='lucide:verified' />
       Verified
     </Badge>
