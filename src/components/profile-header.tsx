@@ -3,16 +3,20 @@ import Image from 'next/image'
 
 import { Badge } from '@/components/ui/badge'
 
+import { VerifyBadge } from './ui/verify-badge'
+
 interface ProfileHeaderProps {
   imageUrl: string
   name: string
   packageNumber: number
+  isVerified: boolean
 }
 
 export function ProfileHeader({
   imageUrl,
   name,
   packageNumber,
+  isVerified,
 }: ProfileHeaderProps) {
   return (
     <div className='flex flex-row items-center gap-6'>
@@ -29,6 +33,7 @@ export function ProfileHeader({
           <Badge variant='photographer' className='hidden lg:block'>
             Photographer
           </Badge>
+          <VerifyBadge isVerified={isVerified} />
         </div>
         <div className='flex flex-row items-center gap-3'>
           <Badge variant='photographer' className='lg:hidden'>
