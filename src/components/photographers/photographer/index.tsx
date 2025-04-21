@@ -45,6 +45,7 @@ export default function PhotographerPage(props: PhotographerPageProps) {
           imageUrl={photographer.profilePictureUrl || ProfileMockImage.src}
           name={photographer.name || ''}
           packageNumber={packagesWithPagination.data.length}
+          isVerified={photographer.isVerified || false}
         />
       </div>
       <div className='mt-6'>

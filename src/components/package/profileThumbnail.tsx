@@ -1,8 +1,7 @@
-import { Icon } from '@iconify/react'
 import FallBackImage from '@public/images/fallBackProfileImage.png'
 import Image from 'next/image'
 
-import { Badge } from '@/components/ui/badge'
+import { VerifyBadge } from '../ui/verify-badge'
 
 interface ProfileThumbnailProps {
   profilePictureUrl: string
@@ -17,28 +16,21 @@ export function ProfileThumbnail({
 }: ProfileThumbnailProps) {
   return (
     <div className='flex items-center gap-2'>
-      <div className='overflow-hidden rounded-full'>
-        <Image
-          src={profilePictureUrl || FallBackImage}
-          alt={name || 'profile'}
-          className='size-12 rounded-full object-cover'
-          width={32}
-          height={32}
-        />
+      <div>
+        <div className='relative size-12'>
+          <Image
+            src={profilePictureUrl || FallBackImage}
+            alt={name || 'profile'}
+            className='rounded-full object-cover'
+            fill
+          />
+        </div>
       </div>
 
       <div className='flex flex-col items-center gap-2'>
         <h3 className='flex items-center gap-2 text-lg font-bold'>
           {name || 'Name'}
-          {haveVerifiedBadge && (
-            <Badge
-              variant='secondary'
-              className='gap-1 bg-green-100 text-green-700'
-            >
-              <Icon icon='lucide:verified' />
-              Verified
-            </Badge>
-          )}
+          <VerifyBadge isVerified={haveVerifiedBadge} />
         </h3>
       </div>
     </div>

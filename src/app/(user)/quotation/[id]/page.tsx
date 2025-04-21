@@ -53,6 +53,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       quotationStatus={quotation.status as QuotationStatus}
       packageName={quotation.package?.name || 'Package'}
       photographerName={quotation.photographer?.name || 'Photographer'}
+      isPhotographerVerified={quotation.photographer?.isVerified || false}
       customerName={quotation.customer?.name || 'Customer'}
       from={formatDateToString(new Date(quotation.fromDate))}
       to={formatDateToString(new Date(quotation.toDate))}
