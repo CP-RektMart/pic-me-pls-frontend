@@ -38,6 +38,7 @@ export default function Page({
   quotationStatus,
   packageName,
   photographerName,
+  isPhotographerVerified,
   customerName,
   from,
   to,
@@ -163,6 +164,7 @@ export default function Page({
               imageUrl={photographerImageUrl}
               name={photographerName}
               packageNumber={packageNumber}
+              isVerified={isPhotographerVerified}
             />
             {(status === 'COMPLETED' ||
               status === 'PAID' ||
