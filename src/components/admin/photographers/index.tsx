@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from 'react'
 
+import banPhotographer from '@/actions/admin/ban-photographer'
+import unbanPhotographer from '@/actions/admin/unban-photographer'
 import { getPhotographerAdmin } from '@/actions/photographers/get-photographers-admin'
 import { components } from '@/api/schema'
 
+import PaginationBar from '@/components/admin/common/pagination-bar'
 import SearchBar from '@/components/admin/common/search-bar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -16,8 +19,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
-import PaginationBar from '../common/pagination-bar'
 
 type Photographer =
   components['schemas']['dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse']
@@ -64,12 +65,27 @@ export default function AdminPhotographers() {
   }
 
   const handleBanPhotographer = async (photographerId: string) => {
-    console.log('ban photographer', photographerId)
+    try {
+      await banPhotographer(Number(photographerId))
+      fetchPhotographers()
+    } catch (err) {
+      setError('Failed to ban photographer')
+      console.error('Error banning photographer:', err)
+    }
   }
+
   const handleUnbanPhotographer = async (photographerId: string) => {
-    console.log('unban photographer', photographerId)
+    try {
+      await unbanPhotographer(Number(photographerId))
+      fetchPhotographers()
+    } catch (err) {
+      setError('Failed to unban photographer')
+      console.error('Error unbanning photographer:', err)
+    }
   }
+
   const handleViewPhotographer = async (photographerId: string) => {
+    //TODO: implement view photographer
     console.log('view photographer', photographerId)
   }
 
@@ -98,48 +114,60 @@ export default function AdminPhotographers() {
             </TableHeader>
             <TableBody>
               {!loading &&
-                photographers.map((p, i) => (
-                  <TableRow key={p?.id}>
-                    <TableCell className='p-4'>
-                      #{(page - 1) * pageSize + i + 1}
-                    </TableCell>
-                    <TableCell className='max-w-24 truncate'>
-                      <Avatar>
-                        <AvatarImage src={p?.profilePictureUrl} alt={p?.name} />
-                        <AvatarFallback>
-                          {p?.name?.charAt(0)?.toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                    </TableCell>
-                    <TableCell className='max-w-24 truncate'>
-                      {p?.name}
-                    </TableCell>
-                    <TableCell>{p?.email}</TableCell>
-                    <TableCell>{p?.phoneNumber}</TableCell>
-                    <TableCell>
-                      <div className='flex gap-2'>
-                        <Button onClick={() => handleViewPhotographer(p?.id)}>
-                          View
-                        </Button>
-                        {p?.isBanned ? (
-                          <Button
-                            variant='unban'
-                            onClick={() => handleUnbanPhotographer(p?.id)}
-                          >
-                            Unban
+                photographers.map((p, i) => {
+                  const isBanned = p.isBanned
+                  const textClass = isBanned ? 'text-slate-300' : ''
+                  const rowIndex = (page - 1) * pageSize + i + 1
+
+                  return (
+                    <TableRow key={p?.id}>
+                      <TableCell className={`p-4 ${textClass}`}>
+                        #{rowIndex}
+                      </TableCell>
+                      <TableCell className={`max-w-24 truncate ${textClass}`}>
+                        <Avatar>
+                          <AvatarImage
+                            src={p?.profilePictureUrl}
+                            alt={p?.name}
+                          />
+                          <AvatarFallback>
+                            {p?.name?.charAt(0)?.toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                      </TableCell>
+                      <TableCell className={`max-w-24 truncate ${textClass}`}>
+                        {p?.name}
+                      </TableCell>
+                      <TableCell className={textClass}>{p?.email}</TableCell>
+                      <TableCell className={textClass}>
+                        {p?.phoneNumber}
+                      </TableCell>
+                      <TableCell>
+                        <div className='flex gap-2'>
+                          <Button onClick={() => handleViewPhotographer(p?.id)}>
+                            View
                           </Button>
-                        ) : (
-                          <Button
-                            variant='destructive'
-                            onClick={() => handleBanPhotographer(p?.id)}
-                          >
-                            Ban
-                          </Button>
-                        )}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                          {isBanned ? (
+                            <Button
+                              variant='unban'
+                              onClick={() => handleUnbanPhotographer(p?.id)}
+                            >
+                              Unban
+                            </Button>
+                          ) : (
+                            <Button
+                              variant='destructive'
+                              onClick={() => handleBanPhotographer(p?.id)}
+                            >
+                              Ban
+                            </Button>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
+
               {loading && (
                 <TableRow>
                   <TableCell colSpan={7} className='py-4 text-center'>
