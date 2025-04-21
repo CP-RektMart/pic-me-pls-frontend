@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from 'react'
 
-import { getReports } from '@/actions/report/get-customer-reports'
+import { acceptReport } from '@/actions/admin/accept-report'
+import { declineReport } from '@/actions/admin/decline-report'
+import { getAllReports } from '@/actions/admin/get-all-report'
 import { Report } from '@/types/report'
 
 import PaginationBar from '@/components/admin/common/pagination-bar'
+import SearchBar from '@/components/admin/common/search-bar'
 import {
   Table,
   TableBody,
@@ -15,22 +18,23 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import ReportStatusBadge from './report-status-badge'
-import ReportView from './report-view'
+import ReportStatusBadge from '../../report/report-status-badge'
+import ReportDialog from './report-dialog'
 
-export function ReportPageComponent() {
+export function AdminReport() {
   const pageSize = 10
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
   const [reports, setReports] = useState<Report[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [search, setSearch] = useState('')
 
   const fetchReports = async () => {
     setLoading(true)
     setError('')
     try {
-      const res = await getReports({ page, pageSize })
+      const res = await getAllReports({ title: search, page, pageSize })
       setReports(res.data)
       if (res.page === 1) {
         setTotalPage(res.totalPage)
@@ -53,11 +57,51 @@ export function ReportPageComponent() {
     }
   }
 
+  const handleSearch = () => {
+    setPage(1)
+    fetchReports()
+  }
+
+  const handleAcceptReport = async (reportId: number) => {
+    setLoading(true)
+    setError('')
+    try {
+      await acceptReport(reportId)
+      fetchReports()
+    } catch (err) {
+      setError('Failed to accept report')
+      console.error('Error accepting report:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDeclineReport = async (reportId: number) => {
+    setLoading(true)
+    setError('')
+    try {
+      await declineReport(reportId)
+      fetchReports()
+    } catch (err) {
+      setError('Failed to decline report')
+      console.error('Error declining report:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className='flex h-full flex-col overflow-auto'>
       <h1 className='text-2xl font-bold'>Report</h1>
       <div className='flex h-full flex-col justify-between gap-2 p-6'>
         <div>
+          <SearchBar
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onSearch={handleSearch}
+            placeholder='Search by title'
+          />
+
           <Table className='mb-2 font-medium'>
             <TableHeader>
               <TableRow>
@@ -87,9 +131,13 @@ export function ReportPageComponent() {
                       <ReportStatusBadge status={report?.status || ''} />
                     </TableCell>
                     <TableCell>
-                      <ReportView
+                      <ReportDialog
+                        id={report?.id || 0}
                         title={report?.title || ''}
                         message={report?.message || ''}
+                        status={report?.status || ''}
+                        handleAcceptReport={handleAcceptReport}
+                        handleDeclineReport={handleDeclineReport}
                       />
                     </TableCell>
                   </TableRow>

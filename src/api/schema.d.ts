@@ -775,6 +775,8 @@ export interface paths {
           page?: number
           /** @description Page size */
           pageSize?: number
+          /** @description Filter by report's title (case-insensitive) */
+          title?: string
         }
         header?: never
         path?: never
