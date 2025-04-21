@@ -51,9 +51,6 @@ const formSchema = z.object({
       /^[A-Z]{2}\d{1}-\d{6}-\d{2}$/,
       'Laser number must be in format MEx-xxxxxx-xx'
     ),
-  terms: z.literal(true, {
-    errorMap: () => ({ message: 'You must accept the terms and conditions' }),
-  }),
 })
 
 type FormValues = z.infer<typeof formSchema>
