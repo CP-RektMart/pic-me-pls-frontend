@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import banPhotographer from '@/actions/admin/ban-photographer'
 import unbanPhotographer from '@/actions/admin/unban-photographer'
 import { getPhotographerAdmin } from '@/actions/photographers/get-photographers-admin'
-import { components } from '@/api/schema'
+import { PhotographerAdmin } from '@/types/photographer'
 
 import PaginationBar from '@/components/admin/common/pagination-bar'
 import SearchBar from '@/components/admin/common/search-bar'
@@ -20,14 +20,11 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-type Photographer =
-  components['schemas']['dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse']
-
 export default function AdminPhotographers() {
   const pageSize = 10
   const [page, setPage] = useState(1)
-  const [totalPage, setTotalPage] = useState(1)
-  const [photographers, setPhotographers] = useState<Photographer[]>([])
+  const [totalPage, setTotalPage] = useState(0)
+  const [photographers, setPhotographers] = useState<PhotographerAdmin[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
@@ -98,7 +95,7 @@ export default function AdminPhotographers() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onSearch={handleSearch}
-            placeholder='Search Package'
+            placeholder='Search Photographer'
           />
 
           <Table className='mb-2 font-medium'>
@@ -144,20 +141,29 @@ export default function AdminPhotographers() {
                       </TableCell>
                       <TableCell>
                         <div className='flex gap-2'>
-                          <Button onClick={() => handleViewPhotographer(p?.id)}>
+                          <Button
+                            onClick={() =>
+                              p?.id && handleViewPhotographer(p.id.toString())
+                            }
+                          >
                             View
                           </Button>
                           {isBanned ? (
                             <Button
                               variant='unban'
-                              onClick={() => handleUnbanPhotographer(p?.id)}
+                              onClick={() =>
+                                p?.id &&
+                                handleUnbanPhotographer(p.id.toString())
+                              }
                             >
                               Unban
                             </Button>
                           ) : (
                             <Button
                               variant='destructive'
-                              onClick={() => handleBanPhotographer(p?.id)}
+                              onClick={() =>
+                                p?.id && handleBanPhotographer(p.id.toString())
+                              }
                             >
                               Ban
                             </Button>

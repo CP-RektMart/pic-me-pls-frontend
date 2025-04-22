@@ -24,12 +24,14 @@ export const getPhotographerAdmin = async ({
   })
 
   const photographers: PhotographerAdmin[] =
-    (data?.data as PhotographerAdmin[]) || []
+    data?.data?.sort(
+      (a: PhotographerAdmin, b: PhotographerAdmin) => (a.id ?? 0) - (b.id ?? 0)
+    ) || []
   const res: Pagination<PhotographerAdmin> = {
     data: photographers,
-    page: data?.result?.page || 0,
-    pageSize: data?.result?.pageSize || 0,
-    totalPage: data?.result?.totalPage || 0,
+    page: data?.page || 0,
+    pageSize: data?.pageSize || 0,
+    totalPage: data?.totalPage || 0,
   }
   return res
 }
