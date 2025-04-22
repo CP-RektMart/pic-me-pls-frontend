@@ -226,7 +226,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse-dto_PaginationResponse-dto_ListUnverifiedPhotographerResponse']
+            'application/json': components['schemas']['dto.PaginationResponse-dto_ListUnverifiedPhotographerResponse']
           }
         }
         /** @description Bad Request */
@@ -548,7 +548,7 @@ export interface paths {
             [name: string]: unknown
           }
           content: {
-            'application/json': components['schemas']['dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse']
+            'application/json': components['schemas']['dto.PaginationResponse-ListPhotographerResponse']
           }
         }
         /** @description Bad Request */
@@ -4046,12 +4046,6 @@ export interface components {
     }
     'dto.HttpResponse-dto_PackageResponse': {
       result?: components['schemas']['dto.PackageResponse']
-    }
-    'dto.HttpResponse-dto_PaginationResponse-ListPhotographerResponse': {
-      result?: components['schemas']['dto.PaginationResponse-ListPhotographerResponse']
-    }
-    'dto.HttpResponse-dto_PaginationResponse-dto_ListUnverifiedPhotographerResponse': {
-      result?: components['schemas']['dto.PaginationResponse-dto_ListUnverifiedPhotographerResponse']
     }
     'dto.HttpResponse-dto_PhotographerResponse': {
       result?: components['schemas']['dto.PhotographerResponse']
