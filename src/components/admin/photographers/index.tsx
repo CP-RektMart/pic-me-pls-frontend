@@ -81,11 +81,6 @@ export default function AdminPhotographers() {
     }
   }
 
-  const handleViewPhotographer = async (photographerId: string) => {
-    //TODO: implement view photographer
-    console.log('view photographer', photographerId)
-  }
-
   return (
     <div className='flex h-full flex-col gap-6 overflow-auto'>
       <h1 className='text-2xl font-bold'>Photographer Manager</h1>
@@ -140,35 +135,25 @@ export default function AdminPhotographers() {
                         {p?.phoneNumber}
                       </TableCell>
                       <TableCell>
-                        <div className='flex gap-2'>
+                        {isBanned ? (
                           <Button
+                            variant='unban'
                             onClick={() =>
-                              p?.id && handleViewPhotographer(p.id.toString())
+                              p?.id && handleUnbanPhotographer(p.id.toString())
                             }
                           >
-                            View
+                            Unban
                           </Button>
-                          {isBanned ? (
-                            <Button
-                              variant='unban'
-                              onClick={() =>
-                                p?.id &&
-                                handleUnbanPhotographer(p.id.toString())
-                              }
-                            >
-                              Unban
-                            </Button>
-                          ) : (
-                            <Button
-                              variant='destructive'
-                              onClick={() =>
-                                p?.id && handleBanPhotographer(p.id.toString())
-                              }
-                            >
-                              Ban
-                            </Button>
-                          )}
-                        </div>
+                        ) : (
+                          <Button
+                            variant='destructive'
+                            onClick={() =>
+                              p?.id && handleBanPhotographer(p.id.toString())
+                            }
+                          >
+                            Ban
+                          </Button>
+                        )}
                       </TableCell>
                     </TableRow>
                   )
