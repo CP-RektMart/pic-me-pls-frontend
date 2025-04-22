@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import deletePackage from '@/actions/admin/delete-package'
 import { getPackages } from '@/actions/packages/get-packages'
 import { PackageVerbose } from '@/types/package'
-import Link from 'next/link'
 
 import PaginationBar from '@/components/admin/common/pagination-bar'
 import SearchBar from '@/components/admin/common/search-bar'
@@ -94,7 +93,9 @@ export default function AdminPackage() {
                 <TableHead className='max-w-24 truncate'>Description</TableHead>
                 <TableHead>Price</TableHead>
                 <TableHead>Category</TableHead>
-                <TableHead>Photographer</TableHead>
+                <TableHead className='max-w-24 truncate'>
+                  Photographer
+                </TableHead>
                 <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
@@ -115,13 +116,8 @@ export default function AdminPackage() {
                         {p.category?.name}
                       </span>
                     </TableCell>
-                    <TableCell>
-                      <Link
-                        href={`/admin/photographers/${p.photographer?.id}`}
-                        className='text-blue-600 underline hover:text-blue-700'
-                      >
-                        {p.photographer?.name?.split(' ')[0]}
-                      </Link>
+                    <TableCell className='max-w-24 truncate'>
+                      {p.photographer?.name}
                     </TableCell>
                     <TableCell>
                       <Button
