@@ -89,13 +89,11 @@ export default function AdminPackage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Id</TableHead>
-                <TableHead className='max-w-24 truncate'>Title</TableHead>
-                <TableHead className='max-w-24 truncate'>Description</TableHead>
+                <TableHead>Title</TableHead>
+                <TableHead>Description</TableHead>
                 <TableHead>Price</TableHead>
                 <TableHead>Category</TableHead>
-                <TableHead className='max-w-24 truncate'>
-                  Photographer
-                </TableHead>
+                <TableHead>Photographer</TableHead>
                 <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
@@ -116,7 +114,7 @@ export default function AdminPackage() {
                         {p.category?.name}
                       </span>
                     </TableCell>
-                    <TableCell className='max-w-24 truncate'>
+                    <TableCell className='max-w-24 truncate sm:max-w-none'>
                       {p.photographer?.name}
                     </TableCell>
                     <TableCell>
