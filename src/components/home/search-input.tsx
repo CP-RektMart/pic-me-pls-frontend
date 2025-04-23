@@ -31,6 +31,11 @@ export default function SearchInput({
         onChange={(e) =>
           handleFilter({ type: 'searchText', payload: e.target.value })
         }
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            onSearchClick()
+          }
+        }}
         data-testid='search-input'
       />
     </div>
