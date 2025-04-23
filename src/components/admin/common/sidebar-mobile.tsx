@@ -1,7 +1,7 @@
 'use client'
 
 import { logout } from '@/actions/logout'
-import { photographerItems } from '@/data/nav-items'
+import { adminItems } from '@/data/nav-items'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
@@ -38,7 +38,7 @@ export const SidebarMobile = () => {
         <SheetTitle></SheetTitle>
         <div className='flex h-full flex-col justify-between'>
           <div className='flex flex-1 flex-col gap-2'>
-            {photographerItems.map((item) => (
+            {adminItems.map((item) => (
               <Link href={item.url} key={item.title}>
                 <SheetTrigger asChild>
                   <Button variant='ghost' className='flex w-full justify-start'>
