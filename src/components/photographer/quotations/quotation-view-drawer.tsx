@@ -139,8 +139,8 @@ export default function QuotationViewDrawer({
               duration={calculateDurationFromDate(quotation.from, quotation.to)}
               totalPrice={quotation.price}
             />
-            {quotation.status === 'PAID' ||
-              (quotation.status === 'SUBMITTED' && (
+            {quotation.status !== 'PENDING' &&
+              quotation.status !== 'CONFIRMED' && (
                 <>
                   {showPreview && (
                     <PreviewView
@@ -156,7 +156,7 @@ export default function QuotationViewDrawer({
                     {showPreview ? 'View Less' : 'View More'}
                   </Button>
                 </>
-              ))}
+              )}
           </div>
         )}
       </DrawerContent>

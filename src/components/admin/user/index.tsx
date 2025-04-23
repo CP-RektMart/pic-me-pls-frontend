@@ -84,7 +84,7 @@ export default function AdminUser() {
     <div className='flex h-full flex-col gap-6 overflow-auto'>
       <h1 className='text-2xl font-bold'>User Manager</h1>
       <div className='flex h-full flex-col justify-between gap-2 rounded-xl bg-white p-6'>
-        <div>
+        <div className='overflow-scroll'>
           <SearchBar
             value={search}
             onChange={(e) => setSearch(e.target.value)}
