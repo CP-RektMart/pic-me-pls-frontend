@@ -53,7 +53,7 @@ export function CreatePackageDetailSection({
     })
 
   return (
-    <div className='shadow-right space-between flex w-full flex-col gap-y-4 bg-white px-5 py-4 shadow-black/100 drop-shadow-lg lg:h-full lg:w-96'>
+    <div className='shadow-right space-between flex max-h-96 w-full flex-col gap-y-4 overflow-y-auto bg-white px-5 py-4 shadow-black/100 drop-shadow-lg md:h-auto md:max-h-none lg:h-full lg:w-96'>
       <div className='flex flex-row items-center gap-4'>
         <BackButton href='/photographer/packages' />
         <h1 className='text-xl font-bold'>New Package</h1>
