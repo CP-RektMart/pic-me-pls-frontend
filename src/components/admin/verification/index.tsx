@@ -31,7 +31,7 @@ type UnverifiedPhotographer =
   components['schemas']['dto.ListUnverifiedPhotographerResponse']
 
 export default function AdminVerification() {
-  const pageSize = 5
+  const pageSize = 10
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
   const [photographers, setPhotographers] = useState<UnverifiedPhotographer[]>(
