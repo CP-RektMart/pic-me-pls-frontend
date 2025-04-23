@@ -310,7 +310,8 @@ export default function PhotographerQuotation({
                       totalPrice={currentQuotation.price}
                     />
                     {currentQuotation.status !== 'PENDING' &&
-                      currentQuotation.status !== 'CONFIRMED' && (
+                      currentQuotation.status !== 'CONFIRMED' &&
+                      currentQuotation.status !== 'CANCELLED' && (
                         <PreviewView
                           quotationId={currentQuotation.quotationID}
                           isPhotographer={true}
