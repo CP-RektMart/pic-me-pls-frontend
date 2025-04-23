@@ -10,6 +10,21 @@ interface ChatCardProps {
   setSelectedChat: (chat: Chat) => void
 }
 
+const formatData = (data?: string): string => {
+  if (!data) return ''
+
+  try {
+    const parsed = JSON.parse(data)
+    if (typeof parsed === 'object' && parsed.package?.name) {
+      return `New Quotation: ${parsed.package.name}`
+    }
+
+    return 'Unreadable structured message'
+  } catch {
+    return data
+  }
+}
+
 export default function ChatCard({
   chat,
   name,
@@ -37,7 +52,7 @@ export default function ChatCard({
         <h2 className='truncate font-medium'>{name}</h2>
         {chat.messages.length > 0 && (
           <p className='truncate text-xs font-medium text-gray-500'>
-            {chat?.messages[chat.messages.length - 1]?.content}
+            {formatData(chat?.messages[chat.messages.length - 1]?.content)}
           </p>
         )}
       </div>
