@@ -65,7 +65,8 @@ export function PackagePage({
                     pkg.photographer?.profilePictureUrl || FallBackImage.src
                   }
                   name={pkg.photographer?.name || 'Photographer Name'}
-                  haveVerifiedBadge={pkg.photographer?.isVerified ?? false}
+                  displayVerifyBadge={true}
+                  isVerified={pkg.photographer?.isVerified}
                 />
               </Link>
 

@@ -91,7 +91,6 @@ export default function QuotationForm({
         <hr className='my-4 border-[0.5px] border-zinc-400' />
         {customerProfile ? (
           <ProfileThumbnail
-            haveVerifiedBadge={false}
             name={customerProfile?.name || ''}
             profilePictureUrl={customerProfile.profilePictureUrl || ''}
           />
