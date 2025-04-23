@@ -13,7 +13,7 @@ export interface QuotationAction {
 }
 
 export default async function createQuotationAction(payload: QuotationAction) {
-  await client.POST('/api/v1/photographer/quotations', {
+  const result = await client.POST('/api/v1/photographer/quotations', {
     body: {
       customerId: parseInt(payload.customerId),
       packageId: parseInt(payload.packageId),
@@ -25,4 +25,7 @@ export default async function createQuotationAction(payload: QuotationAction) {
   })
 
   revalidatePath('/photographer/quotations')
+  const status = (result.response as Response).status
+
+  return { status }
 }
