@@ -116,7 +116,7 @@ export function EditPackage({ categories, initialPackage }: EditPackageProps) {
 
   return (
     <FormProvider {...form}>
-      <div className='flex min-h-full w-full flex-col bg-gray-100 lg:flex-row'>
+      <div className='flex min-h-full w-full flex-1 flex-col overflow-hidden bg-gray-100 lg:flex-row'>
         <EditPackageDetailSection
           categories={categories}
           name=''
@@ -127,7 +127,7 @@ export function EditPackage({ categories, initialPackage }: EditPackageProps) {
           form={form}
           onDrop={onDrop}
         />
-        <div className='flex-1'>
+        <div className='flex flex-1 flex-col overflow-y-auto'>
           {photoCards.length === 0 ? (
             <div className='h-full'>
               <div
@@ -153,7 +153,7 @@ export function EditPackage({ categories, initialPackage }: EditPackageProps) {
             </div>
           ) : (
             <div>
-              <div className='grid h-full grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
+              <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
                 {photoCards.map((photo, i) => (
                   <div className='flex' key={i}>
                     {photo.pictureUrl ? (

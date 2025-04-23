@@ -13,7 +13,7 @@ export default async function Home() {
     maxPrice: 0,
     categoryIds: [],
     page: 1,
-    pageSize: 10,
+    pageSize: 6,
   })
 
   return (
