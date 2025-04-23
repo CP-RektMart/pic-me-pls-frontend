@@ -69,10 +69,10 @@ export default function ReportButton({ quotationId, variant }: ReportBtnProps) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className='w-full lg:w-28'
+          className='w-full px-10 lg:w-28'
           variant={variant ? 'ghost' : 'default'}
         >
-          Report
+          Report issue
         </Button>
       </DialogTrigger>
       <DialogContent>

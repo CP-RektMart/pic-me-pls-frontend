@@ -79,8 +79,18 @@ export function QuotationStar({
           const isActiveHalf = displayRating === starValue - 0.5
 
           return (
-            <div key={index} className='relative'>
-              {/* Background star (always rendered) */}
+            <button
+              key={starValue}
+              type='button'
+              data-testid={`star-${starValue}`}
+              onClick={() => {
+                if (!readOnly) {
+                  setCurrentRating(starValue)
+                  onChange?.(starValue)
+                }
+              }}
+              className='relative'
+            >
               <Star
                 className={cn(
                   starSize,
@@ -89,8 +99,6 @@ export function QuotationStar({
                 )}
                 fill={isActiveFull ? 'currentColor' : '#dedceb'}
               />
-
-              {/* Half star overlay */}
               {isActiveHalf && (
                 <div className='absolute inset-0 w-1/2 overflow-hidden'>
                   <Star
@@ -99,7 +107,7 @@ export function QuotationStar({
                   />
                 </div>
               )}
-            </div>
+            </button>
           )
         })}
       </div>
