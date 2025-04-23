@@ -3,9 +3,12 @@
 import { useState } from 'react'
 
 import { Review } from '@/types/package'
+import { RatingScore } from '@/types/rating'
 import { Icon } from '@iconify/react'
+import { z } from 'zod'
 
 import { QuotationStar } from '@/components/quotation/quotation-star'
+import ReviewRating from '@/components/reviews/review-rating'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import {
@@ -39,18 +42,30 @@ export function QuotationComment({
 }: QuotationCommentProps) {
   const hasReview = review !== undefined
   const [onEdit, setOnEdit] = useState<boolean>(false || !hasReview)
+  const [onSent, setOnSent] = useState<boolean>(false)
   const originalComment = useState(comment)[0]
+  const originalRatingScore = useState(ratingScore)[0]
+  const [validationError, setValidationError] = useState<string | null>(null)
+
+  const formSchema = z.object({
+    ratingScore: z.number().min(1, 'Rating is required'),
+    comment: z.string().min(1, 'Comment is required'),
+  })
 
   return (
     <div className='w-full space-y-2.5 p-4'>
       <div className='flex flex-row items-center justify-between'>
         <div className='inline-flex h-8 items-center gap-x-4'>
           <Label className='text-base'>Rating</Label>
-          <QuotationStar
-            rating={ratingScore}
-            onChange={handleStarOnChange}
-            readOnly={!onEdit}
-          />
+          {onEdit ? (
+            <QuotationStar
+              rating={ratingScore}
+              onChange={handleStarOnChange}
+              readOnly={!onEdit}
+            />
+          ) : (
+            <ReviewRating rating={review?.rating as RatingScore} />
+          )}
         </div>
         {hasReview && !onEdit && (
           <Popover>
@@ -87,17 +102,39 @@ export function QuotationComment({
       <div className='space-y-1.5'>
         <Label className='text-base'>Comment</Label>
         {onEdit ? (
-          <Textarea
-            placeholder='Type your message here.'
-            className='h-20 cursor-default'
-            value={comment}
-            disabled={!onEdit}
-            onChange={(e) => handleCommentOnChange(e.target.value)}
-          />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              const isValid = formSchema.safeParse({ ratingScore, comment })
+              if (isValid.success) {
+                handleSendOnClick()
+                setOnEdit(false)
+                setValidationError(null)
+              } else {
+                console.error(isValid.error.errors)
+                setValidationError(
+                  isValid.error.errors[0]?.message || 'Comment is required'
+                )
+              }
+            }}
+          >
+            <Textarea
+              placeholder='Type your message here.'
+              className='h-20 cursor-default'
+              value={comment}
+              onChange={(e) => {
+                handleCommentOnChange(e.target.value)
+                setValidationError(null)
+              }}
+            />
+            {validationError && (
+              <p className='mt-1 text-sm text-red-500'>{validationError}</p>
+            )}
+          </form>
         ) : (
           originalComment && (
             <p className='h-20 rounded-lg bg-gray-100 px-3 py-2.5 text-sm'>
-              {originalComment}
+              {onSent ? comment : originalComment}
             </p>
           )
         )}
@@ -106,8 +143,16 @@ export function QuotationComment({
         {!review && (
           <Button
             onClick={() => {
-              handleSendOnClick()
-              setOnEdit(false)
+              const isValid = formSchema.safeParse({ ratingScore, comment })
+              if (isValid.success) {
+                handleSendOnClick()
+                setOnEdit(false)
+                setValidationError(null)
+              } else {
+                setValidationError(
+                  isValid.error.errors[0]?.message || 'Comment is required'
+                )
+              }
             }}
           >
             Send
@@ -117,10 +162,11 @@ export function QuotationComment({
           <Button
             variant={'destructive'}
             onClick={() => {
-              setOnEdit(false)
               if (originalComment || originalComment === '') {
                 handleCommentOnChange(originalComment)
               }
+              handleStarOnChange(originalRatingScore)
+              setOnEdit(false)
             }}
           >
             Cancel
@@ -129,10 +175,17 @@ export function QuotationComment({
         {review && onEdit && (
           <Button
             onClick={() => {
-              if (review.id) {
+              const isValid = formSchema.safeParse({ ratingScore, comment })
+              if (isValid.success && review.id) {
                 handleUpdateOnClick(review.id)
+                setOnEdit(false)
+                setOnSent(true)
+                setValidationError(null)
+              } else {
+                setValidationError(
+                  isValid.error?.errors[0]?.message || 'Comment is required'
+                )
               }
-              setOnEdit(false)
             }}
           >
             Update
