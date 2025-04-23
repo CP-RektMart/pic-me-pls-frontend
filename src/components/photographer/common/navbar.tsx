@@ -1,9 +1,6 @@
-import { Icon } from '@iconify/react/dist/iconify.js'
 import LogoTrans from '@public/icons/logo-trans.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { Button } from '@/components/ui/button'
 
 import { SidebarMobile } from './sidebar-mobile'
 
@@ -24,9 +21,9 @@ export const Navbar = () => {
       </Link>
 
       <div className='flex gap-1'>
-        <Button variant='ghost' className='relative size-9'>
+        {/* <Button variant='ghost' className='relative size-9'>
           <Icon icon='lucide:bell' className='size-4' />
-        </Button>
+        </Button> */}
         <SidebarMobile />
       </div>
     </div>

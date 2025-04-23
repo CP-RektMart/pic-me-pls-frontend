@@ -8,7 +8,6 @@ import {
   defaultItems,
   photographerItems,
 } from '@/data/nav-items'
-import { Icon } from '@iconify/react'
 import LogoTrans from '@public/icons/logo-trans.svg'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
@@ -76,9 +75,9 @@ export default function Navbar() {
         )}
       </div>
       <div className='flex flex-row items-center space-x-4'>
-        <div className='relative size-4'>
+        {/* <div className='relative size-4'>
           <Icon icon='lucide:bell' className='size-full' />
-        </div>
+        </div> */}
         <Sidebar handleLogout={handleLogout} />
       </div>
     </nav>
