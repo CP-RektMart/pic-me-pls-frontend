@@ -111,8 +111,13 @@ export default function PhotographerQuotation({
 
   const onSubmit = async (data: CreateQuotationForm) => {
     try {
-      await createQuotationAction(data)
+      const { status } = await createQuotationAction(data)
+      if (status !== 204) {
+        toast.error('An error occurred while creating your quotation.')
+        return
+      }
       toast.success('Your quotation has been successfully created.')
+      router.replace('/photographer/quotations')
     } catch {
       toast.error('An error occurred while create your quotation')
     }
