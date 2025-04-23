@@ -103,7 +103,7 @@ export default function PaginationBar({
   }
 
   return (
-    <Pagination>
+    <Pagination className='absolute bottom-2'>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

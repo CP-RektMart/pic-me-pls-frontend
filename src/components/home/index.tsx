@@ -72,17 +72,15 @@ export default function HomePageComponent({
       pageSize: 6,
     })
     setPackages(sortPackages(paginatedPackage.data, filters.sort))
-    setTotalPage(paginatedPackage.totalPage)
     setPage(newPage)
   }
-
   useEffect(() => {
     setPackages((prevPackages) => sortPackages(prevPackages, filters.sort))
   }, [filters.sort])
 
   return (
-    <div className='flex w-dvw flex-col'>
-      <Container className='space-y-6 py-6'>
+    <div className='relative flex w-dvw flex-col'>
+      <Container className='mb-8 space-y-6 py-6'>
         <div className='flex flex-col gap-4 md:flex-row md:items-center'>
           <Greeting
             userName={profile?.name}
