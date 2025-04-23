@@ -58,111 +58,113 @@ export function CreatePackageDetailSection({
         <BackButton href='/photographer/packages' />
         <h1 className='text-xl font-bold'>New Package</h1>
       </div>
-      <FormField
-        control={form.control}
-        name='name'
-        defaultValue=''
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className='text-sm font-medium'>Name</FormLabel>
-            <FormControl>
-              <Input placeholder='Package Name' {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <div className='max-h-72 space-y-4 overflow-y-auto md:h-auto md:max-h-none'>
+        <FormField
+          control={form.control}
+          name='name'
+          defaultValue=''
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='text-sm font-medium'>Name</FormLabel>
+              <FormControl>
+                <Input placeholder='Package Name' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <FormField
-        control={form.control}
-        name='category'
-        defaultValue=''
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className='text-sm font-medium'>Category</FormLabel>
-            <FormControl className='font-normal'>
-              <Select
-                onValueChange={(value) => {
-                  field.onChange(value)
-                }}
-                value={field.value}
-              >
-                <SelectTrigger className='w-full font-normal'>
-                  <SelectValue placeholder='Category' />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem
-                      key={category.id!}
-                      value={category.id!.toString()}
-                    >
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+        <FormField
+          control={form.control}
+          name='category'
+          defaultValue=''
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='text-sm font-medium'>Category</FormLabel>
+              <FormControl className='font-normal'>
+                <Select
+                  onValueChange={(value) => {
+                    field.onChange(value)
+                  }}
+                  value={field.value}
+                >
+                  <SelectTrigger className='w-full font-normal'>
+                    <SelectValue placeholder='Category' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map((category) => (
+                      <SelectItem
+                        key={category.id!}
+                        value={category.id!.toString()}
+                      >
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <FormField
-        control={form.control}
-        name='packageDescription'
-        defaultValue=''
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className='text-sm font-medium'>Description</FormLabel>
-            <FormControl>
-              <Textarea placeholder='Description' {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+        <FormField
+          control={form.control}
+          name='packageDescription'
+          defaultValue=''
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='text-sm font-medium'>Description</FormLabel>
+              <FormControl>
+                <Textarea placeholder='Description' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <FormField
-        control={form.control}
-        name='price'
-        defaultValue={undefined}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className='text-sm font-medium'>
-              Price Per Hour
-            </FormLabel>
-            <FormControl>
-              <Input type='number' placeholder='&#3647; 200' {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <div>
-        <div
-          {...getRootProps()}
-          className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
-        >
-          <Icon icon='lucide:image-up' />
-          <Input {...getInputProps()} type='file' />
-          {isDragActive ? (
-            <p className='text-sm'>Drop the image!</p>
-          ) : (
-            <p className='text-sm'>Upload Photos</p>
+        <FormField
+          control={form.control}
+          name='price'
+          defaultValue={undefined}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='text-sm font-medium'>
+                Price Per Hour
+              </FormLabel>
+              <FormControl>
+                <Input type='number' placeholder='&#3647; 200' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div>
+          <div
+            {...getRootProps()}
+            className='flex max-h-10 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-lg bg-zinc-50 py-2'
+          >
+            <Icon icon='lucide:image-up' />
+            <Input {...getInputProps()} type='file' />
+            {isDragActive ? (
+              <p className='text-sm'>Drop the image!</p>
+            ) : (
+              <p className='text-sm'>Upload Photos</p>
+            )}
+          </div>
+          {fileRejections.length !== 0 && (
+            <p>Image must be less than 10 MB and of type png, jpg, or jpeg</p>
           )}
         </div>
-        {fileRejections.length !== 0 && (
-          <p>Image must be less than 10 MB and of type png, jpg, or jpeg</p>
-        )}
-      </div>
-      <div className='mt-auto'>
-        <Button
-          type='button'
-          className='w-full hover:bg-zinc-700'
-          onClick={form.handleSubmit(onSubmit)}
-        >
-          Create
-        </Button>
+        <div className='mt-auto'>
+          <Button
+            type='button'
+            className='w-full hover:bg-zinc-700'
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            Create
+          </Button>
+        </div>
       </div>
     </div>
   )
