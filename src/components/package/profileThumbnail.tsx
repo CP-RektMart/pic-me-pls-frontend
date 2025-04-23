@@ -6,13 +6,15 @@ import { VerifyBadge } from '../ui/verify-badge'
 interface ProfileThumbnailProps {
   profilePictureUrl: string
   name: string
-  haveVerifiedBadge: boolean
+  displayVerifyBadge?: boolean
+  isVerified?: boolean
 }
 
 export function ProfileThumbnail({
   profilePictureUrl,
   name,
-  haveVerifiedBadge,
+  displayVerifyBadge,
+  isVerified = false,
 }: ProfileThumbnailProps) {
   return (
     <div className='flex items-center gap-2'>
@@ -30,7 +32,7 @@ export function ProfileThumbnail({
       <div className='flex flex-col items-center gap-2'>
         <h3 className='flex items-center gap-2 text-lg font-bold'>
           {name || 'Name'}
-          <VerifyBadge isVerified={haveVerifiedBadge} />
+          {displayVerifyBadge && <VerifyBadge isVerified={isVerified} />}
         </h3>
       </div>
     </div>
