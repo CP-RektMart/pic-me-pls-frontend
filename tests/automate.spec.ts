@@ -1,10 +1,13 @@
 import { chromium, expect, test } from '@playwright/test'
 
-const EMAIL = 'chanatip.kowsurat@gmail.com'
-const REPORT_NAME = 'test report from automation at 12 pm'
-const REPORT_DESCRIPTION = 'simple descriptionnn'
+const EMAIL = '👀 👀 👀 👀'
+const TRY = 3
+const REPORT_QUOTATION_ID = 1
+const REPORT_NAME = `test report demo day ${TRY}`
+const REPORT_DESCRIPTION = `simple descriptionnn ah ah ${TRY}`
+const REVIEW_QUOTATION_ID = 5
 const REVIEW_STARS = 4
-const REVIEW_COMMENT = 'test review from automation at 12 pm'
+const REVIEW_COMMENT = `test review demo day ${TRY}`
 
 test('create report', async () => {
   const browser = await chromium.launch({
@@ -36,8 +39,10 @@ test('create report', async () => {
 
   // go to quotation page
   await page.getByRole('button', { name: 'Quotation' }).click()
-  await page.click("a[href='/quotation/5']")
-  await expect(page).toHaveURL('http://localhost:3000/quotation/5')
+  await page.click(`a[href='/quotation/${REPORT_QUOTATION_ID}']`)
+  await expect(page).toHaveURL(
+    `http://localhost:3000/quotation/${REPORT_QUOTATION_ID}`
+  )
 
   // filling report info
   await page.getByRole('button', { name: 'Report issue' }).click()
@@ -56,6 +61,12 @@ test('create report', async () => {
   const dialog = page.locator('[role="dialog"]')
   await expect(dialog.getByText(REPORT_NAME)).toBeVisible()
   await expect(dialog.getByText(REPORT_DESCRIPTION)).toBeVisible()
+  await page.waitForTimeout(2000)
+  await page.keyboard.press('Escape')
+
+  // logout
+  await page.getByRole('button', { name: 'Logout' }).click()
+  await page.close()
 })
 
 test('create review', async () => {
@@ -88,7 +99,9 @@ test('create review', async () => {
   // go to quotation page
   await page.getByRole('button', { name: 'Quotation' }).click()
   await page.click("a[href='/quotation/5']")
-  await expect(page).toHaveURL('http://localhost:3000/quotation/5')
+  await expect(page).toHaveURL(
+    `http://localhost:3000/quotation/${REVIEW_QUOTATION_ID}`
+  )
 
   await page.getByTestId(`star-${REVIEW_STARS}`).click()
 
@@ -98,8 +111,10 @@ test('create review', async () => {
   await page.getByRole('button', { name: 'Send' }).click()
 
   // check result
-  await page.goto('http://localhost:3000/quotation/5')
+  await page.goto(`http://localhost:3000/quotation/${REVIEW_QUOTATION_ID}`)
   await expect(page.getByText(REVIEW_COMMENT)).toBeVisible()
 
+  // logout
+  await page.getByRole('button', { name: 'Logout' }).click()
   await page.close()
 })
