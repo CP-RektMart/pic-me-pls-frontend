@@ -34,7 +34,17 @@ import {
 import { SidebarProvider } from '../../common/sidebar-provider'
 
 const formSchema = z.object({
-  cardPicture: z.instanceof(File).optional(),
+  cardPicture: z
+    .instanceof(File)
+    .refine(
+      (file) => ['image/jpeg', 'image/jpg', 'image/png'].includes(file.type),
+      'Card picture must be a .jpeg, .jpg, or .png file'
+    )
+    .refine(
+      (file) => file.size <= 10 * 1000 * 1000,
+      'File size must not exceed 10MB'
+    )
+    .optional(),
   citizenId: z
     .string()
     .min(17, 'Citizen ID must be in format 1-XXXX-XXXXX-XX-X')

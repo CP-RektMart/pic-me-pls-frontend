@@ -31,7 +31,7 @@ type UnverifiedPhotographer =
   components['schemas']['dto.ListUnverifiedPhotographerResponse']
 
 export default function AdminVerification() {
-  const pageSize = 5
+  const pageSize = 10
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
   const [photographers, setPhotographers] = useState<UnverifiedPhotographer[]>(
@@ -92,7 +92,7 @@ export default function AdminVerification() {
     <div className='flex h-full flex-col gap-6 overflow-auto'>
       <h1 className='text-2xl font-bold'>Review Verification</h1>
       <div className='flex h-full flex-col justify-between gap-2 rounded-xl bg-white p-6'>
-        <div>
+        <div className='overflow-scroll'>
           <SearchBar
             value={search}
             onChange={(e) => setSearch(e.target.value)}

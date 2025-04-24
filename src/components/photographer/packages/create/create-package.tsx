@@ -101,7 +101,7 @@ export default function CreatePackage({ categories }: CreatePackageProps) {
 
   return (
     <FormProvider {...form}>
-      <div className='flex min-h-full w-full flex-col bg-gray-100 lg:flex-row'>
+      <div className='flex min-h-full w-full flex-1 flex-col overflow-hidden bg-gray-100 lg:flex-row'>
         <CreatePackageDetailSection
           name=''
           description=''
@@ -112,7 +112,7 @@ export default function CreatePackage({ categories }: CreatePackageProps) {
           onDrop={onDrop}
           categories={categories}
         />
-        <div className='flex-1'>
+        <div className='flex flex-1 flex-col overflow-y-auto'>
           {photoCards.length === 0 ? (
             <div className='h-full'>
               <div
@@ -138,7 +138,7 @@ export default function CreatePackage({ categories }: CreatePackageProps) {
             </div>
           ) : (
             <div>
-              <div className='grid h-full grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
+              <div className='grid grid-cols-2 gap-4 p-4 lg:grid-cols-4'>
                 {photoCards.map((photo, i) => (
                   <div className='flex' key={i}>
                     <PhotoCard

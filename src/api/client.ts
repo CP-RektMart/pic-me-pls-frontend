@@ -22,6 +22,12 @@ const middleware: Middleware = {
 
 const client = createClient<paths>({
   baseUrl: process.env.BACKEND_URL,
+  fetch: (url, init = {}) => {
+    return fetch(url, {
+      ...init,
+      cache: 'no-store',
+    })
+  },
 })
 
 client.use(middleware)
